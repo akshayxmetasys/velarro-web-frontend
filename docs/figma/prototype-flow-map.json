@@ -1,0 +1,33 @@
+{
+  "$comment": "Velarro Estate — prototype flow map. STATUS: BLOCKED. No prototype data was retrieved; the Figma MCP rate limit was reached before the first read call succeeded on 2026-07-01. The continuation run fills nodes/edges from get_metadata on page 85:10 and get_design_context prototype reactions.",
+  "status": "blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "prototype": {
+    "url": "https://www.figma.com/proto/92rhH51aErpYQWRrlJqMhn/Velarro?node-id=15967-43304&t=HJe6XAvQNYwmEyvH-1&scaling=contain&content-scaling=fixed&page-id=85%3A10",
+    "fileKey": "92rhH51aErpYQWRrlJqMhn",
+    "startNodeId": "15967:43304",
+    "pageId": "85:10",
+    "scaling": "contain",
+    "contentScaling": "fixed"
+  },
+  "_nodeSchema": {
+    "nodeId": "string",
+    "frameName": "string — exact Figma frame name",
+    "screenNumber": "integer — cross-reference to screen-manifest.json",
+    "isPrototypeStart": "boolean"
+  },
+  "_edgeSchema": {
+    "fromNodeId": "string",
+    "toNodeId": "string",
+    "trigger": "on-click | on-drag | while-hovering | after-delay | key | mouse-enter | mouse-leave",
+    "triggerElement": "string — name of the layer carrying the reaction",
+    "action": "navigate | open-overlay | close-overlay | swap-overlay | back | scroll-to | change-to",
+    "transition": "instant | dissolve | smart-animate | move-in | move-out | push | slide-in | slide-out",
+    "overlaySettings": "object|null — position, background, close-on-click-outside (for open-overlay)",
+    "verificationSource": "Prototype verified | Assumption requiring confirmation"
+  },
+  "nodes": [],
+  "edges": [],
+  "entryPoints": [],
+  "unreachableScreens": []
+}

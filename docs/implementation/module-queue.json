@@ -1,0 +1,56 @@
+{
+  "$comment": "Velarro Estate — module queue in dependency order. STATUS: PARTIAL. Only M00-foundations is defined; screen-derived modules require the screen manifest, which is empty because Figma MCP ingestion was rate-limited on 2026-07-01 with zero data retrieved. Modules M01+ are added by the continuation run — inventing them now would fabricate screens.",
+  "status": "partial-blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "executionRules": [
+    "Strict dependency order; one module per implementation run",
+    "No implementation before the user sends START VELARRO IMPLEMENTATION",
+    "Overlay surfaces ship with their host screen's module",
+    "One screen with three breakpoints is one module entry, not three"
+  ],
+  "modules": [
+    {
+      "moduleId": "M00-foundations",
+      "moduleName": "Foundations: tokens, fonts, layout shell, component scaffolding",
+      "relatedFigmaNodes": ["14366:82579 (token source — values pending ingestion)", "85:10 (prototype page — flow entry context)"],
+      "relatedScreens": [],
+      "routes": ["/ (layout and globals only; page replacement belongs to the entry-screen module)"],
+      "sharedComponents": ["components/ui and components/layout scaffolding per shared-component-plan.json conventions"],
+      "moduleSpecificComponents": [],
+      "requiredAssets": ["Velarro logo + favicon (pending asset-inventory.json)", "brand font files if not on Google Fonts (U-05)"],
+      "responsiveRequirements": "Breakpoint tokens from design-tokens.json mapped to Tailwind v4 @theme; unknown until ingestion",
+      "interactions": "None (non-visual module apart from base typography/colors)",
+      "accessibilityRequirements": "Base document semantics: lang attribute (exists), landmark structure in root layout, focus-visible styling, color tokens meeting WCAG 2.1 AA contrast (U-08)",
+      "implementationSteps": [
+        "Map Figma variables to @theme CSS variables in app/globals.css",
+        "Implement font strategy (next/font/google or next/font/local per U-05); remove body Arial override",
+        "Replace create-next-app metadata, favicon, and public/ placeholder SVGs with Velarro branding",
+        "Create components/ui, components/layout, and public/images + public/icons structure",
+        "Add app/not-found.tsx and app/error.tsx aligned to wireframe styling if such screens exist, else minimal branded versions",
+        "Install and configure approved testing stack (see testing-plan.md) if approved"
+      ],
+      "testRequirements": ["npm run lint passes", "npm run build passes", "unit smoke test for token presence once test runner exists"],
+      "visualVerificationRequirements": ["Typography and color sample page compared against Figma token values"],
+      "blockers": ["U-01 Figma quota (token/font/asset values unknown)", "U-05 font decision", "U-07 testing stack approval", "Awaiting START VELARRO IMPLEMENTATION"],
+      "status": "pending"
+    }
+  ],
+  "_moduleSchema": {
+    "moduleId": "M<nn>-<slug>",
+    "moduleName": "string",
+    "relatedFigmaNodes": ["node IDs"],
+    "relatedScreens": ["screenNumbers from docs/figma/screen-manifest.json"],
+    "routes": ["App Router paths"],
+    "sharedComponents": ["componentIds"],
+    "moduleSpecificComponents": ["componentIds or planned paths"],
+    "requiredAssets": ["assetIds from docs/figma/asset-inventory.json"],
+    "responsiveRequirements": "string",
+    "interactions": "string — from prototype-flow-map.json edges",
+    "accessibilityRequirements": "string",
+    "implementationSteps": ["ordered strings"],
+    "testRequirements": ["strings"],
+    "visualVerificationRequirements": ["strings"],
+    "blockers": ["strings"],
+    "status": "pending | in-progress | complete"
+  }
+}

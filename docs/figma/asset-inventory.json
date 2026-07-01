@@ -1,0 +1,22 @@
+{
+  "$comment": "Velarro Estate — asset inventory from Figma. STATUS: BLOCKED. No asset data was retrieved before the rate limit on 2026-07-01. The continuation run fills this from get_design_context (image fills, vectors, icons) per screen. Actual downloads happen only during implementation, not planning, unless required.",
+  "status": "blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "_assetSchema": {
+    "assetId": "string — stable slug, e.g. asset-hero-home",
+    "type": "image | icon | logo | illustration | video | font",
+    "figmaNodeId": "string — node carrying the fill/vector",
+    "figmaNodeName": "string",
+    "usedOnScreens": ["array of screenNumbers from screen-manifest.json"],
+    "suggestedExportFormat": "svg | png | webp | avif",
+    "suggestedPublicPath": "string — e.g. public/images/hero-home.webp",
+    "dimensions": { "width": "number|null", "height": "number|null" },
+    "downloaded": "boolean — false during planning",
+    "verificationSource": "Figma verified | Assumption requiring confirmation"
+  },
+  "assets": [],
+  "fonts": {
+    "$comment": "Fonts observed in Figma text styles go here; compare against next/font strategy in repository-assessment.md",
+    "observed": []
+  }
+}

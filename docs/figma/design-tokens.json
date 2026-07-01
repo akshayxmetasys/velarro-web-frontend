@@ -1,0 +1,22 @@
+{
+  "$comment": "Velarro Estate — design tokens from Figma. STATUS: BLOCKED. No variable/style data was retrieved before the rate limit on 2026-07-01. The continuation run fills this from get_variable_defs on the Approved Wireframes section and from styles observed in get_design_context. Tokens map to Tailwind CSS v4 @theme variables in app/globals.css during implementation.",
+  "status": "blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "_tokenSchema": {
+    "figmaName": "string — exact variable/style name, e.g. color/brand/primary",
+    "type": "color | typography | spacing | radius | shadow | breakpoint | opacity | other",
+    "value": "string|object — resolved value(s); include per-mode values if the file uses modes",
+    "modes": "object|null — e.g. { light: '#...', dark: '#...' }",
+    "suggestedCssVariable": "string — e.g. --color-brand-primary",
+    "suggestedTailwindTheme": "string — Tailwind v4 @theme key, e.g. --color-brand-primary",
+    "usedOnScreens": ["array of screenNumbers"],
+    "verificationSource": "Figma verified | Assumption requiring confirmation"
+  },
+  "colors": [],
+  "typography": [],
+  "spacing": [],
+  "radii": [],
+  "shadows": [],
+  "breakpoints": [],
+  "other": []
+}

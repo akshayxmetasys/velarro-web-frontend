@@ -1,0 +1,31 @@
+{
+  "$comment": "Velarro Estate — route map. Existing routes are Repository verified. Planned routes CANNOT be defined yet: the screen inventory is empty because the Figma MCP rate limit blocked ingestion on 2026-07-01 (see docs/figma/ingestion-log.md). The continuation run derives plannedRoutes from screen-manifest.json suggestedRoute fields.",
+  "status": "partial-blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "existingRoutes": [
+    {
+      "route": "/",
+      "file": "app/page.tsx",
+      "renders": "Default create-next-app landing page (placeholder, to be replaced)",
+      "layout": "app/layout.tsx",
+      "verificationSource": "Repository verified"
+    }
+  ],
+  "_plannedRouteSchema": {
+    "route": "string — App Router path, e.g. /properties/[id]",
+    "file": "string — e.g. app/properties/[id]/page.tsx",
+    "module": "string — module ID from module-queue.json",
+    "screens": ["array of screenNumbers from docs/figma/screen-manifest.json"],
+    "surfaceNotes": "string — modals/drawers rendered within this route rather than as routes",
+    "dynamicParams": ["array — awaited-Promise params per Next 16 convention"],
+    "verificationSource": "Metadata verified | Assumption requiring confirmation"
+  },
+  "plannedRoutes": [],
+  "conventions": {
+    "router": "App Router, app/ at repo root",
+    "dynamicSegments": "[param] folders; params/searchParams are Promises and must be awaited (Next 16)",
+    "routeGroups": "(group) folders for layout partitioning where wireframes show distinct shells",
+    "overlays": "Prototype modal/drawer/overlay surfaces default to in-route client state, not separate routes, unless the flow map shows deep-linking (then parallel/intercepting routes)",
+    "verificationSource": "Repository verified (conventions from Next 16 bundled docs)"
+  }
+}

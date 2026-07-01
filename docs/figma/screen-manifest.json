@@ -1,0 +1,48 @@
+{
+  "$comment": "Velarro Estate — screen manifest. STATUS: BLOCKED. The Figma MCP monthly rate limit (View seat, 6 calls/month) was hit before any node data was retrieved on 2026-07-01. Zero screens have been enumerated; the totals below are real, not placeholders to be trusted. The continuation run (docs/figma/continuation-prompt.md) fills the screens array using the schema in _screenSchema.",
+  "status": "blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "figmaFile": {
+    "fileKey": "92rhH51aErpYQWRrlJqMhn",
+    "fileName": "Velarro",
+    "approvedWireframesNodeId": "14366:82579",
+    "prototypeStartNodeId": "15967:43304",
+    "prototypePageId": "85:10"
+  },
+  "totals": {
+    "screensFound": 0,
+    "screensAnalyzed": 0,
+    "desktop": 0,
+    "tablet": 0,
+    "mobile": 0,
+    "note": "UNKNOWN true total — wireframe section was never enumerated"
+  },
+  "verificationLabels": [
+    "Figma verified",
+    "Prototype verified",
+    "Repository verified",
+    "Metadata verified",
+    "Assumption requiring confirmation"
+  ],
+  "_screenSchema": {
+    "screenNumber": "integer — sequential across the manifest",
+    "figmaFrameName": "string — exact frame name from Figma, unmodified",
+    "nodeId": "string — e.g. 12345:67890",
+    "pageName": "string — Figma page containing the frame",
+    "dimensions": { "width": "number(px)", "height": "number(px)" },
+    "breakpoint": "desktop | tablet | mobile",
+    "module": "string — module ID from docs/implementation/module-queue.json",
+    "purpose": "string — one-sentence screen purpose",
+    "suggestedRoute": "string — Next.js App Router path, e.g. /properties/[id]",
+    "prototypeDestinations": ["array of { trigger, targetNodeId, targetFrameName, transition }"],
+    "surfaceType": "page | modal | drawer | dropdown | overlay | state",
+    "reusableComponents": ["array of component IDs from component-inventory.json"],
+    "assetDependencies": ["array of asset IDs from asset-inventory.json"],
+    "responsiveVariants": ["array of nodeIds of the same screen at other breakpoints"],
+    "interactionStates": ["array — hover/focus/error/empty/loading states found as separate frames or in prototype"],
+    "duplicateStatus": "unique | duplicate-of:<nodeId> | near-duplicate-of:<nodeId>",
+    "verificationSource": "Figma verified | Prototype verified | Metadata verified | Assumption requiring confirmation",
+    "analysisStatus": "pending | metadata-only | context-retrieved | screenshot-retrieved | complete"
+  },
+  "screens": []
+}

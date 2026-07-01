@@ -1,0 +1,30 @@
+{
+  "$comment": "Velarro Estate — shared component plan. STATUS: BLOCKED. Depends on docs/figma/component-inventory.json, which is empty because the Figma MCP rate limit blocked ingestion on 2026-07-01. Only the repository-side conventions are defined; no component list is invented. The continuation run fills sharedComponents from components observed on 2+ screens.",
+  "status": "blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "conventions": {
+    "directoryLayout": {
+      "components/ui": "Design-system primitives (Button, Input, Card, ...) mapped 1:1 to Figma components where possible",
+      "components/layout": "Header, Footer, navigation, page shells shared across routes",
+      "components/<module>": "Module-specific composites, colocated by module ID from module-queue.json"
+    },
+    "naming": "PascalCase file and export names; one component per file",
+    "imports": "@/components/... via the @/* path alias (tsconfig, Repository verified)",
+    "clientServerSplit": "Server Components by default; \"use client\" only for interactive leaves (menus, carousels, form controls, overlay triggers)",
+    "styling": "Tailwind v4 utilities referencing @theme tokens from app/globals.css; no CSS modules or CSS-in-JS",
+    "accessibility": "Interactive primitives ship with keyboard support, ARIA where semantics fall short, and focus management for overlay surfaces",
+    "verificationSource": "Repository verified (conventions) — component list pending Figma"
+  },
+  "_sharedComponentSchema": {
+    "componentId": "string — matches component-inventory.json",
+    "codePath": "string — e.g. components/ui/Button.tsx",
+    "figmaSources": ["array of figmaComponentName + nodeIds"],
+    "usedByModules": ["array of module IDs"],
+    "usedOnScreens": ["array of screenNumbers"],
+    "props": "string — planned prop surface incl. variants",
+    "states": ["array — hover/focus/disabled/error/loading as evidenced in Figma"],
+    "priority": "P0 (blocks multiple modules) | P1 | P2",
+    "verificationSource": "Figma verified | Assumption requiring confirmation"
+  },
+  "sharedComponents": []
+}

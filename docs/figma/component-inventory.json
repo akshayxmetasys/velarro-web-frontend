@@ -1,0 +1,18 @@
+{
+  "$comment": "Velarro Estate — reusable component inventory from Figma. STATUS: BLOCKED. No component data was retrieved before the rate limit on 2026-07-01. The continuation run fills this from get_design_context per screen (component instances, variants, text styles).",
+  "status": "blocked-rate-limit",
+  "runDate": "2026-07-01",
+  "_componentSchema": {
+    "componentId": "string — stable slug, e.g. cmp-header-nav",
+    "figmaComponentName": "string — exact Figma component/instance name",
+    "figmaComponentKey": "string|null — component key if published",
+    "sourceNodeIds": ["array — node IDs where instances were observed"],
+    "usedOnScreens": ["array of screenNumbers from screen-manifest.json"],
+    "variants": ["array — variant property=value combinations observed"],
+    "category": "navigation | layout | form | card | list | overlay | feedback | media | typography | other",
+    "suggestedCodeComponent": "string — proposed path, e.g. components/ui/Button.tsx",
+    "shared": "boolean — used on 2+ screens",
+    "verificationSource": "Figma verified | Metadata verified | Assumption requiring confirmation"
+  },
+  "components": []
+}
