@@ -1,8 +1,8 @@
 # Velarro Estate — Master Implementation Plan
 
-Status: **INGESTION COMPLETE — DOCUMENTATION CORRECTED — READY FOR M00**
+Status: **M00 IN REVIEW — FOUNDATIONS IMPLEMENTED**
 
-Last updated: 2026-07-01 (documentation correction run)
+Last updated: 2026-07-01 (M00 implementation)
 
 ## Inputs
 
@@ -47,23 +47,24 @@ This sequence is identical in `module-queue.json` and this document.
 
 ## M00 — Foundations (first implementation module)
 
-**Readiness:** READY WITH CONDITIONS (see final report)
+**Status:** `in_review` (implementation complete; awaiting user review)
 
-M00 may proceed using the approved Arial/Helvetica fallback via `--font-family-primary`. Licensed Gotham files remain pending (U-05/U-16).
+M00 shipped with the approved Arial/Helvetica fallback via `--font-family-primary`. Licensed Gotham files remain pending (U-05/U-16).
 
-### M00 scope
+### M00 delivered
 
-- Map Figma-verified tokens + shadows to `app/globals.css` `@theme`
-- Configure `--font-family-primary` with approved fallback; structure for Gotham swap
-- Scaffold `components/ui/` and `components/layout/` including `RouteBackedModalShell`
-- Define engineering breakpoint CSS variables (768 tablet, 390 mobile — not Figma verified)
-- Replace create-next-app metadata placeholders
-- Install approved testing stack when implementation begins
+- Figma-verified tokens + shadows mapped to `app/globals.css` `@theme`
+- `--font-family-primary` with approved fallback; Gotham swap path documented
+- `components/ui/` primitives: Button, Input, Textarea, Checkbox, Radio, Switch, Accordion, Drawer, ProgressIndicator, RouteBackedModalShell
+- `components/layout/` shells: SiteHeader, SiteFooter, MainExplore, Container, Section
+- Engineering breakpoint CSS variables (768 tablet, 390 mobile — not Figma verified)
+- Velarro metadata in `app/layout.tsx` (create-next-app placeholders removed)
+- Vitest + React Testing Library + Playwright configured with foundation tests
 
-### M00 blockers
+### M00 remaining conditions
 
-- Licensed Gotham webfont files not procured (interim fallback approved)
-- `START VELARRO IMPLEMENTATION` not yet given
+- Licensed Gotham webfont files not procured (interim fallback in use)
+- User review before marking M00 complete
 
 ## Project decisions applied (correction run)
 
@@ -90,5 +91,5 @@ M00 may proceed using the approved Arial/Helvetica fallback via `--font-family-p
 ## Repository compatibility
 
 - Next.js **16.2.10** App Router, React **19.2.4**, TypeScript strict, Tailwind **v4** CSS-first
-- Available scripts: `npm run dev`, `build`, `start`, `lint` — no test script until implementation
+- Available scripts: `npm run dev`, `build`, `start`, `lint`, `test`, `test:watch`, `test:e2e`
 - No assumptions about packages beyond those listed in `package.json`
