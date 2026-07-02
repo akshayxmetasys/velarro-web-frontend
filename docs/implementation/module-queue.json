@@ -1,0 +1,1032 @@
+{
+  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+  "correctionRunDate": "2026-07-01",
+  "canonicalModuleOrder": [
+    "M00-foundations",
+    "M01-home",
+    "M02-auth",
+    "M03-estate",
+    "M04-house",
+    "M05-vault",
+    "M08-editorial",
+    "M09-engagement",
+    "M10-legal-info",
+    "M06-cart-checkout",
+    "M07-profile"
+  ],
+  "executionRules": [
+    "Execute modules in canonicalModuleOrder",
+    "One module per implementation run",
+    "No code until START VELARRO IMPLEMENTATION",
+    "Overlays ship with host module; use route-backed pattern where documented",
+    "Inferred prototype edges require QA and product approval before final acceptance"
+  ],
+  "projectDecisions": {
+    "accessibility": "WCAG 2.2 AA",
+    "deployment": "Vercel",
+    "testing": "Vitest + React Testing Library + Playwright",
+    "responsive": "Engineering-derived from desktop; UI/UX review per module",
+    "modals": "Hybrid route-backed intercepting overlays",
+    "typography": "Gotham target with approved Arial/Helvetica interim fallback"
+  },
+  "modules": [
+    {
+      "moduleId": "M00-foundations",
+      "moduleName": "Foundations: Gotham fonts, design tokens, layout shell, shared UI scaffolding",
+      "dependencies": [],
+      "relatedScreenIds": [],
+      "relatedFigmaNodeIds": [
+        "14366:82579",
+        "13148:15012"
+      ],
+      "screenCounts": {
+        "total": 0,
+        "confirmedPages": 0,
+        "modalsAndOverlays": 0
+      },
+      "routes": [
+        "/ (layout/globals only)"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down",
+        "cmp-main-sidedbar",
+        "cmp-main-wishlist",
+        "cmp-pricing-cards",
+        "cmp-the-house",
+        "cmp-search",
+        "cmp-category-cards",
+        "cmp-main-cigars-the-cabinet"
+      ],
+      "moduleSpecificComponents": [
+        "components/m00-foundations/"
+      ],
+      "requiredAssets": [
+        "asset-font-gotham",
+        "asset-font-noto-sans",
+        "asset-logo-velarro",
+        "asset-oauth-google"
+      ],
+      "designTokens": [
+        "Map all Figma-verified tokens + shadows from design-tokens.json to @theme",
+        "Define engineering breakpoints (tablet 768, mobile 390) \u2014 not Figma verified"
+      ],
+      "responsiveRequirements": "Define --breakpoint-* CSS variables and container max-widths; desktop 1440 reference; tablet/mobile engineering-derived with UI/UX review",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA foundations: semantic HTML landmarks, visible focus, contrast tokens, prefers-reduced-motion baseline",
+      "implementationSteps": [
+        "Map design-tokens.json (colors, spacing, radii, shadows) to app/globals.css @theme",
+        "Configure --font-family-primary with approved Arial/Helvetica fallback; structure for Gotham swap",
+        "Scaffold components/ui and components/layout including RouteBackedModalShell",
+        "Define engineering breakpoint CSS variables",
+        "Replace create-next-app metadata placeholders",
+        "Install Vitest, RTL, Playwright when implementation begins (approved stack)"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Token sample page vs design-tokens.json",
+        "No M00-specific screenshot required \u2014 use token swatch page"
+      ],
+      "blockers": [
+        "Licensed Gotham webfont files not yet procured (interim fallback approved)",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "fontStrategy": {
+        "target": "Gotham via next/font/local when files procured",
+        "interimFallback": "Arial, Helvetica, sans-serif via --font-family-primary",
+        "status": "pending-procurement"
+      },
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "unit/component tests",
+        "reactTestingLibrary": "component behavior and a11y assertions",
+        "playwright": "E2E and visual verification at 1440px"
+      }
+    },
+    {
+      "moduleId": "M01-home",
+      "moduleName": "Home: guest landing, hero, category rails, footer",
+      "dependencies": [
+        "M00-foundations"
+      ],
+      "relatedScreenIds": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "relatedFigmaNodeIds": [
+        "12339:55472",
+        "13148:15012",
+        "15148:40087",
+        "15967:43304"
+      ],
+      "screenCounts": {
+        "total": 4,
+        "confirmedPages": 2,
+        "modalsAndOverlays": 0
+      },
+      "routes": [
+        "/",
+        "/coming-soon"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m01-home/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 2 confirmed pages and 0 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M01-home"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M02-auth",
+      "moduleName": "Authentication modals: login, signup, forgot/new password",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "relatedFigmaNodeIds": [
+        "14991:70051",
+        "14991:70094",
+        "14991:70134",
+        "14991:70162"
+      ],
+      "screenCounts": {
+        "total": 4,
+        "confirmedPages": 0,
+        "modalsAndOverlays": 4
+      },
+      "routes": [
+        "/forgot-password",
+        "/login",
+        "/reset-password",
+        "/signup"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m02-auth/"
+      ],
+      "requiredAssets": [
+        "asset-font-gotham",
+        "asset-font-noto-sans",
+        "asset-logo-velarro",
+        "asset-oauth-google"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 0 confirmed pages and 4 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M02-auth"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      },
+      "modalStrategy": "Route-backed intercepting overlays: /login, /signup, /forgot-password, /reset-password"
+    },
+    {
+      "moduleId": "M03-estate",
+      "moduleName": "The Estate: humidor listings, estate house/roastery tabs, PDPs",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "relatedFigmaNodeIds": [
+        "13148:16189",
+        "14670:34051",
+        "14670:35568",
+        "14670:37727",
+        "14888:53493",
+        "15451:39198"
+      ],
+      "screenCounts": {
+        "total": 6,
+        "confirmedPages": 4,
+        "modalsAndOverlays": 0
+      },
+      "routes": [
+        "/the-estate",
+        "/the-estate/the-house",
+        "/the-estate/the-house/the-roastery",
+        "/the-estate/the-humidor",
+        "/the-estate/the-humidor/heritage",
+        "/the-estate/the-humidor/royal-leaf"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m03-estate/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 4 confirmed pages and 0 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M03-estate"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M04-house",
+      "moduleName": "The House: clothier, cabinet, apothecary, roastery shop pages",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "relatedFigmaNodeIds": [
+        "14670:35095",
+        "14670:39860",
+        "14670:39923",
+        "14670:39985",
+        "14670:40071",
+        "14670:40152",
+        "14670:40233",
+        "14670:46376",
+        "14695:54494",
+        "15008:36663",
+        "15008:37073",
+        "15008:37483",
+        "15008:37893"
+      ],
+      "screenCounts": {
+        "total": 13,
+        "confirmedPages": 11,
+        "modalsAndOverlays": 0
+      },
+      "routes": [
+        "/the-house",
+        "/the-house/the-apothecary",
+        "/the-house/the-apothecary/wuyi-oolong-reserve",
+        "/the-house/the-cabinet",
+        "/the-house/the-cabinet/estate-guillotine-cutter",
+        "/the-house/the-clothier",
+        "/the-house/the-clothier/founders-boxy-hoodie",
+        "/the-house/the-roastery",
+        "/the-house/the-roastery/estate-espresso",
+        "/the-house/the-saddlery",
+        "/the-house/the-saddlery/reserve-card-holder"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m04-house/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 11 confirmed pages and 0 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M04-house"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M05-vault",
+      "moduleName": "The Vault: curated collection page",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        28
+      ],
+      "relatedFigmaNodeIds": [
+        "14240:78024"
+      ],
+      "screenCounts": {
+        "total": 1,
+        "confirmedPages": 1,
+        "modalsAndOverlays": 0
+      },
+      "routes": [
+        "/the-vault"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m05-vault/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 1 confirmed pages and 0 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M05-vault"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M08-editorial",
+      "moduleName": "Editorial: chronicle, pairing guide",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "relatedFigmaNodeIds": [
+        "14284:63187",
+        "14406:85066",
+        "14406:85132",
+        "14585:38918",
+        "14644:32880"
+      ],
+      "screenCounts": {
+        "total": 5,
+        "confirmedPages": 5,
+        "modalsAndOverlays": 0
+      },
+      "routes": [
+        "/pairing-guide",
+        "/pairing-guide/find-your-pairing",
+        "/pairing-guide/rum-and-cigars",
+        "/the-chronicle",
+        "/the-chronicle/international-cigar-day"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m08-editorial/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 5 confirmed pages and 0 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M08-editorial"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M09-engagement",
+      "moduleName": "Engagement: membership, careers, partner, press, get in touch",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "relatedFigmaNodeIds": [
+        "13148:15771",
+        "13148:15855",
+        "13148:15939",
+        "13563:29858",
+        "14644:34661",
+        "14670:42180",
+        "14670:49691",
+        "15008:38309",
+        "15640:24481",
+        "15640:27501",
+        "15663:38140"
+      ],
+      "screenCounts": {
+        "total": 11,
+        "confirmedPages": 7,
+        "modalsAndOverlays": 2
+      },
+      "routes": [
+        "/careers",
+        "/careers/positions",
+        "/careers/positions/[jobId]",
+        "/careers/positions/[jobId]/apply",
+        "/get-in-touch",
+        "/membership",
+        "/partner",
+        "/press"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m09-engagement/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 7 confirmed pages and 2 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M09-engagement"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M10-legal-info",
+      "moduleName": "Legal and info: privacy, terms, FAQ, craftsmanship, accessibility",
+      "dependencies": [
+        "M01-home"
+      ],
+      "relatedScreenIds": [
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116
+      ],
+      "relatedFigmaNodeIds": [
+        "13148:20719",
+        "14670:45497",
+        "14670:48497",
+        "14670:48590",
+        "14670:48780",
+        "14703:32598",
+        "14703:32859",
+        "14703:32888",
+        "14703:33048",
+        "14703:33971",
+        "15934:43007"
+      ],
+      "screenCounts": {
+        "total": 11,
+        "confirmedPages": 9,
+        "modalsAndOverlays": 1
+      },
+      "routes": [
+        "/ (global)",
+        "/accessibility",
+        "/cookie-policy",
+        "/craftsmanship",
+        "/faq",
+        "/our-story",
+        "/press",
+        "/privacy-policy",
+        "/sustainability",
+        "/terms-of-service"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m10-legal-info/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 9 confirmed pages and 1 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M10-legal-info"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M06-cart-checkout",
+      "moduleName": "Cart and checkout: shipping, payment, review, empty states",
+      "dependencies": [
+        "M03-estate",
+        "M04-house"
+      ],
+      "relatedScreenIds": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "relatedFigmaNodeIds": [
+        "14670:43110",
+        "14670:45135",
+        "14670:50025",
+        "14670:50189",
+        "14670:50330",
+        "14670:50562",
+        "14670:50857",
+        "14670:51019",
+        "14712:33219",
+        "14803:100778",
+        "15081:41742",
+        "15127:23850",
+        "15127:24015",
+        "15127:24104",
+        "15127:24193",
+        "15127:24308",
+        "15127:24336",
+        "15127:24381",
+        "15274:39176",
+        "15451:37833",
+        "15451:37998",
+        "15451:38230",
+        "15451:38345",
+        "15451:38373",
+        "15451:38418"
+      ],
+      "screenCounts": {
+        "total": 30,
+        "confirmedPages": 5,
+        "modalsAndOverlays": 5
+      },
+      "routes": [
+        "/cart",
+        "/checkout/payment",
+        "/checkout/review",
+        "/checkout/shipping"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m06-cart-checkout/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 5 confirmed pages and 5 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M06-cart-checkout"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      }
+    },
+    {
+      "moduleId": "M07-profile",
+      "moduleName": "My Profile: dashboard, orders, wishlist, settings, deactivation/deletion flows",
+      "dependencies": [
+        "M02-auth"
+      ],
+      "relatedScreenIds": [
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89
+      ],
+      "relatedFigmaNodeIds": [
+        "13148:18311",
+        "13148:18414",
+        "13148:18728",
+        "13148:18794",
+        "13148:19312",
+        "13148:19561",
+        "14323:56798",
+        "14762:96902",
+        "14771:98658",
+        "14852:34676",
+        "14852:34754",
+        "14852:34765",
+        "14888:44021",
+        "14894:79892",
+        "14894:81468",
+        "15253:40306",
+        "15253:40372",
+        "15253:40433",
+        "15253:40494",
+        "15253:40549",
+        "15253:40571",
+        "15397:39748",
+        "15397:40009",
+        "15397:40144",
+        "15631:66323"
+      ],
+      "screenCounts": {
+        "total": 31,
+        "confirmedPages": 7,
+        "modalsAndOverlays": 21
+      },
+      "routes": [
+        "/my-profile",
+        "/my-profile/addresses",
+        "/my-profile/complete",
+        "/my-profile/orders",
+        "/my-profile/orders/[orderId]",
+        "/my-profile/settings",
+        "/my-profile/wishlist"
+      ],
+      "sharedComponents": [
+        "cmp-main-explore",
+        "cmp-main-breadcrumbs",
+        "cmp-main-footer",
+        "cmp-main-navbar",
+        "cmp-main-nav",
+        "cmp-main-product-card",
+        "cmp-checkbox",
+        "cmp-chevron-down"
+      ],
+      "moduleSpecificComponents": [
+        "components/m07-profile/"
+      ],
+      "requiredAssets": [
+        "asset-product-hero-images"
+      ],
+      "designTokens": [
+        "Consume M00 @theme tokens"
+      ],
+      "responsiveRequirements": "Desktop 1440px Figma fidelity; tablet/mobile engineering-derived per module with UI/UX review before acceptance",
+      "interactions": "See prototype-flow-map.json",
+      "accessibilityRequirements": "WCAG 2.2 AA: keyboard, focus, semantic HTML, accessible names, contrast, reduced motion, form errors, modal focus trap",
+      "implementationSteps": [
+        "Implement 7 confirmed pages and 21 modals/overlays",
+        "Reuse shared components from shared-component-plan.json",
+        "Verify against saved screenshots where available"
+      ],
+      "testRequirements": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "visualVerificationRequirements": [
+        "Representative screenshots in docs/figma/screenshots/ for M07-profile"
+      ],
+      "blockers": [
+        "Awaiting START VELARRO IMPLEMENTATION",
+        "Awaiting START VELARRO IMPLEMENTATION"
+      ],
+      "status": "pending",
+      "deploymentTarget": "Vercel",
+      "testingStack": {
+        "vitest": "module unit tests",
+        "reactTestingLibrary": "component tests",
+        "playwright": "E2E flows and visual checks"
+      },
+      "modalStrategy": "Route-backed settings and profile overlays per route-map.json routeBackedModals"
+    }
+  ]
+}

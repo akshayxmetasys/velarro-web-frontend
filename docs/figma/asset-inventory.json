@@ -1,0 +1,213 @@
+{
+  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+  "correctionRunDate": "2026-07-01",
+  "assets": [
+    {
+      "assetId": "asset-font-gotham",
+      "type": "font",
+      "status": "pending-external-procurement",
+      "description": "Licensed Gotham webfont files (Light, Book, Medium, Bold, Italic). Not fabricated in repo.",
+      "approvedInterimFallback": "Arial, Helvetica, sans-serif via --font-family-primary",
+      "suggestedPublicPath": "public/fonts/gotham/",
+      "verificationSource": "Figma verified; procurement: pending"
+    },
+    {
+      "assetId": "asset-font-noto-sans",
+      "type": "font",
+      "status": "available-via-google-fonts",
+      "description": "Secondary Title/title-2 token",
+      "suggestedPublicPath": "public/fonts/noto-sans/",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-logo-velarro",
+      "type": "logo",
+      "status": "pending-external-export",
+      "description": "Navbar/footer brand mark",
+      "suggestedPublicPath": "public/icons/velarro-logo.svg",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "assetId": "asset-favicon",
+      "type": "logo",
+      "status": "pending-external-export",
+      "description": "Browser favicon",
+      "suggestedPublicPath": "app/favicon.ico",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "assetId": "asset-oauth-google",
+      "type": "icon",
+      "figmaNodeId": "14991:70108",
+      "status": "export-at-implementation",
+      "suggestedPublicPath": "public/icons/oauth-google.svg",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-oauth-apple",
+      "type": "icon",
+      "figmaNodeId": "14991:70112",
+      "status": "export-at-implementation",
+      "suggestedPublicPath": "public/icons/oauth-apple.svg",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-oauth-microsoft",
+      "type": "icon",
+      "figmaNodeId": "14991:70116",
+      "status": "export-at-implementation",
+      "suggestedPublicPath": "public/icons/oauth-microsoft.svg",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-product-hero-images",
+      "type": "image",
+      "status": "pending-bulk-export",
+      "description": "Product and hero photography across home, estate, house, vault modules",
+      "suggestedPublicPath": "public/images/",
+      "verificationSource": "Figma verified (design context URLs; export at implementation)"
+    }
+  ],
+  "screenshots": {
+    "totalFiles": 26,
+    "mappedToNodeId": [
+      {
+        "path": "docs/figma/screenshots/M01-home-13148-15012.png",
+        "nodeId": "13148:15012",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M01-home-15967-43304.png",
+        "nodeId": "15967:43304",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M02-auth-login-14991-70094.png",
+        "nodeId": "14991:70094",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M02-signup-14991-70051.png",
+        "nodeId": "14991:70051",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M03-estate-14888-53493.png",
+        "nodeId": "14888:53493",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M03-estate-house-tab-14670-34051.png",
+        "nodeId": "14670:34051",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M03-estate-pdp-14670-37727.png",
+        "nodeId": "14670:37727",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M03-estate-roastery-tab-15451-39198.png",
+        "nodeId": "15451:39198",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M04-house-14670-40233.png",
+        "nodeId": "14670:40233",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M05-vault-14240-78024.png",
+        "nodeId": "14240:78024",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M06-cart-14670-45135.png",
+        "nodeId": "14670:45135",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M06-checkout-payment-15127-23850.png",
+        "nodeId": "15127:23850",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M06-checkout-shipping-15127-24015.png",
+        "nodeId": "15127:24015",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M07-deactivation-15253-40306.png",
+        "nodeId": "15253:40306",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M07-order-detail-13148-19312.png",
+        "nodeId": "13148:19312",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M07-profile-13148-18311.png",
+        "nodeId": "13148:18311",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M07-profile-settings-14762-96902.png",
+        "nodeId": "14762:96902",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M08-chronicle-14284-63187.png",
+        "nodeId": "14284:63187",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M08-pairing-guide-14406-85066.png",
+        "nodeId": "14406:85066",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M09-careers-13148-15771.png",
+        "nodeId": "13148:15771",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M09-membership-15008-38309.png",
+        "nodeId": "15008:38309",
+        "mappingConfidence": "reliable"
+      },
+      {
+        "path": "docs/figma/screenshots/M10-our-story-15934-43007.png",
+        "nodeId": "15934:43007",
+        "mappingConfidence": "reliable"
+      }
+    ],
+    "alternates": [
+      {
+        "path": "docs/figma/screenshots/M01-home-full-13148-15012.png",
+        "nodeId": "13148:15012",
+        "primaryScreenshot": "docs/figma/screenshots/M01-home-13148-15012.png",
+        "mappingConfidence": "reliable-alternate"
+      },
+      {
+        "path": "docs/figma/screenshots/M03-pdp-royal-leaf-14670-37727.png",
+        "nodeId": "14670:37727",
+        "primaryScreenshot": "docs/figma/screenshots/M03-estate-pdp-14670-37727.png",
+        "mappingConfidence": "reliable-alternate"
+      },
+      {
+        "path": "docs/figma/screenshots/M07-deactivation-chooser-15253-40306.png",
+        "nodeId": "15253:40306",
+        "primaryScreenshot": "docs/figma/screenshots/M07-deactivation-15253-40306.png",
+        "mappingConfidence": "reliable-alternate"
+      },
+      {
+        "path": "docs/figma/screenshots/M07-settings-14762-96902.png",
+        "nodeId": "14762:96902",
+        "primaryScreenshot": "docs/figma/screenshots/M07-profile-settings-14762-96902.png",
+        "mappingConfidence": "reliable-alternate"
+      }
+    ],
+    "unmatched": []
+  }
+}

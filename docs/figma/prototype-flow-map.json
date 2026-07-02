@@ -1,0 +1,1065 @@
+{
+  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+  "runDate": "2026-07-01",
+  "prototype": {
+    "fileKey": "92rhH51aErpYQWRrlJqMhn",
+    "fileName": "Velarro",
+    "approvedWireframesSection": "Over 21",
+    "approvedWireframesNodeId": "14366:82579",
+    "prototypeStartNodeId": "15967:43304",
+    "prototypePageId": "85:10",
+    "url": "https://www.figma.com/proto/92rhH51aErpYQWRrlJqMhn/Velarro?node-id=15967-43304&t=HJe6XAvQNYwmEyvH-1&scaling=contain&content-scaling=fixed&page-id=85%3A10",
+    "pageName": "Velarro Wireframes"
+  },
+  "verificationSummary": {
+    "purelyVerified": 5,
+    "mixedVerifiedAndInferred": 14,
+    "purelyInferred": 39,
+    "totalEdges": 58
+  },
+  "nodes": [
+    {
+      "nodeId": "15967:43304",
+      "frameName": "home",
+      "screenNumber": 1,
+      "isPrototypeStart": true
+    },
+    {
+      "nodeId": "13148:15012",
+      "frameName": "home",
+      "screenNumber": 2,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14240:78024",
+      "frameName": "home/the vault",
+      "screenNumber": 28,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14284:63187",
+      "frameName": "home/the chronicle",
+      "screenNumber": 90,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14670:37727",
+      "frameName": "home/the estate/ the humidor/royal leaf",
+      "screenNumber": 14,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14670:39985",
+      "frameName": "home/the house/the clothier",
+      "screenNumber": 20,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14670:45135",
+      "frameName": "home/cart",
+      "screenNumber": 31,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14762:96902",
+      "frameName": "home/my profile/settings",
+      "screenNumber": 61,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14771:98658",
+      "frameName": "home/my profile/settings/deletion4",
+      "screenNumber": 83,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14888:53493",
+      "frameName": "home/the estate",
+      "screenNumber": 13,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14991:70051",
+      "frameName": "sign up",
+      "screenNumber": 5,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14991:70094",
+      "frameName": "Login ",
+      "screenNumber": 6,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14991:70134",
+      "frameName": "forgot password",
+      "screenNumber": 7,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "14991:70162",
+      "frameName": "new password",
+      "screenNumber": 8,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15127:23850",
+      "frameName": "home/the estate/the humidor/royal leaf/cart/payment",
+      "screenNumber": 35,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15127:24015",
+      "frameName": "home/the estate/the humidor/royal leaf/cart/shipping",
+      "screenNumber": 33,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15127:24193",
+      "frameName": "home/the estate/the humidor/royal leaf/cart/review",
+      "screenNumber": 37,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15253:40306",
+      "frameName": "home/my profile/settings/deactivation&deletion",
+      "screenNumber": 75,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15253:40372",
+      "frameName": "home/my profile/settings/deletion1",
+      "screenNumber": 76,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15253:40433",
+      "frameName": "home/my profile/deactivation1",
+      "screenNumber": 77,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15253:40494",
+      "frameName": "home/my profile/settings/deletion2",
+      "screenNumber": 78,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15253:40549",
+      "frameName": "home/my profile/deactivation2",
+      "screenNumber": 79,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15253:40571",
+      "frameName": "home/my profile/settings/deletion3",
+      "screenNumber": 81,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15631:66323",
+      "frameName": "home/my profile/deactivation3",
+      "screenNumber": 80,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15631:66346",
+      "frameName": "home/my profile/settings/deletion5",
+      "screenNumber": 84,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15631:66398",
+      "frameName": "home/my profile/settings/deletion6",
+      "screenNumber": 88,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15631:66439",
+      "frameName": "home/my profile/deactivation4",
+      "screenNumber": 82,
+      "isPrototypeStart": false
+    },
+    {
+      "nodeId": "15661:38017",
+      "frameName": "SIGN OUT CONFIRMATION",
+      "screenNumber": 62,
+      "isPrototypeStart": false
+    }
+  ],
+  "edges": [
+    {
+      "fromNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "MAIN NAVBAR",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Inferred navbar \u2192 /the-estate",
+      "toNodeId": "14888:53493"
+    },
+    {
+      "fromNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "MAIN NAVBAR",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Inferred navbar \u2192 /the-house/the-clothier",
+      "toNodeId": "14670:39985"
+    },
+    {
+      "fromNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "MAIN NAVBAR",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Inferred navbar \u2192 /the-vault",
+      "toNodeId": "14240:78024"
+    },
+    {
+      "fromNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "MAIN NAVBAR",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Inferred navbar \u2192 /the-chronicle",
+      "toNodeId": "14284:63187"
+    },
+    {
+      "fromNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "Login trigger",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14991:70094"
+    },
+    {
+      "fromNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "Sign up trigger",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14991:70051"
+    },
+    {
+      "fromNodeId": "14991:70094",
+      "trigger": "on-click",
+      "triggerElement": "Sign Up link",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14991:70051"
+    },
+    {
+      "fromNodeId": "14991:70051",
+      "trigger": "on-click",
+      "triggerElement": "Sign in link",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14991:70094"
+    },
+    {
+      "fromNodeId": "14991:70094",
+      "trigger": "on-click",
+      "triggerElement": "Forgot password",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14991:70134"
+    },
+    {
+      "fromNodeId": "14991:70134",
+      "trigger": "on-click",
+      "triggerElement": "Submit reset",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14991:70162"
+    },
+    {
+      "fromNodeId": "14991:70094",
+      "trigger": "on-click",
+      "triggerElement": "Close",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Auth modal close",
+      "toNodeId": "13148:15012"
+    },
+    {
+      "fromNodeId": "14991:70051",
+      "trigger": "on-click",
+      "triggerElement": "Close",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Auth modal close",
+      "toNodeId": "13148:15012"
+    },
+    {
+      "fromNodeId": "14991:70134",
+      "trigger": "on-click",
+      "triggerElement": "Close",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Auth modal close",
+      "toNodeId": "13148:15012"
+    },
+    {
+      "fromNodeId": "14991:70162",
+      "trigger": "on-click",
+      "triggerElement": "Close",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Auth modal close",
+      "toNodeId": "13148:15012"
+    },
+    {
+      "fromNodeId": "14670:37727",
+      "trigger": "on-click",
+      "triggerElement": "Add to cart",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14670:45135"
+    },
+    {
+      "fromNodeId": "14670:45135",
+      "trigger": "on-click",
+      "triggerElement": "Proceed to shipping",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15127:24015"
+    },
+    {
+      "fromNodeId": "15127:24015",
+      "trigger": "on-click",
+      "triggerElement": "Continue to payment",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15127:23850"
+    },
+    {
+      "fromNodeId": "15127:23850",
+      "trigger": "on-click",
+      "triggerElement": "Continue to review",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15127:24193"
+    },
+    {
+      "fromNodeId": "15127:24193",
+      "trigger": "on-click",
+      "triggerElement": "checkout overlay",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15127:24308"
+    },
+    {
+      "fromNodeId": "15127:24193",
+      "trigger": "on-click",
+      "triggerElement": "OTP VERIFICATION",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15916:42914"
+    },
+    {
+      "fromNodeId": "15127:24193",
+      "trigger": "on-click",
+      "triggerElement": "create password",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15127:24336"
+    },
+    {
+      "fromNodeId": "15127:24193",
+      "trigger": "on-click",
+      "triggerElement": "welcome overlay",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15127:24381"
+    },
+    {
+      "fromNodeId": "15127:23850",
+      "trigger": "on-click",
+      "triggerElement": "QR code",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15694:41226"
+    },
+    {
+      "fromNodeId": "14762:96902",
+      "trigger": "on-click",
+      "triggerElement": "Account deactivation entry",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15253:40306"
+    },
+    {
+      "fromNodeId": "15253:40306",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE (Account Removal)",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15253:40372"
+    },
+    {
+      "fromNodeId": "15253:40372",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15253:40494"
+    },
+    {
+      "fromNodeId": "15253:40494",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15253:40571"
+    },
+    {
+      "fromNodeId": "15253:40571",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14771:98658"
+    },
+    {
+      "fromNodeId": "14771:98658",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15631:66346"
+    },
+    {
+      "fromNodeId": "15631:66346",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE final",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (step copy on frames); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15631:66398"
+    },
+    {
+      "fromNodeId": "15253:40306",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15253:40372",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15253:40494",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15253:40571",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "14771:98658",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified (button label on earlier steps); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15631:66346",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified (button label on earlier steps); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15631:66398",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Figma verified (button label on earlier steps); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15253:40306",
+      "trigger": "on-click",
+      "triggerElement": "CONTINUE (Temporarily Disable)",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (frame naming); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15253:40433"
+    },
+    {
+      "fromNodeId": "15253:40433",
+      "trigger": "on-click",
+      "triggerElement": "deactivation step 2",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (frame naming); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15253:40549"
+    },
+    {
+      "fromNodeId": "15253:40549",
+      "trigger": "on-click",
+      "triggerElement": "deactivation step 3",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (frame naming); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15631:66323"
+    },
+    {
+      "fromNodeId": "15631:66323",
+      "trigger": "on-click",
+      "triggerElement": "deactivation step 4",
+      "action": "navigate",
+      "transition": "dissolve",
+      "verificationSource": "Figma verified (frame naming); connection: Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15631:66439"
+    },
+    {
+      "fromNodeId": "15253:40433",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account / Cancel",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15253:40549",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account / Cancel",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15631:66323",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account / Cancel",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15631:66439",
+      "trigger": "on-click",
+      "triggerElement": "Keep Account / Cancel",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15631:66398",
+      "trigger": "on-complete",
+      "triggerElement": "Account removal confirmed",
+      "action": "terminal-state",
+      "transition": "none",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Terminal frame \u2014 no outgoing edge; exit behavior requires product approval"
+    },
+    {
+      "fromNodeId": "14762:96902",
+      "trigger": "on-click",
+      "triggerElement": "Sign out",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15661:38017"
+    },
+    {
+      "fromNodeId": "15661:38017",
+      "trigger": "on-click",
+      "triggerElement": "cancel",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Figma verified",
+      "note": "",
+      "toNodeId": "14762:96902"
+    },
+    {
+      "fromNodeId": "15661:38017",
+      "trigger": "on-click",
+      "triggerElement": "sign out",
+      "action": "navigate",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "13148:15012"
+    },
+    {
+      "fromNodeId": "14852:34676",
+      "trigger": "on-click",
+      "triggerElement": "Cancel order",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "13148:19561"
+    },
+    {
+      "fromNodeId": "14852:34765",
+      "trigger": "on-click",
+      "triggerElement": "Delete wishlist",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15640:25119"
+    },
+    {
+      "fromNodeId": "13148:18311",
+      "trigger": "on-click",
+      "triggerElement": "Edit profile",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "15397:39748"
+    },
+    {
+      "fromNodeId": "14670:48497",
+      "trigger": "on-submit",
+      "triggerElement": "Press form submit",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "In-page overlay on /press",
+      "toNodeId": "15640:27501"
+    },
+    {
+      "fromNodeId": "15640:27501",
+      "trigger": "on-click",
+      "triggerElement": "Dismiss success",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "",
+      "toNodeId": "14670:48497"
+    },
+    {
+      "fromNodeId": "14644:34661",
+      "toNodeId": "15663:38140",
+      "trigger": "on-submit",
+      "triggerElement": "Get in touch form submit",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "In-page success overlay on /get-in-touch"
+    },
+    {
+      "fromNodeId": "15663:38140",
+      "toNodeId": "14644:34661",
+      "trigger": "on-click",
+      "triggerElement": "Dismiss",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "fromNodeId": "13148:15012",
+      "toNodeId": "14703:32888",
+      "trigger": "on-load",
+      "triggerElement": "Cookie consent",
+      "action": "open-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Global cookie popup"
+    },
+    {
+      "fromNodeId": "14703:32888",
+      "toNodeId": "13148:15012",
+      "trigger": "on-click",
+      "triggerElement": "Accept/dismiss",
+      "action": "close-overlay",
+      "transition": "instant",
+      "verificationSource": "Assumption requiring confirmation"
+    }
+  ],
+  "entryPoints": [
+    {
+      "nodeId": "15967:43304",
+      "screenNumber": 1,
+      "note": "Prototype start frame (viewport-height home duplicate)"
+    }
+  ],
+  "unresolvedConnections": [
+    "Exact navbar menu item \u2192 destination for all editorial/legal links",
+    "Order cancellation popup confirm/dismiss (13148:19561)",
+    "Wishlist delete confirm (15640:25119)",
+    "Pairing guide quiz result routing",
+    "Membership enrollment CTA destinations",
+    "Chatbot popup (14888:44021)",
+    "Address edit/add submit paths",
+    "Profile completed modal trigger (14323:56798)",
+    "Post-deletion6 terminal exit (product decision)"
+  ],
+  "correctionRunDate": "2026-07-01",
+  "deletionStepInconsistency": {
+    "issue": "Step copy says \"of 5\" but six deletionN frames exist after chooser",
+    "resolution": "Open product decision U-13",
+    "verificationSource": "Figma verified (labels); Metadata verified (frame count)"
+  },
+  "modalCoverage": [
+    {
+      "nodeId": "14991:70051",
+      "screenNumber": 5,
+      "frameName": "sign up",
+      "module": "M02-auth",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/signup"
+    },
+    {
+      "nodeId": "14991:70094",
+      "screenNumber": 6,
+      "frameName": "Login ",
+      "module": "M02-auth",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/login"
+    },
+    {
+      "nodeId": "14991:70134",
+      "screenNumber": 7,
+      "frameName": "forgot password",
+      "module": "M02-auth",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/forgot-password"
+    },
+    {
+      "nodeId": "14991:70162",
+      "screenNumber": 8,
+      "frameName": "new password",
+      "module": "M02-auth",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/reset-password"
+    },
+    {
+      "nodeId": "15127:24308",
+      "screenNumber": 40,
+      "frameName": "Background+Border+Shadow",
+      "module": "M06-cart-checkout",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/checkout/review"
+    },
+    {
+      "nodeId": "15694:41226",
+      "screenNumber": 43,
+      "frameName": "qr code",
+      "module": "M06-cart-checkout",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/checkout/payment"
+    },
+    {
+      "nodeId": "15916:42914",
+      "screenNumber": 44,
+      "frameName": "OTP VERIFICATION",
+      "module": "M06-cart-checkout",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/checkout/review"
+    },
+    {
+      "nodeId": "15127:24336",
+      "screenNumber": 46,
+      "frameName": "home/cart/create password",
+      "module": "M06-cart-checkout",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/checkout/review"
+    },
+    {
+      "nodeId": "15127:24381",
+      "screenNumber": 47,
+      "frameName": "home/cart/verification/welcome to velarro",
+      "module": "M06-cart-checkout",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/checkout/review"
+    },
+    {
+      "nodeId": "15397:39748",
+      "screenNumber": 60,
+      "frameName": "edit profile form",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile"
+    },
+    {
+      "nodeId": "15661:38017",
+      "screenNumber": 62,
+      "frameName": "SIGN OUT CONFIRMATION",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "14323:56798",
+      "screenNumber": 65,
+      "frameName": "home/my profile/profile completed",
+      "module": "M07-profile",
+      "coverageStatus": "unresolved",
+      "hostRoute": "/my-profile",
+      "unresolvedReason": "Profile-completed modal trigger path unknown"
+    },
+    {
+      "nodeId": "15640:25119",
+      "screenNumber": 70,
+      "frameName": "delete from wishlist",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/wishlist"
+    },
+    {
+      "nodeId": "15397:40144",
+      "screenNumber": 72,
+      "frameName": "edit address form",
+      "module": "M07-profile",
+      "coverageStatus": "unresolved",
+      "hostRoute": "/my-profile/addresses",
+      "unresolvedReason": "Edit address form submit/cancel wiring unresolved"
+    },
+    {
+      "nodeId": "15397:40009",
+      "screenNumber": 73,
+      "frameName": "add address form",
+      "module": "M07-profile",
+      "coverageStatus": "unresolved",
+      "hostRoute": "/my-profile/addresses",
+      "unresolvedReason": "Add address form submit/cancel wiring unresolved"
+    },
+    {
+      "nodeId": "15253:40306",
+      "screenNumber": 75,
+      "frameName": "home/my profile/settings/deactivation&deletion",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15253:40372",
+      "screenNumber": 76,
+      "frameName": "home/my profile/settings/deletion1",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15253:40433",
+      "screenNumber": 77,
+      "frameName": "home/my profile/deactivation1",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15253:40494",
+      "screenNumber": 78,
+      "frameName": "home/my profile/settings/deletion2",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15253:40549",
+      "screenNumber": 79,
+      "frameName": "home/my profile/deactivation2",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15631:66323",
+      "screenNumber": 80,
+      "frameName": "home/my profile/deactivation3",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15253:40571",
+      "screenNumber": 81,
+      "frameName": "home/my profile/settings/deletion3",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15631:66439",
+      "screenNumber": 82,
+      "frameName": "home/my profile/deactivation4",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "14771:98658",
+      "screenNumber": 83,
+      "frameName": "home/my profile/settings/deletion4",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "15631:66346",
+      "screenNumber": 84,
+      "frameName": "home/my profile/settings/deletion5",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "14888:44021",
+      "screenNumber": 85,
+      "frameName": "CHATBOT POP UP",
+      "module": "M07-profile",
+      "coverageStatus": "unresolved",
+      "hostRoute": "/my-profile",
+      "unresolvedReason": "Chatbot open/close trigger unresolved"
+    },
+    {
+      "nodeId": "13148:19561",
+      "screenNumber": 86,
+      "frameName": "CANCELLATION POP UP",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/orders/[orderId]"
+    },
+    {
+      "nodeId": "14894:81468",
+      "screenNumber": 87,
+      "frameName": "See all updates",
+      "module": "M07-profile",
+      "coverageStatus": "unresolved",
+      "hostRoute": "/my-profile/orders/[orderId]",
+      "unresolvedReason": "Order updates overlay trigger unresolved"
+    },
+    {
+      "nodeId": "15631:66398",
+      "screenNumber": 88,
+      "frameName": "home/my profile/settings/deletion6",
+      "module": "M07-profile",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/my-profile/settings"
+    },
+    {
+      "nodeId": "14894:79892",
+      "screenNumber": 89,
+      "frameName": "Background+Border+Shadow",
+      "module": "M07-profile",
+      "coverageStatus": "unresolved",
+      "hostRoute": "/my-profile/orders/[orderId]",
+      "unresolvedReason": "Order overlay (Background+Border+Shadow) trigger unresolved"
+    },
+    {
+      "nodeId": "15640:27501",
+      "screenNumber": 97,
+      "frameName": "PRESS FORM SUBMISSION",
+      "module": "M09-engagement",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/press"
+    },
+    {
+      "nodeId": "15663:38140",
+      "screenNumber": 101,
+      "frameName": "get in touch submission",
+      "module": "M09-engagement",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/get-in-touch"
+    },
+    {
+      "nodeId": "14703:32888",
+      "screenNumber": 116,
+      "frameName": "final cookie popup",
+      "module": "M10-legal-info",
+      "coverageStatus": "edges-documented",
+      "hostRoute": "/ (global)"
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+  "correctionRunDate": "2026-07-01",
+  "conventions": {
+    "directoryLayout": {
+      "components/ui": "Reusable primitives and form controls",
+      "components/layout": "Navbar, footer, sidebar shells",
+      "components/<module>": "Module-specific composites"
+    },
+    "naming": "PascalCase component exports; kebab-case filenames",
+    "styling": "Tailwind v4 @theme tokens from design-tokens.json",
+    "modalPattern": "RouteBackedModalShell for intercepting routes (U-11)",
+    "verificationSource": "Project-approved + Repository verified"
+  },
+  "sharedComponents": [
+    {
+      "componentId": "cmp-main-explore",
+      "codePath": "components/ui/main-explore.tsx",
+      "figmaComponentName": "MAIN EXPLORE",
+      "usageCount": 69,
+      "priority": "P0",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainExplore"
+    },
+    {
+      "componentId": "cmp-main-breadcrumbs",
+      "codePath": "components/ui/main-breadcrumbs.tsx",
+      "figmaComponentName": "MAIN BREADCRUMBS",
+      "usageCount": 53,
+      "priority": "P0",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainBreadcrumbs"
+    },
+    {
+      "componentId": "cmp-main-footer",
+      "codePath": "components/layout/main-footer.tsx",
+      "figmaComponentName": "MAIN FOOTER",
+      "usageCount": 48,
+      "priority": "P0",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainFooter"
+    },
+    {
+      "componentId": "cmp-main-navbar",
+      "codePath": "components/layout/main-navbar.tsx",
+      "figmaComponentName": "MAIN NAVBAR",
+      "usageCount": 35,
+      "priority": "P0",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainNavbar"
+    },
+    {
+      "componentId": "cmp-main-nav",
+      "codePath": "components/layout/main-nav.tsx",
+      "figmaComponentName": "main nav",
+      "usageCount": 16,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainNav"
+    },
+    {
+      "componentId": "cmp-main-product-card",
+      "codePath": "components/ui/main-product-card.tsx",
+      "figmaComponentName": "MAIN PRODUCT CARD",
+      "usageCount": 15,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainProductCard"
+    },
+    {
+      "componentId": "cmp-checkbox",
+      "codePath": "components/ui/checkbox.tsx",
+      "figmaComponentName": "CHECKBOX",
+      "usageCount": 9,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "Checkbox"
+    },
+    {
+      "componentId": "cmp-chevron-down",
+      "codePath": "components/ui/chevron-down.tsx",
+      "figmaComponentName": "chevron-down",
+      "usageCount": 9,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "ChevronDown"
+    },
+    {
+      "componentId": "cmp-main-sidedbar",
+      "codePath": "components/layout/main-sidebar.tsx",
+      "figmaComponentName": "MAIN SIDEDBAR",
+      "usageCount": 8,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainSidebar"
+    },
+    {
+      "componentId": "cmp-main-wishlist",
+      "codePath": "components/ui/main-wishlist.tsx",
+      "figmaComponentName": "MAIN WISHLIST",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainWishlist"
+    },
+    {
+      "componentId": "cmp-pricing-cards",
+      "codePath": "components/ui/pricing-cards.tsx",
+      "figmaComponentName": "PRICING CARDS",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "PricingCards"
+    },
+    {
+      "componentId": "cmp-the-house",
+      "codePath": "components/ui/the-house.tsx",
+      "figmaComponentName": "The House",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "TheHouse"
+    },
+    {
+      "componentId": "cmp-search",
+      "codePath": "components/ui/search.tsx",
+      "figmaComponentName": "search",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "Search"
+    },
+    {
+      "componentId": "cmp-category-cards",
+      "codePath": "components/ui/category-cards.tsx",
+      "figmaComponentName": "Category cards",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "CategoryCards"
+    },
+    {
+      "componentId": "cmp-main-cigars-the-cabinet",
+      "codePath": "components/ui/main-cigars-the-cabinet.tsx",
+      "figmaComponentName": "MAIN CIGARS/THE CABINET",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainCigarsTheCabinet"
+    },
+    {
+      "componentId": "cmp-alert-circle",
+      "codePath": "components/ui/alert-circle.tsx",
+      "figmaComponentName": "alert-circle",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "AlertCircle"
+    },
+    {
+      "componentId": "cmp-columns",
+      "codePath": "components/ui/columns.tsx",
+      "figmaComponentName": "columns",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "Columns"
+    },
+    {
+      "componentId": "cmp-user",
+      "codePath": "components/ui/user.tsx",
+      "figmaComponentName": "user",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "User"
+    },
+    {
+      "componentId": "cmp-button-explore",
+      "codePath": "components/ui/button-explore.tsx",
+      "figmaComponentName": "Button - explore",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "ButtonExplore"
+    },
+    {
+      "componentId": "cmp-component-8",
+      "codePath": "components/ui/component-8.tsx",
+      "figmaComponentName": "Component 8",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "Component8"
+    },
+    {
+      "componentId": "cmp-component-9",
+      "codePath": "components/ui/component-9.tsx",
+      "figmaComponentName": "Component 9",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "Component9"
+    },
+    {
+      "componentId": "cmp-main-checkout-cta",
+      "codePath": "components/ui/main-checkout-cta.tsx",
+      "figmaComponentName": "MAIN CHECKOUT CTA",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainCheckoutCta"
+    },
+    {
+      "componentId": "cmp-main-delete-add",
+      "codePath": "components/ui/main-delete-add.tsx",
+      "figmaComponentName": "MAIN DELETE/ADD",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "MainDeleteAdd"
+    },
+    {
+      "componentId": "cmp-save-for-later",
+      "codePath": "components/ui/save-for-later.tsx",
+      "figmaComponentName": "Save for later",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "SaveForLater"
+    },
+    {
+      "componentId": "cmp-pagination",
+      "codePath": "components/ui/pagination.tsx",
+      "figmaComponentName": "pagination",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified",
+      "componentName": "Pagination"
+    }
+  ],
+  "additionalAbstractions": [
+    {
+      "componentId": "cmp-accordion",
+      "componentName": "Accordion",
+      "codePath": "components/ui/accordion.tsx",
+      "figmaSources": [
+        "Observed in settings/content sections"
+      ],
+      "priority": "P1",
+      "verificationSource": "Assumption requiring confirmation",
+      "note": "Pattern-based abstraction; not a named Figma component instance"
+    },
+    {
+      "componentId": "cmp-drawer",
+      "componentName": "Drawer",
+      "codePath": "components/ui/drawer.tsx",
+      "figmaSources": [
+        "Mobile/responsive engineering-derived"
+      ],
+      "priority": "P2",
+      "verificationSource": "Assumption requiring confirmation (engineering-derived)"
+    },
+    {
+      "componentId": "cmp-progress-indicator",
+      "componentName": "ProgressIndicator",
+      "codePath": "components/ui/progress-indicator.tsx",
+      "figmaSources": [
+        "Deletion/deactivation step bars (15253:40306 et al.)"
+      ],
+      "priority": "P1",
+      "verificationSource": "Figma verified (visual pattern in enriched frames)"
+    },
+    {
+      "componentId": "cmp-route-backed-modal-shell",
+      "componentName": "RouteBackedModalShell",
+      "codePath": "components/ui/route-backed-modal-shell.tsx",
+      "figmaSources": [
+        "Auth modals",
+        "Settings overlays",
+        "Checkout overlays"
+      ],
+      "priority": "P0",
+      "verificationSource": "Project-approved (correction run)"
+    }
+  ]
+}

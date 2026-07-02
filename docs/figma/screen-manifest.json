@@ -1,0 +1,4224 @@
+{
+ "$comment": "Velarro Estate - screen manifest built from the Approved Wireframes section metadata (node 14366:82579, retrieved 2026-07-01). All 116 top-level frames are accounted for. Purposes/modules/routes are name-derived assumptions until enrichment marks them Figma verified.",
+ "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+ "runDate": "2026-07-01",
+ "figmaFile": {
+  "fileKey": "92rhH51aErpYQWRrlJqMhn",
+  "fileName": "Velarro",
+  "approvedWireframesSection": "Over 21",
+  "approvedWireframesNodeId": "14366:82579",
+  "prototypeStartNodeId": "15967:43304",
+  "prototypePageId": "85:10"
+ },
+ "totals": {
+  "topLevelFrameCandidates": 116,
+  "confirmedScreens": 53,
+  "modalsAndOverlays": 33,
+  "interactionStates": 8,
+  "duplicatesOrNearDuplicates": 22,
+  "componentOrUtilityFrames": 0,
+  "requiresFurtherInspection": 0,
+  "responsiveVariants": 0,
+  "breakpointNote": "Figma wireframes are desktop-only (1440px; FAQ frame 1459px is a layout anomaly, not a breakpoint). Tablet/mobile behavior is engineering-derived with UI/UX review (U-10)."
+ },
+ "verificationLabels": [
+  "Figma verified",
+  "Prototype verified",
+  "Repository verified",
+  "Metadata verified",
+  "Assumption requiring confirmation"
+ ],
+ "screens": [
+  {
+   "screenNumber": 1,
+   "figmaFrameName": "home",
+   "nodeId": "15967:43304",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 963
+   },
+   "deviceClass": "desktop",
+   "module": "M01-home",
+   "purpose": "Viewport-height copy of home used as the prototype entry frame",
+   "suggestedRoute": "/",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 8",
+    "Component 9",
+    "MAIN EXPLORE",
+    "MAIN FOOTER/Footer - under 21",
+    "alert-circle",
+    "user"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:13148:15012",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 46217,
+    "y": 2654
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+  },
+  {
+   "screenNumber": 2,
+   "figmaFrameName": "home",
+   "nodeId": "13148:15012",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 7624
+   },
+   "deviceClass": "desktop",
+   "module": "M01-home",
+   "purpose": "Primary home page (guest): hero, category sections, editorial teasers",
+   "suggestedRoute": "/",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 8",
+    "Component 9",
+    "MAIN EXPLORE",
+    "MAIN FOOTER/Footer - under 21",
+    "alert-circle",
+    "user"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 48867,
+    "y": 2654
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M01-home-13148-15012.png"
+  },
+  {
+   "screenNumber": 3,
+   "figmaFrameName": "home login",
+   "nodeId": "15148:40087",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 7624
+   },
+   "deviceClass": "desktop",
+   "module": "M01-home",
+   "purpose": "Home page in logged-in state (account-aware nav)",
+   "suggestedRoute": "/",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 8",
+    "Component 9",
+    "MAIN EXPLORE",
+    "MAIN FOOTER/Footer - under 21",
+    "alert-circle",
+    "user"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:13148:15012",
+   "canvasPosition": {
+    "x": 50770,
+    "y": 2654
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 4,
+   "figmaFrameName": "Coming soon",
+   "nodeId": "12339:55472",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1481
+   },
+   "deviceClass": "desktop",
+   "module": "M01-home",
+   "purpose": "Coming-soon / unveiling placeholder page with links back to homepage",
+   "suggestedRoute": "/coming-soon",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 46839,
+    "y": 8797
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 5,
+   "figmaFrameName": "sign up",
+   "nodeId": "14991:70051",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 490,
+    "height": 891
+   },
+   "deviceClass": "modal",
+   "module": "M02-auth",
+   "purpose": "Sign-up modal with registration form",
+   "suggestedRoute": "/signup",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 39",
+    "Input 40",
+    "Input 41",
+    "Input 42",
+    "Input 43",
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 58453,
+    "y": 13822
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)signup",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 6,
+   "figmaFrameName": "Login ",
+   "nodeId": "14991:70094",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 490,
+    "height": 891
+   },
+   "deviceClass": "modal",
+   "module": "M02-auth",
+   "purpose": "Login modal",
+   "suggestedRoute": "/login",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Apple",
+    "Input 37",
+    "Input 38",
+    "Microsoft",
+    "google",
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 59519,
+    "y": 13822
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M02-auth-login-14991-70094.png",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)login",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 7,
+   "figmaFrameName": "forgot password",
+   "nodeId": "14991:70134",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 490,
+    "height": 891
+   },
+   "deviceClass": "modal",
+   "module": "M02-auth",
+   "purpose": "Forgot-password modal",
+   "suggestedRoute": "/forgot-password",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 45",
+    "Input 46",
+    "Submit button",
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 59519,
+    "y": 16428
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)forgot-password",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 8,
+   "figmaFrameName": "new password",
+   "nodeId": "14991:70162",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 490,
+    "height": 891
+   },
+   "deviceClass": "modal",
+   "module": "M02-auth",
+   "purpose": "New-password (reset) modal",
+   "suggestedRoute": "/reset-password",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Button - explore",
+    "Input 47",
+    "Input 48",
+    "Submit button",
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 59519,
+    "y": 19207
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)reset-password",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 9,
+   "figmaFrameName": "home/the estate/the house",
+   "nodeId": "14670:34051",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2683
+   },
+   "deviceClass": "desktop",
+   "module": "M03-estate",
+   "purpose": "The Estate \u2014 The House tab (category landing within estate)",
+   "suggestedRoute": "/the-estate/the-house",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Category cards",
+    "MAIN BREADCRUMBS",
+    "MAIN CIGARS/THE CABINET",
+    "MAIN PRODUCT CARD",
+    "all filters",
+    "pagination"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 39207,
+    "y": 14493
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Figma verified via get_design_context"
+  },
+  {
+   "screenNumber": 10,
+   "figmaFrameName": "home/the estate/the house/the roastery",
+   "nodeId": "15451:39198",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2683
+   },
+   "deviceClass": "desktop",
+   "module": "M03-estate",
+   "purpose": "The Estate \u2014 The Roastery tab (category landing within estate)",
+   "suggestedRoute": "/the-estate/the-house/the-roastery",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Category cards",
+    "MAIN BREADCRUMBS",
+    "MAIN CIGARS/THE CABINET",
+    "MAIN PRODUCT CARD",
+    "all filters",
+    "pagination"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 40770,
+    "y": 14493
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Figma verified via get_design_context"
+  },
+  {
+   "screenNumber": 11,
+   "figmaFrameName": "home/the estate/the humidor",
+   "nodeId": "13148:16189",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2683
+   },
+   "deviceClass": "desktop",
+   "module": "M03-estate",
+   "purpose": "The Humidor (cigar collection) under The Estate",
+   "suggestedRoute": "/the-estate/the-humidor",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Category cards",
+    "MAIN BREADCRUMBS",
+    "MAIN CIGARS/THE CABINET",
+    "MAIN PRODUCT CARD",
+    "minus",
+    "pagination"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35621,
+    "y": 14533
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 12,
+   "figmaFrameName": "home/the estate/the humidor/heritage",
+   "nodeId": "14670:35568",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2101
+   },
+   "deviceClass": "desktop",
+   "module": "M03-estate",
+   "purpose": "Humidor heritage story page",
+   "suggestedRoute": "/the-estate/the-humidor/heritage",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Category cards",
+    "MAIN BREADCRUMBS",
+    "MAIN CIGARS/THE CABINET",
+    "MAIN PRODUCT CARD",
+    "all filters",
+    "minus"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 37184,
+    "y": 14533
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 13,
+   "figmaFrameName": "home/the estate",
+   "nodeId": "14888:53493",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2683
+   },
+   "deviceClass": "desktop",
+   "module": "M03-estate",
+   "purpose": "The Estate landing page",
+   "suggestedRoute": "/the-estate",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Category cards",
+    "MAIN BREADCRUMBS",
+    "MAIN CIGARS/THE CABINET",
+    "MAIN PRODUCT CARD",
+    "minus",
+    "pagination"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 97026,
+    "y": 14747
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 14,
+   "figmaFrameName": "home/the estate/ the humidor/royal leaf",
+   "nodeId": "14670:37727",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2996
+   },
+   "deviceClass": "desktop",
+   "module": "M03-estate",
+   "purpose": "Product detail: Royal Leaf cigar (humidor PDP)",
+   "suggestedRoute": "/the-estate/the-humidor/royal-leaf",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS",
+    "columns"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35621,
+    "y": 19008
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M03-estate-pdp-14670-37727.png"
+  },
+  {
+   "screenNumber": 15,
+   "figmaFrameName": "home/the house",
+   "nodeId": "14670:46376",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 4904
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Footer-band duplicate of The House landing",
+   "suggestedRoute": "/the-house",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House",
+    "navigation tabs"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:14670:40233",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 100558,
+    "y": 14747
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 16,
+   "figmaFrameName": "home/the house",
+   "nodeId": "14670:40233",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 4904
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "The House landing (ateliers overview)",
+   "suggestedRoute": "/the-house",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House",
+    "navigation tabs"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 9889,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 17,
+   "figmaFrameName": "home/the estate/the house/founder's boxy hoodie",
+   "nodeId": "14670:35095",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2879
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Estate-band duplicate of Founder's Boxy Hoodie PDP",
+   "suggestedRoute": "/the-house/the-clothier/founders-boxy-hoodie",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN NAVBAR",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:14695:54494",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 39207,
+    "y": 19008
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 18,
+   "figmaFrameName": "home/the house/the roastery",
+   "nodeId": "14670:39860",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6019
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Atelier: The Roastery",
+   "suggestedRoute": "/the-house/the-roastery",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 727,
+    "y": 27070
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 19,
+   "figmaFrameName": "home/the house/the apothecary",
+   "nodeId": "14670:39923",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6019
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Atelier: The Apothecary",
+   "suggestedRoute": "/the-house/the-apothecary",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 3980,
+    "y": 27070
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 20,
+   "figmaFrameName": "home/the house/the clothier",
+   "nodeId": "14670:39985",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6243
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Atelier: The Clothier",
+   "suggestedRoute": "/the-house/the-clothier",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House",
+    "chevron-right"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 6862,
+    "y": 27070
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+  },
+  {
+   "screenNumber": 21,
+   "figmaFrameName": "home/the house/the saddlery",
+   "nodeId": "14670:40071",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6134
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Atelier: The Saddlery",
+   "suggestedRoute": "/the-house/the-saddlery",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House",
+    "chevron-right"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 9554,
+    "y": 27070
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 22,
+   "figmaFrameName": "home/the house/the cabinet",
+   "nodeId": "14670:40152",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6134
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "Atelier: The Cabinet",
+   "suggestedRoute": "/the-house/the-cabinet",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "The House",
+    "chevron-right"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 12207,
+    "y": 27070
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 23,
+   "figmaFrameName": "home/the house/the clothier/founder's boxy hoodie",
+   "nodeId": "14695:54494",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2879
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "PDP: Founder's Boxy Hoodie (clothier)",
+   "suggestedRoute": "/the-house/the-clothier/founders-boxy-hoodie",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "MAIN NAVBAR",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS",
+    "columns"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 6862,
+    "y": 35333
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 24,
+   "figmaFrameName": "home/the house/the saddlery/Reserve Card Holder",
+   "nodeId": "15008:37483",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2879
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "PDP: Reserve Card Holder (saddlery)",
+   "suggestedRoute": "/the-house/the-saddlery/reserve-card-holder",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "MAIN NAVBAR",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS",
+    "columns"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 9554,
+    "y": 35333
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 25,
+   "figmaFrameName": "home/the house/the Cabinet/Estate Guillotine Cutter",
+   "nodeId": "15008:37893",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2879
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "PDP: Estate Guillotine Cutter (cabinet)",
+   "suggestedRoute": "/the-house/the-cabinet/estate-guillotine-cutter",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "MAIN NAVBAR",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS",
+    "columns"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 12207,
+    "y": 35333
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 26,
+   "figmaFrameName": "home/the house/the roastery/estate espresso",
+   "nodeId": "15008:37073",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2879
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "PDP: Estate Espresso (roastery)",
+   "suggestedRoute": "/the-house/the-roastery/estate-espresso",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN NAVBAR",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 727,
+    "y": 35348
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 27,
+   "figmaFrameName": "home/the house/the apothecary/wuyi oolong reserve",
+   "nodeId": "15008:36663",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2879
+   },
+   "deviceClass": "desktop",
+   "module": "M04-house",
+   "purpose": "PDP: Wuyi Oolong Reserve (apothecary)",
+   "suggestedRoute": "/the-house/the-apothecary/wuyi-oolong-reserve",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "MAIN NAVBAR",
+    "MAIN PRODUCT CARD",
+    "MAIN WISHLIST",
+    "PRICING CARDS",
+    "columns"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 3980,
+    "y": 35348
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 28,
+   "figmaFrameName": "home/the vault",
+   "nodeId": "14240:78024",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3900
+   },
+   "deviceClass": "desktop",
+   "module": "M05-vault",
+   "purpose": "The Vault (exclusive collection) page",
+   "suggestedRoute": "/the-vault",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Button - explore",
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 13399,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M05-vault-14240-78024.png"
+  },
+  {
+   "screenNumber": 29,
+   "figmaFrameName": "home/cart/buy again",
+   "nodeId": "14712:33219",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1843
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Cart with buy-again section",
+   "suggestedRoute": "/cart",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "EDIT profile",
+    "MAIN CHECKOUT CTA",
+    "MAIN DELETE/ADD",
+    "Save for later",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 54793,
+    "y": 12896
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 30,
+   "figmaFrameName": "home/cart empty",
+   "nodeId": "14670:43110",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1874
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Empty-cart state",
+   "suggestedRoute": "/cart",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 23",
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "chevron-down",
+    "list"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:14670:45135",
+   "canvasPosition": {
+    "x": 51134,
+    "y": 13306
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 31,
+   "figmaFrameName": "home/cart",
+   "nodeId": "14670:45135",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2151
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Shopping cart page",
+   "suggestedRoute": "/cart",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "MAIN CHECKOUT CTA",
+    "MAIN DELETE/ADD",
+    "Save for later",
+    "Saved for later",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 52788,
+    "y": 13306
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M06-cart-14670-45135.png"
+  },
+  {
+   "screenNumber": 32,
+   "figmaFrameName": "home/cart/buy again",
+   "nodeId": "15274:39176",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1914
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Near-duplicate of buy-again cart",
+   "suggestedRoute": "/cart",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 23",
+    "MAIN /SAVE FOR LATER",
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "Saved for later",
+    "VIEW BUTTON CART"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:14712:33219",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 54793,
+    "y": 14928
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 33,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/shipping",
+   "nodeId": "15127:24015",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2499
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Checkout step 1: shipping",
+   "suggestedRoute": "/checkout/shipping",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Input 71",
+    "Input 73",
+    "Input 75",
+    "Input 79",
+    "Input 80",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 52840,
+    "y": 17863
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 34,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/shipping",
+   "nodeId": "15127:24104",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1951
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Shipping step variant (compact/saved-address state)",
+   "suggestedRoute": "/checkout/shipping",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "Shipping form"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:15127:24015",
+   "canvasPosition": {
+    "x": 54365,
+    "y": 17863
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 35,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/payment",
+   "nodeId": "15127:23850",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2383
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Checkout step 2: payment",
+   "suggestedRoute": "/checkout/payment",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Input 66",
+    "Input 67",
+    "Input 68",
+    "Input 69",
+    "Input 70",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 52840,
+    "y": 22127
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 36,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart",
+   "nodeId": "14803:100778",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1680
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of the cart page",
+   "suggestedRoute": "/cart",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "EDIT profile",
+    "MAIN CHECKOUT CTA",
+    "MAIN DELETE/ADD",
+    "Save for later",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:14670:45135",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35554,
+    "y": 23809
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 37,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/review",
+   "nodeId": "15127:24193",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2513
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Checkout step 3: review order",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "Input 81",
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 52854,
+    "y": 26900
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+  },
+  {
+   "screenNumber": 38,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/shipping",
+   "nodeId": "14670:50189",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2414
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of shipping step",
+   "suggestedRoute": "/checkout/shipping",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Input 71",
+    "Input 73",
+    "Input 75",
+    "Input 79",
+    "Input 80",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24015",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35614,
+    "y": 27951
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 39,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/shipping",
+   "nodeId": "15081:41742",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1951
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of shipping variant",
+   "suggestedRoute": "/checkout/shipping",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "Shipping form"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24104",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 37199,
+    "y": 27951
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 40,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "15127:24308",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 610
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Order-placed success modal (with verify prompt)",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 53324,
+    "y": 31497
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
+  },
+  {
+   "screenNumber": 41,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/payment",
+   "nodeId": "14670:50025",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2239
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of payment step",
+   "suggestedRoute": "/checkout/payment",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Input 66",
+    "Input 67",
+    "Input 68",
+    "Input 69",
+    "Input 70",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:23850",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35614,
+    "y": 32215
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 42,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/payment",
+   "nodeId": "15694:41162",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1878
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Payment step in QR/UPI state",
+   "suggestedRoute": "/checkout/payment",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:15127:23850",
+   "canvasPosition": {
+    "x": 37140,
+    "y": 32215
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 43,
+   "figmaFrameName": "qr code",
+   "nodeId": "15694:41226",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 527,
+    "height": 525
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "QR-code payment modal",
+   "suggestedRoute": "/checkout/payment",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 38666,
+    "y": 32307
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/payment",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/payment"
+  },
+  {
+   "screenNumber": 44,
+   "figmaFrameName": "OTP VERIFICATION",
+   "nodeId": "15916:42914",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 492
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "OTP verification modal (email/phone)",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 1",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 52604,
+    "y": 34439
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
+  },
+  {
+   "screenNumber": 45,
+   "figmaFrameName": "home/the estate/the humidor/royal leaf/cart/review",
+   "nodeId": "14670:50330",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2513
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of review step",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "Input 81",
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24193",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35628,
+    "y": 36988
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 46,
+   "figmaFrameName": "home/cart/create password",
+   "nodeId": "15127:24336",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 733
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Create-password modal (post-purchase account creation)",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 53324,
+    "y": 37233
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
+  },
+  {
+   "screenNumber": 47,
+   "figmaFrameName": "home/cart/verification/welcome to velarro",
+   "nodeId": "15127:24381",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 556
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Welcome-to-Velarro modal (account ready)",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 53324,
+    "y": 40540
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
+  },
+  {
+   "screenNumber": 48,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "14670:50562",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 610
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of order-placed modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24308",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 36098,
+    "y": 41585
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 49,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "15451:38373",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 750
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow verified + create-password modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24336",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 9806,
+    "y": 42358
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 50,
+   "figmaFrameName": "home/the house/the roastery/estate espresso/cart",
+   "nodeId": "15451:39778",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2151
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow copy of the cart page",
+   "suggestedRoute": "/cart",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "MAIN CHECKOUT CTA",
+    "MAIN DELETE/ADD",
+    "MAIN PRODUCT CARD",
+    "Save for later",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:14670:45135",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 956,
+    "y": 42376
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 51,
+   "figmaFrameName": "home/the house/the roastery/estate espresso/cart/shipping",
+   "nodeId": "15451:37998",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2499
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow copy of shipping step",
+   "suggestedRoute": "/checkout/shipping",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24015",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 2745,
+    "y": 42376
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 52,
+   "figmaFrameName": "home/the house/the roastery/estate espresso/cart/payment",
+   "nodeId": "15451:37833",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2383
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow copy of payment step",
+   "suggestedRoute": "/checkout/payment",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:23850",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 4353,
+    "y": 42376
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 53,
+   "figmaFrameName": "home/the house/the roastery/estate espresso/cart/review",
+   "nodeId": "15451:38230",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2513
+   },
+   "deviceClass": "desktop",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow copy of review step",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24193",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 6030,
+    "y": 42376
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 54,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "15451:38345",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 610
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow copy of order-placed modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24308",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 8302,
+    "y": 42428
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 55,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "15451:38418",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 573
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Roastery-flow copy of welcome modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24381",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 10655,
+    "y": 42465
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 56,
+   "figmaFrameName": "OTP VERIFICATION",
+   "nodeId": "15640:24401",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 492
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of OTP modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 1",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15916:42914",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 35546,
+    "y": 44527
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 57,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "14670:50857",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 718
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow verified + create-password modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 90",
+    "Input 91",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24336",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 36098,
+    "y": 47321
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 58,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "14670:51019",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 573
+   },
+   "deviceClass": "modal",
+   "module": "M06-cart-checkout",
+   "purpose": "Estate-flow copy of welcome modal",
+   "suggestedRoute": "/checkout/review",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15127:24381",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 36098,
+    "y": 50084
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 59,
+   "figmaFrameName": "home/my profile",
+   "nodeId": "13148:18311",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1780
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "My Profile dashboard",
+   "suggestedRoute": "/my-profile",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "EDIT profile",
+    "Iconex/Light/Mail",
+    "map-pin",
+    "phone",
+    "profile card",
+    "user"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 74534,
+    "y": 13593
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 60,
+   "figmaFrameName": "edit profile form",
+   "nodeId": "15397:39748",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 670,
+    "height": 620
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Edit-profile form modal",
+   "suggestedRoute": "/my-profile",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 1",
+    "Input 2",
+    "Input 5",
+    "Input 8",
+    "Input 9",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 76120,
+    "y": 13593
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 61,
+   "figmaFrameName": "home/my profile/settings",
+   "nodeId": "14762:96902",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3108
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Settings page (preferences, market, early access)",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 8",
+    "Component 9",
+    "MAIN FOOTER",
+    "MAIN SIDEDBAR",
+    "alert-circle",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85854,
+    "y": 18170
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M07-profile-settings-14762-96902.png"
+  },
+  {
+   "screenNumber": 62,
+   "figmaFrameName": "SIGN OUT CONFIRMATION",
+   "nodeId": "15661:38017",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 206
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Sign-out confirmation modal",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MOVE TO CART BUTTON"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 87439,
+    "y": 18183
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 63,
+   "figmaFrameName": "home/my profile/address",
+   "nodeId": "13148:18794",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1598
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Address book page",
+   "suggestedRoute": "/my-profile/addresses",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "MAIN SIDEDBAR",
+    "edit-3",
+    "trash"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 69808,
+    "y": 18447
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 64,
+   "figmaFrameName": "home/my profile/complete profile",
+   "nodeId": "13148:18414",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1619
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Complete-profile page (progress prompts)",
+   "suggestedRoute": "/my-profile/complete",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "MAIN SIDEDBAR",
+    "PROFILE COMPLETION"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 64469,
+    "y": 18531
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 65,
+   "figmaFrameName": "home/my profile/profile completed",
+   "nodeId": "14323:56798",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 544
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Profile-completed success modal",
+   "suggestedRoute": "/my-profile",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Button - explore"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 66017,
+    "y": 18531
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 66,
+   "figmaFrameName": "home/my profile/my orders empty",
+   "nodeId": "14852:34754",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1590
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "My orders empty state",
+   "suggestedRoute": "/my-profile/orders",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "MAIN SIDEDBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:14852:34676",
+   "canvasPosition": {
+    "x": 76974,
+    "y": 18604
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 67,
+   "figmaFrameName": "home/my profile/my orders",
+   "nodeId": "14852:34676",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1590
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "My orders list",
+   "suggestedRoute": "/my-profile/orders",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Frame 1000004802",
+    "Frame 1000004803",
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "MAIN SIDEDBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 78560,
+    "y": 18604
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 68,
+   "figmaFrameName": "home/my profile/wishlist item removed",
+   "nodeId": "15640:25349",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2004
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Wishlist item-removed state (undo affordance)",
+   "suggestedRoute": "/my-profile/wishlist",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "3 TABS",
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN PRODUCT CARD",
+    "MAIN SIDEDBAR",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:14852:34765",
+   "canvasPosition": {
+    "x": 81114,
+    "y": 18604
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 69,
+   "figmaFrameName": "home/my profile/wishlist",
+   "nodeId": "14852:34765",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2004
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Wishlist page",
+   "suggestedRoute": "/my-profile/wishlist",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "3 TABS",
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN PRODUCT CARD",
+    "MAIN SIDEDBAR",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 82619,
+    "y": 18604
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 70,
+   "figmaFrameName": "delete from wishlist",
+   "nodeId": "15640:25119",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 206
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Delete-from-wishlist confirmation modal",
+   "suggestedRoute": "/my-profile/wishlist",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MOVE TO CART BUTTON"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 84143,
+    "y": 18604
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/wishlist",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 71,
+   "figmaFrameName": "home/my profile/final profile complete ",
+   "nodeId": "13148:18728",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1780
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Profile dashboard in fully-completed state",
+   "suggestedRoute": "/my-profile",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Iconex/Light/Mail",
+    "calendar",
+    "edit-3",
+    "map-pin",
+    "phone",
+    "user"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:13148:18311",
+   "canvasPosition": {
+    "x": 64577,
+    "y": 21860
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 72,
+   "figmaFrameName": "edit address form",
+   "nodeId": "15397:40144",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 670,
+    "height": 520
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Edit-address form modal",
+   "suggestedRoute": "/my-profile/addresses",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 10",
+    "Input 2",
+    "Input 5",
+    "Input 8",
+    "Input 9",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 71403,
+    "y": 22729
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/addresses",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 73,
+   "figmaFrameName": "add address form",
+   "nodeId": "15397:40009",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 670,
+    "height": 520
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Add-address form modal",
+   "suggestedRoute": "/my-profile/addresses",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "Input 10",
+    "Input 2",
+    "Input 5",
+    "Input 8",
+    "Input 9",
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 68400,
+    "y": 22825
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/addresses",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 74,
+   "figmaFrameName": "home/my profile/my orders/order detail",
+   "nodeId": "13148:19312",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2249
+   },
+   "deviceClass": "desktop",
+   "module": "M07-profile",
+   "purpose": "Order detail page",
+   "suggestedRoute": "/my-profile/orders/[orderId]",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Component 23",
+    "Frame 1000005254",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN SIDEDBAR",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 78190,
+    "y": 22970
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 75,
+   "figmaFrameName": "home/my profile/settings/deactivation&deletion",
+   "nodeId": "15253:40306",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 867,
+    "height": 543
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Deactivation & deletion chooser panel",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "RADIO BUTTON"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85737,
+    "y": 23016
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M07-deactivation-15253-40306.png",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 76,
+   "figmaFrameName": "home/my profile/settings/deletion1",
+   "nodeId": "15253:40372",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 638,
+    "height": 693
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Permanent deletion step 1",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85770,
+    "y": 24052
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 77,
+   "figmaFrameName": "home/my profile/deactivation1",
+   "nodeId": "15253:40433",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 638,
+    "height": 694
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Temporary deactivation step 1",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 86822,
+    "y": 24052
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 78,
+   "figmaFrameName": "home/my profile/settings/deletion2",
+   "nodeId": "15253:40494",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 638,
+    "height": 753
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Permanent deletion step 2",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85769,
+    "y": 25085
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 79,
+   "figmaFrameName": "home/my profile/deactivation2",
+   "nodeId": "15253:40549",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 638,
+    "height": 475
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Temporary deactivation step 2",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 86822,
+    "y": 25219
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 80,
+   "figmaFrameName": "home/my profile/deactivation3",
+   "nodeId": "15631:66323",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 411
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Temporary deactivation step 3",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 86822,
+    "y": 25969
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 81,
+   "figmaFrameName": "home/my profile/settings/deletion3",
+   "nodeId": "15253:40571",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 638,
+    "height": 587
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Permanent deletion step 3",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85769,
+    "y": 26071
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 82,
+   "figmaFrameName": "home/my profile/deactivation4",
+   "nodeId": "15631:66439",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 281
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Temporary deactivation step 4 (confirmation)",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 86822,
+    "y": 26549
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 83,
+   "figmaFrameName": "home/my profile/settings/deletion4",
+   "nodeId": "14771:98658",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 638,
+    "height": 475
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Permanent deletion step 4",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85748,
+    "y": 26981
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 84,
+   "figmaFrameName": "home/my profile/settings/deletion5",
+   "nodeId": "15631:66346",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 411
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Permanent deletion step 5",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85748,
+    "y": 27717
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 85,
+   "figmaFrameName": "CHATBOT POP UP",
+   "nodeId": "14888:44021",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 554,
+    "height": 770
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Chatbot popup widget",
+   "suggestedRoute": "/my-profile",
+   "classification": "Modal or overlay",
+   "surfaceType": "overlay",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 78760,
+    "y": 28197
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 86,
+   "figmaFrameName": "CANCELLATION POP UP",
+   "nodeId": "13148:19561",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 661,
+    "height": 437
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Order cancellation confirmation popup",
+   "suggestedRoute": "/my-profile/orders/[orderId]",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE",
+    "RADIO BUTTON"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 74327,
+    "y": 28239
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/orders/[orderId]",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 87,
+   "figmaFrameName": "See all updates",
+   "nodeId": "14894:81468",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 563,
+    "height": 1044
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "See-all-updates order tracking drawer",
+   "suggestedRoute": "/my-profile/orders/[orderId]",
+   "classification": "Modal or overlay",
+   "surfaceType": "drawer",
+   "reusableComponents": [
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 82582,
+    "y": 28239
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/orders/[orderId]",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 88,
+   "figmaFrameName": "home/my profile/settings/deletion6",
+   "nodeId": "15631:66398",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 281
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Permanent deletion step 6 (final confirmation)",
+   "suggestedRoute": "/my-profile/settings",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 85748,
+    "y": 28245
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 89,
+   "figmaFrameName": "Background+Border+Shadow",
+   "nodeId": "14894:79892",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 545
+   },
+   "deviceClass": "modal",
+   "module": "M07-profile",
+   "purpose": "Cancellation-successful modal",
+   "suggestedRoute": "/my-profile/orders/[orderId]",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 74407,
+    "y": 30853
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/orders/[orderId]",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
+  },
+  {
+   "screenNumber": 90,
+   "figmaFrameName": "home/the chronicle",
+   "nodeId": "14284:63187",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3884
+   },
+   "deviceClass": "desktop",
+   "module": "M08-editorial",
+   "purpose": "The Chronicle (news & events) landing",
+   "suggestedRoute": "/the-chronicle",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 20689,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 91,
+   "figmaFrameName": "home/pairing guide",
+   "nodeId": "14406:85066",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3332
+   },
+   "deviceClass": "desktop",
+   "module": "M08-editorial",
+   "purpose": "Pairing Guide landing",
+   "suggestedRoute": "/pairing-guide",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "PAIRING CARD"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 25280,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "context-retrieved",
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+  },
+  {
+   "screenNumber": 92,
+   "figmaFrameName": "the chronicle/international cigar day",
+   "nodeId": "14585:38918",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2593
+   },
+   "deviceClass": "desktop",
+   "module": "M08-editorial",
+   "purpose": "Article: International Cigar Day",
+   "suggestedRoute": "/the-chronicle/international-cigar-day",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Button - explore",
+    "Frame 1000005786",
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 20678,
+    "y": 23565
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 93,
+   "figmaFrameName": "home/pairing guide/find your pairing",
+   "nodeId": "14406:85132",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2048
+   },
+   "deviceClass": "desktop",
+   "module": "M08-editorial",
+   "purpose": "Find-your-pairing interactive page",
+   "suggestedRoute": "/pairing-guide/find-your-pairing",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "PAIRING Q2",
+    "pairing guide cards"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 25280,
+    "y": 24922
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 94,
+   "figmaFrameName": "home/pairing guide/rum &cigars",
+   "nodeId": "14644:32880",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2189
+   },
+   "deviceClass": "desktop",
+   "module": "M08-editorial",
+   "purpose": "Pairing detail: Rum & Cigars",
+   "suggestedRoute": "/pairing-guide/rum-and-cigars",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 25280,
+    "y": 28938
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 95,
+   "figmaFrameName": "home/partner",
+   "nodeId": "14670:42180",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1806
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Partner (B2B) application page",
+   "suggestedRoute": "/partner",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Input 49",
+    "Input 50",
+    "Input 51",
+    "Input 52",
+    "Input 53",
+    "Input 54"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 42845,
+    "y": 13493
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 96,
+   "figmaFrameName": "home/get in touch",
+   "nodeId": "14670:49691",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3253
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Footer-band duplicate of get-in-touch",
+   "suggestedRoute": "/get-in-touch",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "mail",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:14644:34661",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 118127,
+    "y": 14556
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 97,
+   "figmaFrameName": "PRESS FORM SUBMISSION",
+   "nodeId": "15640:27501",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 464
+   },
+   "deviceClass": "modal",
+   "module": "M09-engagement",
+   "purpose": "Press form submission success state on the M10 /press page (not a separate route)",
+   "suggestedRoute": "/press",
+   "classification": "Modal or overlay",
+   "surfaceType": "overlay",
+   "reusableComponents": [],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 116600,
+    "y": 15424
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified; press routing decision: project-approved (correction run)",
+   "hostRoute": "/press",
+   "routeBackedModal": false,
+   "modalStrategy": "in-page-overlay-on-host"
+  },
+  {
+   "screenNumber": 98,
+   "figmaFrameName": "home/partner/application submitted",
+   "nodeId": "15640:24481",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1806
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Partner page: application-submitted state",
+   "suggestedRoute": "/partner",
+   "classification": "Interaction state",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "state-variant-of:14670:42180",
+   "canvasPosition": {
+    "x": 42845,
+    "y": 15544
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 99,
+   "figmaFrameName": "home/careers",
+   "nodeId": "13148:15771",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3661
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Careers landing",
+   "suggestedRoute": "/careers",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 16836,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 100,
+   "figmaFrameName": "home/get in touch",
+   "nodeId": "14644:34661",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3253
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Get-in-touch contact page",
+   "suggestedRoute": "/get-in-touch",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "Input 85",
+    "Input 86",
+    "Input 87",
+    "Input 88",
+    "Input 89",
+    "MAIN BREADCRUMBS"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 29515,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 101,
+   "figmaFrameName": "get in touch submission",
+   "nodeId": "15663:38140",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 500,
+    "height": 358
+   },
+   "deviceClass": "modal",
+   "module": "M09-engagement",
+   "purpose": "Get-in-touch submission confirmation modal",
+   "suggestedRoute": "/get-in-touch",
+   "classification": "Modal or overlay",
+   "surfaceType": "modal",
+   "reusableComponents": [],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 31002,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": false,
+   "modalStrategy": "in-page-overlay-on-host"
+  },
+  {
+   "screenNumber": 102,
+   "figmaFrameName": "home/membership",
+   "nodeId": "15008:38309",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3184
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Membership tiers page",
+   "suggestedRoute": "/membership",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "alert-circle"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 32568,
+    "y": 18438
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "screenshot-retrieved",
+   "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
+   "screenshotPath": "docs/figma/screenshots/M09-membership-15008-38309.png"
+  },
+  {
+   "screenNumber": 103,
+   "figmaFrameName": "home/careers/view position",
+   "nodeId": "13148:15855",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1703
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Careers: open positions list",
+   "suggestedRoute": "/careers/positions",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 17020,
+    "y": 24619
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 104,
+   "figmaFrameName": "home/careers/view position/job description",
+   "nodeId": "13148:15939",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2563
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Careers: job description",
+   "suggestedRoute": "/careers/positions/[jobId]",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "search"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 17020,
+    "y": 28498
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 105,
+   "figmaFrameName": "home/careers/view position/job description/application",
+   "nodeId": "13563:29858",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 1659
+   },
+   "deviceClass": "desktop",
+   "module": "M09-engagement",
+   "purpose": "Careers: application form",
+   "suggestedRoute": "/careers/positions/[jobId]/apply",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN EXPLORE",
+    "MAIN FOOTER",
+    "MAIN NAVBAR",
+    "chevron-down"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 17020,
+    "y": 33220
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 106,
+   "figmaFrameName": "home/our story",
+   "nodeId": "15934:43007",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 4586
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Our Story page",
+   "suggestedRoute": "/our-story",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 47427,
+    "y": 13493
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 107,
+   "figmaFrameName": "home/cookie policy",
+   "nodeId": "14703:32859",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 2877
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Cookie policy page",
+   "suggestedRoute": "/cookie-policy",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 132061,
+    "y": 14543
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 108,
+   "figmaFrameName": "home/accessibility",
+   "nodeId": "14703:32598",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6129
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Accessibility statement page",
+   "suggestedRoute": "/accessibility",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 135863,
+    "y": 14543
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 109,
+   "figmaFrameName": "home/privacy policy",
+   "nodeId": "14670:48780",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 7908
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Privacy policy page",
+   "suggestedRoute": "/privacy-policy",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 123953,
+    "y": 14552
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 110,
+   "figmaFrameName": "home/sutainability",
+   "nodeId": "13148:20719",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3496
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Sustainability page (frame name has typo 'sutainability')",
+   "suggestedRoute": "/sustainability",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "MAIN NAVBAR"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 112193,
+    "y": 14556
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 111,
+   "figmaFrameName": "home/press",
+   "nodeId": "14670:48497",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 3100
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Canonical press page at /press (M10)",
+   "suggestedRoute": "/press",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "CHECKBOX",
+    "Input 56",
+    "Input 58",
+    "Input 60",
+    "Input 62",
+    "MAIN BREADCRUMBS"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 114907,
+    "y": 14556
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "canonicalRouteOwner": true
+  },
+  {
+   "screenNumber": 112,
+   "figmaFrameName": "home/faq",
+   "nodeId": "14670:48590",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1459,
+    "height": 4238
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "FAQ page (frame is 1459px wide - 19px overflow to fix)",
+   "suggestedRoute": "/faq",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "chevron-down",
+    "dropdownnn",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 120984,
+    "y": 14556
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 113,
+   "figmaFrameName": "home/terms & conditions",
+   "nodeId": "14703:33048",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 7630
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Terms & conditions page",
+   "suggestedRoute": "/terms-of-service",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 128191,
+    "y": 14691
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 114,
+   "figmaFrameName": "home/craftsmanship",
+   "nodeId": "14703:33971",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 6812
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Craftsmanship page",
+   "suggestedRoute": "/craftsmanship",
+   "classification": "Confirmed screen",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 104984,
+    "y": 14747
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 115,
+   "figmaFrameName": "home/our story",
+   "nodeId": "14670:45497",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 1440,
+    "height": 4586
+   },
+   "deviceClass": "desktop",
+   "module": "M10-legal-info",
+   "purpose": "Footer-band duplicate of Our Story",
+   "suggestedRoute": "/our-story",
+   "classification": "Duplicate or near-duplicate",
+   "surfaceType": "page",
+   "reusableComponents": [
+    "MAIN BREADCRUMBS",
+    "MAIN FOOTER",
+    "main nav"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "duplicate-of:15934:43007",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 93495,
+    "y": 14790
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+  },
+  {
+   "screenNumber": 116,
+   "figmaFrameName": "final cookie popup",
+   "nodeId": "14703:32888",
+   "pageOrSection": "Velarro Wireframes / Section 'Over 21' (14366:82579)",
+   "dimensions": {
+    "width": 451,
+    "height": 209
+   },
+   "deviceClass": "modal",
+   "module": "M10-legal-info",
+   "purpose": "Cookie consent popup banner",
+   "suggestedRoute": "/ (global)",
+   "classification": "Modal or overlay",
+   "surfaceType": "overlay",
+   "reusableComponents": [
+    "MAIN EXPLORE"
+   ],
+   "assetDependencies": [
+    "unknown from metadata - filled during enrichment/implementation"
+   ],
+   "duplicateRelationship": "unique",
+   "responsiveRelationship": "none - single desktop breakpoint set",
+   "canvasPosition": {
+    "x": 132061,
+    "y": 17572
+   },
+   "prototypeDestinations": [],
+   "interactionStates": [],
+   "analysisStatus": "metadata-only",
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": false,
+   "modalStrategy": "in-page-overlay-on-host"
+  }
+ ],
+ "pageName": "Velarro Wireframes",
+ "enrichmentNote": "Structural inventory complete for all 116 frames. Design context retrieved for 16 representative/unique nodes. Screenshots saved for 8 visually unique representatives. Prototype reaction data not exposed by MCP design-context responses; flows partially inferred from frame naming and verified step copy.",
+ "correctionRunDate": "2026-07-01",
+ "projectDecisionsApplied": true
+}
