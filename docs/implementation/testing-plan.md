@@ -1,41 +1,51 @@
 # Velarro Estate — Testing Plan
 
-Last updated: 2026-07-01 (Run 3)
+Last updated: 2026-07-01 (documentation correction run)
 
-## Current state
+## Approved stack
 
-No test infrastructure (Repository verified). Planning complete; installation deferred to M00 after U-07 approval.
+| Tool | Responsibility |
+| --- | --- |
+| **Vitest** | Unit tests, fast feedback on utilities, token helpers, pure functions |
+| **React Testing Library** | Component rendering, user interactions, accessible queries, form behavior |
+| **Playwright** | End-to-end flows, route-backed modal navigation, browser back/refresh, visual screenshots at 1440px |
+| **ESLint** (`npm run lint`) | Static analysis including jsx-a11y on every module |
+| **`npm run build`** | Production build gate on every module |
 
-## Recommended stack
+Installation deferred to implementation. Not installed during planning runs.
 
-| Layer | Tool | Scope |
-| --- | --- | --- |
-| Static | `npm run lint`, `npm run build` | Every module |
-| Unit/component | Vitest + RTL | Shared UI: MAIN NAVBAR, buttons, inputs, modals |
-| E2E | Playwright | Flows from `prototype-flow-map.json` |
-| Visual | Playwright screenshots @ 1440px | Compare to `docs/figma/screenshots/` |
-| A11y | `@axe-core/playwright` | WCAG 2.1 AA (U-08) |
+## Deployment
+
+- **Target:** Vercel
+- Recommended CI on PR: `npm ci` → lint → build → Vitest → Playwright (chromium)
+- CI configuration deferred to implementation
 
 ## Module test matrix
 
-| Module | Unit | E2E | Visual |
+| Module | Vitest/RTL | Playwright | Visual |
 | --- | --- | --- | --- |
-| M00 | Token smoke test | — | Typography/color sample |
+| M00 | Token + font variable smoke tests | — | Token swatch page |
 | M01 | Navbar, footer | Home load | `M01-home-13148-15012.png` |
-| M02 | Login form validation | Auth modal open/close chain | `M02-auth-login-14991-70094.png` |
+| M02 | Login form validation | Auth modal routes + close | `M02-auth-login-14991-70094.png` |
 | M03–M05 | Product card | PDP → add to cart | Estate/vault screenshots |
-| M06 | Checkout form fields | cart→shipping→payment→review | Cart screenshot |
-| M07 | Deletion stepper | Settings→deactivation→deletion steps; sign-out confirm | Settings/deactivation screenshots |
-| M08–M10 | — | Primary route smoke | Where screenshots exist |
+| M06 | Checkout fields | cart→shipping→payment→review | Cart/checkout screenshots |
+| M07 | Deletion stepper | Settings flows; sign-out | Settings/deactivation screenshots |
+| M08–M10 | — | Primary route smoke | Where screenshots mapped |
 
-## Priority E2E flows (from prototype-flow-map.json)
+## E2E priority flows
 
-1. Guest home → login modal → sign up ↔ login
+1. Guest home → `/login` intercepting modal → close/back
 2. PDP → cart → shipping → payment → review
-3. Settings → deactivation&deletion → deletion1–6 (Keep Account exits)
-4. Settings → sign out confirmation → cancel / sign out
-5. Temporary disable branch (deactivation1–4)
+3. Settings → deactivation/deletion steps; Keep Account exits
+4. Sign-out confirmation
+5. `/press` form submit → in-page success overlay (no route change)
 
-## CI (recommended, not configured)
+## Inferred flow policy
 
-PR: `npm ci` → lint → build → unit → Playwright (chromium)
+- Tests for inferred prototype edges are written as **pending QA approval**
+- Do not mark inferred interactions as regression-stable until product signs off
+
+## Accessibility testing
+
+- RTL: accessible name and role assertions
+- Playwright: keyboard walk-through + axe scan targeting WCAG 2.2 AA

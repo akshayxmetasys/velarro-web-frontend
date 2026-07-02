@@ -1,6 +1,6 @@
 {
  "$comment": "Velarro Estate - screen manifest built from the Approved Wireframes section metadata (node 14366:82579, retrieved 2026-07-01). All 116 top-level frames are accounted for. Purposes/modules/routes are name-derived assumptions until enrichment marks them Figma verified.",
- "status": "enriched-partial",
+ "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
  "runDate": "2026-07-01",
  "figmaFile": {
   "fileKey": "92rhH51aErpYQWRrlJqMhn",
@@ -19,7 +19,7 @@
   "componentOrUtilityFrames": 0,
   "requiresFurtherInspection": 0,
   "responsiveVariants": 0,
-  "breakpointNote": "Every page frame is 1440px desktop (one at 1459px). No tablet or mobile variants exist in the approved section - responsive behavior below 1440 is an open item (U-10)."
+  "breakpointNote": "Figma wireframes are desktop-only (1440px; FAQ frame 1459px is a layout anomaly, not a breakpoint). Tablet/mobile behavior is engineering-derived with UI/UX review (U-10)."
  },
  "verificationLabels": [
   "Figma verified",
@@ -209,7 +209,14 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "context-retrieved",
-   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)signup",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 6,
@@ -247,7 +254,14 @@
    "interactionStates": [],
    "analysisStatus": "screenshot-retrieved",
    "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
-   "screenshotPath": "docs/figma/screenshots/M02-auth-login-14991-70094.png"
+   "screenshotPath": "docs/figma/screenshots/M02-auth-login-14991-70094.png",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)login",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 7,
@@ -282,7 +296,14 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)forgot-password",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 8,
@@ -318,7 +339,14 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": true,
+   "interceptingRoutePattern": "@modal/(.)reset-password",
+   "hostRoutes": [
+    "/",
+    "/coming-soon"
+   ],
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 9,
@@ -1493,7 +1521,11 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
   },
   {
    "screenNumber": 41,
@@ -1595,7 +1627,11 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/payment",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/payment"
   },
   {
    "screenNumber": 44,
@@ -1628,7 +1664,11 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
   },
   {
    "screenNumber": 45,
@@ -1697,7 +1737,11 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
   },
   {
    "screenNumber": 47,
@@ -1729,7 +1773,11 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/checkout/review",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay",
+   "interceptingRoutePattern": "@modal/(.)checkout/review"
   },
   {
    "screenNumber": 48,
@@ -2174,7 +2222,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 61,
@@ -2244,7 +2295,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "context-retrieved",
-   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 63,
@@ -2349,7 +2403,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 66,
@@ -2528,7 +2585,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/wishlist",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 71,
@@ -2602,7 +2662,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/addresses",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 73,
@@ -2639,7 +2702,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/addresses",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 74,
@@ -2710,7 +2776,10 @@
    "interactionStates": [],
    "analysisStatus": "screenshot-retrieved",
    "verificationSource": "Metadata verified; components/purpose enriched via get_design_context; screenshot: Figma verified",
-   "screenshotPath": "docs/figma/screenshots/M07-deactivation-15253-40306.png"
+   "screenshotPath": "docs/figma/screenshots/M07-deactivation-15253-40306.png",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 76,
@@ -2742,7 +2811,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "context-retrieved",
-   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)"
+   "verificationSource": "Metadata verified; layout/components enriched via get_design_context (Figma verified)",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 77,
@@ -2774,7 +2846,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 78,
@@ -2806,7 +2881,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 79,
@@ -2838,7 +2916,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 80,
@@ -2870,7 +2951,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 81,
@@ -2902,7 +2986,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 82,
@@ -2932,7 +3019,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 83,
@@ -2964,7 +3054,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 84,
@@ -2996,7 +3089,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 85,
@@ -3028,7 +3124,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 86,
@@ -3061,7 +3160,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/orders/[orderId]",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 87,
@@ -3093,7 +3195,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/orders/[orderId]",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 88,
@@ -3123,7 +3228,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/settings",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 89,
@@ -3155,7 +3263,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "hostRoute": "/my-profile/orders/[orderId]",
+   "routeBackedModal": true,
+   "modalStrategy": "route-backed-intercepting-overlay"
   },
   {
    "screenNumber": 90,
@@ -3420,10 +3531,10 @@
    },
    "deviceClass": "modal",
    "module": "M09-engagement",
-   "purpose": "Press-form submission confirmation modal",
+   "purpose": "Press form submission success state on the M10 /press page (not a separate route)",
    "suggestedRoute": "/press",
    "classification": "Modal or overlay",
-   "surfaceType": "modal",
+   "surfaceType": "overlay",
    "reusableComponents": [],
    "assetDependencies": [
     "unknown from metadata - filled during enrichment/implementation"
@@ -3437,7 +3548,10 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified; press routing decision: project-approved (correction run)",
+   "hostRoute": "/press",
+   "routeBackedModal": false,
+   "modalStrategy": "in-page-overlay-on-host"
   },
   {
    "screenNumber": 98,
@@ -3573,7 +3687,9 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": false,
+   "modalStrategy": "in-page-overlay-on-host"
   },
   {
    "screenNumber": 102,
@@ -3901,7 +4017,7 @@
    },
    "deviceClass": "desktop",
    "module": "M10-legal-info",
-   "purpose": "Press page",
+   "purpose": "Canonical press page at /press (M10)",
    "suggestedRoute": "/press",
    "classification": "Confirmed screen",
    "surfaceType": "page",
@@ -3925,7 +4041,8 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "canonicalRouteOwner": true
   },
   {
    "screenNumber": 112,
@@ -4095,9 +4212,13 @@
    "prototypeDestinations": [],
    "interactionStates": [],
    "analysisStatus": "metadata-only",
-   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation"
+   "verificationSource": "Metadata verified (name, nodeId, dimensions, position, child instances); purpose/module/route: Assumption requiring confirmation",
+   "routeBackedModal": false,
+   "modalStrategy": "in-page-overlay-on-host"
   }
  ],
  "pageName": "Velarro Wireframes",
- "enrichmentNote": "Structural inventory complete for all 116 frames. Design context retrieved for 16 representative/unique nodes. Screenshots saved for 8 visually unique representatives. Prototype reaction data not exposed by MCP design-context responses; flows partially inferred from frame naming and verified step copy."
+ "enrichmentNote": "Structural inventory complete for all 116 frames. Design context retrieved for 16 representative/unique nodes. Screenshots saved for 8 visually unique representatives. Prototype reaction data not exposed by MCP design-context responses; flows partially inferred from frame naming and verified step copy.",
+ "correctionRunDate": "2026-07-01",
+ "projectDecisionsApplied": true
 }

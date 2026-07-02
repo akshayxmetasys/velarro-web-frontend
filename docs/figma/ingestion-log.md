@@ -1,6 +1,26 @@
 # Velarro Figma Ingestion Log
 
-## RUN 3 — 2026-07-01 20:14–22:15 (UTC-4) — PARTIAL COMPLETE
+## RUN 4 — 2026-07-01 — DOCUMENTATION CORRECTION (audit remediation)
+
+Run type: Documentation correction only (no Figma MCP; no production code)
+Run status: **INGESTION COMPLETE — DOCUMENTATION CORRECTED — READY FOR M00**
+
+### Corrections applied
+
+- `unresolved-items.md`: U-05 through U-12 resolved per approved project decisions; U-13–U-16 for remaining open items
+- `design-tokens.json`: shadow elevations, Gotham fallback strategy, engineering breakpoints
+- `route-map.json`: estate tab routes, hybrid route-backed modals, `/press` canonical ownership
+- `screen-manifest.json`: auth hybrid modal fields, press collision fix, 26 screenshot cross-refs
+- `prototype-flow-map.json`: 58 edges; all 33 modals in `modalCoverage`; deletion/deactivation flows; verificationSummary split
+- `asset-inventory.json`: all 26 PNG screenshots inventoried with reliable node-ID mapping
+- `master-plan.md`, `module-queue.json`, `shared-component-plan.json`, `acceptance-criteria.md`, `testing-plan.md`: canonical module order, 106/59 components, project decisions
+- Removed unused temp artifact `docs/figma/.frame-extract.tmp.json`
+
+Classification totals unchanged: 53 confirmed / 33 modals / 8 interaction states / 22 duplicates.
+
+---
+
+## RUN 3 — 2026-07-01 20:14–22:15 (UTC-4) — PARTIAL COMPLETE (superseded by Run 4)
 
 Run type: Continuation ingestion (analysis and planning only)
 Run status: **PARTIAL COMPLETE** — all 116 frames classified; tokens/components/assets populated; 16 design-context enrichments; 8 screenshots saved; prototype flows partially inferred

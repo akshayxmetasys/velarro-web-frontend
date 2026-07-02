@@ -1,73 +1,104 @@
 # Velarro — Unresolved Items
 
-Last updated: 2026-07-01 (Run 3). Ordered by severity.
+Last updated: 2026-07-01 (documentation correction run). Ordered by severity.
 
 ## U-01 — RESOLVED: Figma MCP access
 
-- Run 3 authenticated as `akshay@metasysglobal.com`, Metasys Professional **Full** seat.
-- 27 additional read calls succeeded; ingestion proceeded.
 - Status: **CLOSED**
 
 ## U-02 — RESOLVED: Screen inventory
 
-- 116 top-level frames enumerated and classified in `screen-manifest.json`.
+- 116 frames enumerated in `screen-manifest.json`.
 - Status: **CLOSED**
 
 ## U-03 — PARTIAL: Prototype flow
 
-- `prototype-flow-map.json` documents 32 edges; step copy on deletion/deactivation modals is **Figma verified**.
-- MCP `get_design_context` did **not** return prototype reaction metadata; most navigation edges are **inferred** from frame naming and UX sequence.
-- Unresolved: exact navbar link → destination for all editorial/legal items; wishlist delete; order cancellation popup wiring.
-- Status: **OPEN (non-blocking for M00/M01 planning)**
+- `prototype-flow-map.json` documents 54 edges with separate counts for purely verified, mixed, and inferred connections.
+- All 33 modals have `modalCoverage` records (edges-documented or unresolved).
+- Remaining gaps: navbar editorial/legal wiring, order cancellation confirm, wishlist delete confirm, pairing quiz routing, membership CTA, chatbot, address forms, profile-completed trigger, post-deletion6 terminal exit.
+- Status: **OPEN (non-blocking for M00; inferred edges require QA per module)**
 
 ## U-04 — RESOLVED: Design tokens
 
-- `design-tokens.json` populated from `get_variable_defs` on `13148:15012` (Figma verified).
-- Primary brand font confirmed as **Gotham** (not Geist).
+- Colors, typography, spacing, radii populated from Figma variables.
+- Shadow elevations added from local design-context records (correction run).
 - Status: **CLOSED**
 
-## U-05 — RESOLVED: Font strategy
+## U-05 — RESOLVED WITH CONDITIONS: Font strategy
 
-- Wireframes use **Gotham** (Light, Book, Medium, Bold, Italic) and secondary **Noto Sans** for one title token.
-- Implementation requires `next/font/local` with licensed Gotham files — not Google Fonts.
-- Status: **CLOSED (pending font file procurement at implementation time)**
+- **Figma verified:** Gotham primary; Noto Sans secondary (one title token).
+- **Implementation target:** `next/font/local` when licensed Gotham webfont files are procured.
+- **Approved interim fallback:** `Arial, Helvetica, sans-serif` via central CSS variable `--font-family-primary`.
+- **M00 may complete** using the fallback; final visual typography remains pending until Gotham files are provided.
+- Do not fabricate Gotham font files in the repository.
+- Status: **CLOSED (procurement pending)**
 
 ## U-06 — RESOLVED: Module boundaries
 
-- 11 modules defined in `module-queue.json` (M00–M10) mapped to all 116 frames.
+- 11 modules (M00–M10) in canonical order; 116 frames assigned across M01–M10.
 - Status: **CLOSED**
 
-## U-07 — OPEN: No testing framework
+## U-07 — RESOLVED: Testing stack
 
-- Repository has no test runner (Repository verified).
-- Recommendation unchanged: Vitest + Playwright at M00 if approved.
-- Status: **OPEN**
+- **Approved:** Vitest (unit/component), React Testing Library (component behavior/a11y), Playwright (E2E + visual verification).
+- Installation deferred to implementation; not installed during planning runs.
+- Status: **CLOSED**
 
-## U-08 — OPEN: Accessibility target
+## U-08 — RESOLVED: Accessibility target
 
-- Working target WCAG 2.1 AA — not explicitly confirmed by product owner.
-- Status: **OPEN**
+- **Project target:** WCAG 2.2 AA.
+- Includes keyboard support, visible focus, semantic HTML, accessible names, contrast checks, reduced-motion support, form errors, and modal focus management.
+- Status: **CLOSED**
 
-## U-09 — OPEN: Deployment target
+## U-09 — RESOLVED: Deployment target
 
-- `.gitignore` suggests Vercel; no CI config exists.
-- Status: **OPEN**
+- **Target platform:** Vercel.
+- CI/CD configuration deferred to implementation.
+- Status: **CLOSED**
 
-## U-10 — OPEN: Responsive behavior below 1440px
+## U-10 — RESOLVED WITH CONDITIONS: Responsive behavior
 
-- Approved section contains **only 1440px desktop frames** (one at 1459px). No tablet/mobile wireframes.
-- Implementation must not invent breakpoints without design approval.
-- Status: **OPEN — blocking pixel-perfect mobile/tablet claims**
+- Figma source: desktop wireframes only (1440px; FAQ frame 1459px is a layout anomaly).
+- **Engineering approach:** Derive tablet/mobile layouts from the desktop design system.
+- **Review gate:** UI/UX review required before final acceptance per module.
+- M00 may define breakpoint CSS variables and container foundations only.
+- Do not classify inferred responsive behavior as Figma verified.
+- Status: **CLOSED (review gate remains per module)**
 
-## U-11 — OPEN: Modal routing strategy
+## U-11 — RESOLVED: Modal routing strategy
 
-- Auth and account flows are modal overlays in Figma, not separate pages.
-- Decision needed: overlay-only vs. deep-linkable routes (`/login`, etc.).
-- Status: **OPEN**
+- **Decision:** Hybrid route-backed modals via Next.js App Router parallel/intercepting routes.
+- Auth, account, checkout, and destructive flows use stable URLs with overlay presentation.
+- Simple confirmation/success states stay on the parent page (no separate URL).
+- Press submission success is an in-page overlay on `/press` (M10), not a second route.
+- Documented in `route-map.json` (`routeBackedModals`, `inPageOverlays`).
+- Status: **CLOSED**
 
-## U-12 — OPEN: “Requires inspection” estate tab frames
+## U-12 — RESOLVED: Estate tab frame classification
 
-- `14670:34051` and `15451:39198` matched dimensions (1440×2683) — design context confirms estate **house tab** and **roastery tab** layouts respectively.
-- Reclassified from “requires inspection” to confirmed tab content in manifest enrichment.
-- Remaining question: exact tab-switch interaction (prototype not verified).
+- `14670:34051` and `15451:39198` reclassified as confirmed estate tab screens.
+- **Remaining minor item:** exact tab-switch interaction (prototype not verified) — see U-13.
+- Status: **CLOSED**
+
+## U-13 — OPEN: Estate tab-switch interaction
+
+- Tab switch behavior between `/the-estate`, `/the-estate/the-house`, and `/the-estate/the-house/the-roastery` is not prototype-verified.
 - Status: **OPEN (minor)**
+
+## U-14 — OPEN: Deletion step count inconsistency
+
+- Chooser and early deletion frames display "Step X of **5**" but the manifest contains **six** `deletionN` frames (`deletion1`–`deletion6`) after the chooser.
+- Recorded in `prototype-flow-map.json` `deletionStepInconsistency`.
+- Requires product/design decision; do not invent step copy.
+- Status: **OPEN**
+
+## U-15 — OPEN: Post-deletion6 terminal exit
+
+- Final deletion frame (`15631:66398`) has no documented outgoing prototype edge.
+- Exit behavior (return home, sign out, confirmation page) requires product approval.
+- Status: **OPEN**
+
+## U-16 — OPEN: Licensed asset procurement
+
+- Gotham webfont files, Velarro logo, favicon, and bulk product photography are pending external export/procurement.
+- Status: **OPEN (blocks final visual fidelity, not M00 scaffolding)**

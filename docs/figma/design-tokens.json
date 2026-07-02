@@ -1,12 +1,15 @@
 {
-  "status": "partial-complete",
+  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
   "runDate": "2026-07-01",
   "sourceNodeId": "13148:15012",
   "fontStrategy": {
-    "primary": "Gotham (Light, Book, Book Italic, Medium, Bold observed in design context)",
+    "primary": "Gotham (Figma verified in wireframes)",
     "secondary": "Noto Sans (Title/title-2 token only)",
-    "implementation": "next/font/local with licensed Gotham files (Figma verified; not on Google Fonts)",
-    "verificationSource": "Figma verified"
+    "implementationTarget": "next/font/local when licensed Gotham webfont files are provided",
+    "approvedInterimFallback": "Arial, Helvetica, sans-serif",
+    "centralCssVariable": "--font-family-primary",
+    "note": "M00 may ship with the approved fallback. Final visual typography remains pending until licensed Gotham files are procured. Do not fabricate font files.",
+    "verificationSource": "Figma verified (family); fallback: project-approved (correction run)"
   },
   "colors": [
     {
@@ -440,15 +443,74 @@
       "type": "radius"
     }
   ],
-  "shadows": [],
+  "shadows": [
+    {
+      "figmaName": "elevation/card-subtle",
+      "type": "shadow",
+      "value": "0px 1px 1px rgba(0, 0, 0, 0.05)",
+      "sourceNodeId": "15127:24220",
+      "sourceContext": "cart/review shipping address card (get_design_context)",
+      "suggestedCssVariable": "--shadow-card-subtle",
+      "verificationSource": "Figma verified (design context)"
+    },
+    {
+      "figmaName": "elevation/section",
+      "type": "shadow",
+      "value": "0px 1px 2px 0px rgba(0, 0, 0, 0.05)",
+      "sourceNodeId": "15127:24244",
+      "sourceContext": "cart/review Section (get_design_context)",
+      "suggestedCssVariable": "--shadow-section",
+      "verificationSource": "Figma verified (design context)"
+    },
+    {
+      "figmaName": "elevation/auth-modal",
+      "type": "shadow",
+      "value": "0px 3.482px 1.741px rgba(197, 153, 73, 0.25)",
+      "sourceNodeId": "14991:70094",
+      "sourceContext": "Login modal (get_design_context Run 3)",
+      "suggestedCssVariable": "--shadow-auth-modal",
+      "verificationSource": "Figma verified (design context)"
+    },
+    {
+      "figmaName": "elevation/confirmation-modal",
+      "type": "shadow",
+      "value": "0px 4px 11.55px rgba(0, 0, 0, 0.15)",
+      "sourceNodeId": "15661:38017",
+      "sourceContext": "SIGN OUT CONFIRMATION (get_design_context Run 3)",
+      "suggestedCssVariable": "--shadow-confirmation-modal",
+      "verificationSource": "Figma verified (design context)"
+    },
+    {
+      "figmaName": "elevation/button",
+      "type": "shadow",
+      "value": "0.871px 0.871px 0.871px rgba(0, 0, 0, 0.1)",
+      "sourceNodeId": "14991:70106",
+      "sourceContext": "OAuth button (get_design_context Run 3)",
+      "suggestedCssVariable": "--shadow-button",
+      "verificationSource": "Figma verified (design context)"
+    }
+  ],
   "breakpoints": [
     {
-      "figmaName": "frame-width-desktop",
+      "figmaName": "wireframe-desktop-width",
       "type": "breakpoint",
       "value": "1440",
-      "note": "All approved wireframe page frames use 1440px width (one frame 1459px). No tablet/mobile variants in section Over 21.",
-      "suggestedCssVariable": "--breakpoint-desktop",
+      "note": "All approved wireframe page frames use 1440px width except FAQ frame 14670:48590 at 1459px (layout anomaly\u2014treat as 1440 implementation target).",
       "verificationSource": "Metadata verified"
+    },
+    {
+      "figmaName": "breakpoint-tablet",
+      "type": "breakpoint",
+      "value": "768",
+      "note": "Engineering-defined for responsive implementation. Not Figma verified.",
+      "verificationSource": "Assumption requiring confirmation (engineering-derived; UI/UX review required)"
+    },
+    {
+      "figmaName": "breakpoint-mobile",
+      "type": "breakpoint",
+      "value": "390",
+      "note": "Engineering-defined for responsive implementation. Not Figma verified.",
+      "verificationSource": "Assumption requiring confirmation (engineering-derived; UI/UX review required)"
     }
   ],
   "other": [
@@ -468,5 +530,16 @@
       "verificationSource": "Figma verified",
       "type": "other"
     }
-  ]
+  ],
+  "correctionRunDate": "2026-07-01",
+  "shadowsUnresolved": [
+    "Figma variable definitions did not expose shadow tokens; additional elevations may exist on unaudited frames."
+  ],
+  "responsiveStrategy": {
+    "figmaSource": "desktop wireframes only",
+    "engineeringApproach": "Derive tablet/mobile layouts from desktop system tokens and components",
+    "reviewRequired": "UI/UX review before final acceptance per module",
+    "m00Scope": "May define container widths and breakpoint CSS variables only",
+    "verificationSource": "Project-approved (correction run)"
+  }
 }
