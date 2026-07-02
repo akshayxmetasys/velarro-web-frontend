@@ -1,9 +1,14 @@
-# Velarro — Continuation Prompt (run after Figma MCP quota is restored)
+# Velarro — Continuation Prompt (run after the Figma MCP connection is restored)
 
-Precondition: resolve U-01 in `docs/figma/unresolved-items.md` (Full/Dev seat on the
-Professional team, or an authenticated account with such a seat and access to file
-`92rhH51aErpYQWRrlJqMhn`). Verify with `whoami` before starting; if the seat still
-reads `View`, stop.
+Preconditions (updated after Run 2, 2026-07-01):
+
+1. Fix the MCP connection (U-01 in `docs/figma/unresolved-items.md`): in Cursor,
+   reload/re-enable the Figma MCP server (`plugin-figma-figma`); complete any pending
+   Figma OAuth consent as `akshay@metasysglobal.com`; ensure the Figma desktop app is
+   signed in as the same account.
+2. `whoami` must return: email `akshay@metasysglobal.com`, Professional plan,
+   **Full or Dev seat**, with access to file `92rhH51aErpYQWRrlJqMhn`. If the server
+   times out or the seat reads `View`, stop and report.
 
 Copy everything below the line into a new agent run.
 
@@ -16,11 +21,17 @@ This task belongs exclusively to the Velarro Estate frontend repository
 This run is for analysis and documentation only. Do not write production code.
 Only create or modify files inside docs/figma/** and docs/implementation/**.
 
-CONTEXT FROM THE PREVIOUS RUN (2026-07-01):
+CONTEXT FROM PREVIOUS RUNS (both 2026-07-01):
 
-- Phase 0 preflight passed; repository, remote, and branch verified. Re-run it anyway.
-- The previous run hit the Figma MCP monthly rate limit (View seat) with ZERO
-  successful data-read calls.
+- Run 1: preflight passed; hit the Figma MCP monthly rate limit (View seat,
+  accounts@metasysglobal.com) with ZERO successful data-read calls.
+- Run 2: after reauthentication as akshay@metasysglobal.com, the MCP server was
+  UNREACHABLE (connection timeouts on every whoami attempt); identity never
+  verified; still ZERO Figma data retrieved. Fix connectivity before starting.
+- Budget rule from Run 2 instructions: use at most 100 Figma read calls per run;
+  at ~90 calls stop, checkpoint, and update this prompt.
+- Log every call in docs/figma/ingestion-log.md with: sequential call number,
+  tool, node ID, node name, purpose, result, node complete?, next action.
 - Last completed node: NONE. Next unprocessed node: 14366:82579 (Approved
   Wireframes section). Then page 85:10 and prototype start node 15967:43304.
 - Skeleton documents with schemas already exist and must be FILLED, not recreated:

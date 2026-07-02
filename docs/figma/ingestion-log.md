@@ -1,6 +1,61 @@
 # Velarro Figma Ingestion Log
 
-Run date: 2026-07-01 18:52–19:05 (UTC-4)
+## RUN 2 — 2026-07-01 19:54–20:03 (UTC-4) — BLOCKED: Figma MCP server unreachable
+
+Run type: Continuation of Run 1 (analysis and documentation only; no production implementation)
+Run status: **BLOCKED — Figma MCP server connection timed out on every attempt; identity could not be verified; zero Figma calls succeeded**
+
+### Run 2 preflight results
+
+| Check | Result | Status |
+| --- | --- | --- |
+| `pwd` / `git rev-parse --show-toplevel` | `/Users/mac/Projects/velarro-web-frontend` | PASS |
+| `git remote -v` | `origin https://github.com/akshayxmetasys/velarro-web-frontend.git` | PASS |
+| `git branch --show-current` | `feature/figma-wireframes` | PASS |
+| `git status --short` | Clean (Run 1 checkpoint committed as `1f6635b` and pushed by the user) | PASS |
+| TAIRC references | None | PASS |
+| Figma identity (`whoami`) | **UNVERIFIABLE — server unreachable** | FAIL |
+
+### Run 2 Figma call log
+
+Required format: sequential call number, tool, node ID, node name, purpose, result, node complete?, next required action.
+
+| # | Tool | Node ID | Node name | Purpose | Result | Node complete? | Next action |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | `whoami` | — | — | Phase 0 identity check (expect akshay@metasysglobal.com, Professional, Full/Dev seat) | `Timed out waiting for connection to "plugin-figma-figma..."` | No | Retry |
+| 2 | `whoami` | — | — | Retry (~15 s later) | Same timeout | No | Retry after wait |
+| 3 | `whoami` | — | — | Retry (~35 s later) | Same timeout | No | Retry after wait |
+| 4 | `whoami` | — | — | Retry (~80 s later) | Same timeout | No | Retry after wait |
+| 5 | `whoami` | — | — | Retry (~2.5 min later) | Same timeout | No | Retry after wait |
+| 6 | `whoami` | — | — | Retry (~4 min later) | Same timeout | No | Retry after wait |
+| 7 | `whoami` | — | — | Final retry (~6 min later) | Same timeout | No | Stop per preflight rule |
+
+Data-read calls used against the Figma quota this run: **0** (the server was never reached; `whoami` is quota-exempt anyway).
+
+### Run 2 diagnosis
+
+- The failure mode changed from Run 1. Run 1: server reachable, `whoami` succeeded, data reads rejected by the **View-seat rate limit**. Run 2: the server is **unreachable** — every call times out during connection, before any Figma API interaction.
+- This is consistent with the MCP server being in a stale/disconnected state after the account reauthentication to `akshay@metasysglobal.com` (e.g. the plugin's OAuth session was replaced and the local MCP process needs a restart, or a browser OAuth confirmation is still pending).
+- Not a rate-limit event; the rate-limit protocol's Figma-side steps do not apply. The stop-and-checkpoint steps were followed anyway.
+- Cannot be fixed from the agent side: restarting or re-enabling the MCP server requires user action in Cursor (Settings → MCP → plugin-figma-figma → reload/re-enable, or completing the pending Figma OAuth flow), after which `whoami` must return the required identity before ingestion may begin.
+
+### Run 2 node processing state (unchanged from Run 1)
+
+- **Last completed node: NONE.**
+- **Next unprocessed node: `14366:82579`** (Approved Wireframes section) — `get_metadata` is still the first ingestion action.
+- Then: page `85:10`, then prototype start node `15967:43304`.
+
+### Run 2 documentation changes
+
+- `docs/figma/ingestion-log.md` — this Run 2 section added.
+- `docs/figma/unresolved-items.md` — U-01 updated: seat upgrade attempted (reauth to akshay@metasysglobal.com) but now blocked on MCP server connectivity; verification still pending.
+- `docs/figma/continuation-prompt.md` — precondition updated to require a working MCP connection and the akshay identity.
+- No other files changed; no Figma data existed to populate them. No production code touched.
+
+---
+
+## RUN 1 — 2026-07-01 18:52–19:05 (UTC-4) — BLOCKED: rate limit (View seat)
+
 Run type: Analysis and planning only (no production implementation)
 Run status: **BLOCKED — Figma MCP monthly rate limit reached before any node data was retrieved**
 

@@ -1,18 +1,20 @@
 # Velarro — Unresolved Items
 
-Run date: 2026-07-01. Items are ordered by blocking severity.
+Last updated: 2026-07-01 (Run 2). Items are ordered by blocking severity.
 
-## U-01 — BLOCKER: Figma MCP quota exhausted (decision required)
+## U-01 — BLOCKER: Figma MCP access (updated in Run 2)
 
-- The authenticated account (`accounts@metasysglobal.com`) holds a **View seat** on the "Metasys" **Professional** team and a View seat on the "Internal" Starter team.
-- View/Collab seats get **up to 6 Figma MCP tool calls per month**. The quota was already consumed before this run; the first data-read call (`get_metadata` on `14366:82579`) was rejected.
-- Zero Figma data was retrieved. All Figma-derived documents are schema-only skeletons.
-- **Decision required (pick one):**
-  1. Upgrade `accounts@metasysglobal.com` to a **Full or Dev seat** on the "Metasys" Professional team (raises limit to 200 calls/day, 15/min) — recommended.
-  2. Authenticate the Figma MCP with a **different account** that already has a Full/Dev seat and access to file `92rhH51aErpYQWRrlJqMhn`.
-  3. Wait for the monthly quota reset (reset date not exposed by Figma; up to a month away; 6 calls is in any case far too few to enumerate a wireframe set).
-- Owner: user / Metasys admin.
-- Status: OPEN.
+- **Run 1 state:** authenticated as `accounts@metasysglobal.com` (View seat, Professional team) — monthly quota of 6 MCP calls already exhausted; first data read rejected.
+- **Run 2 action taken (user):** Figma MCP reauthenticated as `akshay@metasysglobal.com`, expected to hold a Professional **Full** seat.
+- **Run 2 new failure:** the MCP server `plugin-figma-figma` is **unreachable** — all 7 `whoami` attempts over ~6 minutes returned `Timed out waiting for connection`. The required identity (email/plan/seat) could not be verified, so per the preflight rule no ingestion was attempted.
+- This is a connectivity/session problem, not a rate limit. Likely cause: the MCP server process is stale after reauthentication, or the Figma OAuth flow was not completed.
+- **User action required (in order):**
+  1. In Cursor: Settings → MCP → reload/re-enable the Figma server (`plugin-figma-figma`), or disable and re-enable the Figma plugin.
+  2. If a browser window is waiting on a Figma OAuth consent screen, complete it as `akshay@metasysglobal.com`.
+  3. Confirm the Figma desktop app is running and signed in as the same account (some MCP tools proxy through it).
+  4. Re-run the continuation prompt; its first step is `whoami`, which must return email `akshay@metasysglobal.com`, Professional plan, Full or Dev seat.
+- Owner: user.
+- Status: **OPEN — blocking all Figma ingestion.**
 
 ## U-02 — Screen inventory unknown
 
