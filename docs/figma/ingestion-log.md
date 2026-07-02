@@ -1,158 +1,91 @@
 # Velarro Figma Ingestion Log
 
-## RUN 2 — 2026-07-01 19:54–20:03 (UTC-4) — BLOCKED: Figma MCP server unreachable
+## RUN 3 — 2026-07-01 20:14–22:15 (UTC-4) — PARTIAL COMPLETE
 
-Run type: Continuation of Run 1 (analysis and documentation only; no production implementation)
-Run status: **BLOCKED — Figma MCP server connection timed out on every attempt; identity could not be verified; zero Figma calls succeeded**
+Run type: Continuation ingestion (analysis and planning only)
+Run status: **PARTIAL COMPLETE** — all 116 frames classified; tokens/components/assets populated; 16 design-context enrichments; 8 screenshots saved; prototype flows partially inferred
 
-### Run 2 preflight results
+### Run 3 preflight
 
 | Check | Result | Status |
 | --- | --- | --- |
-| `pwd` / `git rev-parse --show-toplevel` | `/Users/mac/Projects/velarro-web-frontend` | PASS |
-| `git remote -v` | `origin https://github.com/akshayxmetasys/velarro-web-frontend.git` | PASS |
-| `git branch --show-current` | `feature/figma-wireframes` | PASS |
-| `git status --short` | Clean (Run 1 checkpoint committed as `1f6635b` and pushed by the user) | PASS |
+| Repository | `/Users/mac/Projects/velarro-web-frontend` | PASS |
+| Remote | `https://github.com/akshayxmetasys/velarro-web-frontend.git` | PASS |
+| Branch | `feature/figma-wireframes` | PASS |
 | TAIRC references | None | PASS |
-| Figma identity (`whoami`) | **UNVERIFIABLE — server unreachable** | FAIL |
+| Figma identity | `akshay@metasysglobal.com`, Metasys, Professional, **Full** seat | PASS |
 
-### Run 2 Figma call log
-
-Required format: sequential call number, tool, node ID, node name, purpose, result, node complete?, next required action.
-
-| # | Tool | Node ID | Node name | Purpose | Result | Node complete? | Next action |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `whoami` | — | — | Phase 0 identity check (expect akshay@metasysglobal.com, Professional, Full/Dev seat) | `Timed out waiting for connection to "plugin-figma-figma..."` | No | Retry |
-| 2 | `whoami` | — | — | Retry (~15 s later) | Same timeout | No | Retry after wait |
-| 3 | `whoami` | — | — | Retry (~35 s later) | Same timeout | No | Retry after wait |
-| 4 | `whoami` | — | — | Retry (~80 s later) | Same timeout | No | Retry after wait |
-| 5 | `whoami` | — | — | Retry (~2.5 min later) | Same timeout | No | Retry after wait |
-| 6 | `whoami` | — | — | Retry (~4 min later) | Same timeout | No | Retry after wait |
-| 7 | `whoami` | — | — | Final retry (~6 min later) | Same timeout | No | Stop per preflight rule |
-
-Data-read calls used against the Figma quota this run: **0** (the server was never reached; `whoami` is quota-exempt anyway).
-
-### Run 2 diagnosis
-
-- The failure mode changed from Run 1. Run 1: server reachable, `whoami` succeeded, data reads rejected by the **View-seat rate limit**. Run 2: the server is **unreachable** — every call times out during connection, before any Figma API interaction.
-- This is consistent with the MCP server being in a stale/disconnected state after the account reauthentication to `akshay@metasysglobal.com` (e.g. the plugin's OAuth session was replaced and the local MCP process needs a restart, or a browser OAuth confirmation is still pending).
-- Not a rate-limit event; the rate-limit protocol's Figma-side steps do not apply. The stop-and-checkpoint steps were followed anyway.
-- Cannot be fixed from the agent side: restarting or re-enabling the MCP server requires user action in Cursor (Settings → MCP → plugin-figma-figma → reload/re-enable, or completing the pending Figma OAuth flow), after which `whoami` must return the required identity before ingestion may begin.
-
-### Run 2 node processing state (unchanged from Run 1)
-
-- **Last completed node: NONE.**
-- **Next unprocessed node: `14366:82579`** (Approved Wireframes section) — `get_metadata` is still the first ingestion action.
-- Then: page `85:10`, then prototype start node `15967:43304`.
-
-### Run 2 documentation changes
-
-- `docs/figma/ingestion-log.md` — this Run 2 section added.
-- `docs/figma/unresolved-items.md` — U-01 updated: seat upgrade attempted (reauth to akshay@metasysglobal.com) but now blocked on MCP server connectivity; verification still pending.
-- `docs/figma/continuation-prompt.md` — precondition updated to require a working MCP connection and the akshay identity.
-- No other files changed; no Figma data existed to populate them. No production code touched.
-
----
-
-## RUN 1 — 2026-07-01 18:52–19:05 (UTC-4) — BLOCKED: rate limit (View seat)
-
-Run type: Analysis and planning only (no production implementation)
-Run status: **BLOCKED — Figma MCP monthly rate limit reached before any node data was retrieved**
-
----
-
-## Phase 0 — Preflight results
-
-| Check | Result | Status |
-| --- | --- | --- |
-| `pwd` | `/Users/mac/Projects/velarro-web-frontend` | PASS |
-| `git rev-parse --show-toplevel` | `/Users/mac/Projects/velarro-web-frontend` | PASS |
-| `git remote -v` | `origin https://github.com/akshayxmetasys/velarro-web-frontend.git` (fetch + push) | PASS |
-| `git branch --show-current` | `feature/figma-wireframes` | PASS |
-| `git status --short` | Clean (no uncommitted changes at run start) | PASS |
-| TAIRC references | None found in repo root, remote, or branch name | PASS |
-| Product | Velarro Estate | PASS |
-
-## Phase 0 — Figma MCP identity (`whoami`)
-
-`whoami` succeeded (it is exempt from rate limits), confirming the MCP connection itself works.
-
-- Authenticated handle: **Metasys Accounts**
-- Authenticated email: **accounts@metasysglobal.com**
-- Plans / seats:
-  - Team "Metasys" — tier: **Professional (pro)**, seat: **View**
-  - Team "Internal" — tier: **Starter**, seat: **View**
-- Connection status: **Connected and authenticated; data-read quota exhausted**
-
-## Rate-limit event
-
-- Timestamp: 2026-07-01 ~18:57 (UTC-4)
-- Tool called: `get_metadata`
-- Arguments: `fileKey=92rhH51aErpYQWRrlJqMhn`, `nodeId=14366:82579` (Approved Wireframes section)
-- Response: `You've reached the Figma MCP tool call limit for your View seat on the Professional plan. Upgrade your seat or plan for more tool calls.`
-- Successful data-read calls this run: **0**
-- Root cause: View and Collab seats are limited to **up to 6 MCP tool calls per month** (per Figma's published MCP rate limits). The quota was already consumed before this run started (likely by earlier sessions on 2026-07-01). `whoami` is exempt and does not count.
-- Quota reset timing: unknown (Figma does not expose the reset date; View-seat limits are monthly).
-
-Per the run instructions, all Figma calls were stopped immediately after this response. No retries were attempted.
-
-## Figma scope (as supplied — the only permitted sources)
+### Prior metadata (not re-fetched)
 
 | Item | Value |
 | --- | --- |
-| File key | `92rhH51aErpYQWRrlJqMhn` |
-| File name | Velarro |
-| Approved Wireframes section URL | `https://www.figma.com/design/92rhH51aErpYQWRrlJqMhn/Velarro?node-id=14366-82579&t=rwRvrRR07Ry1Sa8S-1` |
-| Approved Wireframes node ID | `14366:82579` |
-| Prototype flow URL | `https://www.figma.com/proto/92rhH51aErpYQWRrlJqMhn/Velarro?node-id=15967-43304&t=HJe6XAvQNYwmEyvH-1&scaling=contain&content-scaling=fixed&page-id=85%3A10` |
-| Prototype start node ID | `15967:43304` |
-| Prototype page ID | `85:10` |
+| Tool | `get_metadata` (prior successful test, Run 3 pre-session) |
+| Node | `14366:82579` — section **Over 21** |
+| Local file | `/Users/mac/.cursor/projects/Users-mac-Projects-velarro-web-frontend/agent-tools/c70ef522-102e-4ce1-8683-e91ab57339ab.txt` (~18,093 lines) |
+| Result | 116 top-level frame candidates discovered |
+| Repeated call? | **No** — per instructions |
 
-## Node processing state
+### Run 3 Figma call log
 
-- **Last completed node: NONE.** No node metadata, design context, screenshots, variables, or assets were retrieved.
-- **Next unprocessed node: `14366:82579`** (Approved Wireframes section) — first action of the continuation run is `get_metadata` on this node.
-- Second unprocessed node: `85:10` (prototype page) followed by prototype start node `15967:43304` for flow mapping.
+| # | Tool | Node ID | Node name | Purpose | Result | Complete? | Next action |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | `get_metadata` | *(none)* | Velarro file pages | Resolve containing page name | 3 pages listed; wireframes page `85:10` = **Velarro Wireframes** | Yes | Tokens |
+| 2 | `get_variable_defs` | `13148:15012` | home | Design tokens from primary home frame | 40+ color/type/spacing tokens returned | Yes | Prototype page metadata |
+| 3 | `get_metadata` | `85:10` | Velarro Wireframes page | Prototype page structure | Large XML (~34k lines) saved locally | Yes | Representative design context |
+| 4 | `get_design_context` | `15967:43304` | home (prototype entry) | Prototype entry + nav components | Success (no screenshot) | Yes | Continue representatives |
+| 5 | `get_design_context` | `13148:15012` | home | Primary home page structure | Success | Yes | Estate PDP |
+| 6 | `get_design_context` | `14670:37727` | royal leaf PDP | Estate product detail | Success | Yes | Vault |
+| 7 | `get_design_context` | `14240:78024` | the vault | Vault page | Success | Yes | Cart review |
+| 8 | `get_design_context` | `15127:24193` | cart/review | Checkout review | Success | Yes | Profile settings |
+| 9 | `get_design_context` | `14762:96902` | settings | Profile settings + account flows entry | Success | Yes | Login modal |
+| 10 | `get_design_context` | `14991:70094` | Login | Auth modal structure + OAuth icons | Success | Yes | Estate house tab |
+| 11 | `get_design_context` | `14670:34051` | the house tab | Resolve “requires inspection” frame | Success — estate house tab layout | Yes | House clothier |
+| 12 | `get_design_context` | `14670:39985` | the clothier | House module representative | Success | Yes | Membership |
+| 13 | `get_design_context` | `15008:38309` | membership | Membership page | Success | Yes | Pairing guide |
+| 14 | `get_design_context` | `14406:85066` | pairing guide | Editorial pairing entry | Success | Yes | Sign out modal |
+| 15 | `get_design_context` | `15661:38017` | SIGN OUT CONFIRMATION | Sign-out confirmation overlay | Success | Yes | Deactivation flow |
+| 16 | `get_design_context` | `15253:40306` | deactivation&deletion | Step 1 of 5 — disable vs delete choice | Success | Yes | Deletion step 2 |
+| 17 | `get_design_context` | `15253:40372` | deletion1 | Step 2 of 5 — profile data summary | Success | Yes | Sign up |
+| 18 | `get_design_context` | `14991:70051` | sign up | Sign-up modal form | Success | Yes | Cart page |
+| 19 | `get_design_context` | `14670:45135` | cart | Cart page | Success | Yes | Screenshots |
+| 20 | `get_screenshot` | `13148:15012` | home | Visual verification capture | Saved `M01-home-13148-15012.png` | Yes | More screenshots |
+| 21 | `get_screenshot` | `14670:37727` | royal leaf PDP | Visual verification | Saved `M03-estate-pdp-14670-37727.png` | Yes | Continue |
+| 22 | `get_screenshot` | `14991:70094` | Login | Auth modal capture | Saved `M02-auth-login-14991-70094.png` | Yes | Continue |
+| 23 | `get_screenshot` | `14762:96902` | settings | Profile settings capture | Saved `M07-profile-settings-14762-96902.png` | Yes | Continue |
+| 24 | `get_screenshot` | `14240:78024` | the vault | Vault capture | Saved `M05-vault-14240-78024.png` | Yes | Continue |
+| 25 | `get_screenshot` | `14670:45135` | cart | Cart capture | Saved `M06-cart-14670-45135.png` | Yes | Continue |
+| 26 | `get_screenshot` | `15253:40306` | deactivation&deletion | Account flow capture | Saved `M07-deactivation-15253-40306.png` | Yes | Continue |
+| 27 | `get_screenshot` | `15008:38309` | membership | Membership capture | Saved `M09-membership-15008-38309.png` | Yes | Update docs |
 
-## Planned retrieval order for the continuation run
+**Additional read calls this run:** 27 (excluding the pre-existing `14366:82579` metadata call)
+**Estimated remaining daily allowance:** ~173 of 200 (Full seat Professional plan)
 
-1. `get_metadata` on `14366:82579` — enumerate all wireframe frames (names, node IDs, sizes, positions). One call.
-2. `get_metadata` on page `85:10` — structural overview of the prototype page, locate `15967:43304`. One call.
-3. `get_variable_defs` on the wireframes section (or a representative frame) — design tokens. One to two calls.
-4. `get_design_context` per identified screen frame — components, layout, prototype reactions. One call per screen; never repeat a node.
-5. `get_screenshot` only for visually unique screens or states (skip near-duplicates and responsive variants that differ only by width). Budget-limited.
-6. Asset identification from design context; `download_assets` only if required for planning.
+### Run 3 classification summary
 
-Estimated call budget: roughly 40–120 calls depending on screen count. This is impossible on a View seat (6/month) and comfortable on a Professional Full/Dev seat (200/day, 15/min).
+| Category | Count |
+| --- | --- |
+| Top-level frame candidates | **116** |
+| Confirmed application screens | **51** |
+| Modal and overlay states | **33** |
+| Interaction states | **8** |
+| Duplicate or near-duplicate | **22** |
+| Component or utility frames | **0** |
+| Requires further inspection | **2** → resolved via design context (estate/house tab frames) |
+| Responsive variants (tablet/mobile) | **0** |
 
-## Documentation saved in this run
+Page: **Velarro Wireframes** (`85:10`) / section **Over 21** (`14366:82579`)
 
-All files were created in a blocked/skeleton state with schemas ready for the continuation run to fill:
+### Run 3 node cursor
 
-- `docs/figma/ingestion-log.md` (this file)
-- `docs/figma/screen-manifest.json` — empty, schema documented
-- `docs/figma/prototype-flow-map.json` — empty, schema documented
-- `docs/figma/component-inventory.json` — empty, schema documented
-- `docs/figma/asset-inventory.json` — empty, schema documented
-- `docs/figma/design-tokens.json` — empty, schema documented
-- `docs/figma/unresolved-items.md` — includes the seat-upgrade decision
-- `docs/figma/continuation-prompt.md` — ready-to-paste continuation prompt
-- `docs/implementation/repository-assessment.md` — COMPLETE (no Figma required)
-- `docs/implementation/route-map.json` — repository-verified routes only
-- `docs/implementation/shared-component-plan.json` — blocked skeleton
-- `docs/implementation/master-plan.md` — blocked; foundations module defined from repository evidence only
-- `docs/implementation/module-queue.json` — foundations module only; screen modules blocked
-- `docs/implementation/acceptance-criteria.md` — global criteria only; screen criteria blocked
-- `docs/implementation/testing-plan.md` — based on repository state; screen tests blocked
+- **Last completed enrichment:** `15008:38309` (membership screenshot)
+- **Next unprocessed (optional continuation):** remaining modal states without design context (e.g. `15253:40494` deletion3, `13148:19561` cancellation popup); prototype reaction verification if Figma exposes reactions via another MCP tool
 
-## Verification labels used across all documents
+### Run 3 files updated
 
-- `Figma verified` — read directly from Figma design data (none in this run)
-- `Prototype verified` — read from prototype reactions/flows (none in this run)
-- `Repository verified` — read directly from the repository (used extensively)
-- `Metadata verified` — from Figma structural metadata only (none in this run)
-- `Assumption requiring confirmation` — not verified; must be confirmed in the continuation run
+All under `docs/figma/**` and `docs/implementation/**` — see final report.
 
-## Screen count
+---
 
-**Actual number of screens found: 0 retrieved / UNKNOWN total.** The wireframe section was never enumerated. Reporting any specific count would be an invention; the continuation run must produce the real number.
+## RUN 2 — BLOCKED: MCP unreachable (see prior section)
+
+## RUN 1 — BLOCKED: View-seat rate limit (see prior section)

@@ -1,22 +1,90 @@
 {
-  "$comment": "Velarro Estate — asset inventory from Figma. STATUS: BLOCKED. No asset data was retrieved before the rate limit on 2026-07-01. The continuation run fills this from get_design_context (image fills, vectors, icons) per screen. Actual downloads happen only during implementation, not planning, unless required.",
-  "status": "blocked-rate-limit",
+  "status": "partial-complete",
   "runDate": "2026-07-01",
-  "_assetSchema": {
-    "assetId": "string — stable slug, e.g. asset-hero-home",
-    "type": "image | icon | logo | illustration | video | font",
-    "figmaNodeId": "string — node carrying the fill/vector",
-    "figmaNodeName": "string",
-    "usedOnScreens": ["array of screenNumbers from screen-manifest.json"],
-    "suggestedExportFormat": "svg | png | webp | avif",
-    "suggestedPublicPath": "string — e.g. public/images/hero-home.webp",
-    "dimensions": { "width": "number|null", "height": "number|null" },
-    "downloaded": "boolean — false during planning",
-    "verificationSource": "Figma verified | Assumption requiring confirmation"
-  },
-  "assets": [],
-  "fonts": {
-    "$comment": "Fonts observed in Figma text styles go here; compare against next/font strategy in repository-assessment.md",
-    "observed": []
-  }
+  "assets": [
+    {
+      "assetId": "asset-font-gotham",
+      "type": "font",
+      "figmaNodeName": "Gotham family",
+      "description": "Primary brand typeface (Light/Book/Medium/Bold/Italic)",
+      "suggestedExportFormat": "woff2",
+      "suggestedPublicPath": "public/fonts/gotham/",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-font-noto-sans",
+      "type": "font",
+      "figmaNodeName": "Noto Sans",
+      "description": "Secondary heading token Title/title-2",
+      "suggestedExportFormat": "woff2",
+      "suggestedPublicPath": "public/fonts/noto-sans/",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-logo-velarro",
+      "type": "logo",
+      "figmaNodeName": "Velarro logo",
+      "description": "Navbar/footer brand mark",
+      "suggestedExportFormat": "svg",
+      "suggestedPublicPath": "public/icons/velarro-logo.svg",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "assetId": "asset-oauth-google",
+      "type": "icon",
+      "figmaNodeId": "14991:70108",
+      "figmaNodeName": "google",
+      "usedOnScreens": [
+        6
+      ],
+      "suggestedExportFormat": "svg",
+      "suggestedPublicPath": "public/icons/oauth-google.svg",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-oauth-apple",
+      "type": "icon",
+      "figmaNodeId": "14991:70112",
+      "figmaNodeName": "Apple",
+      "suggestedExportFormat": "svg",
+      "suggestedPublicPath": "public/icons/oauth-apple.svg",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-oauth-microsoft",
+      "type": "icon",
+      "figmaNodeId": "14991:70116",
+      "figmaNodeName": "Microsoft",
+      "suggestedExportFormat": "svg",
+      "suggestedPublicPath": "public/icons/oauth-microsoft.svg",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "assetId": "asset-product-hero-images",
+      "type": "image",
+      "description": "Product/hero photography on home, estate, house, vault pages",
+      "suggestedExportFormat": "webp",
+      "suggestedPublicPath": "public/images/",
+      "verificationSource": "Figma verified (URLs in design context; export at implementation)"
+    },
+    {
+      "assetId": "asset-favicon",
+      "type": "logo",
+      "description": "Browser favicon replacing create-next-app default",
+      "suggestedExportFormat": "ico",
+      "suggestedPublicPath": "app/favicon.ico",
+      "verificationSource": "Assumption requiring confirmation"
+    }
+  ],
+  "screenshotsCaptured": [
+    "docs/figma/screenshots/M01-home-13148-15012.png",
+    "docs/figma/screenshots/M03-estate-pdp-14670-37727.png",
+    "docs/figma/screenshots/M02-auth-login-14991-70094.png",
+    "docs/figma/screenshots/M07-profile-settings-14762-96902.png",
+    "docs/figma/screenshots/M05-vault-14240-78024.png",
+    "docs/figma/screenshots/M06-cart-14670-45135.png",
+    "docs/figma/screenshots/M07-deactivation-15253-40306.png",
+    "docs/figma/screenshots/M09-membership-15008-38309.png"
+  ],
+  "screenshotsPending": "Remaining confirmed screens and modal states without dedicated screenshots (108 frames)"
 }

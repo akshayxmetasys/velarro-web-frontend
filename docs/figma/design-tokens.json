@@ -1,22 +1,472 @@
 {
-  "$comment": "Velarro Estate — design tokens from Figma. STATUS: BLOCKED. No variable/style data was retrieved before the rate limit on 2026-07-01. The continuation run fills this from get_variable_defs on the Approved Wireframes section and from styles observed in get_design_context. Tokens map to Tailwind CSS v4 @theme variables in app/globals.css during implementation.",
-  "status": "blocked-rate-limit",
+  "status": "partial-complete",
   "runDate": "2026-07-01",
-  "_tokenSchema": {
-    "figmaName": "string — exact variable/style name, e.g. color/brand/primary",
-    "type": "color | typography | spacing | radius | shadow | breakpoint | opacity | other",
-    "value": "string|object — resolved value(s); include per-mode values if the file uses modes",
-    "modes": "object|null — e.g. { light: '#...', dark: '#...' }",
-    "suggestedCssVariable": "string — e.g. --color-brand-primary",
-    "suggestedTailwindTheme": "string — Tailwind v4 @theme key, e.g. --color-brand-primary",
-    "usedOnScreens": ["array of screenNumbers"],
-    "verificationSource": "Figma verified | Assumption requiring confirmation"
+  "sourceNodeId": "13148:15012",
+  "fontStrategy": {
+    "primary": "Gotham (Light, Book, Book Italic, Medium, Bold observed in design context)",
+    "secondary": "Noto Sans (Title/title-2 token only)",
+    "implementation": "next/font/local with licensed Gotham files (Figma verified; not on Google Fonts)",
+    "verificationSource": "Figma verified"
   },
-  "colors": [],
-  "typography": [],
-  "spacing": [],
-  "radii": [],
+  "colors": [
+    {
+      "figmaName": "color/text/text white",
+      "value": "#fcfbf8",
+      "suggestedCssVariable": "--color-text-text-white",
+      "suggestedTailwindTheme": "--color-text-text-white",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/text/hover button",
+      "value": "#fcfbf8",
+      "suggestedCssVariable": "--color-text-hover-button",
+      "suggestedTailwindTheme": "--color-text-hover-button",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/text/body-text",
+      "value": "#4a3f36",
+      "suggestedCssVariable": "--color-text-body-text",
+      "suggestedTailwindTheme": "--color-text-body-text",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/text/display",
+      "value": "#1f1a17",
+      "suggestedCssVariable": "--color-text-display",
+      "suggestedTailwindTheme": "--color-text-display",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/text/heading",
+      "value": "#2f2924",
+      "suggestedCssVariable": "--color-text-heading",
+      "suggestedTailwindTheme": "--color-text-heading",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/text/secondary-body-text",
+      "value": "#625648bf",
+      "suggestedCssVariable": "--color-text-secondary-body-text",
+      "suggestedTailwindTheme": "--color-text-secondary-body-text",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/button/fill",
+      "value": "#f6f2eb",
+      "suggestedCssVariable": "--color-button-fill",
+      "suggestedTailwindTheme": "--color-button-fill",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/button/disabled",
+      "value": "#f6f2ebcc",
+      "suggestedCssVariable": "--color-button-disabled",
+      "suggestedTailwindTheme": "--color-button-disabled",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/border/strong",
+      "value": "#c6b49d",
+      "suggestedCssVariable": "--color-border-strong",
+      "suggestedTailwindTheme": "--color-border-strong",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/border/light",
+      "value": "#e6d9c9",
+      "suggestedCssVariable": "--color-border-light",
+      "suggestedTailwindTheme": "--color-border-light",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/border/default",
+      "value": "#d8c9b4",
+      "suggestedCssVariable": "--color-border-default",
+      "suggestedTailwindTheme": "--color-border-default",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/icon/default",
+      "value": "#c6b49d",
+      "suggestedCssVariable": "--color-icon-default",
+      "suggestedTailwindTheme": "--color-icon-default",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/background/section",
+      "value": "#f6f2eb",
+      "suggestedCssVariable": "--color-background-section",
+      "suggestedTailwindTheme": "--color-background-section",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/background/page",
+      "value": "#fcfbf8",
+      "suggestedCssVariable": "--color-background-page",
+      "suggestedTailwindTheme": "--color-background-page",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/background/card",
+      "value": "#f6f2eb",
+      "suggestedCssVariable": "--color-background-card",
+      "suggestedTailwindTheme": "--color-background-card",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/background/input",
+      "value": "#fcfbf8",
+      "suggestedCssVariable": "--color-background-input",
+      "suggestedTailwindTheme": "--color-background-input",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/background/error",
+      "value": "#f2e1de",
+      "suggestedCssVariable": "--color-background-error",
+      "suggestedTailwindTheme": "--color-background-error",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/background/navbar",
+      "value": "#1d1c1a",
+      "suggestedCssVariable": "--color-background-navbar",
+      "suggestedTailwindTheme": "--color-background-navbar",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/brand/logo",
+      "value": "#b79a78",
+      "suggestedCssVariable": "--color-brand-logo",
+      "suggestedTailwindTheme": "--color-brand-logo",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/color/info&links",
+      "value": "#b79a78",
+      "suggestedCssVariable": "--color-color-info-links",
+      "suggestedTailwindTheme": "--color-color-info-links",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "color/labels/active-selected",
+      "value": "#efe7dc",
+      "suggestedCssVariable": "--color-labels-active-selected",
+      "suggestedTailwindTheme": "--color-labels-active-selected",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "velarro text",
+      "value": "#1d1c1a",
+      "suggestedCssVariable": "--velarro-text",
+      "suggestedTailwindTheme": "--velarro-text",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    },
+    {
+      "figmaName": "Velarro/Neutral/neutral-11",
+      "value": "#4A3F36",
+      "suggestedCssVariable": "--velarro-neutral-neutral-11",
+      "suggestedTailwindTheme": "--velarro-neutral-neutral-11",
+      "verificationSource": "Figma verified",
+      "type": "color"
+    }
+  ],
+  "typography": [
+    {
+      "figmaName": "Font Size/1",
+      "value": "12",
+      "suggestedCssVariable": "--font-size-1",
+      "suggestedTailwindTheme": "--font-size-1",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Font Size/3",
+      "value": "16",
+      "suggestedCssVariable": "--font-size-3",
+      "suggestedTailwindTheme": "--font-size-3",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Letter Spacing/1",
+      "value": "0.15000000596046448",
+      "suggestedCssVariable": "--letter-spacing-1",
+      "suggestedTailwindTheme": "--letter-spacing-1",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Font Weights/noto-sans-1",
+      "value": "Medium",
+      "suggestedCssVariable": "--font-weights-noto-sans-1",
+      "suggestedTailwindTheme": "--font-weights-noto-sans-1",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Font Family/Headings",
+      "value": "Noto Sans",
+      "suggestedCssVariable": "--font-family-headings",
+      "suggestedTailwindTheme": "--font-family-headings",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Line Heights/9",
+      "value": "24",
+      "suggestedCssVariable": "--line-heights-9",
+      "suggestedTailwindTheme": "--line-heights-9",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/display/light",
+      "value": "Font(family: \"Gotham\", style: Light, size: 72, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-display-light",
+      "suggestedTailwindTheme": "--velarro-display-light",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/display/shop now",
+      "value": "Font(family: \"Gotham\", style: Book, size: 24, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-display-shop-now",
+      "suggestedTailwindTheme": "--velarro-display-shop-now",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/heading/sectionsmall",
+      "value": "Font(family: \"Gotham\", style: Light, size: 20, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-heading-sectionsmall",
+      "suggestedTailwindTheme": "--velarro-heading-sectionsmall",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/heading/section",
+      "value": "Font(family: \"Gotham\", style: Light, size: 32, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-heading-section",
+      "suggestedTailwindTheme": "--velarro-heading-section",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/heading/card",
+      "value": "Font(family: \"Gotham\", style: Book, size: 24, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-heading-card",
+      "suggestedTailwindTheme": "--velarro-heading-card",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/heading/page",
+      "value": "Font(family: \"Gotham\", style: Book, size: 32, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-heading-page",
+      "suggestedTailwindTheme": "--velarro-heading-page",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/heading/button",
+      "value": "Font(family: \"Gotham\", style: Light, size: 14, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-heading-button",
+      "suggestedTailwindTheme": "--velarro-heading-button",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/heading/product cards",
+      "value": "Font(family: \"Gotham\", style: Book, size: 16, weight: 400, lineHeight: 24, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-heading-product-cards",
+      "suggestedTailwindTheme": "--velarro-heading-product-cards",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/body/default",
+      "value": "Font(family: \"Gotham\", style: Light, size: 20, weight: 300, lineHeight: 28, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-body-default",
+      "suggestedTailwindTheme": "--velarro-body-default",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/body/small",
+      "value": "Font(family: \"Gotham\", style: Light, size: 12, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-body-small",
+      "suggestedTailwindTheme": "--velarro-body-small",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/body/caption",
+      "value": "Font(family: \"Gotham\", style: Book Italic, size: 14, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-body-caption",
+      "suggestedTailwindTheme": "--velarro-body-caption",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/body/label",
+      "value": "Font(family: \"Gotham\", style: Light, size: 18, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-body-label",
+      "suggestedTailwindTheme": "--velarro-body-label",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/ui elements/primary",
+      "value": "Font(family: \"Gotham\", style: Book, size: 16, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-ui-elements-primary",
+      "suggestedTailwindTheme": "--velarro-ui-elements-primary",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/ui elements/secondary",
+      "value": "Font(family: \"Gotham\", style: Book, size: 12, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-ui-elements-secondary",
+      "suggestedTailwindTheme": "--velarro-ui-elements-secondary",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/ui elements/navbar",
+      "value": "Font(family: \"Gotham\", style: Book, size: 18, weight: 400, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-ui-elements-navbar",
+      "suggestedTailwindTheme": "--velarro-ui-elements-navbar",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/ui elements/footer",
+      "value": "Font(family: \"Gotham\", style: Light, size: 18, weight: 300, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-ui-elements-footer",
+      "suggestedTailwindTheme": "--velarro-ui-elements-footer",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Velarro/ui elements/price",
+      "value": "Font(family: \"Gotham\", style: Medium, size: 20, weight: 500, lineHeight: 100, letterSpacing: 0)",
+      "suggestedCssVariable": "--velarro-ui-elements-price",
+      "suggestedTailwindTheme": "--velarro-ui-elements-price",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    },
+    {
+      "figmaName": "Title/title-2",
+      "value": "Font(family: \"Font Family/Headings\", style: Font Weights/noto-sans-1, size: Font Size/3, weight: 500, lineHeight: Line Heights/9, letterSpacing: Letter Spacing/1)",
+      "suggestedCssVariable": "--title-title-2",
+      "suggestedTailwindTheme": "--title-title-2",
+      "verificationSource": "Figma verified",
+      "type": "typography"
+    }
+  ],
+  "spacing": [
+    {
+      "figmaName": "spacing/20",
+      "value": "20",
+      "suggestedCssVariable": "--spacing-20",
+      "suggestedTailwindTheme": "--spacing-20",
+      "verificationSource": "Figma verified",
+      "type": "spacing"
+    },
+    {
+      "figmaName": "spacing/24",
+      "value": "24",
+      "suggestedCssVariable": "--spacing-24",
+      "suggestedTailwindTheme": "--spacing-24",
+      "verificationSource": "Figma verified",
+      "type": "spacing"
+    },
+    {
+      "figmaName": "spacing/40",
+      "value": "40",
+      "suggestedCssVariable": "--spacing-40",
+      "suggestedTailwindTheme": "--spacing-40",
+      "verificationSource": "Figma verified",
+      "type": "spacing"
+    },
+    {
+      "figmaName": "spacing/48",
+      "value": "48",
+      "suggestedCssVariable": "--spacing-48",
+      "suggestedTailwindTheme": "--spacing-48",
+      "verificationSource": "Figma verified",
+      "type": "spacing"
+    }
+  ],
+  "radii": [
+    {
+      "figmaName": "radius-md",
+      "value": "8",
+      "suggestedCssVariable": "--radius-md",
+      "suggestedTailwindTheme": "--radius-md",
+      "verificationSource": "Figma verified",
+      "type": "radius"
+    },
+    {
+      "figmaName": "radius-none",
+      "value": "0",
+      "suggestedCssVariable": "--radius-none",
+      "suggestedTailwindTheme": "--radius-none",
+      "verificationSource": "Figma verified",
+      "type": "radius"
+    }
+  ],
   "shadows": [],
-  "breakpoints": [],
-  "other": []
+  "breakpoints": [
+    {
+      "figmaName": "frame-width-desktop",
+      "type": "breakpoint",
+      "value": "1440",
+      "note": "All approved wireframe page frames use 1440px width (one frame 1459px). No tablet/mobile variants in section Over 21.",
+      "suggestedCssVariable": "--breakpoint-desktop",
+      "verificationSource": "Metadata verified"
+    }
+  ],
+  "other": [
+    {
+      "figmaName": "input_83_placeholder",
+      "value": "Your name",
+      "suggestedCssVariable": "--input-83-placeholder",
+      "suggestedTailwindTheme": "--input-83-placeholder",
+      "verificationSource": "Figma verified",
+      "type": "other"
+    },
+    {
+      "figmaName": "input_84_placeholder",
+      "value": "Your email",
+      "suggestedCssVariable": "--input-84-placeholder",
+      "suggestedTailwindTheme": "--input-84-placeholder",
+      "verificationSource": "Figma verified",
+      "type": "other"
+    }
+  ]
 }

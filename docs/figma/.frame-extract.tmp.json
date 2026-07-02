@@ -1,0 +1,1742 @@
+[
+ {
+  "id": "15967:43304",
+  "name": "home",
+  "x": 46217,
+  "y": 2654,
+  "w": 1440,
+  "h": 963,
+  "children": 19,
+  "instances": {
+   "MAIN EXPLORE": 30,
+   "alert-circle": 18,
+   "user": 16,
+   "MAIN FOOTER/Footer - under 21": 9,
+   "Component 9": 9,
+   "Component 8": 9
+  }
+ },
+ {
+  "id": "13148:15012",
+  "name": "home",
+  "x": 48867,
+  "y": 2654,
+  "w": 1440,
+  "h": 7624,
+  "children": 18,
+  "instances": {
+   "MAIN EXPLORE": 28,
+   "alert-circle": 18,
+   "user": 16,
+   "MAIN FOOTER/Footer - under 21": 9,
+   "Component 9": 9,
+   "Component 8": 9
+  }
+ },
+ {
+  "id": "15148:40087",
+  "name": "home login",
+  "x": 50770,
+  "y": 2654,
+  "w": 1440,
+  "h": 7624,
+  "children": 18,
+  "instances": {
+   "MAIN EXPLORE": 28,
+   "alert-circle": 18,
+   "user": 16,
+   "MAIN FOOTER/Footer - under 21": 9,
+   "Component 9": 9,
+   "Component 8": 9
+  }
+ },
+ {
+  "id": "12339:55472",
+  "name": "Coming soon",
+  "x": 46839,
+  "y": 8797,
+  "w": 1440,
+  "h": 1481,
+  "children": 5,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14712:33219",
+  "name": "home/cart/buy again",
+  "x": 54793,
+  "y": 12896,
+  "w": 1440,
+  "h": 1843,
+  "children": 3,
+  "instances": {
+   "EDIT profile": 2,
+   "CHECKBOX": 1,
+   "MAIN DELETE/ADD": 1,
+   "Save for later": 1,
+   "chevron-down": 1,
+   "MAIN CHECKOUT CTA": 1
+  }
+ },
+ {
+  "id": "14670:43110",
+  "name": "home/cart empty",
+  "x": 51134,
+  "y": 13306,
+  "w": 1440,
+  "h": 1874,
+  "children": 4,
+  "instances": {
+   "Component 23": 2,
+   "MAIN FOOTER": 1,
+   "list": 1,
+   "chevron-down": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14670:45135",
+  "name": "home/cart",
+  "x": 52788,
+  "y": 13306,
+  "w": 1440,
+  "h": 2151,
+  "children": 3,
+  "instances": {
+   "Saved for later": 3,
+   "CHECKBOX": 1,
+   "MAIN DELETE/ADD": 1,
+   "Save for later": 1,
+   "chevron-down": 1,
+   "MAIN CHECKOUT CTA": 1
+  }
+ },
+ {
+  "id": "14670:42180",
+  "name": "home/partner",
+  "x": 42845,
+  "y": 13493,
+  "w": 1440,
+  "h": 1806,
+  "children": 3,
+  "instances": {
+   "Input 49": 1,
+   "Input 50": 1,
+   "Input 51": 1,
+   "Input 52": 1,
+   "Input 53": 1,
+   "Input 54": 1
+  }
+ },
+ {
+  "id": "15934:43007",
+  "name": "home/our story",
+  "x": 47427,
+  "y": 13493,
+  "w": 1440,
+  "h": 4586,
+  "children": 2,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "13148:18311",
+  "name": "home/my profile",
+  "x": 74534,
+  "y": 13593,
+  "w": 1440,
+  "h": 1780,
+  "children": 7,
+  "instances": {
+   "profile card": 1,
+   "EDIT profile": 1,
+   "user": 1,
+   "Iconex/Light/Mail": 1,
+   "phone": 1,
+   "map-pin": 1
+  }
+ },
+ {
+  "id": "15397:39748",
+  "name": "edit profile form",
+  "x": 76120,
+  "y": 13593,
+  "w": 670,
+  "h": 620,
+  "children": 6,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 2": 1,
+   "Input 1": 1,
+   "Input 5": 1,
+   "Input 8": 1,
+   "Input 9": 1
+  }
+ },
+ {
+  "id": "14991:70051",
+  "name": "sign up",
+  "x": 58453,
+  "y": 13822,
+  "w": 490,
+  "h": 891,
+  "children": 1,
+  "instances": {
+   "search": 1,
+   "Input 39": 1,
+   "Input 40": 1,
+   "Input 41": 1,
+   "Input 42": 1,
+   "Input 43": 1
+  }
+ },
+ {
+  "id": "14991:70094",
+  "name": "Login ",
+  "x": 59519,
+  "y": 13822,
+  "w": 490,
+  "h": 891,
+  "children": 1,
+  "instances": {
+   "search": 1,
+   "google": 1,
+   "Apple": 1,
+   "Microsoft": 1,
+   "Input 37": 1,
+   "Input 38": 1
+  }
+ },
+ {
+  "id": "14670:34051",
+  "name": "home/the estate/the house",
+  "x": 39207,
+  "y": 14493,
+  "w": 1440,
+  "h": 2683,
+  "children": 2,
+  "instances": {
+   "MAIN PRODUCT CARD": 6,
+   "all filters": 1,
+   "MAIN CIGARS/THE CABINET": 1,
+   "Category cards": 1,
+   "MAIN BREADCRUMBS": 1,
+   "pagination": 1
+  }
+ },
+ {
+  "id": "15451:39198",
+  "name": "home/the estate/the house/the roastery",
+  "x": 40770,
+  "y": 14493,
+  "w": 1440,
+  "h": 2683,
+  "children": 2,
+  "instances": {
+   "MAIN PRODUCT CARD": 6,
+   "all filters": 1,
+   "MAIN CIGARS/THE CABINET": 1,
+   "Category cards": 1,
+   "MAIN BREADCRUMBS": 1,
+   "pagination": 1
+  }
+ },
+ {
+  "id": "13148:16189",
+  "name": "home/the estate/the humidor",
+  "x": 35621,
+  "y": 14533,
+  "w": 1440,
+  "h": 2683,
+  "children": 5,
+  "instances": {
+   "MAIN PRODUCT CARD": 6,
+   "minus": 1,
+   "MAIN CIGARS/THE CABINET": 1,
+   "Category cards": 1,
+   "MAIN BREADCRUMBS": 1,
+   "pagination": 1
+  }
+ },
+ {
+  "id": "14670:35568",
+  "name": "home/the estate/the humidor/heritage",
+  "x": 37184,
+  "y": 14533,
+  "w": 1440,
+  "h": 2101,
+  "children": 2,
+  "instances": {
+   "MAIN PRODUCT CARD": 3,
+   "all filters": 1,
+   "minus": 1,
+   "MAIN CIGARS/THE CABINET": 1,
+   "Category cards": 1,
+   "MAIN BREADCRUMBS": 1
+  }
+ },
+ {
+  "id": "14703:32859",
+  "name": "home/cookie policy",
+  "x": 132061,
+  "y": 14543,
+  "w": 1440,
+  "h": 2877,
+  "children": 3,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14703:32598",
+  "name": "home/accessibility",
+  "x": 135863,
+  "y": 14543,
+  "w": 1440,
+  "h": 6129,
+  "children": 8,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14670:48780",
+  "name": "home/privacy policy",
+  "x": 123953,
+  "y": 14552,
+  "w": 1440,
+  "h": 7908,
+  "children": 3,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "13148:20719",
+  "name": "home/sutainability",
+  "x": 112193,
+  "y": 14556,
+  "w": 1440,
+  "h": 3496,
+  "children": 2,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14670:48497",
+  "name": "home/press",
+  "x": 114907,
+  "y": 14556,
+  "w": 1440,
+  "h": 3100,
+  "children": 2,
+  "instances": {
+   "CHECKBOX": 2,
+   "MAIN BREADCRUMBS": 1,
+   "Input 56": 1,
+   "Input 58": 1,
+   "Input 60": 1,
+   "Input 62": 1
+  }
+ },
+ {
+  "id": "14670:49691",
+  "name": "home/get in touch",
+  "x": 118127,
+  "y": 14556,
+  "w": 1440,
+  "h": 3253,
+  "children": 3,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "MAIN EXPLORE": 1,
+   "mail": 1,
+   "MAIN FOOTER": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14670:48590",
+  "name": "home/faq",
+  "x": 120984,
+  "y": 14556,
+  "w": 1459,
+  "h": 4238,
+  "children": 3,
+  "instances": {
+   "dropdownnn": 38,
+   "chevron-down": 3,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14703:33048",
+  "name": "home/terms & conditions",
+  "x": 128191,
+  "y": 14691,
+  "w": 1440,
+  "h": 7630,
+  "children": 3,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14888:53493",
+  "name": "home/the estate",
+  "x": 97026,
+  "y": 14747,
+  "w": 1440,
+  "h": 2683,
+  "children": 4,
+  "instances": {
+   "MAIN PRODUCT CARD": 6,
+   "minus": 1,
+   "MAIN CIGARS/THE CABINET": 1,
+   "Category cards": 1,
+   "MAIN BREADCRUMBS": 1,
+   "pagination": 1
+  }
+ },
+ {
+  "id": "14670:46376",
+  "name": "home/the house",
+  "x": 100558,
+  "y": 14747,
+  "w": 1440,
+  "h": 4904,
+  "children": 2,
+  "instances": {
+   "MAIN EXPLORE": 5,
+   "navigation tabs": 1,
+   "MAIN NAVBAR": 1,
+   "The House": 1,
+   "MAIN FOOTER": 1
+  }
+ },
+ {
+  "id": "14703:33971",
+  "name": "home/craftsmanship",
+  "x": 104984,
+  "y": 14747,
+  "w": 1440,
+  "h": 6812,
+  "children": 3,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14670:45497",
+  "name": "home/our story",
+  "x": 93495,
+  "y": 14790,
+  "w": 1440,
+  "h": 4586,
+  "children": 2,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "15274:39176",
+  "name": "home/cart/buy again",
+  "x": 54793,
+  "y": 14928,
+  "w": 1440,
+  "h": 1914,
+  "children": 3,
+  "instances": {
+   "Saved for later": 4,
+   "Component 23": 1,
+   "MAIN /SAVE FOR LATER": 1,
+   "VIEW BUTTON CART": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1
+  }
+ },
+ {
+  "id": "15640:27501",
+  "name": "PRESS FORM SUBMISSION",
+  "x": 116600,
+  "y": 15424,
+  "w": 500,
+  "h": 464,
+  "children": 3,
+  "instances": {}
+ },
+ {
+  "id": "15640:24481",
+  "name": "home/partner/application submitted",
+  "x": 42845,
+  "y": 15544,
+  "w": 1440,
+  "h": 1806,
+  "children": 3,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1,
+   "MAIN BREADCRUMBS": 1
+  }
+ },
+ {
+  "id": "14991:70134",
+  "name": "forgot password",
+  "x": 59519,
+  "y": 16428,
+  "w": 490,
+  "h": 891,
+  "children": 1,
+  "instances": {
+   "search": 1,
+   "Input 45": 1,
+   "Input 46": 1,
+   "Submit button": 1
+  }
+ },
+ {
+  "id": "14703:32888",
+  "name": "final cookie popup",
+  "x": 132061,
+  "y": 17572,
+  "w": 451,
+  "h": 209,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15127:24015",
+  "name": "home/the estate/the humidor/royal leaf/cart/shipping",
+  "x": 52840,
+  "y": 17863,
+  "w": 1440,
+  "h": 2499,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 71": 1,
+   "Input 73": 1,
+   "Input 75": 1,
+   "Input 79": 1,
+   "Input 80": 1
+  }
+ },
+ {
+  "id": "15127:24104",
+  "name": "home/the estate/the humidor/royal leaf/cart/shipping",
+  "x": 54365,
+  "y": 17863,
+  "w": 1440,
+  "h": 1951,
+  "children": 3,
+  "instances": {
+   "Shipping form": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14762:96902",
+  "name": "home/my profile/settings",
+  "x": 85854,
+  "y": 18170,
+  "w": 1440,
+  "h": 3108,
+  "children": 7,
+  "instances": {
+   "alert-circle": 2,
+   "MAIN FOOTER": 1,
+   "MAIN SIDEDBAR": 1,
+   "Component 9": 1,
+   "Component 8": 1,
+   "chevron-down": 1
+  }
+ },
+ {
+  "id": "15661:38017",
+  "name": "SIGN OUT CONFIRMATION",
+  "x": 87439,
+  "y": 18183,
+  "w": 500,
+  "h": 206,
+  "children": 1,
+  "instances": {
+   "MOVE TO CART BUTTON": 2
+  }
+ },
+ {
+  "id": "14670:40233",
+  "name": "home/the house",
+  "x": 9889,
+  "y": 18438,
+  "w": 1440,
+  "h": 4904,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 5,
+   "MAIN FOOTER": 1,
+   "navigation tabs": 1,
+   "The House": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14240:78024",
+  "name": "home/the vault",
+  "x": 13399,
+  "y": 18438,
+  "w": 1440,
+  "h": 3900,
+  "children": 2,
+  "instances": {
+   "Button - explore": 5,
+   "MAIN EXPLORE": 5,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "13148:15771",
+  "name": "home/careers",
+  "x": 16836,
+  "y": 18438,
+  "w": 1440,
+  "h": 3661,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 3,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14284:63187",
+  "name": "home/the chronicle",
+  "x": 20689,
+  "y": 18438,
+  "w": 1440,
+  "h": 3884,
+  "children": 2,
+  "instances": {
+   "MAIN EXPLORE": 4,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14406:85066",
+  "name": "home/pairing guide",
+  "x": 25280,
+  "y": 18438,
+  "w": 1440,
+  "h": 3332,
+  "children": 2,
+  "instances": {
+   "PAIRING CARD": 6,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14644:34661",
+  "name": "home/get in touch",
+  "x": 29515,
+  "y": 18438,
+  "w": 1440,
+  "h": 3253,
+  "children": 3,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "Input 85": 1,
+   "Input 86": 1,
+   "Input 87": 1,
+   "Input 88": 1,
+   "Input 89": 1
+  }
+ },
+ {
+  "id": "15663:38140",
+  "name": "get in touch submission",
+  "x": 31002,
+  "y": 18438,
+  "w": 500,
+  "h": 358,
+  "children": 2,
+  "instances": {}
+ },
+ {
+  "id": "15008:38309",
+  "name": "home/membership",
+  "x": 32568,
+  "y": 18438,
+  "w": 1440,
+  "h": 3184,
+  "children": 2,
+  "instances": {
+   "alert-circle": 5,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "13148:18794",
+  "name": "home/my profile/address",
+  "x": 69808,
+  "y": 18447,
+  "w": 1440,
+  "h": 1598,
+  "children": 6,
+  "instances": {
+   "edit-3": 4,
+   "trash": 4,
+   "MAIN FOOTER": 1,
+   "MAIN SIDEDBAR": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "13148:18414",
+  "name": "home/my profile/complete profile",
+  "x": 64469,
+  "y": 18531,
+  "w": 1440,
+  "h": 1619,
+  "children": 5,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "PROFILE COMPLETION": 1,
+   "MAIN NAVBAR": 1,
+   "MAIN SIDEDBAR": 1,
+   "MAIN FOOTER": 1
+  }
+ },
+ {
+  "id": "14323:56798",
+  "name": "home/my profile/profile completed",
+  "x": 66017,
+  "y": 18531,
+  "w": 500,
+  "h": 544,
+  "children": 1,
+  "instances": {
+   "Button - explore": 2
+  }
+ },
+ {
+  "id": "14852:34754",
+  "name": "home/my profile/my orders empty",
+  "x": 76974,
+  "y": 18604,
+  "w": 1440,
+  "h": 1590,
+  "children": 6,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN SIDEDBAR": 1,
+   "MAIN NAVBAR": 1,
+   "MAIN BREADCRUMBS": 1
+  }
+ },
+ {
+  "id": "14852:34676",
+  "name": "home/my profile/my orders",
+  "x": 78560,
+  "y": 18604,
+  "w": 1440,
+  "h": 1590,
+  "children": 6,
+  "instances": {
+   "Frame 1000004802": 2,
+   "Frame 1000004803": 1,
+   "MAIN FOOTER": 1,
+   "MAIN SIDEDBAR": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "15640:25349",
+  "name": "home/my profile/wishlist item removed",
+  "x": 81114,
+  "y": 18604,
+  "w": 1440,
+  "h": 2004,
+  "children": 5,
+  "instances": {
+   "MAIN PRODUCT CARD": 5,
+   "MAIN SIDEDBAR": 1,
+   "3 TABS": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14852:34765",
+  "name": "home/my profile/wishlist",
+  "x": 82619,
+  "y": 18604,
+  "w": 1440,
+  "h": 2004,
+  "children": 5,
+  "instances": {
+   "MAIN PRODUCT CARD": 6,
+   "MAIN SIDEDBAR": 1,
+   "3 TABS": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "15640:25119",
+  "name": "delete from wishlist",
+  "x": 84143,
+  "y": 18604,
+  "w": 500,
+  "h": 206,
+  "children": 1,
+  "instances": {
+   "MOVE TO CART BUTTON": 2
+  }
+ },
+ {
+  "id": "14670:37727",
+  "name": "home/the estate/ the humidor/royal leaf",
+  "x": 35621,
+  "y": 19008,
+  "w": 1440,
+  "h": 2996,
+  "children": 4,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN BREADCRUMBS": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1,
+   "columns": 1
+  }
+ },
+ {
+  "id": "14670:35095",
+  "name": "home/the estate/the house/founder's boxy hoodie",
+  "x": 39207,
+  "y": 19008,
+  "w": 1440,
+  "h": 2879,
+  "children": 2,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN NAVBAR": 1,
+   "MAIN BREADCRUMBS": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1
+  }
+ },
+ {
+  "id": "14991:70162",
+  "name": "new password",
+  "x": 59519,
+  "y": 19207,
+  "w": 490,
+  "h": 891,
+  "children": 1,
+  "instances": {
+   "search": 1,
+   "Input 47": 1,
+   "Input 48": 1,
+   "Submit button": 1,
+   "Button - explore": 1
+  }
+ },
+ {
+  "id": "13148:18728",
+  "name": "home/my profile/final profile complete ",
+  "x": 64577,
+  "y": 21860,
+  "w": 1440,
+  "h": 1780,
+  "children": 6,
+  "instances": {
+   "user": 2,
+   "edit-3": 1,
+   "Iconex/Light/Mail": 1,
+   "phone": 1,
+   "map-pin": 1,
+   "calendar": 1
+  }
+ },
+ {
+  "id": "15127:23850",
+  "name": "home/the estate/the humidor/royal leaf/cart/payment",
+  "x": 52840,
+  "y": 22127,
+  "w": 1440,
+  "h": 2383,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 66": 1,
+   "Input 67": 1,
+   "Input 70": 1,
+   "Input 68": 1,
+   "Input 69": 1
+  }
+ },
+ {
+  "id": "15397:40144",
+  "name": "edit address form",
+  "x": 71403,
+  "y": 22729,
+  "w": 670,
+  "h": 520,
+  "children": 6,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 2": 1,
+   "Input 5": 1,
+   "Input 8": 1,
+   "Input 9": 1,
+   "Input 10": 1
+  }
+ },
+ {
+  "id": "15397:40009",
+  "name": "add address form",
+  "x": 68400,
+  "y": 22825,
+  "w": 670,
+  "h": 520,
+  "children": 6,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 2": 1,
+   "Input 5": 1,
+   "Input 8": 1,
+   "Input 9": 1,
+   "Input 10": 1
+  }
+ },
+ {
+  "id": "13148:19312",
+  "name": "home/my profile/my orders/order detail",
+  "x": 78190,
+  "y": 22970,
+  "w": 1440,
+  "h": 2249,
+  "children": 4,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN SIDEDBAR": 1,
+   "Frame 1000005254": 1,
+   "chevron-down": 1,
+   "MAIN EXPLORE": 1,
+   "Component 23": 1
+  }
+ },
+ {
+  "id": "15253:40306",
+  "name": "home/my profile/settings/deactivation&deletion",
+  "x": 85737,
+  "y": 23016,
+  "w": 867,
+  "h": 543,
+  "children": 1,
+  "instances": {
+   "RADIO BUTTON": 2,
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "14585:38918",
+  "name": "the chronicle/international cigar day",
+  "x": 20678,
+  "y": 23565,
+  "w": 1440,
+  "h": 2593,
+  "children": 2,
+  "instances": {
+   "MAIN BREADCRUMBS": 1,
+   "Frame 1000005786": 1,
+   "Button - explore": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14803:100778",
+  "name": "home/the estate/the humidor/royal leaf/cart",
+  "x": 35554,
+  "y": 23809,
+  "w": 1440,
+  "h": 1680,
+  "children": 3,
+  "instances": {
+   "EDIT profile": 2,
+   "CHECKBOX": 1,
+   "MAIN DELETE/ADD": 1,
+   "Save for later": 1,
+   "chevron-down": 1,
+   "MAIN CHECKOUT CTA": 1
+  }
+ },
+ {
+  "id": "15253:40372",
+  "name": "home/my profile/settings/deletion1",
+  "x": 85770,
+  "y": 24052,
+  "w": 638,
+  "h": 693,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15253:40433",
+  "name": "home/my profile/deactivation1",
+  "x": 86822,
+  "y": 24052,
+  "w": 638,
+  "h": 694,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "13148:15855",
+  "name": "home/careers/view position",
+  "x": 17020,
+  "y": 24619,
+  "w": 1440,
+  "h": 1703,
+  "children": 6,
+  "instances": {
+   "search": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14406:85132",
+  "name": "home/pairing guide/find your pairing",
+  "x": 25280,
+  "y": 24922,
+  "w": 1440,
+  "h": 2048,
+  "children": 4,
+  "instances": {
+   "pairing guide cards": 8,
+   "MAIN EXPLORE": 2,
+   "MAIN FOOTER": 1,
+   "PAIRING Q2": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "15253:40494",
+  "name": "home/my profile/settings/deletion2",
+  "x": 85769,
+  "y": 25085,
+  "w": 638,
+  "h": 753,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15253:40549",
+  "name": "home/my profile/deactivation2",
+  "x": 86822,
+  "y": 25219,
+  "w": 638,
+  "h": 475,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15631:66323",
+  "name": "home/my profile/deactivation3",
+  "x": 86822,
+  "y": 25969,
+  "w": 500,
+  "h": 411,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15253:40571",
+  "name": "home/my profile/settings/deletion3",
+  "x": 85769,
+  "y": 26071,
+  "w": 638,
+  "h": 587,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15631:66439",
+  "name": "home/my profile/deactivation4",
+  "x": 86822,
+  "y": 26549,
+  "w": 500,
+  "h": 281,
+  "children": 1,
+  "instances": {}
+ },
+ {
+  "id": "15127:24193",
+  "name": "home/the estate/the humidor/royal leaf/cart/review",
+  "x": 52854,
+  "y": 26900,
+  "w": 1440,
+  "h": 2513,
+  "children": 4,
+  "instances": {
+   "CHECKBOX": 2,
+   "MAIN FOOTER": 1,
+   "Input 81": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "14771:98658",
+  "name": "home/my profile/settings/deletion4",
+  "x": 85748,
+  "y": 26981,
+  "w": 638,
+  "h": 475,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "14670:39860",
+  "name": "home/the house/the roastery",
+  "x": 727,
+  "y": 27070,
+  "w": 1440,
+  "h": 6019,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 7,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "The House": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14670:39923",
+  "name": "home/the house/the apothecary",
+  "x": 3980,
+  "y": 27070,
+  "w": 1440,
+  "h": 6019,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 7,
+   "MAIN BREADCRUMBS": 1,
+   "The House": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14670:39985",
+  "name": "home/the house/the clothier",
+  "x": 6862,
+  "y": 27070,
+  "w": 1440,
+  "h": 6243,
+  "children": 2,
+  "instances": {
+   "MAIN EXPLORE": 7,
+   "MAIN BREADCRUMBS": 1,
+   "The House": 1,
+   "chevron-right": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14670:40071",
+  "name": "home/the house/the saddlery",
+  "x": 9554,
+  "y": 27070,
+  "w": 1440,
+  "h": 6134,
+  "children": 2,
+  "instances": {
+   "MAIN EXPLORE": 7,
+   "MAIN BREADCRUMBS": 1,
+   "The House": 1,
+   "chevron-right": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14670:40152",
+  "name": "home/the house/the cabinet",
+  "x": 12207,
+  "y": 27070,
+  "w": 1440,
+  "h": 6134,
+  "children": 2,
+  "instances": {
+   "MAIN EXPLORE": 7,
+   "MAIN BREADCRUMBS": 1,
+   "The House": 1,
+   "chevron-right": 1,
+   "MAIN FOOTER": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "15631:66346",
+  "name": "home/my profile/settings/deletion5",
+  "x": 85748,
+  "y": 27717,
+  "w": 500,
+  "h": 411,
+  "children": 1,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "14670:50189",
+  "name": "home/the estate/the humidor/royal leaf/cart/shipping",
+  "x": 35614,
+  "y": 27951,
+  "w": 1440,
+  "h": 2414,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 71": 1,
+   "Input 73": 1,
+   "Input 75": 1,
+   "Input 79": 1,
+   "Input 80": 1
+  }
+ },
+ {
+  "id": "15081:41742",
+  "name": "home/the estate/the humidor/royal leaf/cart/shipping",
+  "x": 37199,
+  "y": 27951,
+  "w": 1440,
+  "h": 1951,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Shipping form": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14888:44021",
+  "name": "CHATBOT POP UP",
+  "x": 78760,
+  "y": 28197,
+  "w": 554,
+  "h": 770,
+  "children": 2,
+  "instances": {
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "13148:19561",
+  "name": "CANCELLATION POP UP",
+  "x": 74327,
+  "y": 28239,
+  "w": 661,
+  "h": 437,
+  "children": 5,
+  "instances": {
+   "RADIO BUTTON": 5,
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "14894:81468",
+  "name": "See all updates",
+  "x": 82582,
+  "y": 28239,
+  "w": 563,
+  "h": 1044,
+  "children": 3,
+  "instances": {
+   "search": 1
+  }
+ },
+ {
+  "id": "15631:66398",
+  "name": "home/my profile/settings/deletion6",
+  "x": 85748,
+  "y": 28245,
+  "w": 500,
+  "h": 281,
+  "children": 1,
+  "instances": {}
+ },
+ {
+  "id": "13148:15939",
+  "name": "home/careers/view position/job description",
+  "x": 17020,
+  "y": 28498,
+  "w": 1440,
+  "h": 2563,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "search": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14644:32880",
+  "name": "home/pairing guide/rum &cigars",
+  "x": 25280,
+  "y": 28938,
+  "w": 1440,
+  "h": 2189,
+  "children": 4,
+  "instances": {
+   "MAIN FOOTER": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "14894:79892",
+  "name": "Background+Border+Shadow",
+  "x": 74407,
+  "y": 30853,
+  "w": 500,
+  "h": 545,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "15127:24308",
+  "name": "Background+Border+Shadow",
+  "x": 53324,
+  "y": 31497,
+  "w": 500,
+  "h": 610,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "14670:50025",
+  "name": "home/the estate/the humidor/royal leaf/cart/payment",
+  "x": 35614,
+  "y": 32215,
+  "w": 1440,
+  "h": 2239,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "Input 66": 1,
+   "Input 67": 1,
+   "Input 70": 1,
+   "Input 68": 1,
+   "Input 69": 1
+  }
+ },
+ {
+  "id": "15694:41162",
+  "name": "home/the estate/the humidor/royal leaf/cart/payment",
+  "x": 37140,
+  "y": 32215,
+  "w": 1440,
+  "h": 1878,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "15694:41226",
+  "name": "qr code",
+  "x": 38666,
+  "y": 32307,
+  "w": 527,
+  "h": 525,
+  "children": 6,
+  "instances": {}
+ },
+ {
+  "id": "13563:29858",
+  "name": "home/careers/view position/job description/application",
+  "x": 17020,
+  "y": 33220,
+  "w": 1440,
+  "h": 1659,
+  "children": 3,
+  "instances": {
+   "chevron-down": 2,
+   "MAIN EXPLORE": 2,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "15916:42914",
+  "name": "OTP VERIFICATION",
+  "x": 52604,
+  "y": 34439,
+  "w": 500,
+  "h": 492,
+  "children": 4,
+  "instances": {
+   "Input 1": 1,
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "14695:54494",
+  "name": "home/the house/the clothier/founder's boxy hoodie",
+  "x": 6862,
+  "y": 35333,
+  "w": 1440,
+  "h": 2879,
+  "children": 3,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN NAVBAR": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1,
+   "columns": 1
+  }
+ },
+ {
+  "id": "15008:37483",
+  "name": "home/the house/the saddlery/Reserve Card Holder",
+  "x": 9554,
+  "y": 35333,
+  "w": 1440,
+  "h": 2879,
+  "children": 3,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN NAVBAR": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1,
+   "columns": 1
+  }
+ },
+ {
+  "id": "15008:37893",
+  "name": "home/the house/the Cabinet/Estate Guillotine Cutter",
+  "x": 12207,
+  "y": 35333,
+  "w": 1440,
+  "h": 2879,
+  "children": 3,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN NAVBAR": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1,
+   "columns": 1
+  }
+ },
+ {
+  "id": "15008:37073",
+  "name": "home/the house/the roastery/estate espresso",
+  "x": 727,
+  "y": 35348,
+  "w": 1440,
+  "h": 2879,
+  "children": 2,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN NAVBAR": 1,
+   "MAIN BREADCRUMBS": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1
+  }
+ },
+ {
+  "id": "15008:36663",
+  "name": "home/the house/the apothecary/wuyi oolong reserve",
+  "x": 3980,
+  "y": 35348,
+  "w": 1440,
+  "h": 2879,
+  "children": 3,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "MAIN NAVBAR": 1,
+   "PRICING CARDS": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN WISHLIST": 1,
+   "columns": 1
+  }
+ },
+ {
+  "id": "14670:50330",
+  "name": "home/the estate/the humidor/royal leaf/cart/review",
+  "x": 35628,
+  "y": 36988,
+  "w": 1440,
+  "h": 2513,
+  "children": 4,
+  "instances": {
+   "CHECKBOX": 2,
+   "MAIN FOOTER": 1,
+   "Input 81": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "15127:24336",
+  "name": "home/cart/create password",
+  "x": 53324,
+  "y": 37233,
+  "w": 500,
+  "h": 733,
+  "children": 6,
+  "instances": {
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "15127:24381",
+  "name": "home/cart/verification/welcome to velarro",
+  "x": 53324,
+  "y": 40540,
+  "w": 500,
+  "h": 556,
+  "children": 4,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "14670:50562",
+  "name": "Background+Border+Shadow",
+  "x": 36098,
+  "y": 41585,
+  "w": 500,
+  "h": 610,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15451:38373",
+  "name": "Background+Border+Shadow",
+  "x": 9806,
+  "y": 42358,
+  "w": 500,
+  "h": 750,
+  "children": 6,
+  "instances": {
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "15451:39778",
+  "name": "home/the house/the roastery/estate espresso/cart",
+  "x": 956,
+  "y": 42376,
+  "w": 1440,
+  "h": 2151,
+  "children": 3,
+  "instances": {
+   "MAIN PRODUCT CARD": 4,
+   "CHECKBOX": 1,
+   "MAIN DELETE/ADD": 1,
+   "Save for later": 1,
+   "chevron-down": 1,
+   "MAIN CHECKOUT CTA": 1
+  }
+ },
+ {
+  "id": "15451:37998",
+  "name": "home/the house/the roastery/estate espresso/cart/shipping",
+  "x": 2745,
+  "y": 42376,
+  "w": 1440,
+  "h": 2499,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "CHECKBOX": 1,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "MAIN NAVBAR": 1
+  }
+ },
+ {
+  "id": "15451:37833",
+  "name": "home/the house/the roastery/estate espresso/cart/payment",
+  "x": 4353,
+  "y": 42376,
+  "w": 1440,
+  "h": 2383,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2,
+   "MAIN FOOTER": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "15451:38230",
+  "name": "home/the house/the roastery/estate espresso/cart/review",
+  "x": 6030,
+  "y": 42376,
+  "w": 1440,
+  "h": 2513,
+  "children": 4,
+  "instances": {
+   "CHECKBOX": 2,
+   "MAIN FOOTER": 1,
+   "MAIN EXPLORE": 1,
+   "MAIN BREADCRUMBS": 1,
+   "main nav": 1
+  }
+ },
+ {
+  "id": "15451:38345",
+  "name": "Background+Border+Shadow",
+  "x": 8302,
+  "y": 42428,
+  "w": 500,
+  "h": 610,
+  "children": 3,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15451:38418",
+  "name": "Background+Border+Shadow",
+  "x": 10655,
+  "y": 42465,
+  "w": 500,
+  "h": 573,
+  "children": 4,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ },
+ {
+  "id": "15640:24401",
+  "name": "OTP VERIFICATION",
+  "x": 35546,
+  "y": 44527,
+  "w": 500,
+  "h": 492,
+  "children": 4,
+  "instances": {
+   "Input 1": 1,
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "14670:50857",
+  "name": "Background+Border+Shadow",
+  "x": 36098,
+  "y": 47321,
+  "w": 500,
+  "h": 718,
+  "children": 5,
+  "instances": {
+   "Input 90": 1,
+   "Input 91": 1,
+   "MAIN EXPLORE": 1
+  }
+ },
+ {
+  "id": "14670:51019",
+  "name": "Background+Border+Shadow",
+  "x": 36098,
+  "y": 50084,
+  "w": 500,
+  "h": 573,
+  "children": 4,
+  "instances": {
+   "MAIN EXPLORE": 2
+  }
+ }
+]

@@ -1,31 +1,514 @@
 {
-  "$comment": "Velarro Estate — route map. Existing routes are Repository verified. Planned routes CANNOT be defined yet: the screen inventory is empty because the Figma MCP rate limit blocked ingestion on 2026-07-01 (see docs/figma/ingestion-log.md). The continuation run derives plannedRoutes from screen-manifest.json suggestedRoute fields.",
-  "status": "partial-blocked-rate-limit",
+  "status": "complete",
   "runDate": "2026-07-01",
   "existingRoutes": [
     {
       "route": "/",
       "file": "app/page.tsx",
-      "renders": "Default create-next-app landing page (placeholder, to be replaced)",
-      "layout": "app/layout.tsx",
+      "renders": "create-next-app placeholder",
       "verificationSource": "Repository verified"
     }
   ],
-  "_plannedRouteSchema": {
-    "route": "string — App Router path, e.g. /properties/[id]",
-    "file": "string — e.g. app/properties/[id]/page.tsx",
-    "module": "string — module ID from module-queue.json",
-    "screens": ["array of screenNumbers from docs/figma/screen-manifest.json"],
-    "surfaceNotes": "string — modals/drawers rendered within this route rather than as routes",
-    "dynamicParams": ["array — awaited-Promise params per Next 16 convention"],
-    "verificationSource": "Metadata verified | Assumption requiring confirmation"
-  },
-  "plannedRoutes": [],
-  "conventions": {
-    "router": "App Router, app/ at repo root",
-    "dynamicSegments": "[param] folders; params/searchParams are Promises and must be awaited (Next 16)",
-    "routeGroups": "(group) folders for layout partitioning where wireframes show distinct shells",
-    "overlays": "Prototype modal/drawer/overlay surfaces default to in-route client state, not separate routes, unless the flow map shows deep-linking (then parallel/intercepting routes)",
-    "verificationSource": "Repository verified (conventions from Next 16 bundled docs)"
-  }
+  "plannedRoutes": [
+    {
+      "route": "/",
+      "file": "app/page.tsx",
+      "module": "M01-home",
+      "screens": [
+        2
+      ],
+      "figmaNodeId": "13148:15012",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/coming-soon",
+      "file": "app/coming-soon/page.tsx",
+      "module": "M01-home",
+      "screens": [
+        4
+      ],
+      "figmaNodeId": "12339:55472",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-estate/the-humidor",
+      "file": "app/the-estate/the-humidor/page.tsx",
+      "module": "M03-estate",
+      "screens": [
+        11
+      ],
+      "figmaNodeId": "13148:16189",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-estate/the-humidor/heritage",
+      "file": "app/the-estate/the-humidor/heritage/page.tsx",
+      "module": "M03-estate",
+      "screens": [
+        12
+      ],
+      "figmaNodeId": "14670:35568",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-estate",
+      "file": "app/the-estate/page.tsx",
+      "module": "M03-estate",
+      "screens": [
+        13
+      ],
+      "figmaNodeId": "14888:53493",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-estate/the-humidor/royal-leaf",
+      "file": "app/the-estate/the-humidor/royal-leaf/page.tsx",
+      "module": "M03-estate",
+      "screens": [
+        14
+      ],
+      "figmaNodeId": "14670:37727",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/the-house",
+      "file": "app/the-house/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        16
+      ],
+      "figmaNodeId": "14670:40233",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-roastery",
+      "file": "app/the-house/the-roastery/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        18
+      ],
+      "figmaNodeId": "14670:39860",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-apothecary",
+      "file": "app/the-house/the-apothecary/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        19
+      ],
+      "figmaNodeId": "14670:39923",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-clothier",
+      "file": "app/the-house/the-clothier/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        20
+      ],
+      "figmaNodeId": "14670:39985",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/the-house/the-saddlery",
+      "file": "app/the-house/the-saddlery/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        21
+      ],
+      "figmaNodeId": "14670:40071",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-cabinet",
+      "file": "app/the-house/the-cabinet/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        22
+      ],
+      "figmaNodeId": "14670:40152",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-clothier/founders-boxy-hoodie",
+      "file": "app/the-house/the-clothier/founders-boxy-hoodie/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        23
+      ],
+      "figmaNodeId": "14695:54494",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-saddlery/reserve-card-holder",
+      "file": "app/the-house/the-saddlery/reserve-card-holder/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        24
+      ],
+      "figmaNodeId": "15008:37483",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-cabinet/estate-guillotine-cutter",
+      "file": "app/the-house/the-cabinet/estate-guillotine-cutter/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        25
+      ],
+      "figmaNodeId": "15008:37893",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-roastery/estate-espresso",
+      "file": "app/the-house/the-roastery/estate-espresso/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        26
+      ],
+      "figmaNodeId": "15008:37073",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-house/the-apothecary/wuyi-oolong-reserve",
+      "file": "app/the-house/the-apothecary/wuyi-oolong-reserve/page.tsx",
+      "module": "M04-house",
+      "screens": [
+        27
+      ],
+      "figmaNodeId": "15008:36663",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-vault",
+      "file": "app/the-vault/page.tsx",
+      "module": "M05-vault",
+      "screens": [
+        28
+      ],
+      "figmaNodeId": "14240:78024",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/cart",
+      "file": "app/cart/page.tsx",
+      "module": "M06-cart-checkout",
+      "screens": [
+        29
+      ],
+      "figmaNodeId": "14712:33219",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/checkout/shipping",
+      "file": "app/checkout/shipping/page.tsx",
+      "module": "M06-cart-checkout",
+      "screens": [
+        33
+      ],
+      "figmaNodeId": "15127:24015",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/checkout/payment",
+      "file": "app/checkout/payment/page.tsx",
+      "module": "M06-cart-checkout",
+      "screens": [
+        35
+      ],
+      "figmaNodeId": "15127:23850",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/checkout/review",
+      "file": "app/checkout/review/page.tsx",
+      "module": "M06-cart-checkout",
+      "screens": [
+        37
+      ],
+      "figmaNodeId": "15127:24193",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/my-profile",
+      "file": "app/my-profile/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        59
+      ],
+      "figmaNodeId": "13148:18311",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/my-profile/settings",
+      "file": "app/my-profile/settings/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        61
+      ],
+      "figmaNodeId": "14762:96902",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/my-profile/addresses",
+      "file": "app/my-profile/addresses/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        63
+      ],
+      "figmaNodeId": "13148:18794",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/my-profile/complete",
+      "file": "app/my-profile/complete/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        64
+      ],
+      "figmaNodeId": "13148:18414",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/my-profile/orders",
+      "file": "app/my-profile/orders/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        66
+      ],
+      "figmaNodeId": "14852:34754",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/my-profile/wishlist",
+      "file": "app/my-profile/wishlist/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        68
+      ],
+      "figmaNodeId": "15640:25349",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/my-profile/orders/[orderId]",
+      "file": "app/my-profile/orders/[orderId]/page.tsx",
+      "module": "M07-profile",
+      "screens": [
+        74
+      ],
+      "figmaNodeId": "13148:19312",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/the-chronicle",
+      "file": "app/the-chronicle/page.tsx",
+      "module": "M08-editorial",
+      "screens": [
+        90
+      ],
+      "figmaNodeId": "14284:63187",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/pairing-guide",
+      "file": "app/pairing-guide/page.tsx",
+      "module": "M08-editorial",
+      "screens": [
+        91
+      ],
+      "figmaNodeId": "14406:85066",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/the-chronicle/international-cigar-day",
+      "file": "app/the-chronicle/international-cigar-day/page.tsx",
+      "module": "M08-editorial",
+      "screens": [
+        92
+      ],
+      "figmaNodeId": "14585:38918",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/pairing-guide/find-your-pairing",
+      "file": "app/pairing-guide/find-your-pairing/page.tsx",
+      "module": "M08-editorial",
+      "screens": [
+        93
+      ],
+      "figmaNodeId": "14406:85132",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/pairing-guide/rum-and-cigars",
+      "file": "app/pairing-guide/rum-and-cigars/page.tsx",
+      "module": "M08-editorial",
+      "screens": [
+        94
+      ],
+      "figmaNodeId": "14644:32880",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/partner",
+      "file": "app/partner/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        95
+      ],
+      "figmaNodeId": "14670:42180",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/careers",
+      "file": "app/careers/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        99
+      ],
+      "figmaNodeId": "13148:15771",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/get-in-touch",
+      "file": "app/get-in-touch/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        100
+      ],
+      "figmaNodeId": "14644:34661",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/membership",
+      "file": "app/membership/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        102
+      ],
+      "figmaNodeId": "15008:38309",
+      "verificationSource": "Figma verified"
+    },
+    {
+      "route": "/careers/positions",
+      "file": "app/careers/positions/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        103
+      ],
+      "figmaNodeId": "13148:15855",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/careers/positions/[jobId]",
+      "file": "app/careers/positions/[jobId]/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        104
+      ],
+      "figmaNodeId": "13148:15939",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/careers/positions/[jobId]/apply",
+      "file": "app/careers/positions/[jobId]/apply/page.tsx",
+      "module": "M09-engagement",
+      "screens": [
+        105
+      ],
+      "figmaNodeId": "13563:29858",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/our-story",
+      "file": "app/our-story/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        106
+      ],
+      "figmaNodeId": "15934:43007",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/cookie-policy",
+      "file": "app/cookie-policy/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        107
+      ],
+      "figmaNodeId": "14703:32859",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/accessibility",
+      "file": "app/accessibility/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        108
+      ],
+      "figmaNodeId": "14703:32598",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/privacy-policy",
+      "file": "app/privacy-policy/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        109
+      ],
+      "figmaNodeId": "14670:48780",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/sustainability",
+      "file": "app/sustainability/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        110
+      ],
+      "figmaNodeId": "13148:20719",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/press",
+      "file": "app/press/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        111
+      ],
+      "figmaNodeId": "14670:48497",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/faq",
+      "file": "app/faq/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        112
+      ],
+      "figmaNodeId": "14670:48590",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/terms-of-service",
+      "file": "app/terms-of-service/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        113
+      ],
+      "figmaNodeId": "14703:33048",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "route": "/craftsmanship",
+      "file": "app/craftsmanship/page.tsx",
+      "module": "M10-legal-info",
+      "screens": [
+        114
+      ],
+      "figmaNodeId": "14703:33971",
+      "verificationSource": "Metadata verified"
+    }
+  ]
 }

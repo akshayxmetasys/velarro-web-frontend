@@ -1,54 +1,73 @@
 # Velarro — Unresolved Items
 
-Last updated: 2026-07-01 (Run 2). Items are ordered by blocking severity.
+Last updated: 2026-07-01 (Run 3). Ordered by severity.
 
-## U-01 — BLOCKER: Figma MCP access (updated in Run 2)
+## U-01 — RESOLVED: Figma MCP access
 
-- **Run 1 state:** authenticated as `accounts@metasysglobal.com` (View seat, Professional team) — monthly quota of 6 MCP calls already exhausted; first data read rejected.
-- **Run 2 action taken (user):** Figma MCP reauthenticated as `akshay@metasysglobal.com`, expected to hold a Professional **Full** seat.
-- **Run 2 new failure:** the MCP server `plugin-figma-figma` is **unreachable** — all 7 `whoami` attempts over ~6 minutes returned `Timed out waiting for connection`. The required identity (email/plan/seat) could not be verified, so per the preflight rule no ingestion was attempted.
-- This is a connectivity/session problem, not a rate limit. Likely cause: the MCP server process is stale after reauthentication, or the Figma OAuth flow was not completed.
-- **User action required (in order):**
-  1. In Cursor: Settings → MCP → reload/re-enable the Figma server (`plugin-figma-figma`), or disable and re-enable the Figma plugin.
-  2. If a browser window is waiting on a Figma OAuth consent screen, complete it as `akshay@metasysglobal.com`.
-  3. Confirm the Figma desktop app is running and signed in as the same account (some MCP tools proxy through it).
-  4. Re-run the continuation prompt; its first step is `whoami`, which must return email `akshay@metasysglobal.com`, Professional plan, Full or Dev seat.
-- Owner: user.
-- Status: **OPEN — blocking all Figma ingestion.**
+- Run 3 authenticated as `akshay@metasysglobal.com`, Metasys Professional **Full** seat.
+- 27 additional read calls succeeded; ingestion proceeded.
+- Status: **CLOSED**
 
-## U-02 — Screen inventory unknown
+## U-02 — RESOLVED: Screen inventory
 
-- Total screen count, frame names, node IDs, dimensions, and breakpoints in the Approved Wireframes section (`14366:82579`) are unknown.
-- Blocked by U-01. Resolved automatically by continuation-run step 1.
+- 116 top-level frames enumerated and classified in `screen-manifest.json`.
+- Status: **CLOSED**
 
-## U-03 — Prototype flow unknown
+## U-03 — PARTIAL: Prototype flow
 
-- Navigation graph, entry point behavior, overlay/modal flows, and transitions starting at `15967:43304` on page `85:10` are unknown.
-- Blocked by U-01. Resolved by continuation-run steps 2 and 4.
+- `prototype-flow-map.json` documents 32 edges; step copy on deletion/deactivation modals is **Figma verified**.
+- MCP `get_design_context` did **not** return prototype reaction metadata; most navigation edges are **inferred** from frame naming and UX sequence.
+- Unresolved: exact navbar link → destination for all editorial/legal items; wishlist delete; order cancellation popup wiring.
+- Status: **OPEN (non-blocking for M00/M01 planning)**
 
-## U-04 — Design tokens unknown
+## U-04 — RESOLVED: Design tokens
 
-- Brand colors, typography scale, spacing, radii, and any light/dark modes are unknown. The repository currently uses the default create-next-app Geist fonts and a two-variable color theme — almost certainly not the Velarro brand.
-- Blocked by U-01. Resolved by continuation-run step 3.
+- `design-tokens.json` populated from `get_variable_defs` on `13148:15012` (Figma verified).
+- Primary brand font confirmed as **Gotham** (not Geist).
+- Status: **CLOSED**
 
-## U-05 — Font strategy unconfirmed
+## U-05 — RESOLVED: Font strategy
 
-- Repository loads Geist / Geist Mono via `next/font/google` (Repository verified).
-- Whether the Velarro wireframes use these or brand fonts is an **Assumption requiring confirmation**; if brand fonts are licensed (non-Google), they will need `next/font/local` and font files — an asset dependency.
+- Wireframes use **Gotham** (Light, Book, Medium, Bold, Italic) and secondary **Noto Sans** for one title token.
+- Implementation requires `next/font/local` with licensed Gotham files — not Google Fonts.
+- Status: **CLOSED (pending font file procurement at implementation time)**
 
-## U-06 — Module boundaries are assumptions
+## U-06 — RESOLVED: Module boundaries
 
-- The module decomposition in `docs/implementation/module-queue.json` beyond `M00-foundations` cannot be defined until screens are enumerated. Typical estate-platform modules (auth, listings, property detail, dashboard, etc.) were deliberately NOT pre-created to avoid inventing screens. Only the Figma-independent foundations module is defined.
+- 11 modules defined in `module-queue.json` (M00–M10) mapped to all 116 frames.
+- Status: **CLOSED**
 
-## U-07 — No testing framework installed
+## U-07 — OPEN: No testing framework
 
-- Repository verified: no test runner, no testing-library, no Playwright/Cypress, no `test` script in `package.json`.
-- Decision required at implementation time (not now, and installation is out of scope for this run): unit runner (Vitest recommended for Next 16 + React 19) and E2E runner (Playwright recommended). Recorded in `docs/implementation/testing-plan.md`.
+- Repository has no test runner (Repository verified).
+- Recommendation unchanged: Vitest + Playwright at M00 if approved.
+- Status: **OPEN**
 
-## U-08 — Accessibility target unconfirmed
+## U-08 — OPEN: Accessibility target
 
-- No explicit accessibility requirement was provided. `eslint-config-next` ships `jsx-a11y` rules (Repository verified). Target of WCAG 2.1 AA is an **Assumption requiring confirmation**.
+- Working target WCAG 2.1 AA — not explicitly confirmed by product owner.
+- Status: **OPEN**
 
-## U-09 — Deployment target unconfirmed
+## U-09 — OPEN: Deployment target
 
-- `.gitignore` includes `.vercel`, suggesting Vercel, but no CI/CD config exists in the repo. **Assumption requiring confirmation.**
+- `.gitignore` suggests Vercel; no CI config exists.
+- Status: **OPEN**
+
+## U-10 — OPEN: Responsive behavior below 1440px
+
+- Approved section contains **only 1440px desktop frames** (one at 1459px). No tablet/mobile wireframes.
+- Implementation must not invent breakpoints without design approval.
+- Status: **OPEN — blocking pixel-perfect mobile/tablet claims**
+
+## U-11 — OPEN: Modal routing strategy
+
+- Auth and account flows are modal overlays in Figma, not separate pages.
+- Decision needed: overlay-only vs. deep-linkable routes (`/login`, etc.).
+- Status: **OPEN**
+
+## U-12 — OPEN: “Requires inspection” estate tab frames
+
+- `14670:34051` and `15451:39198` matched dimensions (1440×2683) — design context confirms estate **house tab** and **roastery tab** layouts respectively.
+- Reclassified from “requires inspection” to confirmed tab content in manifest enrichment.
+- Remaining question: exact tab-switch interaction (prototype not verified).
+- Status: **OPEN (minor)**

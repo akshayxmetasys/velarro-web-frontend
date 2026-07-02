@@ -1,30 +1,206 @@
 {
-  "$comment": "Velarro Estate — shared component plan. STATUS: BLOCKED. Depends on docs/figma/component-inventory.json, which is empty because the Figma MCP rate limit blocked ingestion on 2026-07-01. Only the repository-side conventions are defined; no component list is invented. The continuation run fills sharedComponents from components observed on 2+ screens.",
-  "status": "blocked-rate-limit",
+  "status": "complete",
   "runDate": "2026-07-01",
-  "conventions": {
-    "directoryLayout": {
-      "components/ui": "Design-system primitives (Button, Input, Card, ...) mapped 1:1 to Figma components where possible",
-      "components/layout": "Header, Footer, navigation, page shells shared across routes",
-      "components/<module>": "Module-specific composites, colocated by module ID from module-queue.json"
+  "sharedComponents": [
+    {
+      "componentId": "cmp-main-explore",
+      "codePath": "components/ui/MAINEXPLORE.tsx",
+      "figmaComponentName": "MAIN EXPLORE",
+      "usageCount": 69,
+      "priority": "P0",
+      "verificationSource": "Metadata verified"
     },
-    "naming": "PascalCase file and export names; one component per file",
-    "imports": "@/components/... via the @/* path alias (tsconfig, Repository verified)",
-    "clientServerSplit": "Server Components by default; \"use client\" only for interactive leaves (menus, carousels, form controls, overlay triggers)",
-    "styling": "Tailwind v4 utilities referencing @theme tokens from app/globals.css; no CSS modules or CSS-in-JS",
-    "accessibility": "Interactive primitives ship with keyboard support, ARIA where semantics fall short, and focus management for overlay surfaces",
-    "verificationSource": "Repository verified (conventions) — component list pending Figma"
-  },
-  "_sharedComponentSchema": {
-    "componentId": "string — matches component-inventory.json",
-    "codePath": "string — e.g. components/ui/Button.tsx",
-    "figmaSources": ["array of figmaComponentName + nodeIds"],
-    "usedByModules": ["array of module IDs"],
-    "usedOnScreens": ["array of screenNumbers"],
-    "props": "string — planned prop surface incl. variants",
-    "states": ["array — hover/focus/disabled/error/loading as evidenced in Figma"],
-    "priority": "P0 (blocks multiple modules) | P1 | P2",
-    "verificationSource": "Figma verified | Assumption requiring confirmation"
-  },
-  "sharedComponents": []
+    {
+      "componentId": "cmp-main-breadcrumbs",
+      "codePath": "components/ui/MAINBREADCRUMBS.tsx",
+      "figmaComponentName": "MAIN BREADCRUMBS",
+      "usageCount": 53,
+      "priority": "P0",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-footer",
+      "codePath": "components/ui/MAINFOOTER.tsx",
+      "figmaComponentName": "MAIN FOOTER",
+      "usageCount": 48,
+      "priority": "P0",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-navbar",
+      "codePath": "components/ui/MAINNAVBAR.tsx",
+      "figmaComponentName": "MAIN NAVBAR",
+      "usageCount": 35,
+      "priority": "P0",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-nav",
+      "codePath": "components/ui/mainnav.tsx",
+      "figmaComponentName": "main nav",
+      "usageCount": 16,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-product-card",
+      "codePath": "components/ui/MAINPRODUCTCARD.tsx",
+      "figmaComponentName": "MAIN PRODUCT CARD",
+      "usageCount": 15,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-checkbox",
+      "codePath": "components/ui/CHECKBOX.tsx",
+      "figmaComponentName": "CHECKBOX",
+      "usageCount": 9,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-chevron-down",
+      "codePath": "components/ui/chevron-down.tsx",
+      "figmaComponentName": "chevron-down",
+      "usageCount": 9,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-sidedbar",
+      "codePath": "components/ui/MAINSIDEDBAR.tsx",
+      "figmaComponentName": "MAIN SIDEDBAR",
+      "usageCount": 8,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-wishlist",
+      "codePath": "components/ui/MAINWISHLIST.tsx",
+      "figmaComponentName": "MAIN WISHLIST",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-pricing-cards",
+      "codePath": "components/ui/PRICINGCARDS.tsx",
+      "figmaComponentName": "PRICING CARDS",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-the-house",
+      "codePath": "components/ui/TheHouse.tsx",
+      "figmaComponentName": "The House",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-search",
+      "codePath": "components/ui/search.tsx",
+      "figmaComponentName": "search",
+      "usageCount": 7,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-category-cards",
+      "codePath": "components/ui/Categorycards.tsx",
+      "figmaComponentName": "Category cards",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-cigars-the-cabinet",
+      "codePath": "components/ui/MAINCIGARSTHECABINET.tsx",
+      "figmaComponentName": "MAIN CIGARS/THE CABINET",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-alert-circle",
+      "codePath": "components/ui/alert-circle.tsx",
+      "figmaComponentName": "alert-circle",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-columns",
+      "codePath": "components/ui/columns.tsx",
+      "figmaComponentName": "columns",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-user",
+      "codePath": "components/ui/user.tsx",
+      "figmaComponentName": "user",
+      "usageCount": 5,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-button-explore",
+      "codePath": "components/ui/button-explore.tsx",
+      "figmaComponentName": "Button - explore",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-component-8",
+      "codePath": "components/ui/component-8.tsx",
+      "figmaComponentName": "Component 8",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-component-9",
+      "codePath": "components/ui/component-9.tsx",
+      "figmaComponentName": "Component 9",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-checkout-cta",
+      "codePath": "components/ui/main-checkout-cta.tsx",
+      "figmaComponentName": "MAIN CHECKOUT CTA",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-delete-add",
+      "codePath": "components/ui/main-delete-add.tsx",
+      "figmaComponentName": "MAIN DELETE/ADD",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-save-for-later",
+      "codePath": "components/ui/save-for-later.tsx",
+      "figmaComponentName": "Save for later",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-pagination",
+      "codePath": "components/ui/pagination.tsx",
+      "figmaComponentName": "pagination",
+      "usageCount": 4,
+      "priority": "P1",
+      "verificationSource": "Metadata verified"
+    }
+  ]
 }

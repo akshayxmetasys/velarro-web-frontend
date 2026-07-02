@@ -1,18 +1,1643 @@
 {
-  "$comment": "Velarro Estate — reusable component inventory from Figma. STATUS: BLOCKED. No component data was retrieved before the rate limit on 2026-07-01. The continuation run fills this from get_design_context per screen (component instances, variants, text styles).",
-  "status": "blocked-rate-limit",
+  "status": "metadata-enriched",
   "runDate": "2026-07-01",
-  "_componentSchema": {
-    "componentId": "string — stable slug, e.g. cmp-header-nav",
-    "figmaComponentName": "string — exact Figma component/instance name",
-    "figmaComponentKey": "string|null — component key if published",
-    "sourceNodeIds": ["array — node IDs where instances were observed"],
-    "usedOnScreens": ["array of screenNumbers from screen-manifest.json"],
-    "variants": ["array — variant property=value combinations observed"],
-    "category": "navigation | layout | form | card | list | overlay | feedback | media | typography | other",
-    "suggestedCodeComponent": "string — proposed path, e.g. components/ui/Button.tsx",
-    "shared": "boolean — used on 2+ screens",
-    "verificationSource": "Figma verified | Metadata verified | Assumption requiring confirmation"
-  },
-  "components": []
+  "totalComponents": 106,
+  "sharedComponents": 59,
+  "components": [
+    {
+      "componentId": "cmp-main-explore",
+      "figmaComponentName": "MAIN EXPLORE",
+      "usedOnScreens": [
+        1,
+        2,
+        3,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        60,
+        66,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        83,
+        84,
+        85,
+        86,
+        89,
+        90,
+        91,
+        93,
+        94,
+        96,
+        99,
+        102,
+        103,
+        104,
+        105,
+        116
+      ],
+      "usageCount": 69,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINEXPLORE.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-breadcrumbs",
+      "figmaComponentName": "MAIN BREADCRUMBS",
+      "usedOnScreens": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        26,
+        28,
+        30,
+        32,
+        34,
+        37,
+        39,
+        42,
+        45,
+        51,
+        52,
+        53,
+        63,
+        64,
+        66,
+        67,
+        68,
+        69,
+        90,
+        91,
+        92,
+        93,
+        94,
+        96,
+        98,
+        99,
+        100,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115
+      ],
+      "usageCount": 53,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINBREADCRUMBS.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-footer",
+      "figmaComponentName": "MAIN FOOTER",
+      "usedOnScreens": [
+        4,
+        15,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        28,
+        30,
+        32,
+        34,
+        37,
+        39,
+        42,
+        45,
+        51,
+        52,
+        53,
+        61,
+        63,
+        64,
+        66,
+        67,
+        68,
+        69,
+        74,
+        90,
+        91,
+        92,
+        93,
+        94,
+        96,
+        98,
+        99,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        112,
+        113,
+        114,
+        115
+      ],
+      "usageCount": 48,
+      "category": "layout",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINFOOTER.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-navbar",
+      "figmaComponentName": "MAIN NAVBAR",
+      "usedOnScreens": [
+        4,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        34,
+        39,
+        51,
+        63,
+        64,
+        66,
+        67,
+        90,
+        91,
+        92,
+        93,
+        94,
+        98,
+        99,
+        102,
+        103,
+        104,
+        105,
+        110
+      ],
+      "usageCount": 35,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINNAVBAR.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-nav",
+      "figmaComponentName": "main nav",
+      "usedOnScreens": [
+        37,
+        42,
+        45,
+        52,
+        53,
+        68,
+        69,
+        96,
+        106,
+        107,
+        108,
+        109,
+        112,
+        113,
+        114,
+        115
+      ],
+      "usageCount": 16,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/mainnav.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-product-card",
+      "figmaComponentName": "MAIN PRODUCT CARD",
+      "usedOnScreens": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        17,
+        23,
+        24,
+        25,
+        26,
+        27,
+        50,
+        68,
+        69
+      ],
+      "usageCount": 15,
+      "category": "card",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINPRODUCTCARD.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-checkbox",
+      "figmaComponentName": "CHECKBOX",
+      "usedOnScreens": [
+        29,
+        31,
+        36,
+        37,
+        45,
+        50,
+        51,
+        53,
+        111
+      ],
+      "usageCount": 9,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/CHECKBOX.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-chevron-down",
+      "figmaComponentName": "chevron-down",
+      "usedOnScreens": [
+        29,
+        30,
+        31,
+        36,
+        50,
+        61,
+        74,
+        105,
+        112
+      ],
+      "usageCount": 9,
+      "category": "typography",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/chevron-down.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-sidedbar",
+      "figmaComponentName": "MAIN SIDEDBAR",
+      "usedOnScreens": [
+        61,
+        63,
+        64,
+        66,
+        67,
+        68,
+        69,
+        74
+      ],
+      "usageCount": 8,
+      "category": "layout",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINSIDEDBAR.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-wishlist",
+      "figmaComponentName": "MAIN WISHLIST",
+      "usedOnScreens": [
+        14,
+        17,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "usageCount": 7,
+      "category": "feedback",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINWISHLIST.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-pricing-cards",
+      "figmaComponentName": "PRICING CARDS",
+      "usedOnScreens": [
+        14,
+        17,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "usageCount": 7,
+      "category": "card",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/PRICINGCARDS.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-the-house",
+      "figmaComponentName": "The House",
+      "usedOnScreens": [
+        15,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "usageCount": 7,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/TheHouse.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-search",
+      "figmaComponentName": "search",
+      "usedOnScreens": [
+        5,
+        6,
+        7,
+        8,
+        87,
+        103,
+        104
+      ],
+      "usageCount": 7,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/search.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-category-cards",
+      "figmaComponentName": "Category cards",
+      "usedOnScreens": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "usageCount": 5,
+      "category": "card",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/Categorycards.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-cigars-the-cabinet",
+      "figmaComponentName": "MAIN CIGARS/THE CABINET",
+      "usedOnScreens": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "usageCount": 5,
+      "category": "card",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/MAINCIGARSTHECABINET.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-alert-circle",
+      "figmaComponentName": "alert-circle",
+      "usedOnScreens": [
+        1,
+        2,
+        3,
+        61,
+        102
+      ],
+      "usageCount": 5,
+      "category": "feedback",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/alert-circle.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-columns",
+      "figmaComponentName": "columns",
+      "usedOnScreens": [
+        14,
+        23,
+        24,
+        25,
+        27
+      ],
+      "usageCount": 5,
+      "category": "layout",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/columns.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-user",
+      "figmaComponentName": "user",
+      "usedOnScreens": [
+        1,
+        2,
+        3,
+        59,
+        71
+      ],
+      "usageCount": 5,
+      "category": "media",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/user.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-button-explore",
+      "figmaComponentName": "Button - explore",
+      "usedOnScreens": [
+        8,
+        28,
+        65,
+        92
+      ],
+      "usageCount": 4,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/button-explore.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-component-8",
+      "figmaComponentName": "Component 8",
+      "usedOnScreens": [
+        1,
+        2,
+        3,
+        61
+      ],
+      "usageCount": 4,
+      "category": "card",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/component-8.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-component-9",
+      "figmaComponentName": "Component 9",
+      "usedOnScreens": [
+        1,
+        2,
+        3,
+        61
+      ],
+      "usageCount": 4,
+      "category": "card",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/component-9.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-checkout-cta",
+      "figmaComponentName": "MAIN CHECKOUT CTA",
+      "usedOnScreens": [
+        29,
+        31,
+        36,
+        50
+      ],
+      "usageCount": 4,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/main-checkout-cta.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-delete-add",
+      "figmaComponentName": "MAIN DELETE/ADD",
+      "usedOnScreens": [
+        29,
+        31,
+        36,
+        50
+      ],
+      "usageCount": 4,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/main-delete-add.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-save-for-later",
+      "figmaComponentName": "Save for later",
+      "usedOnScreens": [
+        29,
+        31,
+        36,
+        50
+      ],
+      "usageCount": 4,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/save-for-later.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-pagination",
+      "figmaComponentName": "pagination",
+      "usedOnScreens": [
+        9,
+        10,
+        11,
+        13
+      ],
+      "usageCount": 4,
+      "category": "navigation",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/pagination.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-component-23",
+      "figmaComponentName": "Component 23",
+      "usedOnScreens": [
+        30,
+        32,
+        74
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/component-23.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-edit-profile",
+      "figmaComponentName": "EDIT profile",
+      "usedOnScreens": [
+        29,
+        36,
+        59
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/edit-profile.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-input-1",
+      "figmaComponentName": "Input 1",
+      "usedOnScreens": [
+        44,
+        56,
+        60
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-1.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-input-2",
+      "figmaComponentName": "Input 2",
+      "usedOnScreens": [
+        60,
+        72,
+        73
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-2.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-input-5",
+      "figmaComponentName": "Input 5",
+      "usedOnScreens": [
+        60,
+        72,
+        73
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-5.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-input-8",
+      "figmaComponentName": "Input 8",
+      "usedOnScreens": [
+        60,
+        72,
+        73
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-8.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-input-9",
+      "figmaComponentName": "Input 9",
+      "usedOnScreens": [
+        60,
+        72,
+        73
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-9.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-main-footer-footer-under-21",
+      "figmaComponentName": "MAIN FOOTER/Footer - under 21",
+      "usedOnScreens": [
+        1,
+        2,
+        3
+      ],
+      "usageCount": 3,
+      "category": "layout",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/main-footer-footer-under-21.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-all-filters",
+      "figmaComponentName": "all filters",
+      "usedOnScreens": [
+        9,
+        10,
+        12
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/all-filters.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-chevron-right",
+      "figmaComponentName": "chevron-right",
+      "usedOnScreens": [
+        20,
+        21,
+        22
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/chevron-right.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-minus",
+      "figmaComponentName": "minus",
+      "usedOnScreens": [
+        11,
+        12,
+        13
+      ],
+      "usageCount": 3,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/minus.tsx",
+      "verificationSource": "Metadata verified"
+    },
+    {
+      "componentId": "cmp-3-tabs",
+      "figmaComponentName": "3 TABS",
+      "usedOnScreens": [
+        68,
+        69
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/3-tabs.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-iconex-light-mail",
+      "figmaComponentName": "Iconex/Light/Mail",
+      "usedOnScreens": [
+        59,
+        71
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/iconex-light-mail.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-10",
+      "figmaComponentName": "Input 10",
+      "usedOnScreens": [
+        72,
+        73
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-10.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-66",
+      "figmaComponentName": "Input 66",
+      "usedOnScreens": [
+        35,
+        41
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-66.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-67",
+      "figmaComponentName": "Input 67",
+      "usedOnScreens": [
+        35,
+        41
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-67.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-68",
+      "figmaComponentName": "Input 68",
+      "usedOnScreens": [
+        35,
+        41
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-68.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-69",
+      "figmaComponentName": "Input 69",
+      "usedOnScreens": [
+        35,
+        41
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-69.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-70",
+      "figmaComponentName": "Input 70",
+      "usedOnScreens": [
+        35,
+        41
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-70.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-71",
+      "figmaComponentName": "Input 71",
+      "usedOnScreens": [
+        33,
+        38
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-71.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-73",
+      "figmaComponentName": "Input 73",
+      "usedOnScreens": [
+        33,
+        38
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-73.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-75",
+      "figmaComponentName": "Input 75",
+      "usedOnScreens": [
+        33,
+        38
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-75.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-79",
+      "figmaComponentName": "Input 79",
+      "usedOnScreens": [
+        33,
+        38
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-79.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-80",
+      "figmaComponentName": "Input 80",
+      "usedOnScreens": [
+        33,
+        38
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-80.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-81",
+      "figmaComponentName": "Input 81",
+      "usedOnScreens": [
+        37,
+        45
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/input-81.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-move-to-cart-button",
+      "figmaComponentName": "MOVE TO CART BUTTON",
+      "usedOnScreens": [
+        62,
+        70
+      ],
+      "usageCount": 2,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/move-to-cart-button.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-radio-button",
+      "figmaComponentName": "RADIO BUTTON",
+      "usedOnScreens": [
+        75,
+        86
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/radio-button.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-saved-for-later",
+      "figmaComponentName": "Saved for later",
+      "usedOnScreens": [
+        31,
+        32
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/saved-for-later.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-shipping-form",
+      "figmaComponentName": "Shipping form",
+      "usedOnScreens": [
+        34,
+        39
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/shipping-form.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-submit-button",
+      "figmaComponentName": "Submit button",
+      "usedOnScreens": [
+        7,
+        8
+      ],
+      "usageCount": 2,
+      "category": "form",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/submit-button.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-edit-3",
+      "figmaComponentName": "edit-3",
+      "usedOnScreens": [
+        63,
+        71
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/edit-3.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-map-pin",
+      "figmaComponentName": "map-pin",
+      "usedOnScreens": [
+        59,
+        71
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/map-pin.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-navigation-tabs",
+      "figmaComponentName": "navigation tabs",
+      "usedOnScreens": [
+        15,
+        16
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/navigation-tabs.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-phone",
+      "figmaComponentName": "phone",
+      "usedOnScreens": [
+        59,
+        71
+      ],
+      "usageCount": 2,
+      "category": "other",
+      "shared": true,
+      "suggestedCodeComponent": "components/ui/phone.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-apple",
+      "figmaComponentName": "Apple",
+      "usedOnScreens": [
+        6
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/apple.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-frame-1000004802",
+      "figmaComponentName": "Frame 1000004802",
+      "usedOnScreens": [
+        67
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/frame-1000004802.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-frame-1000004803",
+      "figmaComponentName": "Frame 1000004803",
+      "usedOnScreens": [
+        67
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/frame-1000004803.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-frame-1000005254",
+      "figmaComponentName": "Frame 1000005254",
+      "usedOnScreens": [
+        74
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/frame-1000005254.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-frame-1000005786",
+      "figmaComponentName": "Frame 1000005786",
+      "usedOnScreens": [
+        92
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/frame-1000005786.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-37",
+      "figmaComponentName": "Input 37",
+      "usedOnScreens": [
+        6
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-37.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-38",
+      "figmaComponentName": "Input 38",
+      "usedOnScreens": [
+        6
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-38.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-39",
+      "figmaComponentName": "Input 39",
+      "usedOnScreens": [
+        5
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-39.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-40",
+      "figmaComponentName": "Input 40",
+      "usedOnScreens": [
+        5
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-40.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-41",
+      "figmaComponentName": "Input 41",
+      "usedOnScreens": [
+        5
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-41.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-42",
+      "figmaComponentName": "Input 42",
+      "usedOnScreens": [
+        5
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-42.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-43",
+      "figmaComponentName": "Input 43",
+      "usedOnScreens": [
+        5
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-43.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-45",
+      "figmaComponentName": "Input 45",
+      "usedOnScreens": [
+        7
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-45.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-46",
+      "figmaComponentName": "Input 46",
+      "usedOnScreens": [
+        7
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-46.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-47",
+      "figmaComponentName": "Input 47",
+      "usedOnScreens": [
+        8
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-47.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-48",
+      "figmaComponentName": "Input 48",
+      "usedOnScreens": [
+        8
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-48.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-49",
+      "figmaComponentName": "Input 49",
+      "usedOnScreens": [
+        95
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-49.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-50",
+      "figmaComponentName": "Input 50",
+      "usedOnScreens": [
+        95
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-50.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-51",
+      "figmaComponentName": "Input 51",
+      "usedOnScreens": [
+        95
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-51.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-52",
+      "figmaComponentName": "Input 52",
+      "usedOnScreens": [
+        95
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-52.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-53",
+      "figmaComponentName": "Input 53",
+      "usedOnScreens": [
+        95
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-53.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-54",
+      "figmaComponentName": "Input 54",
+      "usedOnScreens": [
+        95
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-54.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-56",
+      "figmaComponentName": "Input 56",
+      "usedOnScreens": [
+        111
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-56.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-58",
+      "figmaComponentName": "Input 58",
+      "usedOnScreens": [
+        111
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-58.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-60",
+      "figmaComponentName": "Input 60",
+      "usedOnScreens": [
+        111
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-60.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-62",
+      "figmaComponentName": "Input 62",
+      "usedOnScreens": [
+        111
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-62.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-85",
+      "figmaComponentName": "Input 85",
+      "usedOnScreens": [
+        100
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-85.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-86",
+      "figmaComponentName": "Input 86",
+      "usedOnScreens": [
+        100
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-86.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-87",
+      "figmaComponentName": "Input 87",
+      "usedOnScreens": [
+        100
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-87.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-88",
+      "figmaComponentName": "Input 88",
+      "usedOnScreens": [
+        100
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-88.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-89",
+      "figmaComponentName": "Input 89",
+      "usedOnScreens": [
+        100
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-89.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-90",
+      "figmaComponentName": "Input 90",
+      "usedOnScreens": [
+        57
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-90.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-input-91",
+      "figmaComponentName": "Input 91",
+      "usedOnScreens": [
+        57
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/input-91.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-main-save-for-later",
+      "figmaComponentName": "MAIN /SAVE FOR LATER",
+      "usedOnScreens": [
+        32
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/main-save-for-later.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-microsoft",
+      "figmaComponentName": "Microsoft",
+      "usedOnScreens": [
+        6
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/microsoft.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-pairing-card",
+      "figmaComponentName": "PAIRING CARD",
+      "usedOnScreens": [
+        91
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/pairing-card.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-pairing-q2",
+      "figmaComponentName": "PAIRING Q2",
+      "usedOnScreens": [
+        93
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/pairing-q2.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-profile-completion",
+      "figmaComponentName": "PROFILE COMPLETION",
+      "usedOnScreens": [
+        64
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/profile-completion.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-view-button-cart",
+      "figmaComponentName": "VIEW BUTTON CART",
+      "usedOnScreens": [
+        32
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/view-button-cart.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-calendar",
+      "figmaComponentName": "calendar",
+      "usedOnScreens": [
+        71
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/calendar.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-dropdownnn",
+      "figmaComponentName": "dropdownnn",
+      "usedOnScreens": [
+        112
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/dropdownnn.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-google",
+      "figmaComponentName": "google",
+      "usedOnScreens": [
+        6
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/google.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-list",
+      "figmaComponentName": "list",
+      "usedOnScreens": [
+        30
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/list.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-mail",
+      "figmaComponentName": "mail",
+      "usedOnScreens": [
+        96
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/mail.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-pairing-guide-cards",
+      "figmaComponentName": "pairing guide cards",
+      "usedOnScreens": [
+        93
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/pairing-guide-cards.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-profile-card",
+      "figmaComponentName": "profile card",
+      "usedOnScreens": [
+        59
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/profile-card.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    },
+    {
+      "componentId": "cmp-trash",
+      "figmaComponentName": "trash",
+      "usedOnScreens": [
+        63
+      ],
+      "usageCount": 1,
+      "category": "other",
+      "shared": false,
+      "suggestedCodeComponent": "components/ui/trash.tsx",
+      "verificationSource": "Assumption requiring confirmation"
+    }
+  ]
 }

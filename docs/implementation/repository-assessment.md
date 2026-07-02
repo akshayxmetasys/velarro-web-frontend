@@ -80,8 +80,9 @@ None installed — no Vitest/Jest, no Testing Library, no Playwright/Cypress, no
 
 ## Font strategy
 
-- Current: `Geist` and `Geist_Mono` via `next/font/google`, exposed as `--font-geist-sans` / `--font-geist-mono`, wired into Tailwind theme as `--font-sans` / `--font-mono`.
-- Velarro brand fonts are unknown until Figma ingestion (U-05). If brand fonts are on Google Fonts, swap within `next/font/google`; otherwise use `next/font/local` with licensed font files placed under `app/fonts/` or similar.
+- **Figma verified (Run 3):** Primary typeface is **Gotham** (Light, Book, Medium, Bold, Book Italic) across all wireframes. Secondary token uses **Noto Sans** for `Title/title-2` only.
+- **Implementation:** `next/font/local` with licensed Gotham files under `public/fonts/` or `app/fonts/` — Geist (current scaffold) must be replaced in M00.
+- Repository currently loads Geist via `next/font/google` and `globals.css` overrides with Arial — both must be removed in M00.
 
 ## Image strategy
 
