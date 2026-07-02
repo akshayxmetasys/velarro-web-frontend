@@ -1,26 +1,264 @@
 @import "tailwindcss";
 
+/*
+ * Velarro design tokens — sourced from docs/figma/design-tokens.json
+ * Figma-verified values are marked inline. Engineering-defined values are labeled.
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Typography — Gotham is the approved production font; swap via this variable when licensed files arrive */
+  --font-family-primary: Arial, Helvetica, sans-serif;
+  /* Loaded via next/font/google in app/layout.tsx (--font-noto-sans) */
+  --font-family-headings: var(--font-noto-sans), var(--font-family-primary);
+
+  /* Figma verified: colors */
+  --color-text-text-white: #fcfbf8;
+  --color-text-hover-button: #fcfbf8;
+  --color-text-body-text: #4a3f36;
+  --color-text-display: #1f1a17;
+  --color-text-heading: #2f2924;
+  --color-text-secondary-body-text: #625648bf;
+  --color-button-fill: #f6f2eb;
+  --color-button-disabled: #f6f2ebcc;
+  --color-border-strong: #c6b49d;
+  --color-border-light: #e6d9c9;
+  --color-border-default: #d8c9b4;
+  --color-icon-default: #c6b49d;
+  --color-background-section: #f6f2eb;
+  --color-background-page: #fcfbf8;
+  --color-background-card: #f6f2eb;
+  --color-background-input: #fcfbf8;
+  --color-background-error: #f2e1de;
+  --color-background-navbar: #1d1c1a;
+  --color-brand-logo: #b79a78;
+  --color-color-info-links: #b79a78;
+  --color-labels-active-selected: #efe7dc;
+  --velarro-text: #1d1c1a;
+  --velarro-neutral-neutral-11: #4a3f36;
+
+  /* Figma verified: spacing (px) */
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+
+  /* Figma verified: radii */
+  --radius-md: 8px;
+  --radius-none: 0px;
+
+  /* Figma verified: shadows (design context) */
+  --shadow-card-subtle: 0px 1px 1px rgba(0, 0, 0, 0.05);
+  --shadow-section: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  --shadow-auth-modal: 0px 3.482px 1.741px rgba(197, 153, 73, 0.25);
+  --shadow-confirmation-modal: 0px 4px 11.55px rgba(0, 0, 0, 0.15);
+  --shadow-button: 0.871px 0.871px 0.871px rgba(0, 0, 0, 0.1);
+
+  /* Figma verified: supporting typography tokens */
+  --font-size-1: 12px;
+  --font-size-3: 16px;
+  --letter-spacing-1: 0.15px;
+  --line-heights-9: 24px;
+  --font-weights-noto-sans-1: 500;
+
+  /*
+   * Figma verified: composite Velarro typography tokens
+   * Gotham family resolves through --font-family-primary until licensed files replace the fallback.
+   */
+  --velarro-display-light-font-family: var(--font-family-primary);
+  --velarro-display-light-font-size: 72px;
+  --velarro-display-light-font-weight: 300;
+  --velarro-display-light-line-height: 1;
+  --velarro-display-light-letter-spacing: 0;
+
+  --velarro-display-shop-now-font-family: var(--font-family-primary);
+  --velarro-display-shop-now-font-size: 24px;
+  --velarro-display-shop-now-font-weight: 400;
+  --velarro-display-shop-now-line-height: 1;
+  --velarro-display-shop-now-letter-spacing: 0;
+
+  --velarro-heading-sectionsmall-font-family: var(--font-family-primary);
+  --velarro-heading-sectionsmall-font-size: 20px;
+  --velarro-heading-sectionsmall-font-weight: 300;
+  --velarro-heading-sectionsmall-line-height: 1;
+  --velarro-heading-sectionsmall-letter-spacing: 0;
+
+  --velarro-heading-section-font-family: var(--font-family-primary);
+  --velarro-heading-section-font-size: 32px;
+  --velarro-heading-section-font-weight: 300;
+  --velarro-heading-section-line-height: 1;
+  --velarro-heading-section-letter-spacing: 0;
+
+  --velarro-heading-card-font-family: var(--font-family-primary);
+  --velarro-heading-card-font-size: 24px;
+  --velarro-heading-card-font-weight: 400;
+  --velarro-heading-card-line-height: 1;
+  --velarro-heading-card-letter-spacing: 0;
+
+  --velarro-heading-page-font-family: var(--font-family-primary);
+  --velarro-heading-page-font-size: 32px;
+  --velarro-heading-page-font-weight: 400;
+  --velarro-heading-page-line-height: 1;
+  --velarro-heading-page-letter-spacing: 0;
+
+  --velarro-heading-button-font-family: var(--font-family-primary);
+  --velarro-heading-button-font-size: 14px;
+  --velarro-heading-button-font-weight: 300;
+  --velarro-heading-button-line-height: 1;
+  --velarro-heading-button-letter-spacing: 0;
+
+  --velarro-heading-product-cards-font-family: var(--font-family-primary);
+  --velarro-heading-product-cards-font-size: 16px;
+  --velarro-heading-product-cards-font-weight: 400;
+  --velarro-heading-product-cards-line-height: 24px;
+  --velarro-heading-product-cards-letter-spacing: 0;
+
+  --velarro-body-default-font-family: var(--font-family-primary);
+  --velarro-body-default-font-size: 20px;
+  --velarro-body-default-font-weight: 300;
+  --velarro-body-default-line-height: 28px;
+  --velarro-body-default-letter-spacing: 0;
+
+  --velarro-body-small-font-family: var(--font-family-primary);
+  --velarro-body-small-font-size: 12px;
+  --velarro-body-small-font-weight: 300;
+  --velarro-body-small-line-height: 1;
+  --velarro-body-small-letter-spacing: 0;
+
+  --velarro-body-caption-font-family: var(--font-family-primary);
+  --velarro-body-caption-font-size: 14px;
+  --velarro-body-caption-font-weight: 400;
+  --velarro-body-caption-font-style: italic;
+  --velarro-body-caption-line-height: 1;
+  --velarro-body-caption-letter-spacing: 0;
+
+  --velarro-body-label-font-family: var(--font-family-primary);
+  --velarro-body-label-font-size: 18px;
+  --velarro-body-label-font-weight: 300;
+  --velarro-body-label-line-height: 1;
+  --velarro-body-label-letter-spacing: 0;
+
+  --velarro-ui-elements-primary-font-family: var(--font-family-primary);
+  --velarro-ui-elements-primary-font-size: 16px;
+  --velarro-ui-elements-primary-font-weight: 400;
+  --velarro-ui-elements-primary-line-height: 1;
+  --velarro-ui-elements-primary-letter-spacing: 0;
+
+  --velarro-ui-elements-secondary-font-family: var(--font-family-primary);
+  --velarro-ui-elements-secondary-font-size: 12px;
+  --velarro-ui-elements-secondary-font-weight: 400;
+  --velarro-ui-elements-secondary-line-height: 1;
+  --velarro-ui-elements-secondary-letter-spacing: 0;
+
+  --velarro-ui-elements-navbar-font-family: var(--font-family-primary);
+  --velarro-ui-elements-navbar-font-size: 18px;
+  --velarro-ui-elements-navbar-font-weight: 400;
+  --velarro-ui-elements-navbar-line-height: 1;
+  --velarro-ui-elements-navbar-letter-spacing: 0;
+
+  --velarro-ui-elements-footer-font-family: var(--font-family-primary);
+  --velarro-ui-elements-footer-font-size: 18px;
+  --velarro-ui-elements-footer-font-weight: 300;
+  --velarro-ui-elements-footer-line-height: 1;
+  --velarro-ui-elements-footer-letter-spacing: 0;
+
+  --velarro-ui-elements-price-font-family: var(--font-family-primary);
+  --velarro-ui-elements-price-font-size: 20px;
+  --velarro-ui-elements-price-font-weight: 500;
+  --velarro-ui-elements-price-line-height: 1;
+  --velarro-ui-elements-price-letter-spacing: 0;
+
+  --title-title-2-font-family: var(--font-family-headings);
+  --title-title-2-font-size: var(--font-size-3);
+  --title-title-2-font-weight: var(--font-weights-noto-sans-1);
+  --title-title-2-line-height: var(--line-heights-9);
+  --title-title-2-letter-spacing: var(--letter-spacing-1);
+
+  /* Metadata verified: desktop wireframe width */
+  --breakpoint-desktop: 1440px;
+
+  /* Engineering-defined — not Figma verified */
+  --breakpoint-tablet: 768px;
+  --breakpoint-mobile: 390px;
+  --container-max-width: 1440px;
+  --container-padding-inline: var(--spacing-24);
+
+  /* Engineering-defined: accessible focus ring */
+  --focus-ring-color: var(--color-color-info-links);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-family-primary);
+  --font-heading: var(--font-family-headings);
+
+  --color-text-text-white: var(--color-text-text-white);
+  --color-text-hover-button: var(--color-text-hover-button);
+  --color-text-body-text: var(--color-text-body-text);
+  --color-text-display: var(--color-text-display);
+  --color-text-heading: var(--color-text-heading);
+  --color-text-secondary-body-text: var(--color-text-secondary-body-text);
+  --color-button-fill: var(--color-button-fill);
+  --color-button-disabled: var(--color-button-disabled);
+  --color-border-strong: var(--color-border-strong);
+  --color-border-light: var(--color-border-light);
+  --color-border-default: var(--color-border-default);
+  --color-icon-default: var(--color-icon-default);
+  --color-background-section: var(--color-background-section);
+  --color-background-page: var(--color-background-page);
+  --color-background-card: var(--color-background-card);
+  --color-background-input: var(--color-background-input);
+  --color-background-error: var(--color-background-error);
+  --color-background-navbar: var(--color-background-navbar);
+  --color-brand-logo: var(--color-brand-logo);
+  --color-color-info-links: var(--color-color-info-links);
+  --color-labels-active-selected: var(--color-labels-active-selected);
+  --color-velarro-text: var(--velarro-text);
+  --color-velarro-neutral-neutral-11: var(--velarro-neutral-neutral-11);
+
+  --spacing-20: var(--spacing-20);
+  --spacing-24: var(--spacing-24);
+  --spacing-40: var(--spacing-40);
+  --spacing-48: var(--spacing-48);
+
+  --radius-md: var(--radius-md);
+  --radius-none: var(--radius-none);
+
+  --shadow-card-subtle: var(--shadow-card-subtle);
+  --shadow-section: var(--shadow-section);
+  --shadow-auth-modal: var(--shadow-auth-modal);
+  --shadow-confirmation-modal: var(--shadow-confirmation-modal);
+  --shadow-button: var(--shadow-button);
+
+  /*
+   * Engineering-defined responsive breakpoints (tablet/mobile not Figma verified).
+   * Desktop width matches metadata-verified wireframe reference.
+   */
+  --breakpoint-desktop: 1440px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-mobile: 390px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background-page);
+  color: var(--color-text-body-text);
+  font-family: var(--font-family-primary);
+  /* Engineering-defined body rhythm — not a Figma composite token */
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }

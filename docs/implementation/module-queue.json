@@ -1,5 +1,5 @@
 {
-  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+  "status": "M00 IN REVIEW — FOUNDATIONS IMPLEMENTED",
   "correctionRunDate": "2026-07-01",
   "canonicalModuleOrder": [
     "M00-foundations",
@@ -90,17 +90,20 @@
       ],
       "testRequirements": [
         "npm run lint",
-        "npm run build"
+        "npm run build",
+        "npm run test",
+        "npm run test:e2e -- --list"
       ],
       "visualVerificationRequirements": [
         "Token sample page vs design-tokens.json",
         "No M00-specific screenshot required \u2014 use token swatch page"
       ],
       "blockers": [
-        "Licensed Gotham webfont files not yet procured (interim fallback approved)",
-        "Awaiting START VELARRO IMPLEMENTATION"
+        "Licensed Gotham webfont files not yet procured (interim fallback in use)",
+        "Awaiting user review before marking M00 complete"
       ],
-      "status": "pending",
+      "status": "in_review",
+      "implementationDate": "2026-07-01",
       "fontStrategy": {
         "target": "Gotham via next/font/local when files procured",
         "interimFallback": "Arial, Helvetica, sans-serif via --font-family-primary",
