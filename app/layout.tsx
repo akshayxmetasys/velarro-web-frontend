@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
+import { SiteShell } from "@/components/layout/site-shell";
 import { createRootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
 
@@ -26,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${notoSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <SiteShell>{children}</SiteShell>
+      </body>
     </html>
   );
 }

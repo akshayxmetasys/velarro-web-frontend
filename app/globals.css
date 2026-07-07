@@ -250,6 +250,11 @@
   }
 }
 
+html {
+  /* Engineering-defined: matches the Figma-verified 73px navbar height. */
+  scroll-padding-top: 73px;
+}
+
 body {
   background-color: var(--color-background-page);
   color: var(--color-text-body-text);
