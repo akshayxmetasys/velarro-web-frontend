@@ -33,4 +33,18 @@ describe("Button", () => {
     await user.click(button);
     expect(onClick).not.toHaveBeenCalled();
   });
+
+  it("renders luxury CTA variants", () => {
+    render(
+      <>
+        <Button variant="explore">Explore</Button>
+        <Button variant="checkout">Checkout</Button>
+        <Button variant="luxury">Join</Button>
+      </>,
+    );
+
+    expect(screen.getByRole("button", { name: "Explore" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Checkout" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Join" })).toBeInTheDocument();
+  });
 });
