@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
+import { createRootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
 
 /**
@@ -16,20 +17,7 @@ const notoSans = Noto_Sans({
   weight: ["500"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Velarro Estate",
-    template: "%s | Velarro Estate",
-  },
-  description:
-    "Velarro Estate — curated cigars, house goods, and membership experiences.",
-  metadataBase: new URL("https://velarroestate.com"),
-  applicationName: "Velarro Estate",
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export const metadata: Metadata = createRootMetadata();
 
 export default function RootLayout({
   children,
