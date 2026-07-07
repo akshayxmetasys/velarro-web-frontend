@@ -1,0 +1,273 @@
+{
+  "$comment": "Velarro merged canonical route map. Sources: page 85:10 'Velarro Wireframes' (existing docs) + page 119:26710 (Under 21 + non cigar catalog, enumerated 2026-07-07). figmaNodeIds.page119 is the canonical visual iteration when present; page85 kept for traceability. No production code until START VELARRO IMPLEMENTATION.",
+  "status": "MERGED PLANNING — SUPERSET OF docs/implementation/route-map.json",
+  "generatedDate": "2026-07-07",
+  "figmaFile": {
+    "fileKey": "92rhH51aErpYQWRrlJqMhn",
+    "pages": {
+      "over21Wireframes": "85:10",
+      "under21AndCatalog": "119:26710"
+    },
+    "prototypeLink": {
+      "nodeId": "14735:62828",
+      "startingPointNodeId": "14735:63837",
+      "pageId": "119:26710"
+    }
+  },
+  "conventions": {
+    "under21Strategy": "state-based: same canonical routes; client age-verification state swaps navbar/footer (MAIN NAVBAR UNDER 21 15006:36650, MAIN FOOTER/Footer - under 21) and hides cigar content; no /under-21 URL tree; persistence mechanism engineering-defined (Assumption requiring confirmation)",
+    "modalStrategy": "hybrid route-backed intercepting overlays (carried over from route-map.json U-11); simple success/confirm states stay in-page",
+    "dynamicSegments": "PDPs consolidated to [productSlug] routes backed by typed data maps under lib/catalog/*; slugs are kebab-case of Figma frame names (Assumption requiring confirmation)",
+    "imagePolicy": "all image slots are placeholders with fixed dimensions; server URLs pasted later",
+    "indexability": "auth/profile/cart/checkout/gate/error routes are noindex; catalog/marketing/editorial/legal indexable"
+  },
+  "routes": [
+    { "route": "/", "file": "app/page.tsx", "module": "M01-home", "pageType": "marketing", "figmaNodeIds": { "page85": "13148:15012", "page85EntryDuplicate": "15967:43304", "page85LoggedInState": "15148:40087", "page119Under21": "14735:62828", "page119Under21Duplicate": "15670:14481" }, "index": true, "under21": { "visible": true, "chrome": "swap", "content": "cigar sections replaced per under-21 frame" } },
+    { "route": "/age-verification", "file": "app/age-verification/page.tsx", "module": "M01-home", "pageType": "form-gate", "figmaNodeIds": { "page119": "14735:63837" }, "index": false, "under21": { "visible": true, "note": "prototype starting point; pass/fail destinations are Assumption requiring confirmation" } },
+    { "route": "/coming-soon", "file": "app/coming-soon/page.tsx", "module": "M01-home", "pageType": "error-empty", "figmaNodeIds": { "page85": "12339:55472", "page119": "14735:62905", "page119Duplicates": ["14735:62922", "15670:14891"] }, "index": false, "under21": { "visible": true } },
+    { "route": "/login", "file": "app/login/page.tsx", "module": "M02-auth", "pageType": "auth", "figmaNodeIds": { "page85": "14991:70094", "page119Modal": "14735:64027", "page119FullPage": "15017:74618" }, "index": false, "presentation": "route-backed modal over host route + full-page fallback", "interceptingPattern": "@modal/(.)login", "under21": { "visible": true } },
+    { "route": "/signup", "file": "app/signup/page.tsx", "module": "M02-auth", "pageType": "auth", "figmaNodeIds": { "page85": "14991:70051", "page119": "14898:95982" }, "index": false, "presentation": "route-backed modal + full-page fallback", "interceptingPattern": "@modal/(.)signup", "under21": { "visible": true } },
+    { "route": "/forgot-password", "file": "app/forgot-password/page.tsx", "module": "M02-auth", "pageType": "auth", "figmaNodeIds": { "page85": "14991:70134", "page119": "14735:64087" }, "index": false, "presentation": "route-backed modal + full-page fallback", "interceptingPattern": "@modal/(.)forgot-password", "under21": { "visible": true } },
+    { "route": "/reset-password", "file": "app/reset-password/page.tsx", "module": "M02-auth", "pageType": "auth", "figmaNodeIds": { "page85": "14991:70162", "page119": "14735:64135" }, "index": false, "presentation": "route-backed modal + full-page fallback", "interceptingPattern": "@modal/(.)reset-password", "under21": { "visible": true } },
+    { "route": "/the-estate", "file": "app/the-estate/page.tsx", "module": "M03-estate", "pageType": "category", "figmaNodeIds": { "page85": "14888:53493" }, "index": true, "under21": { "visible": false, "note": "cigar-led surface; visibility is an open product decision" } },
+    { "route": "/the-estate/the-house", "file": "app/the-estate/the-house/page.tsx", "module": "M03-estate", "pageType": "category-tab", "figmaNodeIds": { "page85": "14670:34051", "page119": "16599:37822" }, "index": true, "under21": { "visible": false, "note": "open product decision" } },
+    { "route": "/the-estate/the-house/the-roastery", "file": "app/the-estate/the-house/the-roastery/page.tsx", "module": "M03-estate", "pageType": "category-tab", "figmaNodeIds": { "page85": "15451:39198" }, "index": true, "under21": { "visible": false, "note": "open product decision" } },
+    { "route": "/the-estate/the-humidor", "file": "app/the-estate/the-humidor/page.tsx", "module": "M03-estate", "pageType": "product-listing", "figmaNodeIds": { "page85": "13148:16189" }, "index": true, "under21": { "visible": false, "note": "cigar catalog" } },
+    { "route": "/the-estate/the-humidor/heritage", "file": "app/the-estate/the-humidor/heritage/page.tsx", "module": "M03-estate", "pageType": "marketing", "figmaNodeIds": { "page85": "14670:35568" }, "index": true, "under21": { "visible": false } },
+    { "route": "/the-estate/the-humidor/royal-leaf", "file": "app/the-estate/the-humidor/royal-leaf/page.tsx", "module": "M03-estate", "pageType": "product-detail", "figmaNodeIds": { "page85": "14670:37727" }, "index": true, "indexNote": "cigar PDP indexability pending legal review", "under21": { "visible": false } },
+    { "route": "/the-house", "file": "app/the-house/page.tsx", "module": "M04-house", "pageType": "category-hub", "figmaNodeIds": { "page85": "14670:40233", "page85Duplicate": "14670:46376", "page119Under21Landing": "14735:71136", "page119Under21Duplicate": "14735:71191" }, "index": true, "under21": { "visible": true, "chrome": "swap" } },
+    { "route": "/the-house/the-roastery", "file": "app/the-house/the-roastery/page.tsx", "module": "M04-house", "pageType": "product-listing", "figmaNodeIds": { "page85": "14670:39860", "page119": "16599:33038" }, "index": true, "under21": { "visible": true } },
+    { "route": "/the-house/the-t-hub", "file": "app/the-house/the-t-hub/page.tsx", "module": "M04-house", "pageType": "product-listing", "figmaNodeIds": { "page119": "16599:33008" }, "index": true, "new": true, "under21": { "visible": true }, "note": "relationship to page-85 apothecary is an open product decision" },
+    { "route": "/the-house/the-apothecary", "file": "app/the-house/the-apothecary/page.tsx", "module": "M04-house", "pageType": "category", "figmaNodeIds": { "page85": "14670:39923" }, "index": true, "under21": { "visible": true }, "statusNote": "page-85 only; retire or merge into t-hub pending product decision" },
+    { "route": "/the-house/the-clothier", "file": "app/the-house/the-clothier/page.tsx", "module": "M04-house", "pageType": "category", "figmaNodeIds": { "page85": "14670:39985" }, "index": true, "under21": { "visible": true } },
+    { "route": "/the-house/the-clothier/the-sartorial-collection", "file": "app/the-house/the-clothier/the-sartorial-collection/page.tsx", "module": "M04-house", "pageType": "product-listing", "figmaNodeIds": { "page119": "16599:32943", "page119ViewVariant": "16599:32920" }, "index": true, "new": true, "under21": { "visible": true } },
+    { "route": "/the-house/the-clothier/the-sporting-collection", "file": "app/the-house/the-clothier/the-sporting-collection/page.tsx", "module": "M04-house", "pageType": "product-listing", "figmaNodeIds": { "page119": "16599:32976" }, "index": true, "new": true, "under21": { "visible": true } },
+    { "route": "/the-house/the-saddlery", "file": "app/the-house/the-saddlery/page.tsx", "module": "M04-house", "pageType": "product-listing", "figmaNodeIds": { "page85": "14670:40071", "page119": "16599:32887", "page119ViewVariant": "16599:32859" }, "index": true, "under21": { "visible": true } },
+    { "route": "/the-house/the-cabinet", "file": "app/the-house/the-cabinet/page.tsx", "module": "M04-house", "pageType": "product-listing", "figmaNodeIds": { "page85": "14670:40152", "page119": "16599:32828", "page119ViewVariant": "16599:32802" }, "index": true, "under21": { "visible": true, "note": "cigar accessories under-21 visibility flagged for product/legal review" } },
+    { "route": "/the-vault", "file": "app/the-vault/page.tsx", "module": "M05-vault", "pageType": "marketing-listing", "figmaNodeIds": { "page85": "14240:78024" }, "index": true, "under21": { "visible": false, "note": "open product decision" } },
+    { "route": "/the-chronicle", "file": "app/the-chronicle/page.tsx", "module": "M08-editorial", "pageType": "editorial-index", "figmaNodeIds": { "page85": "14284:63187", "page119": "14991:73869" }, "index": true, "under21": { "visible": true, "note": "cigar articles visibility flagged" } },
+    { "route": "/the-chronicle/international-cigar-day", "file": "app/the-chronicle/international-cigar-day/page.tsx", "module": "M08-editorial", "pageType": "editorial-article", "figmaNodeIds": { "page85": "14585:38918", "page119": "14991:73917" }, "index": true, "under21": { "visible": false, "note": "cigar-topic article; flagged" } },
+    { "route": "/pairing-guide", "file": "app/pairing-guide/page.tsx", "module": "M08-editorial", "pageType": "editorial", "figmaNodeIds": { "page85": "14406:85066" }, "index": true, "under21": { "visible": false, "note": "cigar pairing content; flagged" } },
+    { "route": "/pairing-guide/find-your-pairing", "file": "app/pairing-guide/find-your-pairing/page.tsx", "module": "M08-editorial", "pageType": "form-quiz", "figmaNodeIds": { "page85": "14406:85132" }, "index": true, "under21": { "visible": false }, "note": "quiz result routing unresolved" },
+    { "route": "/pairing-guide/rum-and-cigars", "file": "app/pairing-guide/rum-and-cigars/page.tsx", "module": "M08-editorial", "pageType": "editorial-article", "figmaNodeIds": { "page85": "14644:32880" }, "index": true, "under21": { "visible": false } },
+    { "route": "/membership", "file": "app/membership/page.tsx", "module": "M09-engagement", "pageType": "marketing-form", "figmaNodeIds": { "page85": "15008:38309", "page119": "15694:43984" }, "index": true, "under21": { "visible": true, "note": "membership eligibility copy must come from Figma only" } },
+    { "route": "/partner", "file": "app/partner/page.tsx", "module": "M09-engagement", "pageType": "marketing-form", "figmaNodeIds": { "page85": "14670:42180", "page85SubmittedState": "15640:24481", "page119": "14735:64944", "page119Duplicate": "15742:47685" }, "index": true, "under21": { "visible": true } },
+    { "route": "/get-in-touch", "file": "app/get-in-touch/page.tsx", "module": "M09-engagement", "pageType": "form", "figmaNodeIds": { "page85": "14644:34661", "page85Duplicate": "14670:49691", "page119": "14735:64245", "page119Duplicate": "14735:71454" }, "index": true, "under21": { "visible": true } },
+    { "route": "/careers", "file": "app/careers/page.tsx", "module": "M09-engagement", "pageType": "marketing", "figmaNodeIds": { "page85": "13148:15771" }, "index": true, "under21": { "visible": true } },
+    { "route": "/careers/positions", "file": "app/careers/positions/page.tsx", "module": "M09-engagement", "pageType": "listing", "figmaNodeIds": { "page85": "13148:15855" }, "index": true, "under21": { "visible": true } },
+    { "route": "/careers/positions/[jobId]", "file": "app/careers/positions/[jobId]/page.tsx", "module": "M09-engagement", "pageType": "detail", "figmaNodeIds": { "page85": "13148:15939" }, "index": true, "dataMap": "lib/careers/positions.ts (fixtures from Figma copy only)", "under21": { "visible": true } },
+    { "route": "/careers/positions/[jobId]/apply", "file": "app/careers/positions/[jobId]/apply/page.tsx", "module": "M09-engagement", "pageType": "form", "figmaNodeIds": { "page85": "13563:29858" }, "index": false, "under21": { "visible": true } },
+    { "route": "/our-story", "file": "app/our-story/page.tsx", "module": "M10-legal-info", "pageType": "static", "figmaNodeIds": { "page85": "15934:43007", "page85Duplicate": "14670:45497", "page119": "14897:62858", "page119Duplicate": "14735:65002" }, "index": true, "under21": { "visible": true } },
+    { "route": "/craftsmanship", "file": "app/craftsmanship/page.tsx", "module": "M10-legal-info", "pageType": "static", "figmaNodeIds": { "page85": "14703:33971", "page119": "14735:68716" }, "index": true, "under21": { "visible": true } },
+    { "route": "/sustainability", "file": "app/sustainability/page.tsx", "module": "M10-legal-info", "pageType": "static", "figmaNodeIds": { "page85": "13148:20719", "page119": "14735:71637" }, "index": true, "under21": { "visible": true } },
+    { "route": "/accessibility", "file": "app/accessibility/page.tsx", "module": "M10-legal-info", "pageType": "static", "figmaNodeIds": { "page85": "14703:32598", "page119": "14735:68782" }, "index": true, "under21": { "visible": true } },
+    { "route": "/press", "file": "app/press/page.tsx", "module": "M10-legal-info", "pageType": "static-form", "figmaNodeIds": { "page85": "14670:48497", "page119": "14735:68990" }, "index": true, "under21": { "visible": true } },
+    { "route": "/privacy-policy", "file": "app/privacy-policy/page.tsx", "module": "M10-legal-info", "pageType": "legal", "figmaNodeIds": { "page85": "14670:48780", "page119": "14735:69083" }, "index": true, "under21": { "visible": true } },
+    { "route": "/terms-of-service", "file": "app/terms-of-service/page.tsx", "module": "M10-legal-info", "pageType": "legal", "figmaNodeIds": { "page85": "14703:33048", "page119": "14735:69197" }, "index": true, "under21": { "visible": true } },
+    { "route": "/cookie-policy", "file": "app/cookie-policy/page.tsx", "module": "M10-legal-info", "pageType": "legal", "figmaNodeIds": { "page85": "14703:32859", "page119": "14735:69304" }, "index": true, "under21": { "visible": true } },
+    { "route": "/faq", "file": "app/faq/page.tsx", "module": "M10-legal-info", "pageType": "static-faq", "figmaNodeIds": { "page85": "14670:48590", "page119": "14735:71264" }, "index": true, "widthAnomaly": "1459px frames on both pages; implement at 1440", "under21": { "visible": true } },
+    { "route": "/cart", "file": "app/cart/page.tsx", "module": "M06-cart-checkout", "pageType": "cart", "figmaNodeIds": { "page85": "14670:45135", "page85Duplicates": ["14712:33219", "15274:39176", "14803:100778", "15451:39778"], "page85EmptyState": "14670:43110", "page119": "14991:67392", "page119Duplicates": ["15742:49793", "15877:42588"], "page119EmptyState": "14735:65097" }, "index": false, "under21": { "visible": true, "note": "non-cigar items only" } },
+    { "route": "/cart/buy-again", "file": "app/cart/buy-again/page.tsx", "module": "M06-cart-checkout", "pageType": "listing", "figmaNodeIds": { "page119ListView": "15764:46150", "page119GridView": "15764:46226" }, "index": false, "new": true, "viewToggle": "list/grid is client state, one route", "under21": { "visible": true } },
+    { "route": "/checkout/shipping", "file": "app/checkout/shipping/page.tsx", "module": "M06-cart-checkout", "pageType": "checkout-ui", "figmaNodeIds": { "page85": "15127:24015", "page85SavedAddressState": "15127:24104", "page85Duplicates": ["14670:50189", "15081:41742", "15451:37998"], "page119Iterations": ["14991:66550", "15764:41858", "15877:42242"] }, "index": false, "under21": { "visible": true } },
+    { "route": "/checkout/payment", "file": "app/checkout/payment/page.tsx", "module": "M06-cart-checkout", "pageType": "checkout-ui", "figmaNodeIds": { "page85": "15127:23850", "page85QrState": "15694:41162", "page85Duplicates": ["14670:50025", "15451:37833"], "page119Iterations": ["14991:66387", "15764:41719", "15877:42078"] }, "index": false, "processingNote": "display-only; no payment processing", "under21": { "visible": true } },
+    { "route": "/checkout/review", "file": "app/checkout/review/page.tsx", "module": "M06-cart-checkout", "pageType": "checkout-ui", "figmaNodeIds": { "page85": "15127:24193", "page85Duplicates": ["14670:50330", "15451:38230"], "page119Iterations": ["14991:66690", "15764:42051", "15877:42384"] }, "index": false, "under21": { "visible": true } },
+    { "route": "/my-profile", "file": "app/my-profile/page.tsx", "module": "M07-profile", "pageType": "profile", "figmaNodeIds": { "page85": "13148:18311", "page119": "14897:53438" }, "index": false, "under21": { "visible": true } },
+    { "route": "/my-profile/complete", "file": "app/my-profile/complete/page.tsx", "module": "M07-profile", "pageType": "profile-form", "figmaNodeIds": { "page85": "13148:18414", "page85SuccessState": "13148:18728", "page119": "14897:53478", "page119SuccessState": "14897:53690", "page119ComponentSheet": "15488:39642" }, "index": false, "under21": { "visible": true } },
+    { "route": "/my-profile/addresses", "file": "app/my-profile/addresses/page.tsx", "module": "M07-profile", "pageType": "profile", "figmaNodeIds": { "page85": "13148:18794", "page119": "14897:53754" }, "index": false, "under21": { "visible": true } },
+    { "route": "/my-profile/orders", "file": "app/my-profile/orders/page.tsx", "module": "M07-profile", "pageType": "profile-listing", "figmaNodeIds": { "page85": "14852:34754", "page85CancelState": "14852:34676", "page119": "14897:56041", "page119EmptyState": "14897:56118" }, "index": false, "under21": { "visible": true } },
+    { "route": "/my-profile/orders/[orderId]", "file": "app/my-profile/orders/[orderId]/page.tsx", "module": "M07-profile", "pageType": "profile-detail", "figmaNodeIds": { "page85": "13148:19312", "page119": "14897:54167" }, "index": false, "dataMap": "lib/account/orders.ts (Figma fixture copy only)", "under21": { "visible": true } },
+    { "route": "/my-profile/wishlist", "file": "app/my-profile/wishlist/page.tsx", "module": "M07-profile", "pageType": "profile-listing", "figmaNodeIds": { "page85": "15640:25349", "page85DeleteState": "14852:34765", "page119": "14897:56128", "page119RemovedState": "15708:42060" }, "index": false, "under21": { "visible": true } },
+    { "route": "/my-profile/settings", "file": "app/my-profile/settings/page.tsx", "module": "M07-profile", "pageType": "profile-settings", "figmaNodeIds": { "page85": "14762:96902", "page119": "14897:54444" }, "index": false, "under21": { "visible": true } }
+  ],
+  "dynamicProductRoutes": [
+    {
+      "route": "/the-house/the-cabinet/[productSlug]",
+      "file": "app/the-house/the-cabinet/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/cabinet.ts",
+      "under21Visible": true,
+      "under21Note": "cigar accessories; flagged for product/legal review",
+      "products": [
+        { "slug": "estate-humidor", "name": "estate humidor", "figmaNodeId": "16599:38391" },
+        { "slug": "travel-humidor", "name": "travel humidor", "figmaNodeId": "16599:38540" },
+        { "slug": "estate-guillotine-cutter", "name": "estate guillotine cutter", "figmaNodeId": "16599:38692", "page85NodeId": "15008:37893" },
+        { "slug": "heritage-v-cutter", "name": "heritage v-cutter", "figmaNodeId": "16599:38842" },
+        { "slug": "estate-torch-lighter", "name": "estate torch lighter", "figmaNodeId": "16599:40534" },
+        { "slug": "founders-soft-flame-lighter", "name": "founder's soft flame lighter", "figmaNodeId": "16599:40684" },
+        { "slug": "estate-ashtray", "name": "estate ashtray", "figmaNodeId": "16599:40834" },
+        { "slug": "crystal-ashtray", "name": "crystal ashtray", "figmaNodeId": "16599:40983" },
+        { "slug": "estate-cigar-case", "name": "estate cigar case", "figmaNodeId": "16599:41132" },
+        { "slug": "estate-briar-pipe", "name": "estate briar pipe", "figmaNodeId": "16599:41282" },
+        { "slug": "churchwarden-pipe", "name": "churchwarden pipe", "figmaNodeId": "16599:41431" },
+        { "slug": "cigar-stand", "name": "cigar stand", "figmaNodeId": "16599:41581" },
+        { "slug": "aficionado-starter-set", "name": "aficionado starter set", "figmaNodeId": "16599:41731" },
+        { "slug": "collectors-collection", "name": "collector's collection", "figmaNodeId": "16599:41879" }
+      ]
+    },
+    {
+      "route": "/the-house/the-roastery/[productSlug]",
+      "file": "app/the-house/the-roastery/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/roastery.ts",
+      "under21Visible": true,
+      "products": [
+        { "slug": "estate-espresso", "name": "estate espresso", "figmaNodeId": "16599:38140", "page85NodeId": "15008:37073" },
+        { "slug": "heritage-medium-roast", "name": "heritage medium roast", "figmaNodeId": "16599:38265" },
+        { "slug": "anejo-dark-roast", "name": "Añejo Dark Roast", "figmaNodeId": "16599:38992" },
+        { "slug": "grand-cru-cappuccino-blend", "name": "Grand Cru Cappuccino Blend", "figmaNodeId": "16599:39116" },
+        { "slug": "nicaragua-reserve", "name": "Nicaragua Reserve", "figmaNodeId": "16599:39238" },
+        { "slug": "founders-barrel-aged-coffee", "name": "founder's Barrel-aged coffee", "figmaNodeId": "16599:39362" },
+        { "slug": "midnight-cold-brew", "name": "Midnight Cold brew", "figmaNodeId": "16599:39487" }
+      ]
+    },
+    {
+      "route": "/the-house/the-t-hub/[productSlug]",
+      "file": "app/the-house/the-t-hub/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/t-hub.ts",
+      "under21Visible": true,
+      "products": [
+        { "slug": "estate-breakfast", "name": "estate breakfast", "figmaNodeId": "16599:39612" },
+        { "slug": "earl-grey-reserve", "name": "earl grey reserve", "figmaNodeId": "16599:39737" },
+        { "slug": "assam-heritage", "name": "assam heritage", "figmaNodeId": "16599:39864" },
+        { "slug": "vanilla-rooibos-estate", "name": "vanilla rooibos estate", "figmaNodeId": "16599:39994" },
+        { "slug": "darjeeling-first-flush-reserve", "name": "darjeeling first flush reserve", "figmaNodeId": "16599:40121" },
+        { "slug": "estate-espresso", "name": "estate espresso", "figmaNodeId": "16599:40248", "anomaly": "espresso frame filed under t-hub in Figma; kept verbatim, flagged for design confirmation" },
+        { "slug": "cacao-chai-reserve", "name": "cacao chai reserve", "figmaNodeId": "16599:40373" }
+      ]
+    },
+    {
+      "route": "/the-house/the-saddlery/[productSlug]",
+      "file": "app/the-house/the-saddlery/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/saddlery.ts",
+      "under21Visible": true,
+      "products": [
+        { "slug": "estate-bifold-wallet", "name": "estate bifold wallet", "figmaNodeId": "16599:42618" },
+        { "slug": "reserve-card-holder", "name": "reserve card holder", "figmaNodeId": "16599:42799", "page85NodeId": "15008:37483" },
+        { "slug": "executive-travel-wallet", "name": "executive travel wallet", "figmaNodeId": "16599:42977" },
+        { "slug": "heritage-weekender", "name": "heritage weekender", "figmaNodeId": "16599:43155" },
+        { "slug": "founders-duffle", "name": "founder's duffle", "figmaNodeId": "16599:43337" },
+        { "slug": "passport-holder", "name": "passport holder", "figmaNodeId": "16599:43514" },
+        { "slug": "executive-briefcase", "name": "executive briefcase", "figmaNodeId": "16599:43694" },
+        { "slug": "leather-laptop-sleeve", "name": "leather laptop sleeve", "figmaNodeId": "16599:43868" },
+        { "slug": "watch-roll", "name": "watch roll", "figmaNodeId": "16599:44235" },
+        { "slug": "valet-tray", "name": "valet tray", "figmaNodeId": "16599:44415" },
+        { "slug": "leather-cigar-case", "name": "leather cigar case", "figmaNodeId": "16599:44593" },
+        { "slug": "cigar-accessory-roll", "name": "cigar accessory roll", "figmaNodeId": "16599:44771" }
+      ]
+    },
+    {
+      "route": "/the-house/the-clothier/the-sporting-collection/[productSlug]",
+      "file": "app/the-house/the-clothier/the-sporting-collection/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/clothier-sporting.ts",
+      "under21Visible": true,
+      "overlays": [{ "name": "Founder's Hoodie Size Chart", "figmaNodeId": "16599:48276", "presentation": "in-page overlay" }],
+      "products": [
+        { "slug": "founders-boxy-hoodie", "name": "founder's boxy hoodie", "figmaNodeId": "16599:42062", "page85NodeId": "14695:54494", "page85Duplicate": "14670:35095", "supersedesRoute": "/the-house/the-clothier/founders-boxy-hoodie" },
+        { "slug": "estate-weekender-jacket", "name": "estate weekender jacket", "figmaNodeId": "16599:42249" },
+        { "slug": "estate-chinio", "name": "estate chinio", "figmaNodeId": "16599:46431", "anomaly": "Figma spelling kept verbatim; likely 'chino' — confirm with design" },
+        { "slug": "estate-cap", "name": "estate cap", "figmaNodeId": "16599:46618" },
+        { "slug": "heritage-dad-cap", "name": "heritage dad cap", "figmaNodeId": "16599:46794" },
+        { "slug": "estate-polo", "name": "estate polo", "figmaNodeId": "16599:47519" },
+        { "slug": "heritage-quarter-zip", "name": "heritage quarter zip", "figmaNodeId": "16599:47706" },
+        { "slug": "linen-camp-shirt", "name": "linen camp shirt", "figmaNodeId": "16599:47895" },
+        { "slug": "estate-oversized-t-shirt", "name": "estate oversized t-shirt", "figmaNodeId": "16599:48086" }
+      ]
+    },
+    {
+      "route": "/the-house/the-clothier/the-sartorial-collection/[productSlug]",
+      "file": "app/the-house/the-clothier/the-sartorial-collection/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/clothier-sartorial.ts",
+      "under21Visible": true,
+      "products": [
+        { "slug": "signature-dress-shirt", "name": "signature dress shirt", "figmaNodeId": "16599:42433" },
+        { "slug": "heritage-oxford-shirt", "name": "heritage oxford shirt", "figmaNodeId": "16599:44948" },
+        { "slug": "estate-blazer", "name": "estate blazer", "figmaNodeId": "16599:45136" },
+        { "slug": "reserve-sport-coat", "name": "Reserve Sport Coat", "figmaNodeId": "16599:45320" },
+        { "slug": "tailored-trousers", "name": "tailored trousers", "figmaNodeId": "16599:45503" },
+        { "slug": "merino-crewneck", "name": "merino crewneck", "figmaNodeId": "16599:45688" },
+        { "slug": "cashmere-quarter-zip", "name": "cashmere quarter-zip", "figmaNodeId": "16599:45874" },
+        { "slug": "estate-overcoat", "name": "estate overcoat", "figmaNodeId": "16599:46061" },
+        { "slug": "silk-tie", "name": "silk tie", "figmaNodeId": "16599:46248" },
+        { "slug": "pocket-square", "name": "pocket square", "figmaNodeId": "16599:46973" },
+        { "slug": "cufflinks", "name": "cufflinks", "figmaNodeId": "16599:47155" },
+        { "slug": "dress-belt", "name": "dress belt", "figmaNodeId": "16599:47337" }
+      ]
+    },
+    {
+      "route": "/the-house/the-apothecary/[productSlug]",
+      "file": "app/the-house/the-apothecary/[productSlug]/page.tsx",
+      "module": "M04-house",
+      "dataMap": "lib/catalog/apothecary.ts",
+      "under21Visible": true,
+      "statusNote": "page-85 only; pending apothecary/t-hub product decision",
+      "products": [
+        { "slug": "wuyi-oolong-reserve", "name": "wuyi oolong reserve", "figmaNodeId": "15008:36663" }
+      ]
+    }
+  ],
+  "retiredRoutes": [
+    { "route": "/the-house/the-clothier/founders-boxy-hoodie", "reason": "superseded by /the-house/the-clothier/the-sporting-collection/founders-boxy-hoodie per page-119 IA" },
+    { "route": "/the-house/the-roastery/estate-espresso", "reason": "consolidated into [productSlug]" },
+    { "route": "/the-house/the-saddlery/reserve-card-holder", "reason": "consolidated into [productSlug]" },
+    { "route": "/the-house/the-cabinet/estate-guillotine-cutter", "reason": "consolidated into [productSlug]" },
+    { "route": "/the-house/the-apothecary/wuyi-oolong-reserve", "reason": "consolidated into [productSlug]" }
+  ],
+  "routeBackedModals": [
+    { "route": "/login", "module": "M02-auth", "figmaNodeIds": ["14991:70094", "14735:64027"], "hostRoutes": ["/", "any"], "interceptingPattern": "@modal/(.)login" },
+    { "route": "/signup", "module": "M02-auth", "figmaNodeIds": ["14991:70051", "14898:95982"], "hostRoutes": ["/", "any"], "interceptingPattern": "@modal/(.)signup" },
+    { "route": "/forgot-password", "module": "M02-auth", "figmaNodeIds": ["14991:70134", "14735:64087"], "hostRoutes": ["/", "any"], "interceptingPattern": "@modal/(.)forgot-password" },
+    { "route": "/reset-password", "module": "M02-auth", "figmaNodeIds": ["14991:70162", "14735:64135"], "hostRoutes": ["/", "any"], "interceptingPattern": "@modal/(.)reset-password" },
+    { "hostRoute": "/checkout/review", "module": "M06-cart-checkout", "overlays": [
+      { "name": "order placed", "page85": "15127:24308", "page85Duplicates": ["14670:50562", "15451:38345", "14670:50857", "14670:51019"], "page119Iterations": ["15296:42835", "15764:42161", "15877:42498"] },
+      { "name": "OTP verification", "page85": "15916:42914", "page85Duplicate": "15640:24401", "page119Iterations": ["15670:14276", "15296:42862", "15764:42188", "15877:42525"] },
+      { "name": "create password", "page85": "15127:24336", "page85Duplicates": ["15451:38373", "15451:38418"], "page119Iterations": ["15296:42863", "15764:42189", "15877:42526"] },
+      { "name": "welcome to velarro", "page85": "15127:24381", "page119Iterations": ["15296:42908", "15764:42234", "15877:42571"] }
+    ] },
+    { "hostRoute": "/checkout/payment", "module": "M06-cart-checkout", "overlays": [
+      { "name": "qr code", "page85": "15694:41226" }
+    ] },
+    { "hostRoute": "/my-profile", "module": "M07-profile", "overlays": [
+      { "name": "edit profile form", "page85": "15397:39748", "page119": "15739:44291" },
+      { "name": "profile completed", "page85": "14323:56798", "trigger": "unresolved" },
+      { "name": "chatbot popup", "page85": "14888:44021", "page119": "15566:68743", "trigger": "unresolved" },
+      { "name": "profile overlay (Background+Border+Shadow)", "page119": "14897:53360", "trigger": "unresolved" }
+    ] },
+    { "hostRoute": "/my-profile/settings", "module": "M07-profile", "overlays": [
+      { "name": "sign out confirmation", "page85": "15661:38017", "page119": "15708:41998" },
+      { "name": "deactivation & deletion chooser", "page85": "15253:40306" },
+      { "name": "deletion steps 1-6", "page85": ["15253:40372", "15253:40494", "15253:40571", "14771:98658", "15631:66346", "15631:66398"], "page119Iterations": ["15554:67145", "15554:67175", "15554:67245", "15554:67315", "15554:67384"], "inconsistency": "U-14 step copy says 'of 5'" },
+      { "name": "deactivation steps 1-4 (incl. 90-day)", "page85": ["15253:40433", "15253:40549", "15631:66323", "15631:66439"], "page119Iterations": ["15554:67124", "15554:67365"] },
+      { "name": "confirmed/cancelled deactivation", "page119": ["15739:43443", "15739:43460"], "new": true },
+      { "name": "confirmed/cancelled deletion", "page119": ["15739:43477", "15739:43494"], "new": true }
+    ] },
+    { "hostRoute": "/my-profile/wishlist", "module": "M07-profile", "overlays": [
+      { "name": "delete from wishlist", "page85": "15640:25119", "page119": "15708:42011" }
+    ] },
+    { "hostRoute": "/my-profile/addresses", "module": "M07-profile", "overlays": [
+      { "name": "add address form", "page85": "15397:40009", "page119": "15700:15599" },
+      { "name": "edit address form", "page85": "15397:40144", "page119": "15700:15614" }
+    ] },
+    { "hostRoute": "/my-profile/orders/[orderId]", "module": "M07-profile", "overlays": [
+      { "name": "order cancellation popup", "page85": "13148:19561", "page119": "15566:68819" },
+      { "name": "see all updates", "page85": "14894:81468", "page119": "16671:29562", "trigger": "unresolved" },
+      { "name": "order overlay (Background+Border+Shadow)", "page85": "14894:79892", "page119": "15566:68788", "trigger": "unresolved" }
+    ] }
+  ],
+  "inPageOverlays": [
+    { "hostRoute": "/press", "module": "M10-legal-info", "name": "PRESS FORM SUBMISSION", "page85": "15640:27501" },
+    { "hostRoute": "/get-in-touch", "module": "M09-engagement", "name": "get in touch submission", "page85": "15663:38140", "page119": "15739:43395" },
+    { "hostRoute": "global", "module": "M10-legal-info", "name": "final cookie popup", "page85": "14703:32888", "page119": "14735:69333" },
+    { "hostRoute": "global-footer", "module": "M09-engagement", "name": "submit newsletter", "page119": "15684:17973", "new": true },
+    { "hostRoute": "/the-house/the-clothier/the-sporting-collection/founders-boxy-hoodie", "module": "M04-house", "name": "size chart", "page119": "16599:48276", "new": true }
+  ],
+  "excludedFromRouting": {
+    "componentLibraryNodes": ["15006:36650", "14991:74525", "14991:74633", "14991:74872", "14991:75137", "14991:75257", "14991:75366", "14991:76092", "14991:76191", "14991:76257", "14991:76293", "14991:76364", "14991:76612", "14991:77160", "15518:67223", "15536:38165", "16613:85385", "15488:39642", "14735:63944"],
+    "designSystemSheets": ["119:26711", "155:30268", "234:3095"],
+    "taircAssets": "803:*/804:*/805:*/813:* logo groups on shared canvas — out of scope per repository boundary",
+    "annotationOrExploration": ["9488:*", "9546:2", "9555:*", "842:*", "843:20035", "1688:27556", "1688:27561", "1688:27566", "14735:71245", "16599:48281", "14735:62939"]
+  }
+}
