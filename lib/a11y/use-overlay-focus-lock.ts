@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
-import { getFocusableElements, trapFocus } from "@/lib/a11y/focus-trap";
+import { useEffect } from "react";
 
-export interface UseOverlayFocusLockOptions {
+interface UseOverlayFocusLockProps {
   open: boolean;
   onClose: () => void;
-  containerRef: RefObject<HTMLElement | null>;
-  initialFocusRef?: RefObject<HTMLElement | null>;
-  closeOnEscape?: boolean;
+  containerRef: React.RefObject<HTMLElement | null>;
+  initialFocusRef?: React.RefObject<HTMLElement | null>;
 }
 
 export function useOverlayFocusLock({
@@ -16,87 +14,86 @@ export function useOverlayFocusLock({
   onClose,
   containerRef,
   initialFocusRef,
-  closeOnEscape = true,
-}: UseOverlayFocusLockOptions): void {
+}: UseOverlayFocusLockProps) {
   useEffect(() => {
     if (!open) {
       return;
     }
 
-    const previousFocus = document.activeElement as HTMLElement | null;
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const container = containerRef.current;
 
-    const inertElements: HTMLElement[] = [];
+    if (!container) {
+      return;
+    }
 
-    const applyInert = () => {
-      const container = containerRef.current;
-      if (!container) {
-        return;
-      }
-
-      for (const child of Array.from(document.body.children)) {
-        if (
-          child instanceof HTMLElement &&
-          child !== container &&
-          !child.contains(container)
-        ) {
-          child.inert = true;
-          inertElements.push(child);
-        }
-      }
+    const getFocusableElements = () => {
+      return Array.from(
+        container.querySelectorAll<HTMLElement>(
+          [
+            "button:not([disabled])",
+            "[href]",
+            "input:not([disabled])",
+            "select:not([disabled])",
+            "textarea:not([disabled])",
+            '[tabindex]:not([tabindex="-1"])',
+          ].join(","),
+        ),
+      ).filter((element) => !element.hasAttribute("aria-hidden"));
     };
 
-    applyInert();
+    const previousActiveElement = document.activeElement as HTMLElement;
 
-    const focusInitial = () => {
-      const initialTarget = initialFocusRef?.current ?? containerRef.current;
-      initialTarget?.focus();
-    };
+    requestAnimationFrame(() => {
+      const firstFocusTarget =
+        initialFocusRef?.current ?? getFocusableElements()[0] ?? container;
 
-    focusInitial();
-    const focusFrame = requestAnimationFrame(focusInitial);
+      firstFocusTarget.focus();
+    });
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (closeOnEscape && event.key === "Escape") {
-        event.preventDefault();
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
         onClose();
         return;
       }
 
-      const container = containerRef.current;
-      if (container) {
-        trapFocus(container, event);
-      }
-    };
-
-    const handleFocusIn = (event: FocusEvent) => {
-      const container = containerRef.current;
-      if (!container) {
+      if (event.key !== "Tab") {
         return;
       }
 
-      const target = event.target;
-      if (target instanceof Node && !container.contains(target)) {
-        const focusable = getFocusableElements(container);
-        (focusable[0] ?? container).focus();
+      const focusableElements = getFocusableElements();
+
+      if (!focusableElements.length) {
+        event.preventDefault();
+        container.focus();
+        return;
       }
-    };
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+
+      const active = document.activeElement;
+
+      if (event.shiftKey) {
+        if (active === first) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (active === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
 
     document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("focusin", handleFocusIn);
 
     return () => {
-      cancelAnimationFrame(focusFrame);
       document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("focusin", handleFocusIn);
-      document.body.style.overflow = originalOverflow;
 
-      for (const element of inertElements) {
-        element.inert = false;
+      if (previousActiveElement instanceof HTMLElement) {
+        previousActiveElement.focus();
       }
-
-      previousFocus?.focus();
     };
-  }, [open, onClose, containerRef, initialFocusRef, closeOnEscape]);
+  }, [open, onClose, containerRef, initialFocusRef]);
 }
