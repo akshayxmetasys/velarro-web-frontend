@@ -31,6 +31,7 @@
   --color-background-error: #f2e1de;
   --color-background-navbar: #1d1c1a;
   --color-brand-logo: #b79a78;
+  --color-neutral-7: #b09e87;
   --color-color-info-links: #b79a78;
   --color-labels-active-selected: #efe7dc;
   --velarro-text: #1d1c1a;
@@ -211,6 +212,7 @@
   --color-background-error: var(--color-background-error);
   --color-background-navbar: var(--color-background-navbar);
   --color-brand-logo: var(--color-brand-logo);
+  --color-neutral-7: var(--color-neutral-7);
   --color-color-info-links: var(--color-color-info-links);
   --color-labels-active-selected: var(--color-labels-active-selected);
   --color-velarro-text: var(--velarro-text);
