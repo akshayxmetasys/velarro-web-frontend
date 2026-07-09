@@ -49,13 +49,21 @@ export function useOverlayFocusLock({
 
     applyInert();
 
-    const focusInitial = () => {
+    const focusInitial = (preserveContainedFocus = false) => {
+      const container = containerRef.current;
+      if (preserveContainedFocus) {
+        const active = document.activeElement;
+        if (container && active instanceof Node && container.contains(active)) {
+          return;
+        }
+      }
+
       const initialTarget = initialFocusRef?.current ?? containerRef.current;
       initialTarget?.focus();
     };
 
     focusInitial();
-    const focusFrame = requestAnimationFrame(focusInitial);
+    const focusFrame = requestAnimationFrame(() => focusInitial(true));
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (closeOnEscape && event.key === "Escape") {
