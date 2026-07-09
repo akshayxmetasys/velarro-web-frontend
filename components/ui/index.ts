@@ -16,5 +16,7 @@ export { RouteBackedModalShell } from "@/components/ui/route-backed-modal-shell"
 export type { RouteBackedModalShellProps } from "@/components/ui/route-backed-modal-shell";
 export { Switch } from "@/components/ui/switch";
 export type { SwitchProps } from "@/components/ui/switch";
+export { ImagePlaceholder } from "@/components/ui/image-placeholder";
+export type { ImagePlaceholderProps } from "@/components/ui/image-placeholder";
 export { Textarea } from "@/components/ui/textarea";
 export type { TextareaProps } from "@/components/ui/textarea";
