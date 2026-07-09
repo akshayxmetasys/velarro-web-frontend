@@ -1,0 +1,243 @@
+{
+  "status": "PR-0 planning only",
+  "lastUpdated": "2026-07-09",
+  "sourceDocuments": [
+    "AGENTS.md",
+    "docs/implementation/master-plan.md",
+    "docs/implementation/acceptance-criteria.md",
+    "docs/implementation/route-map.json",
+    "docs/implementation/module-queue.json",
+    "docs/figma/screen-manifest.json",
+    "docs/figma/prototype-flow-map.json",
+    "docs/figma/component-inventory.json"
+  ],
+  "figmaSources": {
+    "fileKey": "92rhH51aErpYQWRrlJqMhn",
+    "over21PrototypeEntry": {
+      "pageId": "85:10",
+      "nodeId": "15967:43304",
+      "route": "/",
+      "notes": [
+        "Prototype start frame",
+        "Duplicate of primary home 13148:15012",
+        "Screenshot and token reads work through MCP",
+        "Full metadata and design context timed out during PR-0 probes"
+      ]
+    },
+    "over21PrimaryHome": {
+      "pageId": "85:10",
+      "nodeId": "13148:15012",
+      "route": "/",
+      "dimensions": {
+        "width": 1440,
+        "height": 7624
+      },
+      "notes": [
+        "Primary over-21 home screen",
+        "Screenshot and token reads work through MCP",
+        "Full metadata and design context timed out during PR-0 probes"
+      ]
+    },
+    "under21PrototypeEntry": {
+      "pageId": "119:26710",
+      "nodeId": "14735:63837",
+      "route": "/",
+      "dimensions": {
+        "width": 1440,
+        "height": 1357
+      },
+      "notes": [
+        "Metadata, design context, screenshot, and variable definitions are MCP readable"
+      ]
+    },
+    "verifiedOver21SectionNode": {
+      "pageId": "85:10",
+      "nodeId": "14279:30062",
+      "name": "MAIN NAVBAR",
+      "notes": [
+        "Section-level extraction works and should be repeated for over-21 modules"
+      ]
+    }
+  },
+  "ageStates": {
+    "unknown": {
+      "description": "Age has not been confirmed.",
+      "defaultBehavior": "Show age verification before cigar/tobacco content is available.",
+      "contentVisibility": "No actionable cigar-commerce content."
+    },
+    "over21": {
+      "description": "Visitor confirms legal tobacco age.",
+      "defaultBehavior": "Use the planned over-21 route map.",
+      "contentVisibility": "Full over-21 Velarro flow, subject to auth and commerce rules."
+    },
+    "under21": {
+      "description": "Visitor indicates they are not 21+.",
+      "defaultBehavior": "Show under-21 denial/safety state.",
+      "contentVisibility": "No cigar, tobacco, humidor, PDP, cart, checkout, or tobacco editorial content."
+    }
+  },
+  "routeVisibilityRules": [
+    {
+      "routePattern": "/",
+      "module": "M01-home",
+      "unknown": "age-gate",
+      "over21": "allow",
+      "under21": "under21-safe-state",
+      "figmaNodes": {
+        "over21PrototypeEntry": "15967:43304",
+        "over21PrimaryHome": "13148:15012",
+        "under21Entry": "14735:63837"
+      },
+      "notes": "Root route is the dual-flow decision point."
+    },
+    {
+      "routePattern": "/coming-soon",
+      "module": "M01-home",
+      "unknown": "age-gate-or-safe-preview-pending-approval",
+      "over21": "allow",
+      "under21": "pending-product-legal-decision",
+      "notes": "Requires review for tobacco marketing content before under-21 visibility."
+    },
+    {
+      "routePattern": "/login|/signup|/forgot-password|/reset-password",
+      "module": "M02-auth",
+      "unknown": "pending-product-legal-decision",
+      "over21": "allow",
+      "under21": "block-unless-product-approves-account-only-access",
+      "notes": "Route-backed auth overlays must not bypass age gates."
+    },
+    {
+      "routePattern": "/the-estate|/the-estate/**",
+      "module": "M03-estate",
+      "unknown": "age-gate",
+      "over21": "allow",
+      "under21": "block",
+      "blockedContentTypes": [
+        "cigar collections",
+        "humidor listings",
+        "cigar PDPs",
+        "cigar purchase CTAs",
+        "tobacco story content"
+      ]
+    },
+    {
+      "routePattern": "/the-house|/the-house/**",
+      "module": "M04-house",
+      "unknown": "age-gate",
+      "over21": "allow",
+      "under21": "partial-block-pending-product-legal-decision",
+      "notes": "Some non-tobacco accessories may be brand-safe, but PR-0 does not approve exposure."
+    },
+    {
+      "routePattern": "/the-vault",
+      "module": "M05-vault",
+      "unknown": "age-gate",
+      "over21": "allow",
+      "under21": "block",
+      "notes": "Curated premium collection presumed age-restricted until legal approves otherwise."
+    },
+    {
+      "routePattern": "/cart|/checkout/**",
+      "module": "M06-cart-checkout",
+      "unknown": "age-gate",
+      "over21": "allow",
+      "under21": "block",
+      "notes": "Under-21 state must not reach checkout or purchase surfaces."
+    },
+    {
+      "routePattern": "/my-profile|/my-profile/**",
+      "module": "M07-profile",
+      "unknown": "pending-auth-and-age-policy",
+      "over21": "allow",
+      "under21": "block-unless-product-approves-account-only-access",
+      "notes": "Profile/account behavior needs product/legal decision."
+    },
+    {
+      "routePattern": "/the-chronicle|/pairing-guide|/pairing-guide/**",
+      "module": "M08-editorial",
+      "unknown": "age-gate",
+      "over21": "allow",
+      "under21": "block",
+      "blockedContentTypes": [
+        "cigar editorial",
+        "pairing guide tobacco content",
+        "tobacco education"
+      ]
+    },
+    {
+      "routePattern": "/membership|/partner|/careers|/careers/**|/get-in-touch",
+      "module": "M09-engagement",
+      "unknown": "pending-content-review",
+      "over21": "allow",
+      "under21": "pending-product-legal-decision",
+      "notes": "May contain brand and business content; screen-by-screen content review required."
+    },
+    {
+      "routePattern": "/accessibility|/cookie-policy|/faq|/privacy-policy|/terms-of-service",
+      "module": "M10-legal-info",
+      "unknown": "allow-if-no-marketing-content",
+      "over21": "allow",
+      "under21": "allow-if-no-marketing-content",
+      "notes": "Legal/accessibility pages should remain available if they avoid tobacco promotion."
+    },
+    {
+      "routePattern": "/craftsmanship|/our-story|/press|/sustainability",
+      "module": "M10-legal-info",
+      "unknown": "pending-content-review",
+      "over21": "allow",
+      "under21": "pending-product-legal-decision",
+      "notes": "Brand/info pages require review for tobacco marketing language and imagery."
+    }
+  ],
+  "under21BlockingRules": {
+    "mustBlock": [
+      "cigar product listings",
+      "cigar PDPs",
+      "humidor routes",
+      "cart and checkout",
+      "add-to-cart and purchase CTAs",
+      "tobacco editorial and pairing content",
+      "cigar-commerce route-backed modals",
+      "tobacco product structured data",
+      "tobacco marketing metadata and social previews"
+    ],
+    "mustReview": [
+      "brand-only pages",
+      "accessory-only pages",
+      "legal/info pages",
+      "blurred background imagery in the under-21 age gate",
+      "auth/account-only routes"
+    ]
+  },
+  "seoAndAnswerSurfaceRules": {
+    "pr0": "Planning only. No metadata, schema, robots, sitemap, answer-engine, or security code changes.",
+    "pr1CodeDeliverablesOnly": [
+      "security",
+      "SEO",
+      "AEO",
+      "GEO",
+      "SXO",
+      "AIO"
+    ],
+    "requirements": [
+      "Do not expose under-21 users to tobacco marketing snippets.",
+      "Do not emit tobacco product JSON-LD for under-21 state.",
+      "Confirm indexability rules with product/legal before implementation."
+    ]
+  },
+  "acceptanceGatesBeforeImplementation": [
+    "PR-0 docs reviewed and accepted.",
+    "Implementation approval phrase from AGENTS.md is provided before any production code.",
+    "Age-state persistence policy is approved.",
+    "Under-21 route and content blocking rules are approved by product/legal.",
+    "First implementation target has complete Figma section specs or approved manual fallbacks.",
+    "Required validation commands pass on PR-0."
+  ],
+  "openQuestions": [
+    "Does under21 redirect, stay on root, or route to a dedicated safe page?",
+    "Which brand/legal pages may under21 visitors access?",
+    "Is blurred cigar imagery acceptable behind the under-21 gate?",
+    "What age-state persistence mechanism is approved?",
+    "How should crawlers and social previews see gated routes?"
+  ]
+}
