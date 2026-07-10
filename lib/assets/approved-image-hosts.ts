@@ -11,6 +11,20 @@ export const M01_HOME_APPROVED_IMAGES = {
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/1781557831962-frame-1000005296-(1).webp",
   collectorHero:
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/collection-series-hero-home-20260709-034217-desktop-hero.webp",
+  cigarCarouselAshtrays:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-velarro-hand-cigar-20260711-012846-product-main.webp",
+  cigarCarouselVerdeClassico:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/verde-classico-cigar-product-main-20260709-014847-product-main.webp",
+  cigarCarouselLighters:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-velarro-lighter-20260711-012856-product-main.webp",
+  cigarCarouselVintageNo88:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/vintage-no-88-cigar-product-main-20260709-011600-product-main.webp",
+  cigarCarouselPipes:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-pipes-20260711-014521-product-main.webp",
+  cigarCarouselNocturne:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/nocturne-cigar-product-main-20260709-021239-product-main.webp",
+  cigarCarouselArrowLeft:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/property-1arrow-left-circle-20260711-004505-svg-logo-icon.svg",
 } as const;
 
 export type M01HomeApprovedImageKey = keyof typeof M01_HOME_APPROVED_IMAGES;

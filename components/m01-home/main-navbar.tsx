@@ -198,8 +198,8 @@ export function MainNavbar() {
         className="absolute inset-0 backdrop-blur-[10px]"
         style={{ backgroundColor: "rgba(29, 28, 26, 0.6)" }}
       />
-      <div className="relative mx-auto flex h-[73px] w-full max-w-[1440px] items-center gap-[195px] px-[40px] py-[8px]">
-        <div className="flex shrink-0 items-center gap-[42px]">
+      <div className="relative grid h-[73px] w-full grid-cols-[minmax(0,1fr)_173px_minmax(0,1fr)] items-center px-[40px] py-[8px]">
+        <div className="flex min-w-0 items-center justify-start gap-[42px]">
           <DeferredIconButton
             label="Menu"
             reason="menu behavior not approved"
@@ -221,18 +221,18 @@ export function MainNavbar() {
           />
         </div>
 
-        <div className="flex w-[173px] shrink-0 flex-col items-center">
+        <div className="flex w-[173px] flex-col items-center justify-self-center">
           <Image
             src={NAVBAR_LOGO_URL}
             alt="Velarro Estate"
             width={173}
             height={90}
-            priority
-            className="h-auto w-[173px] object-contain"
+            preload
+            className="h-[90px] w-[173px] object-contain"
           />
         </div>
 
-        <div className="flex h-[42px] min-w-0 flex-1 items-center justify-end gap-[50px]">
+        <div className="flex h-[42px] min-w-0 items-center justify-end gap-[50px]">
           <DeferredSearchPill />
           <div className="flex items-center gap-[50px]">
             <DeferredUtilityControl

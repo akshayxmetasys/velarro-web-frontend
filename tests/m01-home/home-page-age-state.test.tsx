@@ -8,21 +8,34 @@ vi.mock("next/image", () => ({
     src,
     alt,
     priority,
+    preload,
     fill,
-    ...props
+    width,
+    height,
+    className,
+    unoptimized,
   }: {
     src: string;
     alt: string;
     priority?: boolean;
+    preload?: boolean;
     fill?: boolean;
+    width?: number;
+    height?: number;
+    className?: string;
+    unoptimized?: boolean;
   }) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={alt}
       data-priority={priority ? "true" : undefined}
+      data-preload={preload ? "true" : undefined}
       data-fill={fill ? "true" : undefined}
-      {...props}
+      data-width={width}
+      data-height={height}
+      data-unoptimized={unoptimized ? "true" : undefined}
+      className={className}
     />
   ),
 }));
@@ -60,9 +73,43 @@ describe("HomePageByAgeState", () => {
 
     expect(screen.getByRole("navigation", { name: "Main navigation" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "COLLECTOR SERIES" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Velarro cigars" }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
     );
+  });
+
+  it("does not render the cigar carousel for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "Velarro cigars" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("renders the cigar carousel after the collector hero for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const collectorHeading = screen.getByRole("heading", { name: "COLLECTOR SERIES" });
+    const carouselHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Velarro cigars",
+    });
+
+    expect(
+      collectorHeading.compareDocumentPosition(carouselHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("does not render the cigar carousel for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "Velarro cigars" }),
+    ).not.toBeInTheDocument();
   });
 });
