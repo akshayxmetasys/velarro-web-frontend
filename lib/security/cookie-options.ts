@@ -12,7 +12,7 @@ export function getAgeStateCookieOptions(
   environment: string | undefined = process.env.NODE_ENV,
 ): AgeStateCookieOptions {
   return {
-    httpOnly: false,
+    httpOnly: true,
     maxAge: 60 * 60 * 24 * 180,
     path: "/",
     sameSite: "lax",
