@@ -1,3 +1,5 @@
+import { APPROVED_IMAGE_ORIGIN } from "../assets/approved-image-hosts";
+
 export type CspEnvironment = "development" | "production" | "test";
 
 export interface ContentSecurityPolicyOptions {
@@ -34,7 +36,12 @@ export function buildContentSecurityPolicy({
     serializeDirective("object-src", ["'none'"]),
     serializeDirective("frame-ancestors", ["'none'"]),
     serializeDirective("form-action", ["'self'"]),
-    serializeDirective("img-src", ["'self'", "data:", "blob:"]),
+    serializeDirective("img-src", [
+      "'self'",
+      "data:",
+      "blob:",
+      APPROVED_IMAGE_ORIGIN,
+    ]),
     serializeDirective("font-src", ["'self'", "https://fonts.gstatic.com"]),
     serializeDirective("style-src", [
       "'self'",

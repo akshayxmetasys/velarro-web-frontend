@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { APPROVED_IMAGE_ORIGIN } from "@/lib/assets/approved-image-hosts";
 import { buildContentSecurityPolicy } from "@/lib/security/content-security-policy";
 
 describe("content security policy", () => {
@@ -9,6 +10,16 @@ describe("content security policy", () => {
     expect(csp).toContain("object-src 'none'");
     expect(csp).toContain("frame-ancestors 'none'");
     expect(csp).toContain("base-uri 'self'");
+  });
+
+  it("allows only self, data, blob, and the approved Supabase image origin", () => {
+    const csp = buildContentSecurityPolicy({ environment: "production" });
+
+    expect(csp).toContain(
+      `img-src 'self' data: blob: ${APPROVED_IMAGE_ORIGIN}`,
+    );
+    expect(csp).not.toContain("figma.com");
+    expect(csp).not.toContain("*.supabase.co");
   });
 
   it("allows dev eval only outside production", () => {
