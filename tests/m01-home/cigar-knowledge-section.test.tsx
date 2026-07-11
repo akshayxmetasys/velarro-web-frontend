@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { CigarKnowledgeSection } from "@/components/m01-home/cigar-knowledge-section";
+import { M01_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 import { CIGAR_KNOWLEDGE_CARDS } from "@/lib/m01-home/cigar-knowledge-data";
 
@@ -144,6 +145,9 @@ describe("CigarKnowledgeSection", () => {
     );
 
     expect(outerWrapper).toHaveClass("max-w-[1340px]");
-    expect(cardsRow).toHaveClass("max-w-[1236px]", "gap-[30px]");
+    expect(cardsRow).toHaveClass(
+      M01_CONTAINED_SECTION_WIDTH_CLASS,
+      "gap-[30px]",
+    );
   });
 });

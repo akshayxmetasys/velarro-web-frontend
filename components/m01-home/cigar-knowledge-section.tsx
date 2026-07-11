@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { M01_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
 import { CIGAR_KNOWLEDGE_CARDS } from "@/lib/m01-home/cigar-knowledge-data";
 
 function CigarKnowledgeCard({
@@ -87,7 +88,7 @@ export function CigarKnowledgeSection() {
         </header>
 
         <div
-          className="flex w-full max-w-[1236px] flex-wrap items-center justify-center gap-[30px]"
+          className={`flex w-full ${M01_CONTAINED_SECTION_WIDTH_CLASS} flex-wrap items-center justify-center gap-[30px]`}
           data-slot="cigar-knowledge-cards"
         >
           {CIGAR_KNOWLEDGE_CARDS.map((card) => (

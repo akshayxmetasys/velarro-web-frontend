@@ -35,6 +35,12 @@ export const M01_HOME_APPROVED_IMAGES = {
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/nocturne-cigar-product-main-20260709-021239-product-main.webp",
   giftingBackground:
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/gift-hero-home-20260709-041311-desktop-hero.webp",
+  clothierEstateOversizedTshirt:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-oversized-t-shirt-20260709-045207-product-main.webp",
+  clothierHeritageDadCap:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/heritage-dad-cap-20260709-160620-product-main.webp",
+  clothierEstateWeekenderJacket:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-weekender-jacket-closeup-20260709-154553-product-main.webp",
 } as const;
 
 export type M01HomeApprovedImageKey = keyof typeof M01_HOME_APPROVED_IMAGES;

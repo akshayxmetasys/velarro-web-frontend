@@ -1,6 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { GiftingSection } from "@/components/m01-home/gifting-section";
+import {
+  M01_CONTAINED_SECTION_IMAGE_SIZES,
+  M01_CONTAINED_SECTION_WIDTH_CLASS,
+} from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 
 vi.mock("next/image", () => ({
@@ -85,12 +89,9 @@ describe("GiftingSection", () => {
     const block = section?.firstElementChild;
 
     expect(section).toHaveClass("px-4");
-    expect(block).toHaveClass("mx-auto", "max-w-[1236px]");
+    expect(block).toHaveClass("mx-auto", M01_CONTAINED_SECTION_WIDTH_CLASS);
     expect(
       screen.getByAltText("Velarro gifting collection imagery"),
-    ).toHaveAttribute(
-      "data-sizes",
-      "(min-width: 1268px) 1236px, calc(100vw - 32px)",
-    );
+    ).toHaveAttribute("data-sizes", M01_CONTAINED_SECTION_IMAGE_SIZES);
   });
 });
