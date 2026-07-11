@@ -79,6 +79,12 @@ describe("HomePageByAgeState", () => {
     expect(
       screen.getByRole("heading", { level: 2, name: "THE ROASTERY" }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "Expand your horizons",
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
@@ -98,6 +104,17 @@ describe("HomePageByAgeState", () => {
 
     expect(
       screen.queryByRole("heading", { level: 2, name: "THE ROASTERY" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render cigar knowledge for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "Expand your horizons",
+      }),
     ).not.toBeInTheDocument();
   });
 
@@ -134,6 +151,24 @@ describe("HomePageByAgeState", () => {
     ).toBeTruthy();
   });
 
+  it("renders cigar knowledge after the roastery hero for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const roasteryHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "THE ROASTERY",
+    });
+    const cigarKnowledgeHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Expand your horizons",
+    });
+
+    expect(
+      roasteryHeading.compareDocumentPosition(cigarKnowledgeHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
   it("does not render the cigar carousel for under-21 visitors", () => {
     render(<HomePageByAgeState ageState="under21" />);
 
@@ -147,6 +182,17 @@ describe("HomePageByAgeState", () => {
 
     expect(
       screen.queryByRole("heading", { level: 2, name: "THE ROASTERY" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render cigar knowledge for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "Expand your horizons",
+      }),
     ).not.toBeInTheDocument();
   });
 });
