@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
-import { APPROVED_IMAGE_HOST } from "./lib/assets/approved-image-hosts";
 import { getSecurityHeaders } from "./lib/security/headers";
+
+// Keep in sync with APPROVED_IMAGE_HOST in lib/assets/approved-image-hosts.ts.
+// Inlined here so Next.js config loading does not depend on TS path resolution in dev.
+const APPROVED_IMAGE_HOST = "lpnrhpvmrnoqkzoxukov.supabase.co";
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,6 +11,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: APPROVED_IMAGE_HOST,
+        port: "",
         pathname: "/storage/v1/object/public/**",
       },
     ],
