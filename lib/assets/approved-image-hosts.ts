@@ -11,6 +11,8 @@ export const M01_HOME_APPROVED_IMAGES = {
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/1781557831962-frame-1000005296-(1).webp",
   collectorHero:
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/collection-series-hero-home-20260709-034217-desktop-hero.webp",
+  roasteryHero:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/homeu21-hero-20260709-024151-desktop-hero.webp",
   cigarCarouselAshtrays:
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-velarro-hand-cigar-20260711-012846-product-main.webp",
   cigarCarouselVerdeClassico:

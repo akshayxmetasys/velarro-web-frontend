@@ -42,6 +42,7 @@ export function CigarCategoryCard({
           alt={imageAlt}
           fill
           sizes={isActive ? "364px" : "324px"}
+          unoptimized
           className="object-cover object-center"
         />
         <div

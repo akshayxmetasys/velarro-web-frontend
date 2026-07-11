@@ -107,6 +107,49 @@ describe("CigarCarouselSection", () => {
     );
   });
 
+  it("renders product card images directly from the approved host", () => {
+    render(<CigarCarouselSection />);
+
+    expect(screen.getByAltText("Ashtrays category imagery")).toHaveAttribute(
+      "data-unoptimized",
+      "true",
+    );
+    expect(
+      screen.getByAltText("Verde Classico cigar category imagery"),
+    ).toHaveAttribute("data-unoptimized", "true");
+    expect(screen.getByAltText("Lighters category imagery")).toHaveAttribute(
+      "data-unoptimized",
+      "true",
+    );
+  });
+
+  it("renders Pipes and Nocturne images directly from the approved host", async () => {
+    const user = userEvent.setup();
+
+    render(<CigarCarouselSection />);
+
+    const nextButton = screen.getByRole("button", { name: "Next cigar category" });
+
+    await user.click(nextButton);
+    await user.click(nextButton);
+    await user.click(nextButton);
+
+    expect(screen.getByAltText("Pipes category imagery")).toHaveAttribute(
+      "src",
+      M01_HOME_APPROVED_IMAGES.cigarCarouselPipes,
+    );
+    expect(screen.getByAltText("Pipes category imagery")).toHaveAttribute(
+      "data-unoptimized",
+      "true",
+    );
+    expect(
+      screen.getByAltText("Nocturne cigar category imagery"),
+    ).toHaveAttribute("src", M01_HOME_APPROVED_IMAGES.cigarCarouselNocturne);
+    expect(
+      screen.getByAltText("Nocturne cigar category imagery"),
+    ).toHaveAttribute("data-unoptimized", "true");
+  });
+
   it("exposes accessible previous and next controls", () => {
     render(<CigarCarouselSection />);
 
