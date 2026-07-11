@@ -41,6 +41,20 @@ export const M01_HOME_APPROVED_IMAGES = {
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/heritage-dad-cap-20260709-160620-product-main.webp",
   clothierEstateWeekenderJacket:
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-weekender-jacket-closeup-20260709-154553-product-main.webp",
+  estateCollectionRoasteryCard:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/the-roastery-hero-20260709-023755-desktop-hero.webp",
+  estateCollectionTheCabinet:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/the-cabinet-hero-home-20260709-025631-desktop-hero.webp",
+  estateCollectionEstateOversizedTshirt:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-oversized-t-shirt-20260709-045207-product-main.webp",
+  estateCollectionHumidors:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-humidor-20260709-212816-product-main.webp",
+  estateCollectionEstateEspresso:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-espresso-20260711-013345-product-main.webp",
+  estateCollectionFoundersBoxyHoodie:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-hoodies-20260711-013309-product-main.webp",
+  estateCollectionArrowLeft:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/property-1arrow-left-circle-20260711-004505-svg-logo-icon.svg",
 } as const;
 
 export type M01HomeApprovedImageKey = keyof typeof M01_HOME_APPROVED_IMAGES;

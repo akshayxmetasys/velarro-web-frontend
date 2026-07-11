@@ -35,6 +35,12 @@ describe("approved image hosts", () => {
     expect(M01_HOME_APPROVED_IMAGES.clothierEstateWeekenderJacket).toBe(
       "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-weekender-jacket-closeup-20260709-154553-product-main.webp",
     );
+    expect(M01_HOME_APPROVED_IMAGES.estateCollectionEstateEspresso).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/home-espresso-20260711-013345-product-main.webp",
+    );
+    expect(M01_HOME_APPROVED_IMAGES.estateCollectionArrowLeft).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/property-1arrow-left-circle-20260711-004505-svg-logo-icon.svg",
+    );
   });
 
   it("rejects temporary Figma URLs and arbitrary remote hosts", () => {

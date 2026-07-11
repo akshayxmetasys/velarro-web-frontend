@@ -94,6 +94,12 @@ describe("HomePageByAgeState", () => {
     expect(
       screen.getByRole("heading", { level: 2, name: "The Clothier" }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "Velarro Estate collection",
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
@@ -143,6 +149,17 @@ describe("HomePageByAgeState", () => {
 
     expect(
       screen.queryByRole("heading", { level: 2, name: "The Clothier" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render Estate Collection for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "Velarro Estate collection",
+      }),
     ).not.toBeInTheDocument();
   });
 
@@ -233,6 +250,24 @@ describe("HomePageByAgeState", () => {
     ).toBeTruthy();
   });
 
+  it("renders Estate Collection after Clothier for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const clothierHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "The Clothier",
+    });
+    const estateCollectionHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Velarro Estate collection",
+    });
+
+    expect(
+      clothierHeading.compareDocumentPosition(estateCollectionHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
   it("does not render the cigar carousel for under-21 visitors", () => {
     render(<HomePageByAgeState ageState="under21" />);
 
@@ -276,6 +311,17 @@ describe("HomePageByAgeState", () => {
 
     expect(
       screen.queryByRole("heading", { level: 2, name: "The Clothier" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render Estate Collection for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "Velarro Estate collection",
+      }),
     ).not.toBeInTheDocument();
   });
 });
