@@ -1,6 +1,7 @@
 import { CigarCarouselSection } from "@/components/m01-home/cigar-carousel-section";
 import { CigarKnowledgeSection } from "@/components/m01-home/cigar-knowledge-section";
 import { CollectorHeroSection } from "@/components/m01-home/collector-hero-section";
+import { GiftingSection } from "@/components/m01-home/gifting-section";
 import { MainNavbar } from "@/components/m01-home/main-navbar";
 import { RoasteryHeroSection } from "@/components/m01-home/roastery-hero-section";
 
@@ -13,6 +14,7 @@ export function Over21HomePage() {
         <CigarCarouselSection />
         <RoasteryHeroSection />
         <CigarKnowledgeSection />
+        <GiftingSection />
       </main>
     </div>
   );

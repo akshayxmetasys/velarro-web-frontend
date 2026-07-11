@@ -22,6 +22,10 @@ describe("approved image hosts", () => {
     for (const url of Object.values(M01_HOME_APPROVED_IMAGES)) {
       expect(isApprovedImageUrl(url)).toBe(true);
     }
+
+    expect(M01_HOME_APPROVED_IMAGES.giftingBackground).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/gift-hero-home-20260709-041311-desktop-hero.webp",
+    );
   });
 
   it("rejects temporary Figma URLs and arbitrary remote hosts", () => {
