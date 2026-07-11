@@ -133,4 +133,17 @@ describe("CigarKnowledgeSection", () => {
       ).toBeDisabled();
     }
   });
+
+  it("preserves the Figma outer rhythm and inner card-row width", () => {
+    const { container } = render(<CigarKnowledgeSection />);
+
+    const section = container.querySelector('[data-figma-node="13148:15081"]');
+    const outerWrapper = section?.firstElementChild;
+    const cardsRow = container.querySelector(
+      '[data-slot="cigar-knowledge-cards"]',
+    );
+
+    expect(outerWrapper).toHaveClass("max-w-[1340px]");
+    expect(cardsRow).toHaveClass("max-w-[1236px]", "gap-[30px]");
+  });
 });

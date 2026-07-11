@@ -33,6 +33,8 @@ export const M01_HOME_APPROVED_IMAGES = {
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/reserve-cigar-product-main-20260709-000729-product-main.webp",
   cigarKnowledgeNightSeries:
     "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/nocturne-cigar-product-main-20260709-021239-product-main.webp",
+  giftingBackground:
+    "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/gift-hero-home-20260709-041311-desktop-hero.webp",
 } as const;
 
 export type M01HomeApprovedImageKey = keyof typeof M01_HOME_APPROVED_IMAGES;

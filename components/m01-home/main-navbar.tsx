@@ -226,9 +226,9 @@ export function MainNavbar() {
             src={NAVBAR_LOGO_URL}
             alt="Velarro Estate"
             width={173}
-            height={90}
+            height={54}
             preload
-            className="h-[90px] w-[173px] object-contain"
+            className="h-[54px] w-[173px] object-contain"
           />
         </div>
 

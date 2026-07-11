@@ -85,6 +85,12 @@ describe("HomePageByAgeState", () => {
         name: "Expand your horizons",
       }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "Find the perfect gifts",
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
@@ -114,6 +120,17 @@ describe("HomePageByAgeState", () => {
       screen.queryByRole("heading", {
         level: 2,
         name: "Expand your horizons",
+      }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render Gifting for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "Find the perfect gifts",
       }),
     ).not.toBeInTheDocument();
   });
@@ -165,6 +182,24 @@ describe("HomePageByAgeState", () => {
 
     expect(
       roasteryHeading.compareDocumentPosition(cigarKnowledgeHeading) &
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("renders Gifting after cigar knowledge for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const cigarKnowledgeHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Expand your horizons",
+    });
+    const giftingHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Find the perfect gifts",
+    });
+
+    expect(
+      cigarKnowledgeHeading.compareDocumentPosition(giftingHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
@@ -192,6 +227,17 @@ describe("HomePageByAgeState", () => {
       screen.queryByRole("heading", {
         level: 2,
         name: "Expand your horizons",
+      }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render Gifting for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "Find the perfect gifts",
       }),
     ).not.toBeInTheDocument();
   });

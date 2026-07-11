@@ -86,7 +86,10 @@ export function CigarKnowledgeSection() {
           </h2>
         </header>
 
-        <div className="flex w-full flex-wrap items-center justify-center gap-[30px]">
+        <div
+          className="flex w-full max-w-[1236px] flex-wrap items-center justify-center gap-[30px]"
+          data-slot="cigar-knowledge-cards"
+        >
           {CIGAR_KNOWLEDGE_CARDS.map((card) => (
             <CigarKnowledgeCard key={card.id} card={card} />
           ))}

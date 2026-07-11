@@ -1,0 +1,64 @@
+import {
+  M01_HOME_APPROVED_IMAGES,
+  assertApprovedImageUrl,
+} from "@/lib/assets/approved-image-hosts";
+import Image from "next/image";
+
+const GIFTING_BACKGROUND_URL = assertApprovedImageUrl(
+  M01_HOME_APPROVED_IMAGES.giftingBackground,
+);
+
+export function GiftingSection() {
+  return (
+    <section
+      aria-labelledby="gifting-heading"
+      className="w-full bg-background-section px-4 py-0"
+      data-figma-node="13148:15113"
+    >
+      <div className="relative mx-auto h-[696px] w-full max-w-[1236px] overflow-hidden rounded-[20px] bg-background-navbar">
+        <Image
+          src={GIFTING_BACKGROUND_URL}
+          alt="Velarro gifting collection imagery"
+          fill
+          sizes="(min-width: 1268px) 1236px, calc(100vw - 32px)"
+          unoptimized
+          className="pointer-events-none object-cover object-center"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[rgba(71,70,70,0.6)]"
+        />
+
+        <div className="absolute left-1/2 top-[196px] flex w-[833px] max-w-[calc(100%-32px)] -translate-x-1/2 flex-col items-center gap-[64px]">
+          <div className="flex w-[157px] max-w-full flex-col items-center gap-1">
+            <p className="text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-text-white">
+              Gifting
+            </p>
+            <span
+              aria-hidden="true"
+              className="h-0 w-full border-t-2 border-border-strong"
+            />
+          </div>
+
+          <h2
+            id="gifting-heading"
+            className="w-full text-center font-[family-name:var(--velarro-display-light-font-family)] text-[44px] font-light uppercase leading-normal tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white desktop:text-[length:var(--velarro-display-light-font-size)]"
+          >
+            Find the perfect gifts
+          </h2>
+
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            aria-label="Explore gifting (deferred: destination not approved for this scope)"
+            title="Explore gifting - destination not approved for this scope"
+            className="h-[43px] w-[217px] cursor-not-allowed rounded-radius-md border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-normal text-text-heading"
+          >
+            EXPLORE
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}

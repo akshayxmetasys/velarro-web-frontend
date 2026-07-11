@@ -4,9 +4,27 @@ import { MainNavbar } from "@/components/m01-home/main-navbar";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 
 vi.mock("next/image", () => ({
-  default: ({ src, alt }: { src: string; alt: string }) => (
+  default: ({
+    src,
+    alt,
+    width,
+    height,
+    className,
+  }: {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    className?: string;
+  }) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} />
+    <img
+      src={src}
+      alt={alt}
+      data-width={width}
+      data-height={height}
+      className={className}
+    />
   ),
 }));
 
@@ -18,6 +36,19 @@ describe("MainNavbar", () => {
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
+    );
+    expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
+      "data-width",
+      "173",
+    );
+    expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
+      "data-height",
+      "54",
+    );
+    expect(screen.getByAltText("Velarro Estate")).toHaveClass(
+      "h-[54px]",
+      "w-[173px]",
+      "object-contain",
     );
     expect(screen.queryByText(/SINCE\s+1919/)).not.toBeInTheDocument();
     expect(screen.getByLabelText(/The Estate \(deferred/i)).toBeInTheDocument();
