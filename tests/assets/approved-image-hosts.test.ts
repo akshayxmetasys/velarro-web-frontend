@@ -26,6 +26,15 @@ describe("approved image hosts", () => {
     expect(M01_HOME_APPROVED_IMAGES.giftingBackground).toBe(
       "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/gift-hero-home-20260709-041311-desktop-hero.webp",
     );
+    expect(M01_HOME_APPROVED_IMAGES.clothierEstateOversizedTshirt).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-oversized-t-shirt-20260709-045207-product-main.webp",
+    );
+    expect(M01_HOME_APPROVED_IMAGES.clothierHeritageDadCap).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/heritage-dad-cap-20260709-160620-product-main.webp",
+    );
+    expect(M01_HOME_APPROVED_IMAGES.clothierEstateWeekenderJacket).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/estate-weekender-jacket-closeup-20260709-154553-product-main.webp",
+    );
   });
 
   it("rejects temporary Figma URLs and arbitrary remote hosts", () => {

@@ -17,8 +17,15 @@
 - Implemented as `CigarKnowledgeSection` after `RoasteryHeroSection` in the over-21 homepage only.
 - Matched the Figma section treatment with the `#f6f2eb` background, `19px` vertical padding, a centered heading stack, and a `40px` gap between heading and cards.
 - Used the Figma card order and dimensions: three card layout, `30px` card gap, `16px` horizontal card padding, `20px` vertical card padding, `12px` card radius, and `356px x 309px` image frames with `8px` radius.
+- The card row establishes the shared M01 contained-section width: `1236px`. Contained homepage sections should use this centered width unless a future Figma node is clearly full-bleed or explicitly documents a different contained rhythm.
 - Preserved the Figma image overlay color `rgba(21,20,20,0.4)`.
 - Rendered Supabase images through `next/image` with `unoptimized` to match the safe direct-image behavior used by the Roastery Hero and Cigar Carousel.
+
+## Contained Width Rule
+
+- Cigar Knowledge, Gifting, Clothier, and future contained M01 homepage sections use the shared `1236px` centered contained width.
+- Full-bleed hero sections remain the exception and should not be forced into this width.
+- Future sections such as Estate Collection must first check Figma, then either use the shared contained width or document why the section is intentionally different.
 
 ## Deferred Behavior
 
