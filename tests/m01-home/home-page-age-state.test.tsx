@@ -76,6 +76,9 @@ describe("HomePageByAgeState", () => {
     expect(
       screen.getByRole("heading", { level: 2, name: "Velarro cigars" }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "THE ROASTERY" }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
@@ -87,6 +90,14 @@ describe("HomePageByAgeState", () => {
 
     expect(
       screen.queryByRole("heading", { level: 2, name: "Velarro cigars" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render the roastery hero for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "THE ROASTERY" }),
     ).not.toBeInTheDocument();
   });
 
@@ -105,11 +116,37 @@ describe("HomePageByAgeState", () => {
     ).toBeTruthy();
   });
 
+  it("renders the roastery hero after the cigar carousel for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const carouselHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Velarro cigars",
+    });
+    const roasteryHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "THE ROASTERY",
+    });
+
+    expect(
+      carouselHeading.compareDocumentPosition(roasteryHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
   it("does not render the cigar carousel for under-21 visitors", () => {
     render(<HomePageByAgeState ageState="under21" />);
 
     expect(
       screen.queryByRole("heading", { level: 2, name: "Velarro cigars" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render the roastery hero for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "THE ROASTERY" }),
     ).not.toBeInTheDocument();
   });
 });
