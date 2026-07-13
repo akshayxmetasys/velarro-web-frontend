@@ -3,6 +3,7 @@ import {
   assertApprovedImageUrl,
 } from "@/lib/assets/approved-image-hosts";
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 const NAVBAR_LOGO_URL = assertApprovedImageUrl(
@@ -120,6 +121,17 @@ function DeferredNavControl({ label, reason }: DeferredNavControlProps) {
   );
 }
 
+function NavbarLink({ label, href }: { label: string; href: string }) {
+  return (
+    <Link
+      href={href}
+      className="whitespace-nowrap font-[family-name:var(--velarro-ui-elements-navbar-font-family)] text-[length:var(--velarro-ui-elements-navbar-font-size)] font-normal leading-normal text-icon-default"
+    >
+      {label}
+    </Link>
+  );
+}
+
 interface DeferredIconButtonProps {
   label: string;
   reason: string;
@@ -215,13 +227,14 @@ export function MainNavbar() {
               reason="destination not approved for this scope"
             />
           </div>
-          <DeferredNavControl
-            label="Our Story"
-            reason="destination not approved for this scope"
-          />
+          <NavbarLink label="Our Story" href="/our-story" />
         </div>
 
-        <div className="flex w-[173px] flex-col items-center justify-self-center">
+        <Link
+          href="/"
+          aria-label="Go to Velarro homepage"
+          className="flex w-[173px] flex-col items-center justify-self-center"
+        >
           <Image
             src={NAVBAR_LOGO_URL}
             alt="Velarro Estate"
@@ -230,7 +243,7 @@ export function MainNavbar() {
             preload
             className="h-[54px] w-[173px] object-contain"
           />
-        </div>
+        </Link>
 
         <div className="flex h-[42px] min-w-0 items-center justify-end gap-[50px]">
           <DeferredSearchPill />

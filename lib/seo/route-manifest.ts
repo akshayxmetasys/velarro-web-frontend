@@ -308,10 +308,10 @@ export const ROUTE_MANIFEST = [
     route: "/our-story",
     module: "M10-legal-info",
     figmaNodeId: "15934:43007",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
-    audience: "review",
+    audience: "age-gated",
   },
   {
     route: "/press",

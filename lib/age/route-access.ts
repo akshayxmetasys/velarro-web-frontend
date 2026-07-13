@@ -11,6 +11,7 @@ export interface RouteAccessResult {
 
 const UNDER_21_BLOCKED_PREFIXES = [
   "/the-estate",
+  "/our-story",
   "/the-vault",
   "/cart",
   "/checkout",
@@ -21,6 +22,7 @@ const UNDER_21_BLOCKED_PREFIXES = [
 const UNKNOWN_GATED_PREFIXES = [
   "/the-estate",
   "/the-house",
+  "/our-story",
   "/the-vault",
   "/cart",
   "/checkout",
@@ -34,7 +36,6 @@ const REVIEW_PREFIXES = [
   "/partner",
   "/careers",
   "/get-in-touch",
-  "/our-story",
   "/press",
   "/craftsmanship",
   "/sustainability",
