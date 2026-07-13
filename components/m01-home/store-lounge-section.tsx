@@ -1,0 +1,56 @@
+import Image from "next/image";
+import {
+  M01_CONTAINED_SECTION_IMAGE_SIZES,
+  M01_CONTAINED_SECTION_WIDTH_CLASS,
+} from "@/components/m01-home/m01-section-layout";
+
+export const STORE_LOUNGE_BACKGROUND_SRC =
+  "/images/m01-home/store-lounge-background.png" as const;
+
+export function StoreLoungeSection() {
+  return (
+    <section
+      aria-labelledby="store-lounge-heading"
+      className="w-full bg-background-section px-4 py-8"
+      data-figma-node="13148:15176"
+    >
+      <div
+        className={`relative mx-auto h-[760px] w-full ${M01_CONTAINED_SECTION_WIDTH_CLASS} overflow-hidden rounded-[12px] bg-background-navbar desktop:h-[1065px]`}
+        data-slot="store-lounge-contained-section"
+      >
+        <Image
+          src={STORE_LOUNGE_BACKGROUND_SRC}
+          alt=""
+          fill
+          sizes={M01_CONTAINED_SECTION_IMAGE_SIZES}
+          priority={false}
+          className="pointer-events-none object-cover object-[center_8%]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[rgba(21,20,20,0.4)]"
+        />
+
+        <div className="absolute left-1/2 top-[44.13%] flex w-[737px] max-w-[calc(100%-32px)] -translate-x-1/2 flex-col items-center gap-[20px] rounded-[24px] bg-[rgba(29,28,26,0.6)] py-[24px]">
+          <h2
+            id="store-lounge-heading"
+            className="w-[1159px] max-w-[calc(100vw-32px)] text-center font-[family-name:var(--velarro-display-light-font-family)] text-[40px] font-light uppercase leading-none tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[56px] desktop:text-[length:var(--velarro-display-light-font-size)]"
+          >
+            FIND A STORE &amp; LOUNGE
+          </h2>
+
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            aria-label="Explore Store/Lounge (deferred: destination not approved for this scope)"
+            title="Explore Store/Lounge - destination not approved for this scope"
+            className="h-[43px] w-[355px] max-w-[calc(100%-48px)] cursor-not-allowed rounded-radius-md border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-normal text-text-heading"
+          >
+            EXPLORE
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}

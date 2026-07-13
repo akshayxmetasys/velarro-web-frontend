@@ -100,6 +100,12 @@ describe("HomePageByAgeState", () => {
         name: "Velarro Estate collection",
       }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "FIND A STORE & LOUNGE",
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
@@ -159,6 +165,17 @@ describe("HomePageByAgeState", () => {
       screen.queryByRole("heading", {
         level: 2,
         name: "Velarro Estate collection",
+      }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render Store/Lounge for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "FIND A STORE & LOUNGE",
       }),
     ).not.toBeInTheDocument();
   });
@@ -264,6 +281,24 @@ describe("HomePageByAgeState", () => {
 
     expect(
       clothierHeading.compareDocumentPosition(estateCollectionHeading) &
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("renders Store/Lounge after Estate Collection for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const estateCollectionHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Velarro Estate collection",
+    });
+    const storeLoungeHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "FIND A STORE & LOUNGE",
+    });
+
+    expect(
+      estateCollectionHeading.compareDocumentPosition(storeLoungeHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
@@ -321,6 +356,17 @@ describe("HomePageByAgeState", () => {
       screen.queryByRole("heading", {
         level: 2,
         name: "Velarro Estate collection",
+      }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render Store/Lounge for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", {
+        level: 2,
+        name: "FIND A STORE & LOUNGE",
       }),
     ).not.toBeInTheDocument();
   });
