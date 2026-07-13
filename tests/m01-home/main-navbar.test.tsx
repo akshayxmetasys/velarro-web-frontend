@@ -50,8 +50,15 @@ describe("MainNavbar", () => {
       "w-[173px]",
       "object-contain",
     );
+    expect(
+      screen.getByRole("link", { name: "Go to Velarro homepage" }),
+    ).toHaveAttribute("href", "/");
     expect(screen.queryByText(/SINCE\s+1919/)).not.toBeInTheDocument();
     expect(screen.getByLabelText(/The Estate \(deferred/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Our Story" })).toHaveAttribute(
+      "href",
+      "/our-story",
+    );
     expect(screen.getByLabelText(/Search \(deferred/i)).toBeDisabled();
     expect(screen.getByLabelText(/Cart \(deferred/i)).toBeDisabled();
     expect(screen.getByLabelText(/Login \(deferred/i)).toBeDisabled();

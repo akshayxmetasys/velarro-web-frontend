@@ -1,4 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { OUR_STORY_APPROVED_IMAGES } from "@/components/m02-our-story/our-story-assets";
 import {
   APPROVED_IMAGE_HOST,
   APPROVED_IMAGE_ORIGIN,
@@ -53,6 +56,29 @@ describe("approved image hosts", () => {
     expect(isApprovedImageUrl("http://lpnrhpvmrnoqkzoxukov.supabase.co/x")).toBe(
       false,
     );
+  });
+
+  it("accepts approved M02 Our Story image URLs without adding local files", () => {
+    expect(OUR_STORY_APPROVED_IMAGES.heroBackground).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/ourstory-hero-20260709-024102-desktop-hero.webp",
+    );
+    expect(OUR_STORY_APPROVED_IMAGES.brandStorySide).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/ourstory-product-20260713-232448-product-main.webp",
+    );
+
+    for (const url of Object.values(OUR_STORY_APPROVED_IMAGES)) {
+      expect(isApprovedImageUrl(url)).toBe(true);
+    }
+
+    const serialized = JSON.stringify(OUR_STORY_APPROVED_IMAGES);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(existsSync(join(process.cwd(), "public", "images", "m02"))).toBe(
+      false,
+    );
+    expect(
+      existsSync(join(process.cwd(), "public", "images", "m02-our-story")),
+    ).toBe(false);
   });
 
   it("does not include Figma MCP markers in approved constants", () => {
