@@ -23,6 +23,7 @@ function CarouselArrowButton({
   return (
     <button
       type="button"
+      suppressHydrationWarning
       onClick={onClick}
       disabled={disabled}
       aria-label={label}

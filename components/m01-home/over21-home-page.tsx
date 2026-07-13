@@ -2,6 +2,7 @@ import { CigarCarouselSection } from "@/components/m01-home/cigar-carousel-secti
 import { CigarKnowledgeSection } from "@/components/m01-home/cigar-knowledge-section";
 import { ClothierSection } from "@/components/m01-home/clothier-section";
 import { EstateCollectionSection } from "@/components/m01-home/estate-collection-section";
+import { FooterSection } from "@/components/m01-home/footer-section";
 import { CollectorHeroSection } from "@/components/m01-home/collector-hero-section";
 import { GiftingSection } from "@/components/m01-home/gifting-section";
 import { MainNavbar } from "@/components/m01-home/main-navbar";
@@ -22,6 +23,7 @@ export function Over21HomePage() {
         <EstateCollectionSection />
         <StoreLoungeSection />
       </main>
+      <FooterSection />
     </div>
   );
 }

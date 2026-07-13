@@ -106,6 +106,9 @@ describe("HomePageByAgeState", () => {
         name: "FIND A STORE & LOUNGE",
       }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Stay in Know" }),
+    ).toBeInTheDocument();
     expect(screen.getByAltText("Velarro Estate")).toHaveAttribute(
       "src",
       M01_HOME_APPROVED_IMAGES.navbarLogoScript,
@@ -177,6 +180,14 @@ describe("HomePageByAgeState", () => {
         level: 2,
         name: "FIND A STORE & LOUNGE",
       }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render over-21 footer content for unknown visitors", () => {
+    render(<HomePageByAgeState ageState="unknown" />);
+
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "Stay in Know" }),
     ).not.toBeInTheDocument();
   });
 
@@ -299,6 +310,24 @@ describe("HomePageByAgeState", () => {
 
     expect(
       estateCollectionHeading.compareDocumentPosition(storeLoungeHeading) &
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("renders Footer after Store/Lounge for over-21 visitors", () => {
+    render(<HomePageByAgeState ageState="over21" />);
+
+    const storeLoungeHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "FIND A STORE & LOUNGE",
+    });
+    const footerHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Stay in Know",
+    });
+
+    expect(
+      storeLoungeHeading.compareDocumentPosition(footerHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
@@ -368,6 +397,14 @@ describe("HomePageByAgeState", () => {
         level: 2,
         name: "FIND A STORE & LOUNGE",
       }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render over-21 footer content for under-21 visitors", () => {
+    render(<HomePageByAgeState ageState="under21" />);
+
+    expect(
+      screen.queryByRole("heading", { level: 2, name: "Stay in Know" }),
     ).not.toBeInTheDocument();
   });
 });
