@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { OUR_STORY_APPROVED_IMAGES } from "@/components/m02-our-story/our-story-assets";
+import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-assets";
 import {
   APPROVED_IMAGE_HOST,
   APPROVED_IMAGE_ORIGIN,
@@ -82,9 +83,35 @@ describe("approved image hosts", () => {
   });
 
   it("does not include Figma MCP markers in approved constants", () => {
-    const serialized = JSON.stringify(M01_HOME_APPROVED_IMAGES);
+    const serialized = JSON.stringify({
+      M01_HOME_APPROVED_IMAGES,
+      THE_ESTATE_APPROVED_IMAGES,
+    });
 
     expect(serialized).not.toContain("figma.com");
     expect(serialized).not.toContain("mcp/asset");
+  });
+
+  it("accepts approved M03 The Estate image URLs without adding local files", () => {
+    expect(THE_ESTATE_APPROVED_IMAGES.collectorSeriesHeroBackground).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/collection-series-the-estate-hero-20260709-032805-desktop-hero.webp",
+    );
+    expect(THE_ESTATE_APPROVED_IMAGES.grandCruToro).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/grand-cru-cigar-product-main-20260709-003453-product-main.webp",
+    );
+
+    for (const url of Object.values(THE_ESTATE_APPROVED_IMAGES)) {
+      expect(isApprovedImageUrl(url)).toBe(true);
+    }
+
+    const serialized = JSON.stringify(THE_ESTATE_APPROVED_IMAGES);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(existsSync(join(process.cwd(), "public", "images", "m03"))).toBe(
+      false,
+    );
+    expect(
+      existsSync(join(process.cwd(), "public", "images", "m03-estate")),
+    ).toBe(false);
   });
 });

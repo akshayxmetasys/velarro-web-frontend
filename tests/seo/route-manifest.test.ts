@@ -8,7 +8,7 @@ import { getIndexableRoutes } from "@/lib/seo/indexability";
 describe("route manifest", () => {
   it("marks only implemented public routes as indexable", () => {
     expect(getIndexableRoutes().map((route) => route.route)).toEqual(["/"]);
-    expect(findRouteManifestEntry("/the-estate")?.implemented).toBe(false);
+    expect(findRouteManifestEntry("/the-estate")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/the-estate")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/our-story")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/our-story")?.indexable).toBe(false);
@@ -27,6 +27,18 @@ describe("route manifest", () => {
       route: "/our-story",
       module: "M10-legal-info",
       figmaNodeId: "15934:43007",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "age-gated",
+    });
+  });
+
+  it("marks The Estate as an implemented over-21 restricted route", () => {
+    expect(findRouteManifestEntry("/the-estate")).toMatchObject({
+      route: "/the-estate",
+      module: "M03-estate",
+      figmaNodeId: "16576:98447",
       implemented: true,
       public: true,
       indexable: false,

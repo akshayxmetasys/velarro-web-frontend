@@ -54,7 +54,10 @@ describe("MainNavbar", () => {
       screen.getByRole("link", { name: "Go to Velarro homepage" }),
     ).toHaveAttribute("href", "/");
     expect(screen.queryByText(/SINCE\s+1919/)).not.toBeInTheDocument();
-    expect(screen.getByLabelText(/The Estate \(deferred/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "The Estate" })).toHaveAttribute(
+      "href",
+      "/the-estate",
+    );
     expect(screen.getByRole("link", { name: "Our Story" })).toHaveAttribute(
       "href",
       "/our-story",

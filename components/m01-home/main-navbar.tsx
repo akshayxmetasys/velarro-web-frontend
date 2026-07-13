@@ -218,10 +218,7 @@ export function MainNavbar() {
             icon={<MenuIcon />}
           />
           <div className="flex items-center gap-[42px]">
-            <DeferredNavControl
-              label="The Estate"
-              reason="destination not approved for this scope"
-            />
+            <NavbarLink label="The Estate" href="/the-estate" />
             <DeferredNavControl
               label="Partner"
               reason="destination not approved for this scope"
