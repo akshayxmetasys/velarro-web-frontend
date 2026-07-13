@@ -88,7 +88,10 @@ describe("TheEstatePageByAgeState", () => {
       screen.getByRole("heading", { level: 1, name: "COLLECTOR SERIES" }),
     ).toBeInTheDocument();
     expect(screen.getByText("THE HUMIDOR")).toBeInTheDocument();
-    expect(screen.getByText("THE HOUSE")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "THE HOUSE" })).toHaveAttribute(
+      "href",
+      "/the-estate/the-house",
+    );
     expect(screen.getByText("Limited Compendium")).toBeInTheDocument();
     expect(screen.getByText("Primera Cosecha")).toBeInTheDocument();
     expect(
