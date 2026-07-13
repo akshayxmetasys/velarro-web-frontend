@@ -1,5 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 import { EstateCollectionSection } from "@/components/m01-home/estate-collection-section";
 import {
@@ -155,6 +157,33 @@ describe("EstateCollectionSection", () => {
       M01_HOME_APPROVED_IMAGES.estateCollectionArrowLeft,
     );
     expect(within(nextArrow).getByRole("presentation")).toHaveClass("rotate-180");
+  });
+
+  it("scopes hydration suppression only to Estate Collection arrow buttons", () => {
+    const estateSource = readFileSync(
+      join(process.cwd(), "components/m01-home/estate-collection-section.tsx"),
+      "utf8",
+    );
+    const footerSource = readFileSync(
+      join(process.cwd(), "components/m01-home/footer-section.tsx"),
+      "utf8",
+    );
+    const over21Source = readFileSync(
+      join(process.cwd(), "components/m01-home/over21-home-page.tsx"),
+      "utf8",
+    );
+    const appLayoutSource = readFileSync(
+      join(process.cwd(), "app/layout.tsx"),
+      "utf8",
+    );
+
+    expect(estateSource.match(/suppressHydrationWarning/g)).toHaveLength(1);
+    expect(estateSource).toMatch(
+      /function CarouselArrowButton[\s\S]*<button[\s\S]*suppressHydrationWarning/,
+    );
+    expect(footerSource).not.toContain("suppressHydrationWarning");
+    expect(over21Source).not.toContain("suppressHydrationWarning");
+    expect(appLayoutSource).not.toContain("suppressHydrationWarning");
   });
 
   it("provides accessible deferred CTA controls for visible cards", () => {
