@@ -6,6 +6,7 @@ import { CollectorHeroSection } from "@/components/m01-home/collector-hero-secti
 import { GiftingSection } from "@/components/m01-home/gifting-section";
 import { MainNavbar } from "@/components/m01-home/main-navbar";
 import { RoasteryHeroSection } from "@/components/m01-home/roastery-hero-section";
+import { StoreLoungeSection } from "@/components/m01-home/store-lounge-section";
 
 export function Over21HomePage() {
   return (
@@ -19,6 +20,7 @@ export function Over21HomePage() {
         <GiftingSection />
         <ClothierSection />
         <EstateCollectionSection />
+        <StoreLoungeSection />
       </main>
     </div>
   );
