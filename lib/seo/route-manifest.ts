@@ -91,8 +91,8 @@ export const ROUTE_MANIFEST = [
   {
     route: "/the-estate/the-house",
     module: "M03-estate",
-    figmaNodeId: "14670:34051",
-    implemented: false,
+    figmaNodeId: "16576:96095",
+    implemented: true,
     public: true,
     indexable: false,
     audience: "age-gated",

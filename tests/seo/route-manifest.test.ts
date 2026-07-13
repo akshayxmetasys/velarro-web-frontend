@@ -10,6 +10,12 @@ describe("route manifest", () => {
     expect(getIndexableRoutes().map((route) => route.route)).toEqual(["/"]);
     expect(findRouteManifestEntry("/the-estate")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/the-estate")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/the-estate/the-house")?.implemented).toBe(
+      true,
+    );
+    expect(findRouteManifestEntry("/the-estate/the-house")?.indexable).toBe(
+      false,
+    );
     expect(findRouteManifestEntry("/our-story")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/our-story")?.indexable).toBe(false);
   });
@@ -39,6 +45,18 @@ describe("route manifest", () => {
       route: "/the-estate",
       module: "M03-estate",
       figmaNodeId: "16576:98447",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "age-gated",
+    });
+  });
+
+  it("marks The Estate House tab as an implemented over-21 restricted route", () => {
+    expect(findRouteManifestEntry("/the-estate/the-house")).toMatchObject({
+      route: "/the-estate/the-house",
+      module: "M03-estate",
+      figmaNodeId: "16576:96095",
       implemented: true,
       public: true,
       indexable: false,

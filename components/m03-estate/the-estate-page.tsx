@@ -147,15 +147,13 @@ function CategoryTabs() {
         >
           THE HUMIDOR
         </button>
-        <button
-          type="button"
-          disabled
-          role="tab"
+        <Link
+          href="/the-estate/the-house"
           aria-selected="false"
-          className="cursor-not-allowed pb-[10px] disabled:opacity-100"
+          className="pb-[10px]"
         >
           THE HOUSE
-        </button>
+        </Link>
       </div>
       <div className="flex w-full max-w-[936px] items-center gap-[13px]">
         <div className="flex min-w-0 flex-1 gap-[40px] overflow-x-auto pb-[8px] desktop:gap-[40px]">
