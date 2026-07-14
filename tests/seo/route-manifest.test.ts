@@ -24,6 +24,8 @@ describe("route manifest", () => {
     expect(findRouteManifestEntry("/the-chronicle")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/pairing-guide")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/pairing-guide")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/careers")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/careers")?.indexable).toBe(false);
   });
 
   it("keeps route entries typed and unique", () => {
@@ -103,6 +105,18 @@ describe("route manifest", () => {
       public: true,
       indexable: false,
       audience: "age-gated",
+    });
+  });
+
+  it("marks Careers as an implemented public review route", () => {
+    expect(findRouteManifestEntry("/careers")).toMatchObject({
+      route: "/careers",
+      module: "M09-engagement",
+      figmaNodeId: "13148:15771",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "review",
     });
   });
 });

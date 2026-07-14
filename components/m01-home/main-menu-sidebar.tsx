@@ -13,7 +13,7 @@ export const MAIN_MENU_ITEMS = [
   { label: "Estate Index", href: "/the-estate", implemented: true },
   { label: "The House", href: "/the-estate/the-house", implemented: true },
   { label: "The Vault", href: "/the-vault", implemented: true },
-  { label: "Careers", href: "/careers", implemented: false },
+  { label: "Careers", href: "/careers", implemented: true },
   { label: "News & Events", href: "/the-chronicle", implemented: false },
   { label: "Pairing Guide", href: "/pairing-guide", implemented: true },
   { label: "Membership", href: "/membership", implemented: false },

@@ -7,6 +7,7 @@ import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-asse
 import { THE_VAULT_APPROVED_IMAGES } from "@/components/m05-vault/the-vault-assets";
 import { CHRONICLE_APPROVED_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
 import { PAIRING_GUIDE_APPROVED_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
+import { CAREERS_APPROVED_IMAGES } from "@/components/m09-careers/careers-assets";
 import {
   APPROVED_IMAGE_HOST,
   APPROVED_IMAGE_ORIGIN,
@@ -94,6 +95,7 @@ describe("approved image hosts", () => {
       THE_VAULT_APPROVED_IMAGES,
       CHRONICLE_APPROVED_IMAGES,
       PAIRING_GUIDE_APPROVED_IMAGES,
+      CAREERS_APPROVED_IMAGES,
     });
 
     expect(serialized).not.toContain("figma.com");
@@ -206,6 +208,26 @@ describe("approved image hosts", () => {
     );
     expect(
       existsSync(join(process.cwd(), "public", "images", "m08-pairing-guide")),
+    ).toBe(false);
+  });
+
+  it("accepts approved M09 Careers image URLs without adding local files", () => {
+    expect(CAREERS_APPROVED_IMAGES.hero).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/carrer-horo-20260709-034631-desktop-hero.webp",
+    );
+
+    for (const url of Object.values(CAREERS_APPROVED_IMAGES)) {
+      expect(isApprovedImageUrl(url)).toBe(true);
+    }
+
+    const serialized = JSON.stringify(CAREERS_APPROVED_IMAGES);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(existsSync(join(process.cwd(), "public", "images", "m09"))).toBe(
+      false,
+    );
+    expect(
+      existsSync(join(process.cwd(), "public", "images", "m09-careers")),
     ).toBe(false);
   });
 });

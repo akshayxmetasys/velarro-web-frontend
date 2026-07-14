@@ -245,7 +245,7 @@ export const ROUTE_MANIFEST = [
     route: "/careers",
     module: "M09-engagement",
     figmaNodeId: "13148:15771",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "review",
