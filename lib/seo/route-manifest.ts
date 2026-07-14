@@ -254,7 +254,7 @@ export const ROUTE_MANIFEST = [
     route: "/get-in-touch",
     module: "M09-engagement",
     figmaNodeId: "14644:34661",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "review",

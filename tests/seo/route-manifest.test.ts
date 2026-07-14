@@ -28,6 +28,8 @@ describe("route manifest", () => {
     expect(findRouteManifestEntry("/partner")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/careers")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/careers")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/get-in-touch")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/get-in-touch")?.indexable).toBe(false);
   });
 
   it("keeps route entries typed and unique", () => {
@@ -127,6 +129,18 @@ describe("route manifest", () => {
       route: "/partner",
       module: "M09-engagement",
       figmaNodeId: "14670:42180",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "review",
+    });
+  });
+
+  it("marks Get in Touch as an implemented public review route", () => {
+    expect(findRouteManifestEntry("/get-in-touch")).toMatchObject({
+      route: "/get-in-touch",
+      module: "M09-engagement",
+      figmaNodeId: "14644:34661",
       implemented: true,
       public: true,
       indexable: false,

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   M01_HOME_APPROVED_IMAGES,
   assertApprovedImageUrl,
@@ -76,6 +77,21 @@ function DeferredFooterLink({ label }: { label: string }) {
       {label}
     </span>
   );
+}
+
+function FooterNavLink({ label, href }: { label: string; href?: string }) {
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className="whitespace-nowrap font-[family-name:var(--velarro-ui-elements-footer-font-family)] text-[length:var(--velarro-ui-elements-footer-font-size)] font-light leading-normal text-text-body-text"
+      >
+        {label}
+      </Link>
+    );
+  }
+
+  return <DeferredFooterLink label={label} />;
 }
 
 function SocialControl({
@@ -244,7 +260,11 @@ export function FooterSection() {
               </div>
               <div className="flex w-full max-w-[1020px] flex-wrap items-center justify-center gap-x-[60px] gap-y-[16px]">
                 {SECONDARY_LINKS.map((label) => (
-                  <DeferredFooterLink key={label} label={label} />
+                  <FooterNavLink
+                    key={label}
+                    label={label}
+                    href={label === "Contact Us" ? "/get-in-touch" : undefined}
+                  />
                 ))}
               </div>
             </nav>
