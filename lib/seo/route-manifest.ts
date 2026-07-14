@@ -218,7 +218,7 @@ export const ROUTE_MANIFEST = [
     route: "/pairing-guide",
     module: "M08-editorial",
     figmaNodeId: "14406:85066",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "age-gated",

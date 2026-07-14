@@ -15,7 +15,7 @@ export const MAIN_MENU_ITEMS = [
   { label: "The Vault", href: "/the-vault", implemented: true },
   { label: "Careers", href: "/careers", implemented: false },
   { label: "News & Events", href: "/the-chronicle", implemented: false },
-  { label: "Pairing Guide", href: "/pairing-guide", implemented: false },
+  { label: "Pairing Guide", href: "/pairing-guide", implemented: true },
   { label: "Membership", href: "/membership", implemented: false },
   { label: "Get in touch", href: "/get-in-touch", implemented: false },
 ] as const;

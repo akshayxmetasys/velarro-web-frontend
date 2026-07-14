@@ -22,6 +22,8 @@ describe("route manifest", () => {
     expect(findRouteManifestEntry("/the-vault")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/the-chronicle")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/the-chronicle")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/pairing-guide")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/pairing-guide")?.indexable).toBe(false);
   });
 
   it("keeps route entries typed and unique", () => {
@@ -85,6 +87,18 @@ describe("route manifest", () => {
       route: "/the-chronicle",
       module: "M08-editorial",
       figmaNodeId: "14284:63187",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "age-gated",
+    });
+  });
+
+  it("marks Pairing Guide as an implemented over-21 restricted editorial route", () => {
+    expect(findRouteManifestEntry("/pairing-guide")).toMatchObject({
+      route: "/pairing-guide",
+      module: "M08-editorial",
+      figmaNodeId: "14406:85066",
       implemented: true,
       public: true,
       indexable: false,

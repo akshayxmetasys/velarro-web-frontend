@@ -16,8 +16,10 @@ describe("route access", () => {
     expect(isUnder21BlockedRoute("/cart")).toBe(true);
     expect(isUnder21BlockedRoute("/checkout/payment")).toBe(true);
     expect(isUnder21BlockedRoute("/pairing-guide")).toBe(true);
+    expect(isUnder21BlockedRoute("/pairing-guide/find-your-pairing")).toBe(true);
     expect(getRouteAccess("/the-vault", "under21").decision).toBe("block");
     expect(getRouteAccess("/the-chronicle", "under21").decision).toBe("block");
+    expect(getRouteAccess("/pairing-guide", "under21").decision).toBe("block");
     expect(getRouteAccess("/the-estate", "under21").decision).toBe("block");
     expect(getRouteAccess("/the-estate/the-house", "under21").decision).toBe(
       "block",
@@ -32,7 +34,10 @@ describe("route access", () => {
     expect(shouldGateUnknownRoute("/our-story")).toBe(true);
     expect(shouldGateUnknownRoute("/the-vault")).toBe(true);
     expect(shouldGateUnknownRoute("/the-chronicle")).toBe(true);
+    expect(shouldGateUnknownRoute("/pairing-guide")).toBe(true);
+    expect(shouldGateUnknownRoute("/pairing-guide/rum-and-cigars")).toBe(true);
     expect(getRouteAccess("/the-chronicle", "unknown").decision).toBe("gate");
+    expect(getRouteAccess("/pairing-guide", "unknown").decision).toBe("gate");
     expect(getRouteAccess("/the-vault", "unknown").decision).toBe("gate");
     expect(getRouteAccess("/the-estate", "unknown").decision).toBe("gate");
     expect(getRouteAccess("/the-estate/the-house", "unknown").decision).toBe(
@@ -58,6 +63,9 @@ describe("route access", () => {
       decision: "allow",
     });
     expect(getRouteAccess("/the-chronicle", "over21")).toMatchObject({
+      decision: "allow",
+    });
+    expect(getRouteAccess("/pairing-guide", "over21")).toMatchObject({
       decision: "allow",
     });
   });
