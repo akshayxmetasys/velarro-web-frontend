@@ -1,5 +1,12 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { usePathname } from "next/navigation";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  MAIN_MENU_ITEMS,
+  MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE,
+  MAIN_MENU_SIDEBAR_FIGMA_NODE,
+} from "@/components/m01-home/main-menu-sidebar";
 import { MainNavbar } from "@/components/m01-home/main-navbar";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 
@@ -29,6 +36,10 @@ vi.mock("next/image", () => ({
 }));
 
 describe("MainNavbar", () => {
+  beforeEach(() => {
+    vi.mocked(usePathname).mockReturnValue("/the-vault");
+  });
+
   it("renders the main navigation landmark and deferred controls", () => {
     render(<MainNavbar />);
 
@@ -53,6 +64,9 @@ describe("MainNavbar", () => {
     expect(
       screen.getByRole("link", { name: "Go to Velarro homepage" }),
     ).toHaveAttribute("href", "/");
+    expect(
+      screen.getByRole("button", { name: "Open main menu" }),
+    ).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByText(/SINCE\s+1919/)).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "The Estate" })).toHaveAttribute(
       "href",
@@ -65,5 +79,77 @@ describe("MainNavbar", () => {
     expect(screen.getByLabelText(/Search \(deferred/i)).toBeDisabled();
     expect(screen.getByLabelText(/Cart \(deferred/i)).toBeDisabled();
     expect(screen.getByLabelText(/Login \(deferred/i)).toBeDisabled();
+  });
+
+  it("opens the Figma main menu sidebar with the approved route links", async () => {
+    const user = userEvent.setup();
+    render(<MainNavbar />);
+
+    await user.click(screen.getByRole("button", { name: "Open main menu" }));
+
+    const dialog = screen.getByRole("dialog", { name: "Estate Index" });
+    expect(dialog).toHaveAttribute("data-figma-node", MAIN_MENU_SIDEBAR_FIGMA_NODE);
+    expect(dialog).toHaveAttribute(
+      "data-figma-component-set",
+      MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE,
+    );
+    expect(
+      screen.getByRole("button", { name: "Open main menu" }),
+    ).toHaveAttribute("aria-expanded", "true");
+
+    const menu = within(dialog).getByRole("navigation", { name: "Main menu" });
+    expect(
+      within(menu).getByRole("link", { name: "Estate Index" }),
+    ).toHaveAttribute("href", "/the-estate");
+
+    for (const item of MAIN_MENU_ITEMS.slice(1)) {
+      expect(within(menu).getByRole("link", { name: item.label })).toHaveAttribute(
+        "href",
+        item.href,
+      );
+    }
+
+    expect(within(menu).getByRole("link", { name: "The Vault" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(within(menu).getByRole("link", { name: "The Vault" })).toHaveClass(
+      "bg-labels-active-selected",
+    );
+    expect(within(menu).getByRole("link", { name: "The House" })).toHaveAttribute(
+      "href",
+      "/the-estate/the-house",
+    );
+    expect(
+      within(menu).getByRole("link", { name: "News & Events" }),
+    ).toHaveAttribute("href", "/the-chronicle");
+  });
+
+  it("closes the sidebar on Escape and restores focus to the menu button", async () => {
+    const user = userEvent.setup();
+    render(<MainNavbar />);
+
+    const trigger = screen.getByRole("button", { name: "Open main menu" });
+    await user.click(trigger);
+    expect(screen.getByRole("dialog", { name: "Estate Index" })).toBeInTheDocument();
+
+    await user.keyboard("{Escape}");
+
+    expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it("keeps The Vault reachable and closes the sidebar after link activation", async () => {
+    const user = userEvent.setup();
+    render(<MainNavbar />);
+
+    await user.click(screen.getByRole("button", { name: "Open main menu" }));
+    const vaultLink = screen.getByRole("link", { name: "The Vault" });
+    vaultLink.addEventListener("click", (event) => event.preventDefault(), {
+      once: true,
+    });
+    await user.click(vaultLink);
+
+    expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
   });
 });

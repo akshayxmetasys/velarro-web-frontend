@@ -20,4 +20,12 @@ describe("navigation data", () => {
       OVER_21_NAVIGATION_ITEMS,
     );
   });
+
+  it("keeps The Vault navigation pointed at the approved route", () => {
+    expect(OVER_21_NAVIGATION_ITEMS).toContainEqual({
+      label: "The Vault",
+      href: "/the-vault",
+      requiresOver21: true,
+    });
+  });
 });

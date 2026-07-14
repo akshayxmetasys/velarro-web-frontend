@@ -18,6 +18,8 @@ describe("route manifest", () => {
     );
     expect(findRouteManifestEntry("/our-story")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/our-story")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/the-vault")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/the-vault")?.indexable).toBe(false);
   });
 
   it("keeps route entries typed and unique", () => {
@@ -57,6 +59,18 @@ describe("route manifest", () => {
       route: "/the-estate/the-house",
       module: "M03-estate",
       figmaNodeId: "16576:96095",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "age-gated",
+    });
+  });
+
+  it("marks The Vault as an implemented over-21 restricted route", () => {
+    expect(findRouteManifestEntry("/the-vault")).toMatchObject({
+      route: "/the-vault",
+      module: "M05-vault",
+      figmaNodeId: "14240:78024",
       implemented: true,
       public: true,
       indexable: false,

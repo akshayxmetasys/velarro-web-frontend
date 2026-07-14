@@ -155,7 +155,7 @@ export const ROUTE_MANIFEST = [
     route: "/the-vault",
     module: "M05-vault",
     figmaNodeId: "14240:78024",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "age-gated",

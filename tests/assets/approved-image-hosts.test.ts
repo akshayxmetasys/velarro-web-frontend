@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { OUR_STORY_APPROVED_IMAGES } from "@/components/m02-our-story/our-story-assets";
 import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-assets";
 import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-assets";
+import { THE_VAULT_APPROVED_IMAGES } from "@/components/m05-vault/the-vault-assets";
 import {
   APPROVED_IMAGE_HOST,
   APPROVED_IMAGE_ORIGIN,
@@ -88,6 +89,7 @@ describe("approved image hosts", () => {
       M01_HOME_APPROVED_IMAGES,
       THE_ESTATE_APPROVED_IMAGES,
       THE_HOUSE_APPROVED_IMAGES,
+      THE_VAULT_APPROVED_IMAGES,
     });
 
     expect(serialized).not.toContain("figma.com");
@@ -140,6 +142,26 @@ describe("approved image hosts", () => {
     );
     expect(
       existsSync(join(process.cwd(), "public", "images", "m04-house")),
+    ).toBe(false);
+  });
+
+  it("accepts approved M05 The Vault image URLs without adding local files", () => {
+    expect(THE_VAULT_APPROVED_IMAGES.offerVerdeClassico).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/verde-classico-cigar-product-main-20260709-014847-product-main.webp",
+    );
+
+    for (const url of Object.values(THE_VAULT_APPROVED_IMAGES)) {
+      expect(isApprovedImageUrl(url)).toBe(true);
+    }
+
+    const serialized = JSON.stringify(THE_VAULT_APPROVED_IMAGES);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(existsSync(join(process.cwd(), "public", "images", "m05"))).toBe(
+      false,
+    );
+    expect(
+      existsSync(join(process.cwd(), "public", "images", "m05-vault")),
     ).toBe(false);
   });
 });
