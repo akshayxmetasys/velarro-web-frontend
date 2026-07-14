@@ -24,6 +24,8 @@ describe("route manifest", () => {
     expect(findRouteManifestEntry("/the-chronicle")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/pairing-guide")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/pairing-guide")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/partner")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/partner")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/careers")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/careers")?.indexable).toBe(false);
   });
@@ -113,6 +115,18 @@ describe("route manifest", () => {
       route: "/careers",
       module: "M09-engagement",
       figmaNodeId: "13148:15771",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "review",
+    });
+  });
+
+  it("marks Partner as an implemented public review route", () => {
+    expect(findRouteManifestEntry("/partner")).toMatchObject({
+      route: "/partner",
+      module: "M09-engagement",
+      figmaNodeId: "14670:42180",
       implemented: true,
       public: true,
       indexable: false,

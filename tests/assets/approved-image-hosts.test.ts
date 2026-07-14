@@ -8,6 +8,7 @@ import { THE_VAULT_APPROVED_IMAGES } from "@/components/m05-vault/the-vault-asse
 import { CHRONICLE_APPROVED_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
 import { PAIRING_GUIDE_APPROVED_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
 import { CAREERS_APPROVED_IMAGES } from "@/components/m09-careers/careers-assets";
+import { PARTNER_ASSETS } from "@/components/m09-partner/partner-assets";
 import {
   APPROVED_IMAGE_HOST,
   APPROVED_IMAGE_ORIGIN,
@@ -96,6 +97,7 @@ describe("approved image hosts", () => {
       CHRONICLE_APPROVED_IMAGES,
       PAIRING_GUIDE_APPROVED_IMAGES,
       CAREERS_APPROVED_IMAGES,
+      PARTNER_ASSETS,
     });
 
     expect(serialized).not.toContain("figma.com");
@@ -228,6 +230,26 @@ describe("approved image hosts", () => {
     );
     expect(
       existsSync(join(process.cwd(), "public", "images", "m09-careers")),
+    ).toBe(false);
+  });
+
+  it("keeps M09 Partner image slot explicitly deferred without adding local files", () => {
+    expect(PARTNER_ASSETS.partnerMainImage).toMatchObject({
+      slot: "partner_main_image",
+      url: null,
+      status: "deferred",
+      figmaNodeId: "14670:42191",
+    });
+
+    const serialized = JSON.stringify(PARTNER_ASSETS);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(serialized).not.toContain("unsplash");
+    expect(existsSync(join(process.cwd(), "public", "images", "m09"))).toBe(
+      false,
+    );
+    expect(
+      existsSync(join(process.cwd(), "public", "images", "m09-partner")),
     ).toBe(false);
   });
 });

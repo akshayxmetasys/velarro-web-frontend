@@ -17,6 +17,7 @@ describe("route access", () => {
     expect(isUnder21BlockedRoute("/checkout/payment")).toBe(true);
     expect(isUnder21BlockedRoute("/pairing-guide")).toBe(true);
     expect(isUnder21BlockedRoute("/pairing-guide/find-your-pairing")).toBe(true);
+    expect(isUnder21BlockedRoute("/partner")).toBe(false);
     expect(isUnder21BlockedRoute("/careers")).toBe(false);
     expect(getRouteAccess("/the-vault", "under21").decision).toBe("block");
     expect(getRouteAccess("/the-chronicle", "under21").decision).toBe("block");
@@ -26,6 +27,7 @@ describe("route access", () => {
       "block",
     );
     expect(getRouteAccess("/our-story", "under21").decision).toBe("block");
+    expect(getRouteAccess("/partner", "under21").decision).toBe("review");
     expect(getRouteAccess("/careers", "under21").decision).toBe("review");
   });
 
@@ -38,6 +40,7 @@ describe("route access", () => {
     expect(shouldGateUnknownRoute("/the-chronicle")).toBe(true);
     expect(shouldGateUnknownRoute("/pairing-guide")).toBe(true);
     expect(shouldGateUnknownRoute("/pairing-guide/rum-and-cigars")).toBe(true);
+    expect(shouldGateUnknownRoute("/partner")).toBe(false);
     expect(shouldGateUnknownRoute("/careers")).toBe(false);
     expect(getRouteAccess("/the-chronicle", "unknown").decision).toBe("gate");
     expect(getRouteAccess("/pairing-guide", "unknown").decision).toBe("gate");
@@ -47,6 +50,7 @@ describe("route access", () => {
       "gate",
     );
     expect(getRouteAccess("/our-story", "unknown").decision).toBe("gate");
+    expect(getRouteAccess("/partner", "unknown").decision).toBe("review");
     expect(getRouteAccess("/careers", "unknown").decision).toBe("review");
   });
 
@@ -70,6 +74,9 @@ describe("route access", () => {
       decision: "allow",
     });
     expect(getRouteAccess("/pairing-guide", "over21")).toMatchObject({
+      decision: "allow",
+    });
+    expect(getRouteAccess("/partner", "over21")).toMatchObject({
       decision: "allow",
     });
     expect(getRouteAccess("/careers", "over21")).toMatchObject({

@@ -72,6 +72,10 @@ describe("MainNavbar", () => {
       "href",
       "/the-estate",
     );
+    expect(screen.getByRole("link", { name: "Partner" })).toHaveAttribute(
+      "href",
+      "/partner",
+    );
     expect(screen.getByRole("link", { name: "Our Story" })).toHaveAttribute(
       "href",
       "/our-story",

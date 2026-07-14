@@ -236,7 +236,7 @@ export const ROUTE_MANIFEST = [
     route: "/partner",
     module: "M09-engagement",
     figmaNodeId: "14670:42180",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "review",
