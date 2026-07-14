@@ -5,6 +5,7 @@ import { OUR_STORY_APPROVED_IMAGES } from "@/components/m02-our-story/our-story-
 import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-assets";
 import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-assets";
 import { THE_VAULT_APPROVED_IMAGES } from "@/components/m05-vault/the-vault-assets";
+import { CHRONICLE_APPROVED_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
 import {
   APPROVED_IMAGE_HOST,
   APPROVED_IMAGE_ORIGIN,
@@ -90,6 +91,7 @@ describe("approved image hosts", () => {
       THE_ESTATE_APPROVED_IMAGES,
       THE_HOUSE_APPROVED_IMAGES,
       THE_VAULT_APPROVED_IMAGES,
+      CHRONICLE_APPROVED_IMAGES,
     });
 
     expect(serialized).not.toContain("figma.com");
@@ -162,6 +164,26 @@ describe("approved image hosts", () => {
     );
     expect(
       existsSync(join(process.cwd(), "public", "images", "m05-vault")),
+    ).toBe(false);
+  });
+
+  it("accepts approved M08 The Chronicle image URLs without adding local files", () => {
+    expect(CHRONICLE_APPROVED_IMAGES.hero).toBe(
+      "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/thechronicle-hero-20260709-023616-desktop-hero.webp",
+    );
+
+    for (const url of Object.values(CHRONICLE_APPROVED_IMAGES)) {
+      expect(isApprovedImageUrl(url)).toBe(true);
+    }
+
+    const serialized = JSON.stringify(CHRONICLE_APPROVED_IMAGES);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(existsSync(join(process.cwd(), "public", "images", "m08"))).toBe(
+      false,
+    );
+    expect(
+      existsSync(join(process.cwd(), "public", "images", "m08-chronicle")),
     ).toBe(false);
   });
 });

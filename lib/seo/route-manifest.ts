@@ -209,7 +209,7 @@ export const ROUTE_MANIFEST = [
     route: "/the-chronicle",
     module: "M08-editorial",
     figmaNodeId: "14284:63187",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "age-gated",
