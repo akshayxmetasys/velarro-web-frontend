@@ -181,7 +181,7 @@ describe("FooterSection", () => {
     }
   });
 
-  it("renders footer navigation as deferred non-navigating links", () => {
+  it("renders footer navigation as deferred non-navigating links except Contact Us", () => {
     render(<FooterSection />);
 
     for (const label of [
@@ -193,7 +193,6 @@ describe("FooterSection", () => {
       "Track Order",
       "Sustainability",
       "Press",
-      "Contact Us",
       "FAQ",
       "Privacy Policy",
       "Terms of Service",
@@ -206,6 +205,11 @@ describe("FooterSection", () => {
         }),
       ).not.toHaveAttribute("href");
     }
+
+    expect(screen.getByRole("link", { name: "Contact Us" })).toHaveAttribute(
+      "href",
+      "/get-in-touch",
+    );
   });
 
   it("scrolls to the top when Ascend is activated", async () => {

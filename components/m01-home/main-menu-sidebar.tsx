@@ -17,7 +17,7 @@ export const MAIN_MENU_ITEMS = [
   { label: "News & Events", href: "/the-chronicle", implemented: false },
   { label: "Pairing Guide", href: "/pairing-guide", implemented: true },
   { label: "Membership", href: "/membership", implemented: false },
-  { label: "Get in touch", href: "/get-in-touch", implemented: false },
+  { label: "Get in touch", href: "/get-in-touch", implemented: true },
 ] as const;
 
 function MenuIcon() {
