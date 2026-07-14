@@ -20,6 +20,8 @@ describe("route manifest", () => {
     expect(findRouteManifestEntry("/our-story")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/the-vault")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/the-vault")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/the-chronicle")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/the-chronicle")?.indexable).toBe(false);
   });
 
   it("keeps route entries typed and unique", () => {
@@ -71,6 +73,18 @@ describe("route manifest", () => {
       route: "/the-vault",
       module: "M05-vault",
       figmaNodeId: "14240:78024",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "age-gated",
+    });
+  });
+
+  it("marks The Chronicle as an implemented over-21 restricted editorial route", () => {
+    expect(findRouteManifestEntry("/the-chronicle")).toMatchObject({
+      route: "/the-chronicle",
+      module: "M08-editorial",
+      figmaNodeId: "14284:63187",
       implemented: true,
       public: true,
       indexable: false,
