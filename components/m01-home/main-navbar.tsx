@@ -86,25 +86,6 @@ function LoginIcon() {
   );
 }
 
-interface DeferredNavControlProps {
-  label: string;
-  reason: string;
-}
-
-function DeferredNavControl({ label, reason }: DeferredNavControlProps) {
-  return (
-    <span
-      role="link"
-      aria-disabled="true"
-      aria-label={`${label} (deferred: ${reason})`}
-      title={`${label} - ${reason}`}
-      className="cursor-not-allowed whitespace-nowrap font-[family-name:var(--velarro-ui-elements-navbar-font-family)] text-[length:var(--velarro-ui-elements-navbar-font-size)] font-normal leading-normal text-icon-default"
-    >
-      {label}
-    </span>
-  );
-}
-
 function NavbarLink({ label, href }: { label: string; href: string }) {
   return (
     <Link
@@ -178,10 +159,7 @@ export function MainNavbar() {
           <MainMenuSidebar />
           <div className="flex items-center gap-[42px]">
             <NavbarLink label="The Estate" href="/the-estate" />
-            <DeferredNavControl
-              label="Partner"
-              reason="destination not approved for this scope"
-            />
+            <NavbarLink label="Partner" href="/partner" />
           </div>
           <NavbarLink label="Our Story" href="/our-story" />
         </div>
