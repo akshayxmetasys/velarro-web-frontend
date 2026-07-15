@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "py -3 ./.cursor/hooks/guard.py before-shell"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "py -3 ./.cursor/hooks/guard.py after-edit"
+      }
+    ],
+    "stop": [
+      {
+        "command": "py -3 ./.cursor/hooks/guard.py stop"
+      }
+    ]
+  }
+}

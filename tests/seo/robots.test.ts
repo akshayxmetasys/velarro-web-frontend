@@ -10,7 +10,9 @@ describe("robots", () => {
       userAgent: "*",
       allow: "/",
     });
-    expect(output.rules.disallow).toContain("/the-estate");
-    expect(output.rules.disallow).toContain("/cart");
+    expect(output.rules).not.toBeInstanceOf(Array);
+    const rules = output.rules as Exclude<typeof output.rules, Array<unknown>>;
+    expect(rules.disallow).toContain("/the-estate");
+    expect(rules.disallow).toContain("/cart");
   });
 });

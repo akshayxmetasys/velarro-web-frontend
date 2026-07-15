@@ -1,0 +1,66 @@
+name: Cursor Agent Config
+
+on:
+  pull_request:
+    paths:
+      - ".cursor/**"
+      - ".agents/**"
+      - ".cursorrules"
+      - "AGENTS.md"
+      - "docs/engineering/**"
+      - "scripts/sync_agent_skills.py"
+      - "scripts/validate_cursor_pack.py"
+      - ".github/workflows/cursor-agent-config.yml"
+  push:
+    paths:
+      - ".cursor/**"
+      - ".agents/**"
+      - ".cursorrules"
+      - "AGENTS.md"
+      - "docs/engineering/**"
+      - "scripts/sync_agent_skills.py"
+      - "scripts/validate_cursor_pack.py"
+      - ".github/workflows/cursor-agent-config.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cursor-agent-config-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check mirrored Codex skills
+        run: python -B scripts/sync_agent_skills.py --check
+
+      - name: Validate Cursor configuration
+        run: python -B scripts/validate_cursor_pack.py
+
+      - name: Test Cursor hooks
+        run: python -B -m unittest discover -s .cursor/hooks/tests -p "test_*.py"
+
+      - name: Parse hook JSON
+        run: python -B -c "import json; json.load(open('.cursor/hooks.json', encoding='utf-8')); json.load(open('.cursor/hooks.windows.json', encoding='utf-8'))"
+
+      - name: Compile hook and validation scripts
+        run: python -B -m py_compile .cursor/hooks/guard.py scripts/sync_agent_skills.py scripts/validate_cursor_pack.py
+
+      - name: Detect stale generated files
+        run: git diff --exit-code
+
+      - name: Reject generated installer artifacts
+        run: |
+          test ! -d .cursor/.state
+          ! find . -path './node_modules' -prune -o \( -name '__pycache__' -o -name '*.pyc' -o -name 'cursor-enterprise-engineering-pack*.zip' -o -name 'cursor-pack-extract-*' \) -print -quit | grep .

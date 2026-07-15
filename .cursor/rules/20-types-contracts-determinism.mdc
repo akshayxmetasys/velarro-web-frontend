@@ -1,0 +1,42 @@
+---
+description: Apply when defining data models, APIs, generated code, serialization, configuration, or business logic.
+alwaysApply: false
+---
+
+# Strict typing, contracts, immutability, and determinism
+
+## Strict typing
+
+- ALWAYS use the strongest practical static type system settings supported by the repository.
+- NEVER use untyped escape hatches such as `any`, unchecked casts, dynamic maps, reflection, blanket suppressions, or equivalent mechanisms without a documented boundary reason and runtime validation.
+- External data is `unknown` until validated.
+- Model invalid states as unrepresentable when practical through tagged unions, enums, value objects, branded/opaque identifiers, constrained constructors, and exhaustive matching.
+- Use explicit units for time, money, size, rates, percentages, coordinates, and identifiers.
+- NEVER conflate absent, empty, zero, false, unknown, pending, and failed states.
+- Public contracts MUST state nullability, ownership, mutability, error semantics, and compatibility expectations.
+
+## Immutability and ownership
+
+- Immutability is the default. Prefer immutable values, persistent data structures, readonly views, copy-on-write, and pure functions.
+- Mutation is allowed only when it is localized, measured, encapsulated, and materially improves correctness or performance.
+- NEVER expose mutable internal collections or buffers through a public API.
+- Concurrency-sensitive state MUST have one explicit owner and a documented synchronization model.
+- NEVER rely on incidental thread safety.
+
+## Determinism
+
+- Builds and generators MUST be hermetic and deterministic.
+- Pin direct and transitive dependencies through lockfiles or equivalent resolved manifests.
+- NEVER read undeclared environment state, network resources, current time, randomness, locale, timezone, filesystem ordering, or machine-specific paths during deterministic generation unless injected as an explicit input.
+- Sort unordered inputs before serialization or generation.
+- Normalize line endings, encodings, timestamps, and archive metadata where reproducibility matters.
+- Generated files MUST include the generator identity/version and MUST be reproducible from checked-in inputs.
+- Tests MUST control clocks, randomness, concurrency scheduling where feasible, and external I/O.
+
+## Contracts and invariants
+
+- Validate data once at each trust boundary and convert it to a validated internal type.
+- Use explicit preconditions, postconditions, and invariants for critical state transitions.
+- Fail fast on programmer errors and corrupted internal state.
+- Return typed, actionable errors for expected operational failures.
+- NEVER continue after an invariant violation with partially trusted state.

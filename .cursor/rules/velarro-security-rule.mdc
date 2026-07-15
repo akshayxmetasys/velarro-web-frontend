@@ -1,0 +1,23 @@
+---
+description: Apply to Velarro security-sensitive code, headers, cookies, forms, external domains, dependencies, and browser trust boundaries.
+globs: "app/**,components/**,lib/security/**,lib/age/**,next.config.ts,tests/security/**,tests/e2e/**"
+alwaysApply: false
+---
+
+For every Velarro implementation task, apply security from the start.
+
+Do not expose secrets, API keys, tokens, private URLs, credentials, or environment values in client code.
+
+Do not weaken Content Security Policy or security headers to make implementation easier.
+
+Do not add unapproved third-party scripts, analytics, embeds, fonts, external images, or remote domains.
+
+Do not use dangerouslySetInnerHTML unless explicitly approved, sanitized, and documented.
+
+Do not invent auth, payment, admin, backend, session, privacy, legal, compliance, or backend behavior.
+
+Age-state cookies must store only approved non-PII values.
+
+Every security-relevant change must include or preserve tests where possible.
+
+Before claiming a feature is security-ready, ask the Velarro Security Auditor subagent to review it.
