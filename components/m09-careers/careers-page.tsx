@@ -309,14 +309,12 @@ function JobsSection() {
             <JobCard key={job.id} job={job} />
           ))}
         </div>
-        <button
-          type="button"
-          disabled
-          aria-label="View all positions (deferred: positions route is not approved for this scope)"
-          className="h-[35px] w-[214px] cursor-not-allowed rounded-[4px] border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[0] text-text-heading disabled:opacity-100"
+        <Link
+          href={CAREERS_JOBS_COPY.positionsHref}
+          className="inline-flex h-[35px] w-[214px] items-center justify-center rounded-[4px] border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[0] text-text-heading outline-none focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2"
         >
           {CAREERS_JOBS_COPY.button}
-        </button>
+        </Link>
       </div>
     </section>
   );

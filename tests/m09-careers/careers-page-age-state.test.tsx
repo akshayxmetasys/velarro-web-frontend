@@ -259,16 +259,18 @@ describe("CareersPageByAgeState", () => {
       }),
     ).toBeDisabled();
     expect(
-      screen.getByRole("button", {
+      screen.getByRole("link", { name: CAREERS_JOBS_COPY.button }),
+    ).toHaveAttribute("href", "/careers/positions");
+    expect(
+      screen.queryByRole("button", {
         name: "View all positions (deferred: positions route is not approved for this scope)",
       }),
-    ).toBeDisabled();
+    ).not.toBeInTheDocument();
     expect(
       screen.getByRole("button", {
         name: "Join our team (deferred: application flow is not approved for this scope)",
       }),
     ).toBeDisabled();
-    expect(screen.queryByRole("link", { name: CAREERS_JOBS_COPY.button })).toBeNull();
     expect(screen.queryByRole("link", { name: CAREERS_CTA_COPY.button })).toBeNull();
   });
 
