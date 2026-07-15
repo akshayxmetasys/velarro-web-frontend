@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { PartnerForm } from "@/components/m09-partner/partner-form";
@@ -10,15 +10,25 @@ import {
 
 function fillValidPartnerForm() {
   return async function fill(user: ReturnType<typeof userEvent.setup>) {
-    await user.type(screen.getByLabelText("Email Address"), "partner@example.com");
-    await user.type(screen.getByLabelText("Full name"), "Avery Stone");
-    await user.type(screen.getByLabelText("Phone number"), "+1 555 0100");
-    await user.type(screen.getByLabelText("Business name"), "Stone Retail");
-    await user.type(screen.getByLabelText("Country"), "United States");
-    await user.type(
-      screen.getByLabelText("Your message"),
-      "We would like to discuss a retail partnership.",
-    );
+    fireEvent.change(screen.getByLabelText("Email Address"), {
+      target: { value: "partner@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Full name"), {
+      target: { value: "Avery Stone" },
+    });
+    fireEvent.change(screen.getByLabelText("Phone number"), {
+      target: { value: "+1 555 0100" },
+    });
+    fireEvent.change(screen.getByLabelText("Business name"), {
+      target: { value: "Stone Retail" },
+    });
+    fireEvent.change(screen.getByLabelText("Country"), {
+      target: { value: "United States" },
+    });
+    fireEvent.change(screen.getByLabelText("Your message"), {
+      target: { value: "We would like to discuss a retail partnership." },
+    });
+    await user.tab();
   };
 }
 

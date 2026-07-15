@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { GetInTouchForm } from "@/components/m09-get-in-touch/get-in-touch-form";
@@ -11,14 +11,22 @@ import {
 
 function fillValidGetInTouchForm() {
   return async function fill(user: ReturnType<typeof userEvent.setup>) {
-    await user.type(screen.getByLabelText("Name"), "John Doe");
-    await user.type(screen.getByLabelText("Email address"), "john@example.com");
-    await user.type(screen.getByLabelText("Phone number"), "000 0000 000");
-    await user.type(screen.getByLabelText("Subject"), "General support");
-    await user.type(
-      screen.getByLabelText("Message"),
-      "I have a question about my order.",
-    );
+    fireEvent.change(screen.getByLabelText("Name"), {
+      target: { value: "John Doe" },
+    });
+    fireEvent.change(screen.getByLabelText("Email address"), {
+      target: { value: "john@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText("Phone number"), {
+      target: { value: "000 0000 000" },
+    });
+    fireEvent.change(screen.getByLabelText("Subject"), {
+      target: { value: "General support" },
+    });
+    fireEvent.change(screen.getByLabelText("Message"), {
+      target: { value: "I have a question about my order." },
+    });
+    await user.tab();
   };
 }
 
