@@ -53,15 +53,27 @@ test.describe("M09 Careers positions page", () => {
     const cards = page.locator("[data-careers-position-card]");
     await expect(cards).toHaveCount(6);
     for (let index = 0; index < CAREER_POSITIONS.length; index += 1) {
+      const position = CAREER_POSITIONS[index];
       await expect(cards.nth(index)).toHaveAttribute(
         "data-position-slug",
-        CAREER_POSITIONS[index].slug,
+        position.slug,
       );
+
+      const expectedDetailStatus =
+        position.slug === "area-sales-manager" ? "implemented" : "deferred";
       await expect(cards.nth(index)).toHaveAttribute(
         "data-position-detail-status",
-        "deferred",
+        expectedDetailStatus,
       );
-      await expect(cards.nth(index).locator("a")).toHaveCount(0);
+
+      if (position.slug === "area-sales-manager") {
+        await expect(cards.nth(index).locator("a")).toHaveAttribute(
+          "href",
+          "/careers/positions/area-sales-manager",
+        );
+      } else {
+        await expect(cards.nth(index).locator("a")).toHaveCount(0);
+      }
     }
 
     await page.getByRole("searchbox", { name: "Search by keywords" }).fill(

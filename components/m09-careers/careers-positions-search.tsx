@@ -11,11 +11,15 @@ import {
   getCareerPositionResultsStatus,
 } from "@/components/m09-careers/careers-positions-data";
 
-export function CareersPositionsSearch() {
+export function CareersPositionsSearch({
+  initialQuery = "",
+}: {
+  initialQuery?: string;
+}) {
   const searchFieldId = useId();
   const resultsStatusId = useId();
-  const [query, setQuery] = useState("");
-  const [submittedQuery, setSubmittedQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
+  const [submittedQuery, setSubmittedQuery] = useState(initialQuery);
   const visiblePositions = filterCareerPositions(CAREER_POSITIONS, submittedQuery);
   const hasActiveQuery = submittedQuery.trim().length > 0;
   const resultsStatus = getCareerPositionResultsStatus(

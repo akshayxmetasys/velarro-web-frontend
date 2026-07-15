@@ -10,8 +10,37 @@ export const metadata = buildPageMetadata({
   indexable: false,
 });
 
-export default async function CareersPositions() {
-  const ageState = await getInitialAgeStateFromCookies();
+interface CareersPositionsRouteProps {
+  searchParams: Promise<{
+    q?: string | string[];
+  }>;
+}
 
-  return <CareersPositionsPageByAgeState ageState={ageState} />;
+function getInitialSearchQuery(
+  searchParam: string | string[] | undefined,
+): string {
+  if (typeof searchParam === "string") {
+    return searchParam.trim();
+  }
+
+  if (Array.isArray(searchParam) && typeof searchParam[0] === "string") {
+    return searchParam[0].trim();
+  }
+
+  return "";
+}
+
+export default async function CareersPositions({
+  searchParams,
+}: CareersPositionsRouteProps) {
+  const resolvedSearchParams = await searchParams;
+  const ageState = await getInitialAgeStateFromCookies();
+  const initialQuery = getInitialSearchQuery(resolvedSearchParams.q);
+
+  return (
+    <CareersPositionsPageByAgeState
+      ageState={ageState}
+      initialQuery={initialQuery}
+    />
+  );
 }

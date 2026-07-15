@@ -101,4 +101,13 @@ describe("CareersPositionsSearch", () => {
     fetchSpy.mockRestore();
     storageSpy.mockRestore();
   });
+
+  it("initializes from an initial query value", () => {
+    render(<CareersPositionsSearch initialQuery="manager" />);
+
+    expect(screen.getByRole("searchbox", { name: "Search by keywords" })).toHaveValue(
+      "manager",
+    );
+    expect(document.querySelectorAll("[data-careers-position-card]")).toHaveLength(2);
+  });
 });

@@ -22,6 +22,9 @@ import {
 import type { AgeState } from "@/lib/age/age-state";
 import { cn } from "@/lib/cn";
 
+const CAREERS_VALUE_CARD_INTERACTION_CLASS =
+  "transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:shadow-[0_14px_28px_rgba(47,41,36,0.12)]" as const;
+
 interface CareersPageProps {
   ageState: AgeState;
 }
@@ -165,7 +168,10 @@ function Breadcrumbs() {
 function ValueCard({ card }: { card: CareersValueCard }) {
   return (
     <article
-      className="flex w-full flex-col gap-[20px] rounded-[12px] border border-border-default bg-background-card p-[20px] shadow-card-subtle desktop:max-w-[378px]"
+      className={cn(
+        "flex w-full max-w-[378px] flex-col gap-[15px] rounded-[12px] border border-border-default bg-background-card px-[20px] py-[24px]",
+        CAREERS_VALUE_CARD_INTERACTION_CLASS,
+      )}
       data-careers-value-card
       data-careers-value-card-id={card.id}
       data-figma-node={card.figmaNodeId}
@@ -173,17 +179,17 @@ function ValueCard({ card }: { card: CareersValueCard }) {
       <DeferredCareersImage
         imageKey={card.deferredImageKey}
         figmaNode={card.imageNodeId}
-        className="aspect-[338/225] w-full"
+        className="aspect-[338/225] w-full max-w-[338px]"
       />
-      <div className="flex flex-col gap-[10px] px-[4px] pb-[4px]">
+      <div className="flex w-full max-w-[338px] flex-col gap-[12px]">
         <h3
-          className="font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[length:var(--velarro-heading-product-cards-font-size)] font-normal uppercase leading-[24px] tracking-[0] text-text-display"
+          className="font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[length:var(--velarro-heading-product-cards-font-size)] font-normal uppercase leading-[normal] tracking-[0] text-text-heading"
           data-careers-typography="value-card-title"
         >
           {card.title}
         </h3>
         <p
-          className="font-[family-name:var(--velarro-body-label-font-family)] text-[length:var(--velarro-body-label-font-size)] font-light leading-[var(--velarro-body-label-line-height)] tracking-[0] text-text-body-text"
+          className="font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[length:var(--velarro-heading-product-cards-font-size)] font-normal leading-[var(--velarro-heading-product-cards-line-height)] tracking-[0] text-text-body-text"
           data-careers-typography="value-card-body"
         >
           {card.body}
@@ -197,11 +203,14 @@ function CareersIntroSection() {
   return (
     <section
       aria-labelledby="careers-intro-heading"
-      className="flex w-full justify-center px-[24px] pb-[64px] pt-[60px] desktop:px-[48px] desktop:pb-[84px] desktop:pt-[76px]"
+      className="flex w-full flex-col items-center bg-background-section px-[24px] pb-[36px] pt-[60px] desktop:px-[48px] desktop:pt-[76px]"
       data-section="careers-intro"
-      data-figma-node="13148:15781"
+      data-figma-node="13148:15783"
     >
-      <div className="flex w-full max-w-[1228px] flex-col items-center gap-[40px]">
+      <div
+        className="flex w-full max-w-[1228px] flex-col items-center gap-[40px]"
+        data-figma-node="13148:15784"
+      >
         <div className="flex max-w-[1192px] flex-col items-center gap-[20px] text-center">
           <h2
             id="careers-intro-heading"
@@ -213,7 +222,10 @@ function CareersIntroSection() {
             {CAREERS_INTRO_COPY.body}
           </p>
         </div>
-        <div className="grid w-full gap-[28px] tablet:grid-cols-3 desktop:gap-[37px]">
+        <div
+          className="grid w-full gap-[28px] tablet:grid-cols-3 desktop:gap-[37px]"
+          data-figma-node="13148:15788"
+        >
           {CAREERS_VALUE_CARDS.map((card) => (
             <ValueCard key={card.id} card={card} />
           ))}
@@ -324,25 +336,48 @@ function TestimonialSection() {
   return (
     <section
       aria-labelledby="careers-testimonial-heading"
-      className="flex w-full justify-center px-[24px] pb-[76px] desktop:px-[48px] desktop:pb-[96px]"
+      className="flex w-full justify-center px-[24px] pb-[76px] desktop:px-[80px] desktop:pb-[96px]"
       data-section="careers-testimonial"
-      data-figma-node="13148:15832"
+      data-figma-node="13148:15842"
     >
-      <div className="flex w-full max-w-[1054px] flex-col gap-[24px] border-l border-border-strong pl-[24px] desktop:pl-[40px]">
+      <div className="flex w-full max-w-[1279px] flex-col items-start gap-[34px] text-left">
         <h2
           id="careers-testimonial-heading"
-          className="font-[family-name:var(--velarro-heading-page-font-family)] text-[32px] font-normal leading-[var(--velarro-heading-page-line-height)] tracking-[0] text-text-display desktop:text-[length:var(--velarro-heading-page-font-size)]"
+          className="w-full text-left font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-[normal] tracking-[0] text-text-heading"
+          data-careers-typography="testimonial-heading"
+          data-figma-node="13148:15843"
         >
           {CAREERS_TESTIMONIAL_COPY.title}
         </h2>
-        <blockquote className="flex flex-col gap-[20px]">
-          <p className="font-[family-name:var(--velarro-body-default-font-family)] text-[20px] font-light leading-[32px] tracking-[0] text-text-body-text desktop:text-[24px] desktop:leading-[38px]">
-            {CAREERS_TESTIMONIAL_COPY.quote}
-          </p>
-          <cite className="not-italic font-[family-name:var(--velarro-body-label-font-family)] text-[length:var(--velarro-body-label-font-size)] font-light leading-[var(--velarro-body-label-line-height)] tracking-[0] text-text-heading">
-            {CAREERS_TESTIMONIAL_COPY.attribution}
-          </cite>
-        </blockquote>
+        <figure
+          className="flex w-full items-center gap-[20px] py-[20px]"
+          data-figma-node="13148:15844"
+        >
+          <div
+            aria-hidden="true"
+            className="h-[123px] w-px shrink-0 bg-border-default"
+            data-figma-node="13148:15845"
+          />
+          <blockquote
+            className="min-w-0 flex-1"
+            data-figma-node="13148:15846"
+          >
+            <p
+              className="text-left font-[family-name:var(--velarro-body-default-font-family)] text-[20px] font-[275] leading-[normal] tracking-[-0.25px] text-text-body-text"
+              data-careers-typography="testimonial-quote"
+            >
+              {CAREERS_TESTIMONIAL_COPY.quote}
+            </p>
+            <figcaption className="mt-[20px]">
+              <cite
+                className="not-italic text-left font-[family-name:var(--velarro-body-default-font-family)] text-[20px] font-[275] leading-[normal] tracking-[-0.25px] text-text-body-text"
+                data-careers-typography="testimonial-attribution"
+              >
+                {CAREERS_TESTIMONIAL_COPY.attribution}
+              </cite>
+            </figcaption>
+          </blockquote>
+        </figure>
       </div>
     </section>
   );
@@ -352,25 +387,42 @@ function CareersCtaSection() {
   return (
     <section
       aria-labelledby="careers-cta-heading"
-      className="flex w-full justify-center px-[24px] pb-[84px] desktop:px-[48px] desktop:pb-[112px]"
+      className="flex w-full justify-center px-[24px] pb-[84px] desktop:px-[80px] desktop:pb-[112px]"
       data-section="careers-cta"
-      data-figma-node="13148:15841"
+      data-figma-node="13148:15847"
     >
-      <div className="flex w-full max-w-[820px] flex-col items-center gap-[20px] text-center">
-        <h2
-          id="careers-cta-heading"
-          className="font-[family-name:var(--velarro-heading-page-font-family)] text-[36px] font-normal leading-[var(--velarro-heading-page-line-height)] tracking-[0] text-text-display desktop:text-[length:var(--velarro-heading-page-font-size)]"
+      <div className="flex w-full max-w-[1130px] flex-col items-center gap-[34px]">
+        <div
+          className="flex w-full flex-col items-center gap-[20px]"
+          data-figma-node="13148:15848"
         >
-          {CAREERS_CTA_COPY.title}
-        </h2>
-        <p className="font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[0] text-text-body-text desktop:text-[length:var(--velarro-body-default-font-size)]">
-          {CAREERS_CTA_COPY.body}
-        </p>
+          <div
+            className="w-full max-w-[808px] border-b border-[#d5b57b] py-[8px]"
+            data-careers-cta-title-wrapper
+            data-figma-node="13148:15849"
+          >
+            <h2
+              id="careers-cta-heading"
+              className="text-center font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-[normal] tracking-[0] text-text-heading"
+              data-careers-typography="cta-title"
+              data-figma-node="13148:15850"
+            >
+              {CAREERS_CTA_COPY.title}
+            </h2>
+          </div>
+          <p
+            className="w-full max-w-[1038px] text-center font-[family-name:var(--velarro-body-default-font-family)] text-[length:var(--velarro-body-default-font-size)] font-light leading-[var(--velarro-body-default-line-height)] tracking-[0] text-text-body-text"
+            data-careers-typography="cta-body"
+            data-figma-node="13148:15851"
+          >
+            {CAREERS_CTA_COPY.body}
+          </p>
+        </div>
         <button
           type="button"
           disabled
           aria-label="Join our team (deferred: application flow is not approved for this scope)"
-          className="mt-[10px] h-[35px] w-[183px] cursor-not-allowed rounded-[4px] border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[0] text-text-heading disabled:opacity-100"
+          className="h-[35px] w-[183px] cursor-not-allowed rounded-[4px] border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[0] text-text-heading disabled:opacity-100"
         >
           {CAREERS_CTA_COPY.button}
         </button>

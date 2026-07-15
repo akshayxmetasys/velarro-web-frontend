@@ -3,10 +3,12 @@ import type { AgeState } from "@/lib/age/age-state";
 
 export interface CareersPositionsPageByAgeStateProps {
   ageState: AgeState;
+  initialQuery?: string;
 }
 
 export function CareersPositionsPageByAgeState({
   ageState,
+  initialQuery,
 }: CareersPositionsPageByAgeStateProps) {
-  return <CareersPositionsPage ageState={ageState} />;
+  return <CareersPositionsPage ageState={ageState} initialQuery={initialQuery} />;
 }
