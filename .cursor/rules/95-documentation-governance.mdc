@@ -1,0 +1,16 @@
+---
+description: Apply to material architecture, public APIs, operational behavior, security controls, data models, migrations, and complex algorithms.
+alwaysApply: false
+---
+
+# Documentation and decision records
+
+- Code should explain what it does through structure, naming, types, and narrow interfaces.
+- Comments MUST explain why, constraints, invariants, non-obvious tradeoffs, safety assumptions, or performance reasoning. NEVER narrate obvious syntax.
+- Performance-critical functions MUST include a concise complexity note: time, auxiliary space, dominant allocation/copy behavior, and important worst-case inputs.
+- Public interfaces MUST document contract, errors, side effects, idempotency, thread/concurrency behavior, and compatibility guarantees.
+- Material architectural decisions require an ADR using `docs/engineering/adr-template.md`.
+- Security-sensitive changes require a threat model or delta using `docs/engineering/threat-model-template.md`.
+- New critical operations require runbook and observability updates.
+- Documentation MUST describe current verified behavior. NEVER describe planned controls as implemented.
+- Examples MUST compile or be tested when practical and MUST not contain real credentials or sensitive production data.

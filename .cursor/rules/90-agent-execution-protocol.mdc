@@ -1,0 +1,35 @@
+---
+description: Apply to substantial Cursor Agent work, reviews, refactors, migrations, incident fixes, and cross-cutting changes.
+alwaysApply: false
+---
+
+# Agent execution protocol
+
+## Before editing
+
+- Inspect relevant files and trace callers, callees, data flow, error flow, tests, configuration, and runtime boundaries.
+- Search for existing abstractions, utilities, conventions, ADRs, and prior implementations before creating new ones.
+- Identify acceptance criteria, non-goals, compatibility requirements, and failure modes.
+- For ambiguous but non-blocking details, choose the safest repository-consistent assumption and state it.
+
+## While editing
+
+- Keep changes atomic and reviewable.
+- Update implementation, tests, telemetry, documentation, configuration, and migrations together.
+- Do not generate placeholder tests, superficial telemetry, empty catch blocks, broad suppressions, fake mocks, or TODOs as substitutes for completion.
+- Do not rewrite an entire file to make a narrow change unless the existing structure prevents a safe solution.
+- Preserve public behavior not authorized to change.
+
+## Specialist delegation
+
+- Delegate hot-path, concurrency, memory, or scalability analysis to `senior-performance-agent`.
+- Delegate authentication, authorization, parsing, secrets, cryptography, dependency, infrastructure, and data-protection review to `security-auditor-agent`.
+- Delegate test-gap analysis and missing negative/edge/concurrency coverage to `test-coverage-agent`.
+- Specialist findings are evidence for the parent agent; the parent remains responsible for reconciling conflicts and delivering one coherent change.
+
+## Final review
+
+- Inspect `git diff` or the equivalent complete change set.
+- Verify no unrelated files changed, no secrets appeared, no generated artifact is stale, no lockfile drift is unexplained, and no suppressions weakened controls.
+- Run applicable checks and quote concise outcomes, not fabricated summaries.
+- State residual risk, unrun checks, environment limitations, migrations, and rollout requirements.

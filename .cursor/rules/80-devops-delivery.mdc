@@ -1,0 +1,39 @@
+---
+description: Apply to build systems, CI/CD, containers, infrastructure as code, deployments, migrations, release automation, and operational configuration.
+alwaysApply: false
+---
+
+# Build, infrastructure, and delivery
+
+## Hermetic builds
+
+- Build inputs MUST be declared, pinned, checksum-verifiable, and isolated from developer-machine state.
+- NEVER download unpinned executable code during a release build.
+- Use immutable toolchain and base-image references where supported.
+- Keep lockfiles synchronized and fail CI on unexpected lockfile drift.
+- Build artifacts MUST be reproducible or document the exact nondeterministic fields and mitigation.
+- Generate and retain provenance, checksums, and an SBOM for release artifacts where supported.
+
+## Infrastructure as code
+
+- All durable infrastructure changes MUST be reviewable as code.
+- NEVER place secrets in IaC source, plans, state outputs, CI logs, or generated artifacts.
+- Use least-privilege identities, private networking by default, encryption in transit/at rest, explicit egress, backup policy, retention, and deletion protection according to risk.
+- Validate policy, syntax, formatting, static security, drift, and plan output before apply.
+- Destructive changes require explicit approval, impact analysis, backup/restore confidence, and rollback or recovery steps.
+
+## Delivery safety
+
+- Prefer progressive delivery: canary, blue-green, feature flag, or staged rollout according to system architecture.
+- Define pre-deploy checks, post-deploy verification, rollback triggers, and rollback mechanics.
+- Database migrations MUST be backward-compatible across the deployment window unless an explicitly coordinated outage is approved.
+- Use expand/migrate/contract for incompatible schema changes.
+- NEVER couple irreversible data mutation to an application deploy without a validated recovery strategy.
+- Feature flags require owner, purpose, default, observability, cleanup date, and safe failure behavior.
+
+## Reliability and security gates
+
+- Required CI checks MUST be non-bypassable for protected branches except through documented emergency governance.
+- Deployments MUST stop on failed quality, security, policy, or health gates.
+- NEVER automatically roll forward through an unexplained increase in errors, latency, saturation, or critical business failures.
+- Chaos tests MUST run in an isolated or explicitly authorized environment with bounded blast radius, abort conditions, and recovery verification.

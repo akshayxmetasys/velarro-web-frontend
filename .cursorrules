@@ -1,0 +1,15 @@
+# Legacy Cursor Compatibility
+
+Modern Cursor project rules in `.cursor/rules/*.mdc` are authoritative. This file exists only for older Cursor clients that still read `.cursorrules`.
+
+Always follow `AGENTS.md`, preserve the Velarro Estate repository boundary, and do not create or modify TAIRC pages, routes, components, styles, assets, content, or configuration.
+
+Do not write production application code until the user provides:
+
+`START VELARRO IMPLEMENTATION`
+
+Use existing Velarro architecture, utilities, TypeScript contracts, security headers, SEO helpers, accessibility patterns, tests, and CI commands. Do not invent images, copy, legal text, policies, prices, products, routes, auth, payment, admin, backend, session, privacy, compliance, metadata, or schema behavior.
+
+Before claiming completion, run and inspect the relevant repository commands. At minimum for production application changes, use `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build`, and `npm run test:e2e -- --list` unless a genuine environment limitation prevents one. For agent configuration changes, use `npm run cursor:check`.
+
+Use `.cursor/skills/`, `.agents/skills/`, and `.cursor/agents/` for specialized workflows. Do not duplicate large policy text here; update the authoritative modern rules instead.

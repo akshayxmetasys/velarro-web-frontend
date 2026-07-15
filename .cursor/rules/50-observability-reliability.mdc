@@ -1,0 +1,44 @@
+---
+description: Apply when creating or modifying production modules, services, jobs, APIs, workflows, external integrations, caches, queues, or persistence logic.
+alwaysApply: false
+---
+
+# Observability and reliability by default
+
+## OpenTelemetry
+
+- New production execution paths MUST participate in the repository's OpenTelemetry tracing, metrics, and context propagation conventions.
+- Create spans at meaningful operation boundaries, not every function.
+- Propagate trace context across process, queue, job, and network boundaries.
+- Record stable operation names and low-cardinality attributes.
+- NEVER attach secrets, raw payloads, unbounded identifiers, email addresses, tokens, or high-cardinality values to telemetry.
+- Mark errors with normalized error type/status while preserving actionable internal context safely.
+
+## Structured logging
+
+- Use the approved structured logger; NEVER add ad hoc stdout/stderr or production `console.log` style output.
+- Log events, not prose. Include timestamp, severity, service/module, operation, trace/span identifiers, outcome, duration where applicable, and safe correlation identifiers.
+- Avoid duplicate logging at every layer. Log where ownership and actionability are clear.
+- Error logs MUST preserve root cause through structured chaining without leaking sensitive data.
+
+## Metrics
+
+- Expose demand, errors, latency, saturation, and critical business-flow outcomes.
+- Use counters for events, gauges for current state, histograms for distributions, and explicit units.
+- Define metric ownership, description, labels, and expected cardinality.
+- NEVER use user-controlled arbitrary strings as metric labels.
+- Add health/readiness signals only for dependencies that determine whether the instance can safely serve traffic.
+
+## Reliability mechanics
+
+- Every external call requires explicit timeout and cancellation.
+- Retries require bounded attempts, exponential backoff, jitter, retryable-error classification, idempotency, and an overall deadline.
+- Circuit breakers, bulkheads, queues, and caches require explicit capacity and failure behavior.
+- Graceful shutdown MUST stop intake, drain bounded work, flush telemetry where safe, and release resources within a deadline.
+- Critical state transitions MUST be auditable and recoverable.
+
+## Operational documentation
+
+- Changes affecting operations MUST update dashboards, alerts, runbooks, SLOs, or troubleshooting guidance as applicable.
+- Alerts MUST be actionable, symptom-oriented, owned, and tied to user or system impact.
+- NEVER add an alert without defining response expectations and avoiding known noisy failure modes.

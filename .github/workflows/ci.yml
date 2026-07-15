@@ -26,6 +26,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Type-check
+        run: npm run typecheck
+
       - name: Test
         run: npm run test
 
@@ -33,4 +36,4 @@ jobs:
         run: npm run build
 
       - name: List E2E tests
-        run: npm run test:e2e -- --list
+        run: npm run test:e2e:list
