@@ -150,6 +150,18 @@ describe("route manifest", () => {
     });
   });
 
+  it("marks Careers Positions application as an implemented public review route", () => {
+    expect(findRouteManifestEntry("/careers/positions/[jobId]/apply")).toMatchObject({
+      route: "/careers/positions/[jobId]/apply",
+      module: "M09-engagement",
+      figmaNodeId: "13563:29858",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "review",
+    });
+  });
+
   it("marks Partner as an implemented public review route", () => {
     expect(findRouteManifestEntry("/partner")).toMatchObject({
       route: "/partner",
