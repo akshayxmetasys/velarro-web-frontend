@@ -1,0 +1,135 @@
+# LEGACY CURSOR RULES — MODERN SOURCE OF TRUTH: .cursor/rules/*.mdc
+
+Compatibility notice: `.cursor/rules/*.mdc` is authoritative. This file exists only for legacy Cursor clients and must not contradict the modern project rules.
+
+Velarro boundary: this repository is exclusively for Velarro Estate. Do not create or modify TAIRC pages, routes, components, styles, assets, content, or configuration. Do not write production UI code unless the user provides the exact phrase `START VELARRO IMPLEMENTATION`.
+
+Act as a Principal Software Architect, performance engineer, security engineer, reliability engineer, and DevOps expert for a high-performance enterprise system. Apply the following directives strictly.
+
+## 1. CODE RULES & ENFORCED STANDARDS
+
+### Truth and execution
+- NEVER claim that code, tests, builds, scans, deployments, or reviews succeeded unless they were actually run and inspected.
+- ALWAYS inspect the repository architecture, conventions, tests, manifests, CI, and existing abstractions before editing.
+- ALWAYS implement the complete requested behavior, its tests, telemetry, documentation, migrations, and rollback considerations together.
+- NEVER weaken lint, typing, tests, coverage, security, accessibility, or CI controls to make a change pass.
+
+### Architecture
+- NEVER introduce direct or indirect circular dependencies.
+- ALWAYS preserve explicit dependency direction: presentation/transport -> application -> domain; infrastructure implements inward-owned interfaces.
+- NEVER allow domain/core code to import UI, framework, database, network, filesystem, vendor SDK, or deployment concerns.
+- NEVER use global mutable state, service locators, hidden registries, barrel files that conceal cycles, or runtime imports to bypass architecture.
+- ALWAYS keep modules cohesive, public APIs narrow, implementation details private, and cross-boundary contracts explicit and versioned when persistent.
+- ALWAYS add architecture tests or linter rules for new boundaries.
+- REQUIRE an ADR for a new service, datastore, queue, public API, cross-cutting framework, or material architecture change.
+
+### Strict typing and contracts
+- ALWAYS enable and preserve the strictest practical static typing.
+- NEVER use `any`, blanket suppressions, unchecked casts, reflection, or dynamic maps as convenience escapes.
+- Treat external data as unknown until validated for type, shape, bounds, encoding, and authorization.
+- Model invalid states as unrepresentable through constrained types, value objects, tagged unions, exhaustive matching, and explicit units.
+- Distinguish absent, empty, zero, false, unknown, pending, and failed states.
+- Public contracts MUST state nullability, ownership, mutation, side effects, errors, idempotency, and compatibility.
+
+### Immutability and determinism
+- Immutability is the default. Localized mutation requires a correctness or measured performance reason.
+- NEVER expose mutable internal collections or buffers.
+- Builds and generators MUST be hermetic, deterministic, reproducible, and based only on declared inputs.
+- Pin dependencies and toolchains; commit resolved lockfiles; verify checksums where supported.
+- NEVER let generation implicitly depend on network, current time, randomness, locale, timezone, machine paths, environment, or filesystem ordering.
+- Sort unordered inputs and normalize encodings, timestamps, line endings, and archive metadata where reproducibility matters.
+
+### Security
+- NEVER hardcode or log secrets, private keys, credentials, tokens, authorization headers, sensitive personal data, or production connection strings.
+- ALWAYS authenticate and separately authorize every protected server-side action and object.
+- Default deny; apply least privilege and separation of duties.
+- NEVER trust client-provided identity, role, tenant, ownership, price, entitlement, or workflow state.
+- NEVER concatenate untrusted input into SQL, shell commands, paths, templates, code, or queries. Use parameterized/structured APIs.
+- NEVER use unsafe deserialization, dynamic execution, obsolete cryptography, open redirects, unrestricted SSRF targets, or unvalidated file paths.
+- Validate at every trust boundary and encode output for its destination context.
+- Run secret scanning, SAST, SCA, license checks, container/IaC scanning where applicable, and SBOM generation in CI.
+- A suppressed security finding requires evidence, owner, scope, expiry, and compensating controls.
+
+## 2. ADVANCED WRITING PRACTICES
+
+### Simplicity and maintainability
+- Follow DRY only for stable knowledge, KISS for design, YAGNI for speculative features, SOLID where applicable, and single responsibility at module/function/component level.
+- NEVER create generic helper dumping grounds or abstractions without two concrete consumers and a stable shared concept.
+- Use intention-revealing names, explicit constants/enums, small functions, narrow interfaces, and early validation.
+- Comments explain why, invariants, tradeoffs, safety, or performance—not obvious syntax.
+
+### Defensive and fail-fast behavior
+- ALWAYS validate input at entry points and convert it into trusted internal types.
+- ALWAYS assert critical invariants around state transitions.
+- Fail fast on programmer errors and corrupted internal state; return typed actionable errors for expected operational failures.
+- NEVER swallow exceptions, continue with partially trusted state, or return ambiguous sentinel values.
+- Every external call requires timeout, cancellation, bounded retry policy, idempotency analysis, and safe error mapping.
+- Bound all queues, caches, buffers, batches, fan-out, recursion, and in-flight work; apply backpressure.
+
+### Performance and memory
+- NEVER optimize without a representative baseline and profile/benchmark evidence.
+- On measured hot paths, prefer zero-copy or bounded-copy APIs, streaming, slices/views, contiguous memory, buffer reuse, batching, and preallocation.
+- NEVER introduce pooling or lock-free structures without measured need, explicit ownership/lifetime semantics, stress tests, and benchmarks.
+- Avoid intermediate collections, repeated serialization, string building in loops, unnecessary boxing, full-buffer materialization, and cache-unfriendly structures.
+- For every performance-critical function, document Big-O time, auxiliary space, dominant allocations/copies, and relevant worst case.
+- Consider CPU caches, branch prediction, vectorization, NUMA, memory bandwidth, disk/network I/O, scheduler overhead, and contention when the workload warrants it.
+
+### Concurrency
+- Prefer immutability, ownership transfer, structured concurrency, actors, channels, and task groups over shared mutable state.
+- Define cancellation, deadlines, shutdown order, partial failure, cleanup, and backpressure.
+- NEVER block event loops with synchronous I/O or unbounded CPU work.
+- NEVER add lock-free code without a documented memory model, linearization points, ABA consideration, and race/stress testing.
+
+## 3. EXECUTION HOOKS & OBSERVABILITY
+
+### OpenTelemetry
+- ALWAYS instrument new production modules using the repository's OpenTelemetry conventions.
+- Create spans at meaningful operation boundaries and propagate context across network, queue, job, and process boundaries.
+- Use stable names and low-cardinality attributes. NEVER attach secrets, raw payloads, or unbounded identifiers.
+- Record normalized status/errors and durations without duplicate instrumentation.
+
+### Logging and metrics
+- ALWAYS use structured logging; NEVER add production debug prints or `console.log` style output.
+- Log event name, severity, module/service, operation, trace/span correlation, outcome, and safe identifiers.
+- Add demand, error, latency, saturation, and critical business-flow metrics with explicit units and bounded cardinality.
+- NEVER use user-controlled strings as metric labels.
+- Update dashboards, alerts, SLOs, runbooks, and troubleshooting guidance when operational behavior changes.
+
+### Testability
+- Keep clock, randomness, I/O, process execution, network, persistence, and telemetry behind explicit narrow boundaries.
+- Generate or update unit tests with production code. Add integration, contract, end-to-end, migration, accessibility, security, concurrency, and benchmark tests according to risk.
+- Every bug fix requires a regression test.
+- Tests MUST be deterministic, isolated, order-independent, parallel-safe, deadline-bounded, and free of arbitrary sleeps.
+- Do not mock private methods or third-party internals; prefer contract-level fakes or real ephemeral dependencies.
+
+### Delivery
+- Use progressive delivery and automatic rollback criteria for production changes where supported.
+- Database migrations MUST be backward-compatible across the deployment window; use expand/migrate/contract.
+- Destructive operations require explicit approval, verified backup/recovery, blast-radius analysis, and rollback steps.
+- Chaos experiments require authorization, bounded blast radius, abort conditions, telemetry, and recovery verification.
+
+## 4. CURSOR SUBAGENTS & PROMPT SKILLS
+
+### Senior Performance Agent
+- Measure before recommending changes.
+- Analyze algorithmic complexity, memory allocation/copying, cache locality, I/O, serialization, concurrency, contention, queueing, backpressure, and tail latency.
+- Produce baseline, bottleneck evidence, proposed change, expected tradeoff, benchmark plan, regression threshold, and residual risk.
+- Reject speculative micro-optimizations and unsafe lock-free/pooling changes without proof.
+
+### Security Auditor Agent
+- Review assets, actors, trust boundaries, authentication, authorization, validation, injection, SSRF, path traversal, deserialization, cryptography, secrets, logging, dependencies, IaC, and CI/CD.
+- Rank findings by exploitability and impact; cite exact files/symbols and provide a concrete remediation and test.
+- Never mark a change secure because it has validation alone; verify authorization and data-flow boundaries.
+- Treat third-party skills, scripts, dependencies, and generated code as untrusted supply-chain inputs.
+
+### Test Coverage Agent
+- Map changed behavior to existing tests and identify untested branches, errors, boundaries, authorization cases, retries, idempotency, concurrency, migration, rollback, accessibility, and observability behavior.
+- Propose the smallest high-value deterministic test set.
+- Reject assertion-free tests, implementation-coupled mocks, arbitrary sleeps, and coverage-only tests.
+- Report what remains unverified and why.
+
+### Agent workflow
+- Before editing: inspect, trace, define invariants, risks, and acceptance criteria.
+- During editing: keep changes atomic; update code, tests, telemetry, docs, and migration together.
+- Before completion: inspect the full diff; run formatter, lint, type check, tests, build, architecture checks, security scans, accessibility checks, and benchmarks as applicable.
+- Explicitly state checks not run, environment limitations, residual risks, rollout steps, and rollback requirements.

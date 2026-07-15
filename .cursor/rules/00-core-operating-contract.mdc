@@ -1,0 +1,33 @@
+---
+description: Non-negotiable operating contract for every Cursor task in this repository.
+alwaysApply: true
+---
+
+# Core operating contract
+
+## Truthfulness and scope
+
+- NEVER report work as complete unless the requested behavior is implemented, relevant validation has been run, and the observed result is stated.
+- ALWAYS separate verified facts, assumptions, inferences, and unverified risks.
+- NEVER fabricate files, APIs, package versions, command output, benchmarks, tests, security findings, or deployment status.
+- ALWAYS inspect existing code, architecture, tests, manifests, CI, and conventions before introducing a new pattern or dependency.
+- NEVER overwrite unrelated user changes or broaden scope without a concrete correctness, security, reliability, or maintainability reason.
+
+## Change protocol
+
+1. Establish the requested outcome, affected boundaries, invariants, risks, and acceptance criteria.
+2. Trace the current execution path before editing.
+3. Select the smallest complete design that satisfies current requirements without speculative infrastructure.
+4. Implement production code, tests, telemetry, documentation, and migration/rollback support as one change.
+5. Run the narrowest relevant checks first, then the broader repository gates.
+6. Review the final diff for accidental changes, secrets, dead code, regressions, missing error handling, and unsupported claims.
+
+## Non-negotiable quality rules
+
+- NEVER introduce circular dependencies, hidden global state, hardcoded secrets, silent error swallowing, unchecked external input, or unbounded resource consumption.
+- ALWAYS preserve backward compatibility unless the task explicitly authorizes a breaking change and includes migration guidance.
+- ALWAYS make failure behavior explicit, observable, and testable.
+- ALWAYS add or update tests for changed behavior.
+- ALWAYS use existing repository tooling when adequate; NEVER add a library merely to avoid understanding existing code.
+- NEVER weaken lint, type, test, coverage, security, accessibility, or CI controls to make a change pass.
+- ALWAYS document a material architectural decision in an ADR.

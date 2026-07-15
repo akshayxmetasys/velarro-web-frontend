@@ -7,9 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "agent-skills:sync": "python -B scripts/sync_agent_skills.py",
+    "agent-skills:check": "python -B scripts/sync_agent_skills.py --check",
+    "cursor:validate": "python -B scripts/validate_cursor_pack.py",
+    "cursor:hooks:test": "python -B -m unittest discover .cursor/hooks/tests",
+    "cursor:check": "npm run agent-skills:check && npm run cursor:validate && npm run cursor:hooks:test"
   },
   "dependencies": {
     "next": "16.2.10",

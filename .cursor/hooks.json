@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/session-start.ps1",
+        "timeout": 10
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "python .cursor/hooks/guard.py before-shell",
+        "timeout": 10
+      },
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/block-dangerous-shell.ps1",
+        "timeout": 10,
+        "matcher": "git\\s+push.*\\bmain\\b|git\\s+push.*--force|git\\s+reset\\s+--hard|Remove-Item\\s+.*-Recurse.*-Force"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "python .cursor/hooks/guard.py after-edit",
+        "timeout": 10
+      },
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/after-file-edit.ps1",
+        "timeout": 10
+      }
+    ],
+    "stop": [
+      {
+        "command": "python .cursor/hooks/guard.py stop",
+        "timeout": 10
+      },
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/session-stop.ps1",
+        "timeout": 10
+      }
+    ]
+  }
+}

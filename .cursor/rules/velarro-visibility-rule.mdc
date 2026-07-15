@@ -1,0 +1,30 @@
+---
+description: Velarro SEO, AEO, GEO, SXO, accessibility, metadata, schema, and crawlability requirements for public website routes.
+globs: ["app/**", "components/**", "lib/seo/**", "tests/seo/**", "app/sitemap.ts", "app/robots.ts", "docs/implementation/**"]
+alwaysApply: false
+---
+
+For every Velarro implementation task, apply SEO, AEO, GEO, SXO, AIO, accessibility, and discoverability thinking from the start.
+
+Use legitimate visibility architecture only:
+- semantic HTML
+- clean heading hierarchy
+- page-specific metadata
+- canonical URLs
+- internal linking
+- breadcrumbs
+- truthful structured data
+- descriptive alt text
+- fast responsive UX
+- accessible components
+- crawlable visible content
+
+Do not create doorway pages, city/country keyword stuffing, hidden SEO text, fake localized pages, fake business locations, fake reviews, fake prices, fake products, or fake availability.
+
+Only create city, country, language, or regional pages when there is real approved localized content and a real user/business purpose.
+
+Use hreflang only for real localized page variants.
+
+Structured data must describe visible approved page content only. Do not mark up content users cannot see. Do not use temporary Figma image URLs in metadata or schema.
+
+Before claiming a page is visibility-ready, ask the Velarro Visibility Architect subagent to review it.
