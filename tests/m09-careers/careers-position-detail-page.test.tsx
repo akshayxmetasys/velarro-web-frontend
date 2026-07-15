@@ -77,7 +77,7 @@ describe("CareersPositionDetailPageByAgeState", () => {
     },
   );
 
-  it("renders breadcrumb, metadata, sections, HR contact, and deferred apply", () => {
+  it("renders breadcrumb, metadata, sections, HR contact, and implemented apply link", () => {
     render(
       <CareersPositionDetailPageByAgeState
         ageState="unknown"
@@ -131,15 +131,17 @@ describe("CareersPositionDetailPageByAgeState", () => {
     );
     expect(hrPanel?.className).not.toContain("bg-background-section");
 
-    const applyButton = screen.getByRole("button", {
-      name: /Apply for this job \(unavailable/i,
-    });
-    expect(applyButton).toBeDisabled();
-    expect(applyButton).toHaveAttribute("data-application-status", "deferred");
-    expect(applyButton).toHaveAttribute(
+    const applyLink = screen.getByRole("link", { name: "Apply for this job" });
+    expect(applyLink).toHaveAttribute(
+      "href",
+      "/careers/positions/area-sales-manager/apply",
+    );
+    expect(applyLink).toHaveAttribute("data-application-status", "implemented");
+    expect(applyLink).toHaveAttribute(
       "data-application-route",
       "/careers/positions/area-sales-manager/apply",
     );
+    expect(screen.queryByRole("button", { name: /Apply for this job \(unavailable/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("form", { name: /application/i })).not.toBeInTheDocument();
   });
 

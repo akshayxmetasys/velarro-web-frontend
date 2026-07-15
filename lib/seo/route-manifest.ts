@@ -269,6 +269,15 @@ export const ROUTE_MANIFEST = [
     audience: "review",
   },
   {
+    route: "/careers/positions/[jobId]/apply",
+    module: "M09-engagement",
+    figmaNodeId: "13563:29858",
+    implemented: true,
+    public: true,
+    indexable: false,
+    audience: "review",
+  },
+  {
     route: "/get-in-touch",
     module: "M09-engagement",
     figmaNodeId: "14644:34661",

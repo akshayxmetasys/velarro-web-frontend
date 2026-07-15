@@ -33,6 +33,9 @@ describe("route access", () => {
     expect(
       getRouteAccess("/careers/positions/area-sales-manager", "under21").decision,
     ).toBe("review");
+    expect(
+      getRouteAccess("/careers/positions/area-sales-manager/apply", "under21").decision,
+    ).toBe("review");
     expect(getRouteAccess("/get-in-touch", "under21").decision).toBe("review");
     expect(getRouteAccess("/membership", "under21").decision).toBe("review");
   });
@@ -52,6 +55,9 @@ describe("route access", () => {
     expect(
       shouldGateUnknownRoute("/careers/positions/area-sales-manager"),
     ).toBe(false);
+    expect(
+      shouldGateUnknownRoute("/careers/positions/area-sales-manager/apply"),
+    ).toBe(false);
     expect(shouldGateUnknownRoute("/get-in-touch")).toBe(false);
     expect(shouldGateUnknownRoute("/membership")).toBe(false);
     expect(getRouteAccess("/the-chronicle", "unknown").decision).toBe("gate");
@@ -67,6 +73,9 @@ describe("route access", () => {
     expect(getRouteAccess("/careers/positions", "unknown").decision).toBe("review");
     expect(
       getRouteAccess("/careers/positions/area-sales-manager", "unknown").decision,
+    ).toBe("review");
+    expect(
+      getRouteAccess("/careers/positions/area-sales-manager/apply", "unknown").decision,
     ).toBe("review");
     expect(getRouteAccess("/get-in-touch", "unknown").decision).toBe("review");
     expect(getRouteAccess("/membership", "unknown").decision).toBe("review");
@@ -105,6 +114,11 @@ describe("route access", () => {
     });
     expect(
       getRouteAccess("/careers/positions/area-sales-manager", "over21"),
+    ).toMatchObject({
+      decision: "allow",
+    });
+    expect(
+      getRouteAccess("/careers/positions/area-sales-manager/apply", "over21"),
     ).toMatchObject({
       decision: "allow",
     });
