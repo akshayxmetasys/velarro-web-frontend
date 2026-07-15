@@ -93,13 +93,27 @@ describe("CareersPositionsPageByAgeState", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
 
-  it("marks deferred filters and non-navigable job cards", () => {
+  it("marks deferred filters and navigable detail status per position", () => {
     render(<CareersPositionsPageByAgeState ageState="unknown" />);
 
     expect(document.querySelectorAll('[data-filter-status="deferred"]')).toHaveLength(5);
-    expect(screen.queryByRole("link", { name: "Production Manager" })).not.toBeInTheDocument();
 
-    for (const position of CAREER_POSITIONS) {
+    const areaSalesManagerCard = document.querySelector(
+      '[data-position-slug="area-sales-manager"]',
+    );
+    expect(areaSalesManagerCard).toHaveAttribute(
+      "data-position-detail-status",
+      "implemented",
+    );
+    expect(
+      within(areaSalesManagerCard as HTMLElement).getByRole("link", {
+        name: /Area Sales Manager/i,
+      }),
+    ).toHaveAttribute("href", "/careers/positions/area-sales-manager");
+
+    for (const position of CAREER_POSITIONS.filter(
+      (entry) => entry.slug !== "area-sales-manager",
+    )) {
       const card = document.querySelector(
         `[data-position-slug="${position.slug}"]`,
       );
@@ -189,7 +203,11 @@ describe("/careers/positions route", () => {
   it("uses the cookie age state for the route render without gating positions", async () => {
     vi.mocked(getInitialAgeStateFromCookies).mockResolvedValue("under21");
 
-    render(await CareersPositionsRoute());
+    render(
+      await CareersPositionsRoute({
+        searchParams: Promise.resolve({}),
+      }),
+    );
 
     expect(getInitialAgeStateFromCookies).toHaveBeenCalledOnce();
     expect(screen.getByRole("heading", { name: "Filter" })).toBeInTheDocument();

@@ -10,6 +10,7 @@ import type { AgeState } from "@/lib/age/age-state";
 
 interface CareersPositionsPageProps {
   ageState: AgeState;
+  initialQuery?: string;
 }
 
 function Breadcrumbs() {
@@ -48,7 +49,10 @@ function Breadcrumbs() {
   );
 }
 
-export function CareersPositionsPage({ ageState }: CareersPositionsPageProps) {
+export function CareersPositionsPage({
+  ageState,
+  initialQuery = "",
+}: CareersPositionsPageProps) {
   return (
     <div
       className="min-h-screen w-full overflow-x-hidden bg-background-page"
@@ -68,7 +72,7 @@ export function CareersPositionsPage({ ageState }: CareersPositionsPageProps) {
           <h1 id="careers-positions-page-heading" className="sr-only">
             Careers positions
           </h1>
-          <CareersPositionsSearch />
+          <CareersPositionsSearch initialQuery={initialQuery} />
         </section>
       </main>
       <FooterSection />
