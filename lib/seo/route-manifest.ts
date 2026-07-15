@@ -227,7 +227,7 @@ export const ROUTE_MANIFEST = [
     route: "/membership",
     module: "M09-engagement",
     figmaNodeId: "15008:38309",
-    implemented: false,
+    implemented: true,
     public: true,
     indexable: false,
     audience: "review",
