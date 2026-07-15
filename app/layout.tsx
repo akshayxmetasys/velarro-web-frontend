@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Velarro Estate",
   },
   description:
-    "Velarro Estate — curated cigars, house goods, and membership experiences.",
+    "Velarro Estate — roastery, house goods, and membership experiences.",
   metadataBase: new URL("https://velarroestate.com"),
   applicationName: "Velarro Estate",
   robots: {
