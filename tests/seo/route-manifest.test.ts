@@ -30,6 +30,8 @@ describe("route manifest", () => {
     expect(findRouteManifestEntry("/careers")?.indexable).toBe(false);
     expect(findRouteManifestEntry("/get-in-touch")?.implemented).toBe(true);
     expect(findRouteManifestEntry("/get-in-touch")?.indexable).toBe(false);
+    expect(findRouteManifestEntry("/membership")?.implemented).toBe(true);
+    expect(findRouteManifestEntry("/membership")?.indexable).toBe(false);
   });
 
   it("keeps route entries typed and unique", () => {
@@ -141,6 +143,18 @@ describe("route manifest", () => {
       route: "/get-in-touch",
       module: "M09-engagement",
       figmaNodeId: "14644:34661",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "review",
+    });
+  });
+
+  it("marks Membership as an implemented public review route", () => {
+    expect(findRouteManifestEntry("/membership")).toMatchObject({
+      route: "/membership",
+      module: "M09-engagement",
+      figmaNodeId: "15008:38309",
       implemented: true,
       public: true,
       indexable: false,
