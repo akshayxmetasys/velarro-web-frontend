@@ -1,0 +1,37 @@
+---
+description: Apply to Velarro Estate page, component, route, asset, Figma, or product-scope work.
+globs: "app/**,components/**,lib/**,public/**,docs/figma/**,docs/implementation/**,tests/**"
+alwaysApply: false
+---
+
+Always follow AGENTS.md and CLAUDE.md.
+
+This repository is exclusively for the Velarro Estate website.
+
+Never write production UI code unless the user explicitly provides:
+START VELARRO IMPLEMENTATION
+
+Build module by module and PR by PR.
+
+Before visual implementation:
+- Extract Figma section/page data with Figma MCP.
+- Use section-level nodes when full-page nodes timeout.
+- Ask the user for every required image URL before coding that page/section.
+- Do not invent images, copy, products, prices, legal text, policies, routes, or interactions.
+
+For visual pages:
+- Match Figma exactly at 1440px first.
+- Build feature by feature, section by section, layer by layer inside each section.
+- Use existing project tokens and patterns before adding new values.
+- Record Figma node IDs and source assumptions in docs.
+
+Before claiming completion:
+- Run npm run lint.
+- Run npm run test.
+- Run npm run build.
+- Run npm run test:e2e -- --list.
+- Report changed files, test results, and open assumptions.
+
+Do not modify unrelated modules.
+Do not bypass failing tests.
+Do not push directly to main.

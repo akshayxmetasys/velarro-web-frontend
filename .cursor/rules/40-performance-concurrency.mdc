@@ -1,0 +1,43 @@
+---
+description: Apply to hot paths, high-throughput processing, concurrency, data structures, serialization, networking, storage, large datasets, and latency-sensitive code.
+alwaysApply: false
+---
+
+# Performance, memory, and concurrency
+
+## Evidence before optimization
+
+- NEVER claim a performance improvement without a representative benchmark, profiler trace, load test, or measured production signal.
+- Establish baseline, workload, dataset, hardware/runtime, warm-up, sample count, percentile, variance, and acceptance threshold.
+- Optimize the system bottleneck, not a visually complex function.
+- Preserve a readable reference implementation when an optimized implementation is materially harder to verify.
+
+## Allocation and data movement
+
+- In measured hot paths, prefer zero-copy or bounded-copy designs, contiguous memory, streaming, slices/views, buffer reuse, batching, and preallocation.
+- NEVER introduce object pooling without a profile showing allocation/GC pressure and tests proving correct reset, ownership, and lifetime behavior.
+- Avoid repeated parse/serialize cycles, intermediate collections, string concatenation in loops, unnecessary boxing, and full-buffer materialization.
+- Bound every queue, buffer, cache, batch, recursion depth, fan-out, and in-flight operation.
+- Apply backpressure instead of permitting unbounded memory growth.
+- Document ownership and lifetime for borrowed buffers, views, pooled objects, and native resources.
+
+## Algorithms and mechanical sympathy
+
+- Select algorithms by workload shape, asymptotic cost, constants, memory locality, branch behavior, vectorization opportunity, contention, and I/O pattern.
+- For every performance-critical public function, include a concise complexity note covering time, auxiliary space, dominant allocations, and relevant worst case.
+- Prefer sequential contiguous access over pointer-heavy structures when behavior and benchmarks support it.
+- Avoid false sharing, lock convoys, oversubscription, excessive context switching, and unnecessary cross-NUMA traffic in systems where these effects matter.
+
+## Concurrency
+
+- Prefer ownership transfer, immutable messages, structured concurrency, actors, channels, or task groups over shared mutable state.
+- NEVER add lock-free code without a documented memory model, linearization points, ABA analysis where relevant, stress tests, and benchmark evidence.
+- Define cancellation, deadlines, shutdown order, partial failure, and resource cleanup.
+- Never block an event-loop or async executor with synchronous I/O or unbounded CPU work.
+- Avoid coarse locks in hot paths; do not replace a correct lock with a more complex primitive without evidence.
+
+## Performance acceptance
+
+- Define budgets for latency percentiles, throughput, CPU, memory, allocations, I/O, startup, and payload size as relevant.
+- Add regression tests or benchmark thresholds for critical paths.
+- Performance changes MUST preserve functional equivalence, security invariants, observability, and failure semantics.

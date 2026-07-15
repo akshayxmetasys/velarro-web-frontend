@@ -1,0 +1,51 @@
+---
+description: Apply to authentication, authorization, APIs, parsers, data access, cryptography, configuration, dependencies, CI/CD, infrastructure, and user-controlled input.
+alwaysApply: false
+---
+
+# Security and software supply-chain rules
+
+## Trust boundaries
+
+- ALWAYS enumerate actor, asset, trust boundary, entry point, abuse case, and security invariant before implementing security-sensitive behavior.
+- Treat every request, file, event, message, environment variable, database row, cache value, browser value, webhook, and third-party response as untrusted until validated.
+- Validate syntax, type, range, length, encoding, canonical form, and authorization context.
+- Normalize before comparison. Reject ambiguous or duplicate representations.
+- Use allowlists for protocols, hosts, file types, paths, redirect targets, algorithms, and executable actions.
+
+## Identity and access
+
+- Authentication does not imply authorization. ALWAYS authorize every protected action and object on the server-side boundary.
+- Default deny. Apply least privilege and separation of duties.
+- NEVER trust client-provided role, tenant, ownership, price, entitlement, or workflow state.
+- Prevent horizontal and vertical privilege escalation with object-level checks.
+- Sensitive actions require replay protection, CSRF protection where applicable, audit events, and appropriate step-up verification.
+
+## Secrets and cryptography
+
+- NEVER hardcode secrets, private keys, tokens, credentials, connection strings, or production identifiers.
+- NEVER log secrets, session tokens, authorization headers, raw credentials, sensitive personal data, or unredacted regulated data.
+- Use the platform's approved secret manager and key lifecycle.
+- NEVER invent cryptographic protocols or use obsolete algorithms.
+- Separate keys by purpose and environment. Define rotation and revocation behavior.
+- Use constant-time comparison for secrets when the platform does not already guarantee it.
+
+## Injection and execution
+
+- NEVER build SQL, shell commands, paths, templates, queries, or code by concatenating untrusted input.
+- Use parameterized APIs and structured builders.
+- NEVER call dynamic code execution, unsafe deserialization, or unrestricted template evaluation on untrusted data.
+- Enforce path containment after canonicalization; block traversal and symlink escapes.
+- Apply output encoding for the destination context; input validation is not output encoding.
+
+## Supply chain
+
+- Dependencies MUST be justified, maintained, license-compatible, version-pinned, and represented in the lockfile.
+- Prefer mature, narrowly scoped dependencies over convenience packages.
+- NEVER install dependencies from an unreviewed URL, branch, local path, or mutable tag.
+- Run secret scanning, SAST, dependency vulnerability analysis, license checks, container/IaC scanning where applicable, and SBOM generation in CI.
+- Do not suppress a finding without documenting evidence, scope, owner, expiry, and compensating controls.
+
+## Security completion criteria
+
+A security-sensitive change is incomplete without negative tests, authorization tests, malformed-input tests, audit/telemetry verification, and documented residual risk.
