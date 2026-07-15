@@ -6,6 +6,7 @@
 - Repository: `velarro-web-frontend`
 - Branch: `chore-install-cursor-enterprise-engineering`
 - Starting commit: `dbfee56d159cddac9d230646d310ed05345f0a8a`
+- Installation commit: `004f73da7253a77f63cd5e5e65aa71eba0a3e0da`
 - Operating system: Windows
 - Shell: PowerShell
 - Backup path: `C:\tmp\cursor-enterprise-install-backup-2026-07-15`
@@ -134,8 +135,13 @@ The final status showed unrelated modifications and untracked files outside this
 ## Remaining Limitations
 
 - Remote CI execution cannot be verified locally.
-- Pull request creation depends on GitHub authentication and repository policy.
 - Python is now required for agent governance checks; CI provisions it explicitly.
+
+## Remote Delivery
+
+- Branch push: completed to `origin/chore-install-cursor-enterprise-engineering`.
+- Pull request: draft PR `#39`, `https://github.com/akshayxmetasys/velarro-web-frontend/pull/39`.
+- Auto-merge: not enabled because the PR is draft and repository policy/check status was not complete.
 
 ## Acceptance Checklist
 
@@ -167,6 +173,6 @@ The final status showed unrelated modifications and untracked files outside this
 - [x] No secrets introduced.
 - [x] Final diff reviewed.
 - [x] Installation report completed.
-- [ ] Atomic commit created.
-- [ ] Branch pushed and PR created when credentials and policy allow.
+- [x] Atomic installation commit created.
+- [x] Branch pushed and PR created when credentials and policy allow.
 - [x] No production deployment or governance bypass occurred.
