@@ -107,7 +107,7 @@ function BlockedNavbarItem({ label, reason }: { label: string; reason: string })
       aria-disabled="true"
       aria-label={`${label} (unavailable: ${reason})`}
       title={`${label} - ${reason}`}
-      className="cursor-not-allowed whitespace-nowrap font-[family-name:var(--velarro-ui-elements-navbar-font-family)] text-[length:var(--velarro-ui-elements-navbar-font-size)] font-normal leading-normal text-icon-default opacity-75"
+      className="hidden cursor-not-allowed whitespace-nowrap font-[family-name:var(--velarro-ui-elements-navbar-font-family)] text-[14px] font-normal leading-normal text-icon-default opacity-75 lg:inline lg:text-[length:var(--velarro-ui-elements-navbar-font-size)]"
     >
       {label}
     </span>
@@ -118,7 +118,7 @@ function ReviewNavbarLink({ label, href }: { label: string; href: string }) {
   return (
     <Link
       href={href}
-      className="whitespace-nowrap font-[family-name:var(--velarro-ui-elements-navbar-font-family)] text-[length:var(--velarro-ui-elements-navbar-font-size)] font-normal leading-normal text-icon-default"
+      className="whitespace-nowrap font-[family-name:var(--velarro-ui-elements-navbar-font-family)] text-[14px] font-normal leading-normal text-icon-default lg:text-[length:var(--velarro-ui-elements-navbar-font-size)]"
     >
       {label}
     </Link>
@@ -196,7 +196,7 @@ export function Under21Navbar() {
   return (
     <nav
       aria-label="Under-21 navigation"
-      className="sticky top-0 z-50 isolate w-full border-b-[0.5px] border-border-strong"
+      className="absolute top-0 z-50 isolate h-[73px] w-full border-b-[0.5px] border-border-strong"
       data-figma-node={UNDER21_NAVBAR_FIGMA_NODE}
     >
       <div
@@ -204,10 +204,10 @@ export function Under21Navbar() {
         className="absolute inset-0 backdrop-blur-[10px]"
         style={{ backgroundColor: "rgba(29, 28, 26, 0.6)" }}
       />
-      <div className="relative grid h-[73px] w-full grid-cols-[minmax(0,1fr)_173px_minmax(0,1fr)] items-center px-[40px] py-[8px]">
-        <div className="flex min-w-0 items-center justify-start gap-[42px]">
+      <div className="relative grid h-full w-full grid-cols-[minmax(0,1fr)_100px_minmax(0,1fr)] items-center px-[12px] py-[8px] lg:grid-cols-[minmax(0,1fr)_173px_minmax(0,1fr)] lg:px-[40px]">
+        <div className="flex min-w-0 items-center justify-start gap-[8px] lg:gap-[42px]">
           <DeferredMenuButton />
-          <div className="flex items-center gap-[42px]">
+          <div className="flex items-center gap-[8px] lg:gap-[42px]">
             {UNDER21_PRIMARY_NAV_ITEMS.slice(0, 2).map((item) => (
               <NavbarItem key={item.label} item={item} />
             ))}
@@ -218,7 +218,7 @@ export function Under21Navbar() {
         <Link
           href="/"
           aria-label="Go to Velarro homepage"
-          className="flex w-[173px] flex-col items-center justify-self-center"
+          className="flex w-[100px] flex-col items-center justify-self-center lg:w-[173px]"
         >
           <Image
             src={UNDER21_NAVBAR_LOGO_URL}
@@ -226,11 +226,11 @@ export function Under21Navbar() {
             width={173}
             height={54}
             preload
-            className="h-[54px] w-[173px] object-contain"
+            className="h-[40px] w-[100px] object-contain lg:h-[54px] lg:w-[173px]"
           />
         </Link>
 
-        <div className="flex h-[42px] min-w-0 items-center justify-end gap-[50px]">
+        <div className="hidden h-[42px] min-w-0 items-center justify-end gap-[50px] lg:flex">
           <DeferredSearchPill />
           <div className="flex items-center gap-[50px]">
             <DeferredUtilityControl

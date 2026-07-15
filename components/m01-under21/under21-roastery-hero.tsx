@@ -41,6 +41,7 @@ export function Under21RoasteryHero() {
           alt="Roastery hero imagery"
           fill
           sizes="100vw"
+          loading="eager"
           unoptimized
           className="pointer-events-none object-cover object-center"
         />
@@ -55,7 +56,7 @@ export function Under21RoasteryHero() {
         >
           <h1
             id="under21-roastery-hero-heading"
-            className="text-center font-[family-name:var(--velarro-display-light-font-family)] text-[length:var(--velarro-display-light-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white"
+            className="text-center font-[family-name:var(--velarro-display-light-font-family)] text-[40px] font-light uppercase leading-normal tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white md:text-[length:var(--velarro-display-light-font-size)]"
           >
             THE ROASTERY
           </h1>
