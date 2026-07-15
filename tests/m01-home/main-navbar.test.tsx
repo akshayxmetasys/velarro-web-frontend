@@ -127,6 +127,12 @@ describe("MainNavbar", () => {
     expect(
       within(menu).getByRole("link", { name: "News & Events" }),
     ).toHaveAttribute("href", "/the-chronicle");
+    expect(
+      within(menu).getByRole("link", { name: "Membership" }),
+    ).toHaveAttribute("href", "/membership");
+    expect(
+      within(menu).getByRole("link", { name: "Membership" }),
+    ).toHaveAttribute("data-route-implemented", "true");
   });
 
   it("closes the sidebar on Escape and restores focus to the menu button", async () => {
