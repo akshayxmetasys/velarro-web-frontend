@@ -56,11 +56,17 @@ describe("HomePageByAgeState", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("does not render tobacco homepage content for under-21 visitors", () => {
+  it("renders the under-21 homepage shell without tobacco content for under-21 visitors", () => {
     render(<HomePageByAgeState ageState="under21" />);
 
     expect(
-      screen.getByRole("heading", { name: "Access restricted" }),
+      screen.queryByRole("heading", { name: "Access restricted" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: "Under-21 navigation" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "THE ROASTERY" }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole("heading", { name: "COLLECTOR SERIES" }),
@@ -340,9 +346,12 @@ describe("HomePageByAgeState", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("does not render the roastery hero for under-21 visitors", () => {
+  it("renders the under-21 roastery hero for under-21 visitors", () => {
     render(<HomePageByAgeState ageState="under21" />);
 
+    expect(
+      screen.getByRole("heading", { level: 1, name: "THE ROASTERY" }),
+    ).toBeInTheDocument();
     expect(
       screen.queryByRole("heading", { level: 2, name: "THE ROASTERY" }),
     ).not.toBeInTheDocument();

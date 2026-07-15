@@ -81,7 +81,13 @@ describe("ChroniclePageByAgeState", () => {
     render(<ChroniclePageByAgeState ageState="under21" />);
 
     expect(
-      screen.getByRole("heading", { name: "Access restricted" }),
+      screen.queryByRole("heading", { name: "Access restricted" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: "Under-21 navigation" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "THE ROASTERY" }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole("heading", { name: CHRONICLE_HERO_COPY.title }),
