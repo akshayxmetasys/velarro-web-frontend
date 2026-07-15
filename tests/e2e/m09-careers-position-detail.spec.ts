@@ -58,11 +58,12 @@ test.describe("M09 Careers position detail page", () => {
     await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
     await expect(page.locator('a[href^="tel:"]')).toHaveCount(0);
 
-    const applyButton = page.getByRole("button", {
-      name: /Apply for this job \(unavailable/i,
-    });
-    await expect(applyButton).toBeDisabled();
-    await expect(applyButton).toHaveAttribute("data-application-status", "deferred");
+    const applyLink = page.getByRole("link", { name: "Apply for this job" });
+    await expect(applyLink).toHaveAttribute(
+      "href",
+      "/careers/positions/area-sales-manager/apply",
+    );
+    await expect(applyLink).toHaveAttribute("data-application-status", "implemented");
 
     const pageMetrics = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,

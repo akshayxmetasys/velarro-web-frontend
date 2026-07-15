@@ -59,8 +59,8 @@ export interface CareerPositionDetail {
   overview: readonly string[];
   sections: readonly CareerPositionDetailSection[];
   hrContact: CareerPositionHrContact;
-  applyStatus: "deferred";
-  deferredApplyRoute: string;
+  applicationStatus: "implemented" | "deferred";
+  applyRoute: string;
 }
 
 export const CAREER_POSITION_DETAILS: readonly CareerPositionDetail[] = [
@@ -123,8 +123,8 @@ export const CAREER_POSITION_DETAILS: readonly CareerPositionDetail[] = [
       phone: "+01 345 (7617) 839",
       verificationStatus: "figma-review-unverified",
     },
-    applyStatus: "deferred",
-    deferredApplyRoute: "/careers/positions/area-sales-manager/apply",
+    applyRoute: "/careers/positions/area-sales-manager/apply",
+    applicationStatus: "implemented",
   },
 ] as const;
 

@@ -1,4 +1,6 @@
+import Link from "next/link";
 import type { CareerPositionDetail } from "@/components/m09-careers/careers-position-details-data";
+import { getCareerPositionApplicationHref } from "@/components/m09-careers/careers-position-application-data";
 
 interface CareersPositionDetailSectionsProps {
   detail: CareerPositionDetail;
@@ -43,18 +45,39 @@ export function CareersPositionDetailSections({
         </section>
       ))}
 
-      <button
-        type="button"
-        disabled
-        aria-disabled="true"
-        aria-label="Apply for this job (unavailable: application flow is not approved for this scope)"
-        data-application-status="deferred"
-        data-application-route={detail.deferredApplyRoute}
-        data-figma-node="13148:15976"
-        className="inline-flex h-[48px] min-h-[44px] w-full cursor-not-allowed items-center justify-center rounded-[8px] border border-border-default bg-button-fill px-[24px] font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[16px] font-normal uppercase leading-none tracking-[0] text-text-heading disabled:opacity-100 desktop:max-w-[738px]"
-      >
-        APPLY FOR THIS JOB
-      </button>
+      {(() => {
+        const applicationHref = getCareerPositionApplicationHref(detail.slug);
+
+        if (detail.applicationStatus === "implemented" && applicationHref) {
+          return (
+            <Link
+              href={applicationHref}
+              aria-label="Apply for this job"
+              data-application-status="implemented"
+              data-application-route={detail.applyRoute}
+              data-figma-node="13148:15976"
+              className="inline-flex h-[48px] min-h-[44px] w-full items-center justify-center rounded-[8px] border border-border-default bg-button-fill px-[24px] font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[16px] font-normal uppercase leading-none tracking-[0] text-text-heading outline-none focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2 desktop:max-w-[738px]"
+            >
+              APPLY FOR THIS JOB
+            </Link>
+          );
+        }
+
+        return (
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            aria-label="Apply for this job (unavailable: application flow is not approved for this scope)"
+            data-application-status="deferred"
+            data-application-route={detail.applyRoute}
+            data-figma-node="13148:15976"
+            className="inline-flex h-[48px] min-h-[44px] w-full cursor-not-allowed items-center justify-center rounded-[8px] border border-border-default bg-button-fill px-[24px] font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[16px] font-normal uppercase leading-none tracking-[0] text-text-heading disabled:opacity-100 desktop:max-w-[738px]"
+          >
+            APPLY FOR THIS JOB
+          </button>
+        );
+      })()}
     </div>
   );
 }
