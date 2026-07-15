@@ -20,6 +20,7 @@ export const CAREERS_JOBS_COPY = {
   title: "Find Your Place",
   body: "From our estates to our flagship boutiques, every role at Velarro is an invitation to be part of something enduring.",
   button: "VIEW ALL POSITIONS",
+  positionsHref: "/careers/positions",
 } as const;
 
 export const CAREERS_TESTIMONIAL_COPY = {

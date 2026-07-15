@@ -29,6 +29,7 @@ describe("route access", () => {
     expect(getRouteAccess("/our-story", "under21").decision).toBe("block");
     expect(getRouteAccess("/partner", "under21").decision).toBe("review");
     expect(getRouteAccess("/careers", "under21").decision).toBe("review");
+    expect(getRouteAccess("/careers/positions", "under21").decision).toBe("review");
     expect(getRouteAccess("/get-in-touch", "under21").decision).toBe("review");
     expect(getRouteAccess("/membership", "under21").decision).toBe("review");
   });
@@ -44,6 +45,7 @@ describe("route access", () => {
     expect(shouldGateUnknownRoute("/pairing-guide/rum-and-cigars")).toBe(true);
     expect(shouldGateUnknownRoute("/partner")).toBe(false);
     expect(shouldGateUnknownRoute("/careers")).toBe(false);
+    expect(shouldGateUnknownRoute("/careers/positions")).toBe(false);
     expect(shouldGateUnknownRoute("/get-in-touch")).toBe(false);
     expect(shouldGateUnknownRoute("/membership")).toBe(false);
     expect(getRouteAccess("/the-chronicle", "unknown").decision).toBe("gate");
@@ -56,6 +58,7 @@ describe("route access", () => {
     expect(getRouteAccess("/our-story", "unknown").decision).toBe("gate");
     expect(getRouteAccess("/partner", "unknown").decision).toBe("review");
     expect(getRouteAccess("/careers", "unknown").decision).toBe("review");
+    expect(getRouteAccess("/careers/positions", "unknown").decision).toBe("review");
     expect(getRouteAccess("/get-in-touch", "unknown").decision).toBe("review");
     expect(getRouteAccess("/membership", "unknown").decision).toBe("review");
   });
@@ -86,6 +89,9 @@ describe("route access", () => {
       decision: "allow",
     });
     expect(getRouteAccess("/careers", "over21")).toMatchObject({
+      decision: "allow",
+    });
+    expect(getRouteAccess("/careers/positions", "over21")).toMatchObject({
       decision: "allow",
     });
     expect(getRouteAccess("/get-in-touch", "over21")).toMatchObject({
