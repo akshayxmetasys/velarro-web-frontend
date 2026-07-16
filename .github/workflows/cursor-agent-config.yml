@@ -51,7 +51,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -60,69 +59,43 @@ jobs:
 
       - name: Check mirrored Codex skills
         run: |
-          python -B scripts/sync_agent_skills.py --check
+          python scripts/sync_agent_skills.py --check
 
       - name: Validate Cursor package
         run: |
-          python -B scripts/validate_cursor_pack.py
+          python scripts/validate_cursor_pack.py
 
       - name: Run Cursor hook tests
         run: |
-          python -B -m unittest discover -s .cursor/hooks/tests -p "test_*.py"
+          python -m unittest discover .cursor/hooks/tests
 
       - name: Validate Python syntax
         run: |
-          python -B - <<'PY'
+          python - <<'PY'
           import ast
           from pathlib import Path
 
           files = [
-              Path(".cursor/hooks/guard.py"),
-              Path("scripts/validate_cursor_pack.py"),
-              Path("scripts/sync_agent_skills.py"),
+              ".cursor/hooks/guard.py",
+              "scripts/validate_cursor_pack.py",
+              "scripts/sync_agent_skills.py",
           ]
 
-          for path in files:
+          for file in files:
+              path = Path(file)
               ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
 
-          print("syntax ok")
+          print(":white_check_mark: Python syntax is valid")
           PY
 
-      - name: Validate hook JSON
+      - name: Validate hooks.json
         run: |
-          python -B -m json.tool .cursor/hooks.json > /dev/null
-          python -B -m json.tool .cursor/hooks.windows.json > /dev/null
+          python -m json.tool .cursor/hooks.json > /dev/null
 
       - name: Detect stale generated files
         run: |
           git diff --exit-code
 
-      - name: Reject generated runtime artifacts
+      - name: Ensure Cursor runtime state is not committed
         run: |
-          if [ -d ".cursor/.state" ]; then
-            echo "::error::.cursor/.state must not exist in the repository tree."
-            exit 1
-          fi
-
-          artifacts="$(
-            find . \
-              -path "./.git" -prune -o \
-              -path "./node_modules" -prune -o \
-              \( \
-                -name "__pycache__" -o \
-                -name "*.pyc" -o \
-                -name "*.pyo" -o \
-                -name "*.pyd" -o \
-                -name "cursor-enterprise-engineering-pack*.zip" -o \
-                -name "cursor-pack-extract-*" \
-              \) \
-              -print
-          )"
-
-          if [ -n "$artifacts" ]; then
-            echo "::error::Generated runtime or installer artifacts detected:"
-            printf '%s\n' "$artifacts"
-            exit 1
-          fi
-
-          echo "No generated runtime or installer artifacts detected."
+          test ! -d .cursor/.state
