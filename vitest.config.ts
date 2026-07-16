@@ -9,6 +9,8 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.ts"],
     include: ["tests/**/*.test.{ts,tsx}"],
     globals: false,
+    // Windows CI/local runs with many RTL suites exceed the 5s default under load.
+    testTimeout: 15000,
   },
   resolve: {
     alias: {

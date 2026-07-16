@@ -42,13 +42,12 @@ export function MainMenuSidebar() {
   const pathname = usePathname();
   const dialogId = useId();
   const titleId = useId();
-  const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useOverlayFocusLock({
     open,
     onClose: () => setOpen(false),
-    containerRef: overlayRef,
+    containerRef: panelRef,
     initialFocusRef: panelRef,
   });
 
@@ -67,9 +66,10 @@ export function MainMenuSidebar() {
       </button>
 
       {open ? (
-        <div ref={overlayRef} className="fixed inset-0 z-[60] flex">
+        <div className="fixed inset-0 z-[60] flex">
           <button
             type="button"
+            tabIndex={-1}
             aria-label="Dismiss main menu backdrop"
             className="absolute inset-0 cursor-default bg-transparent"
             onClick={() => setOpen(false)}

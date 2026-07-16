@@ -22,6 +22,14 @@ describe("content security policy", () => {
     expect(csp).not.toContain("*.supabase.co");
   });
 
+  it("does not allow Google Fonts CDN origins because next/font self-hosts", () => {
+    const csp = buildContentSecurityPolicy({ environment: "production" });
+
+    expect(csp).toContain("font-src 'self'");
+    expect(csp).not.toContain("fonts.googleapis.com");
+    expect(csp).not.toContain("fonts.gstatic.com");
+  });
+
   it("allows dev eval only outside production", () => {
     expect(buildContentSecurityPolicy({ environment: "development" })).toContain(
       "'unsafe-eval'",

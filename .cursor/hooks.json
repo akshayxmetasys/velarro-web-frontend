@@ -4,7 +4,7 @@
     "beforeShellExecution": [
       {
         "command": "python ./.cursor/hooks/guard.py before-shell",
-        "timeout": 10
+        "timeout": 15
       }
     ],
     "afterFileEdit": [

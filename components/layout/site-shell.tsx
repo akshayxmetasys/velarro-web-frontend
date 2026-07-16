@@ -22,7 +22,7 @@ export function SiteShell({
   return (
     <div className={cn("flex min-h-screen flex-col bg-background-page", className)}>
       <SiteHeader>{header}</SiteHeader>
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">{children}</main>
       <SiteFooter>{footer}</SiteFooter>
     </div>
   );

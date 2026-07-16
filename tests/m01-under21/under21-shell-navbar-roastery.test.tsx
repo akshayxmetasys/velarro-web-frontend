@@ -88,10 +88,14 @@ describe("Under21Navbar", () => {
     expect(screen.getByText("Login")).toBeInTheDocument();
 
     expect(
-      screen.getByRole("link", { name: "The Estate (unavailable: route blocked for under-21 visitors)" }),
+      screen.getByLabelText(
+        "The Estate (unavailable: route blocked for under-21 visitors)",
+      ),
     ).toHaveAttribute("aria-disabled", "true");
     expect(
-      screen.getByRole("link", { name: "Our Story (unavailable: route blocked for under-21 visitors)" }),
+      screen.getByLabelText(
+        "Our Story (unavailable: route blocked for under-21 visitors)",
+      ),
     ).toHaveAttribute("aria-disabled", "true");
 
     const partnerLink = screen.getByRole("link", { name: "Partner" });

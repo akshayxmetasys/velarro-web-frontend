@@ -1,5 +1,4 @@
-import { AgeGate } from "@/components/age/age-gate";
-import { Under21HomeShell } from "@/components/m01-home/under21-home-shell";
+import { AgeAccessBoundary } from "@/components/age/age-access-boundary";
 import { TheHousePage } from "@/components/m04-house/the-house-page";
 import type { AgeState } from "@/lib/age/age-state";
 
@@ -10,13 +9,9 @@ export interface TheHousePageByAgeStateProps {
 export function TheHousePageByAgeState({
   ageState,
 }: TheHousePageByAgeStateProps) {
-  if (ageState === "unknown") {
-    return <AgeGate />;
-  }
-
-  if (ageState === "under21") {
-    return <Under21HomeShell />;
-  }
-
-  return <TheHousePage />;
+  return (
+    <AgeAccessBoundary route="/the-estate/the-house" ageState={ageState}>
+      <TheHousePage />
+    </AgeAccessBoundary>
+  );
 }

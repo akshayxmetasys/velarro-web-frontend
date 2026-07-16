@@ -249,7 +249,7 @@ export function PairingGuidePage() {
       data-route="/pairing-guide"
     >
       <MainNavbar />
-      <main className="-mt-[73px] w-full">
+      <main id="main-content" className="-mt-[73px] w-full">
         <HeroSection />
         <Breadcrumbs />
         <PairingCardsSection />

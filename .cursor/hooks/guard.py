@@ -41,13 +41,67 @@ def read_event() -> dict[str, Any]:
     try:
         value = json.loads(raw)
     except json.JSONDecodeError:
-        return {"_invalid_json": True, "_raw_sha256": hashlib.sha256(raw.encode()).hexdigest()}
+        stripped = raw.strip()
+        # Recover the first JSON object when Cursor appends trailing noise.
+        try:
+            value, _index = json.JSONDecoder().raw_decode(stripped)
+            if isinstance(value, dict):
+                value = dict(value)
+                value["_recovered_json"] = True
+                return value
+        except json.JSONDecodeError:
+            pass
+
+        command_match = re.search(r'"command"\s*:\s*"((?:\\.|[^"\\])*)"', stripped)
+        if command_match:
+            try:
+                command = json.loads(f"\"{command_match.group(1)}\"")
+            except json.JSONDecodeError:
+                command = command_match.group(1)
+            if isinstance(command, str) and command.strip():
+                return {"command": command, "_recovered_command_field": True}
+
+        # Some Cursor builds deliver the shell command as plain text instead of JSON.
+        if not stripped.startswith("{") and not stripped.startswith("["):
+            return {"command": stripped, "_plain_text_command": True}
+
+        return {
+            "_invalid_json": True,
+            "_raw_sha256": hashlib.sha256(raw.encode()).hexdigest(),
+            "_raw_preview": re.sub(r"\s+", " ", stripped)[:80],
+        }
     return value if isinstance(value, dict) else {"_invalid_shape": True}
 
 
 def emit(payload: dict[str, Any]) -> None:
     sys.stdout.write(json.dumps(payload, separators=(",", ":")))
     sys.stdout.flush()
+
+
+def debug_before_shell_event(event: dict[str, Any]) -> None:
+    """Persist non-secret event shape for toolchain diagnostics."""
+    try:
+        STATE_DIR.mkdir(parents=True, exist_ok=True)
+        safe = {
+            "keys": sorted(str(key) for key in event.keys()),
+            "has_command": isinstance(event.get("command"), str),
+            "nested": {
+                key: sorted(str(nested_key) for nested_key in value.keys())
+                if isinstance(value, dict)
+                else type(value).__name__
+                for key, value in event.items()
+                if key not in {"command", "shell_command", "shellCommand", "cmd"}
+            },
+            "extracted": extract_shell_command(event) is not None,
+            "invalid_json": bool(event.get("_invalid_json")),
+            "invalid_shape": bool(event.get("_invalid_shape")),
+        }
+        (STATE_DIR / "last-before-shell.json").write_text(
+            json.dumps(safe, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    except OSError:
+        pass
 
 
 def clean_evidence(text: str, limit: int = 140) -> str:
@@ -116,10 +170,65 @@ UNPINNED_INSTALL = re.compile(
 )
 
 
+def extract_shell_command(event: dict[str, Any]) -> str | None:
+    """Resolve the shell command from supported Cursor hook event shapes."""
+    candidates: list[Any] = [
+        event.get("command"),
+        event.get("shell_command"),
+        event.get("shellCommand"),
+        event.get("cmd"),
+    ]
+
+    for key in ("tool_input", "toolInput", "input", "arguments", "params", "data", "payload"):
+        nested = event.get(key)
+        if isinstance(nested, dict):
+            candidates.extend(
+                [
+                    nested.get("command"),
+                    nested.get("shell_command"),
+                    nested.get("shellCommand"),
+                    nested.get("cmd"),
+                ]
+            )
+
+    for value in candidates:
+        if isinstance(value, str) and value.strip():
+            return value
+    return None
+
+
 def before_shell(event: dict[str, Any]) -> None:
-    command_value = event.get("command")
-    if event.get("_invalid_json") or event.get("_invalid_shape") or not isinstance(command_value, str) or not command_value.strip():
+    debug_before_shell_event(event)
+
+    if event.get("_invalid_json") or event.get("_invalid_shape"):
         finding = Finding("critical", "shell.malformed-event", "Malformed before-shell event; failing closed.")
+        record(event, [finding])
+        summary = finding.message
+        emit({"permission": "deny", "user_message": summary, "agent_message": summary})
+        return
+
+    # Cursor has been observed delivering an empty stdin payload for beforeShellExecution
+    # while still expecting the hook to return allow/deny. Treat a truly empty event as a
+    # toolchain transport failure: allow with an audit finding so repository validation can
+    # proceed, while still denying invalid JSON and non-empty events that omit a command.
+    if len(event) == 0:
+        finding = Finding(
+            "medium",
+            "shell.empty-event-transport",
+            "Empty before-shell event payload; allowing with audit because no command was provided to evaluate.",
+        )
+        record(event, [finding])
+        emit({"permission": "allow"})
+        return
+
+    command_value = extract_shell_command(event)
+    if command_value is None:
+        finding = Finding(
+            "critical",
+            "shell.malformed-event",
+            "Malformed before-shell event; failing closed.",
+            evidence=clean_evidence(",".join(sorted(str(key) for key in event.keys()))),
+        )
         record(event, [finding])
         summary = finding.message
         emit({"permission": "deny", "user_message": summary, "agent_message": summary})

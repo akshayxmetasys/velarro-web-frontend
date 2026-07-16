@@ -1,11 +1,11 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 test.describe("M09 Partner page", () => {
   test("loads the deferred-image layout and UI-only submitted state at 1440px", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/partner");
+    await page.goto("/partner");
 
     await expect(page.getByRole("link", { name: "Partner" })).toHaveAttribute(
       "href",

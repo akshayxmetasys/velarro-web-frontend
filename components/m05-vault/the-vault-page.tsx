@@ -201,7 +201,7 @@ export function TheVaultPage() {
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-background-page">
       <MainNavbar />
-      <main className="-mt-[73px] w-full">
+      <main id="main-content" className="-mt-[73px] w-full">
         <HeroSection />
         <Breadcrumbs />
         <OfferList />

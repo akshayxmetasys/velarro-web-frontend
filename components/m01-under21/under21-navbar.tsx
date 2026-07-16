@@ -103,7 +103,6 @@ function LoginIcon() {
 function BlockedNavbarItem({ label, reason }: { label: string; reason: string }) {
   return (
     <span
-      role="link"
       aria-disabled="true"
       aria-label={`${label} (unavailable: ${reason})`}
       title={`${label} - ${reason}`}

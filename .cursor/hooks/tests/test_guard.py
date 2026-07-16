@@ -87,6 +87,30 @@ class BeforeShellTests(unittest.TestCase):
         self.assertEqual(result["permission"], "deny")
         self.assertIn("Malformed", result["user_message"])
 
+    def test_plain_text_command_payload_is_allowed(self) -> None:
+        result = run_json("before-shell", "npm run lint")
+        self.assertEqual(result["permission"], "allow")
+
+    def test_recovered_command_field_from_noisy_json_is_allowed(self) -> None:
+        result = run_json("before-shell", '{"command":"npm run test"} trailing')
+        self.assertEqual(result["permission"], "allow")
+        with tempfile.TemporaryDirectory() as state_dir:
+            result = run_json("before-shell", {}, state_dir=state_dir)
+            self.assertEqual(result["permission"], "allow")
+            state_text = "\n".join(path.read_text(encoding="utf-8") for path in Path(state_dir).glob("*.jsonl"))
+            self.assertIn("shell.empty-event-transport", state_text)
+
+    def test_nested_tool_input_command_is_allowed(self) -> None:
+        result = run_json(
+            "before-shell",
+            {"tool_input": {"command": "npm run lint"}, "cwd": "C:/Projects/velarro-web-frontend"},
+        )
+        self.assertEqual(result["permission"], "allow")
+
+    def test_input_command_alias_is_allowed(self) -> None:
+        result = run_json("before-shell", {"input": {"command": "npm run test"}})
+        self.assertEqual(result["permission"], "allow")
+
 
 class EditAndStopTests(unittest.TestCase):
     def test_after_edit_detects_representative_secret(self) -> None:

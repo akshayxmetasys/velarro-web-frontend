@@ -38,7 +38,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${notoSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

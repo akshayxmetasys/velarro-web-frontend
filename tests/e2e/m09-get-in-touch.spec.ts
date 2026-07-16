@@ -1,11 +1,11 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 test.describe("M09 Get in Touch page", () => {
   test("loads hero, deferred map, and UI-only submitted state at 1440px", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/get-in-touch");
+    await page.goto("/get-in-touch");
 
     const heroImage = page.getByTestId("get-in-touch-hero-image");
 

@@ -15,6 +15,14 @@ describe("metadata helpers", () => {
     );
   });
 
+  it("builds indexable home metadata with a canonical URL", async () => {
+    const { metadata: homeMetadata } = await import("@/app/page");
+
+    expect(homeMetadata.robots).toMatchObject({ index: true, follow: true });
+    expect(homeMetadata.alternates?.canonical).toBe("https://velarroestate.com");
+    expect(homeMetadata.openGraph?.url).toBe("https://velarroestate.com");
+  });
+
   it("keeps unimplemented pages noindex by default", () => {
     const metadata = buildPageMetadata({
       title: "Velarro Estate",

@@ -11,7 +11,7 @@ const COLLECTOR_HERO_URL = assertApprovedImageUrl(
 
 export function AgeGate() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-[var(--container-padding-inline)] py-spacing-48">
+    <main id="main-content" className="relative flex min-h-screen items-center justify-center overflow-hidden px-[var(--container-padding-inline)] py-spacing-48">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"

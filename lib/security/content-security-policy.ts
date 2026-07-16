@@ -42,12 +42,10 @@ export function buildContentSecurityPolicy({
       "blob:",
       APPROVED_IMAGE_ORIGIN,
     ]),
-    serializeDirective("font-src", ["'self'", "https://fonts.gstatic.com"]),
-    serializeDirective("style-src", [
-      "'self'",
-      "'unsafe-inline'",
-      "https://fonts.googleapis.com",
-    ]),
+    // next/font self-hosts generated font files from this origin; do not
+    // reopen Google Fonts CDN unless a verified runtime dependency requires it.
+    serializeDirective("font-src", ["'self'"]),
+    serializeDirective("style-src", ["'self'", "'unsafe-inline'"]),
     serializeDirective(
       "script-src",
       isDevelopment

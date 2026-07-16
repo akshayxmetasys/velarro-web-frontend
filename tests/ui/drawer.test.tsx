@@ -33,7 +33,7 @@ describe("Drawer", () => {
     expect(dialog).toHaveAccessibleDescription("Refine results");
   });
 
-  it("keeps Tab focus within the overlay", async () => {
+  it("keeps Tab focus inside the dialog panel and excludes the backdrop", async () => {
     const user = userEvent.setup();
     renderDrawer();
 
@@ -44,12 +44,11 @@ describe("Drawer", () => {
     const reset = screen.getByRole("button", { name: "Reset filters" });
 
     expect(panel).toHaveFocus();
-
-    await user.tab();
-    expect(backdrop).toHaveFocus();
+    expect(backdrop).toHaveAttribute("tabindex", "-1");
 
     await user.tab();
     expect(closeButton).toHaveFocus();
+    expect(backdrop).not.toHaveFocus();
 
     await user.tab();
     expect(apply).toHaveFocus();
@@ -58,10 +57,10 @@ describe("Drawer", () => {
     expect(reset).toHaveFocus();
 
     await user.tab();
-    expect(backdrop).toHaveFocus();
+    expect(closeButton).toHaveFocus();
   });
 
-  it("keeps Shift+Tab focus within the overlay", async () => {
+  it("keeps Shift+Tab focus inside the dialog panel and excludes the backdrop", async () => {
     const user = userEvent.setup();
     renderDrawer();
 
@@ -72,15 +71,13 @@ describe("Drawer", () => {
 
     await user.tab({ shift: true });
     expect(reset).toHaveFocus();
+    expect(screen.getByLabelText("Dismiss drawer backdrop")).not.toHaveFocus();
 
     await user.tab({ shift: true });
     expect(screen.getByRole("button", { name: "Apply filters" })).toHaveFocus();
 
     await user.tab({ shift: true });
     expect(screen.getByRole("button", { name: "Close drawer" })).toHaveFocus();
-
-    await user.tab({ shift: true });
-    expect(screen.getByLabelText("Dismiss drawer backdrop")).toHaveFocus();
 
     await user.tab({ shift: true });
     expect(reset).toHaveFocus();

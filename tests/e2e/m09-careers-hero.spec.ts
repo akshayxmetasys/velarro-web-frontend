@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 const CAREERS_HERO_URL =
   "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/carrer-horo-20260709-034631-desktop-hero.webp";

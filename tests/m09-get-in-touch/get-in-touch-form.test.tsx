@@ -58,11 +58,21 @@ describe("GetInTouchForm", () => {
     const user = userEvent.setup();
     render(<GetInTouchForm />);
 
-    await user.type(screen.getByLabelText("Name"), "John Doe");
-    await user.type(screen.getByLabelText("Email address"), "not-an-email");
-    await user.type(screen.getByLabelText("Phone number"), "000 0000 000");
-    await user.type(screen.getByLabelText("Subject"), "General support");
-    await user.type(screen.getByLabelText("Message"), "Help please.");
+    fireEvent.change(screen.getByLabelText("Name"), {
+      target: { value: "John Doe" },
+    });
+    fireEvent.change(screen.getByLabelText("Email address"), {
+      target: { value: "not-an-email" },
+    });
+    fireEvent.change(screen.getByLabelText("Phone number"), {
+      target: { value: "000 0000 000" },
+    });
+    fireEvent.change(screen.getByLabelText("Subject"), {
+      target: { value: "General support" },
+    });
+    fireEvent.change(screen.getByLabelText("Message"), {
+      target: { value: "Help please." },
+    });
     await user.click(screen.getByRole("button", { name: "SUBMIT" }));
 
     expect(screen.getByLabelText("Email address")).toHaveFocus();

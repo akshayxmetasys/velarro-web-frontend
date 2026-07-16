@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 const DEFERRED_MARKERS = [
   "membership-tier-house-deferred",
@@ -21,7 +21,7 @@ test.describe("M09 Membership page", () => {
     });
 
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/membership");
+    await page.goto("/membership");
 
     await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
     await expect(page.getByRole("contentinfo")).toBeVisible();

@@ -8,6 +8,7 @@ import {
   parseAgeStateCookieValue,
   serializeAgeStateCookie,
 } from "@/lib/age/age-cookie";
+import { getAgeStateCookieOptions } from "@/lib/security/cookie-options";
 
 describe("age state", () => {
   it("parses known states and rejects unknown values", () => {
@@ -33,5 +34,10 @@ describe("age state", () => {
     expect(cookie).toContain("Secure");
     expect(cookie).not.toContain("birth");
     expect(cookie).not.toContain("date");
+  });
+
+  it("requires HttpOnly age-state cookie options for server persistence", () => {
+    expect(getAgeStateCookieOptions("production").httpOnly).toBe(true);
+    expect(getAgeStateCookieOptions("development").httpOnly).toBe(true);
   });
 });

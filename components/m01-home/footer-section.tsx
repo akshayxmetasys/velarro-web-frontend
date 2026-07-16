@@ -68,7 +68,6 @@ const LEGAL_LINKS = [
 function DeferredFooterLink({ label }: { label: string }) {
   return (
     <span
-      role="link"
       aria-disabled="true"
       aria-label={`${label} (deferred: destination not approved for this scope)`}
       title={`${label} - destination not approved for this scope`}

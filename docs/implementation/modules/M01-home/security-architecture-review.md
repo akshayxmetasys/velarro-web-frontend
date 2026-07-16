@@ -24,7 +24,7 @@ Extraction date: 2026-07-10
 - `lib/age/route-access.ts`
 - `app/layout.tsx`
 - `app/page.tsx`
-- `components/age/age-state-provider.tsx`
+- Age acknowledgment uses the server action `confirmAgeStateAction` with an HttpOnly cookie. A former client `AgeStateProvider` path was removed during the frontend audit.
 - relevant SEO/security/age tests and PR-0/PR-1 docs.
 
 ## Security Controls Present

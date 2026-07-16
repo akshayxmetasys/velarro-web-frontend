@@ -243,7 +243,7 @@ export function ChroniclePage() {
       data-route="/the-chronicle"
     >
       <MainNavbar />
-      <main className="-mt-[73px] w-full">
+      <main id="main-content" className="-mt-[73px] w-full">
         <HeroSection />
         <Breadcrumbs />
         <NewsTicker />

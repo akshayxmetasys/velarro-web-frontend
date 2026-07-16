@@ -13,6 +13,11 @@ export function parseAgeStateCookieValue(value: unknown): PersistedAgeState | nu
   return isPersistedAgeState(value) ? value : null;
 }
 
+/**
+ * Serializes non-HttpOnly cookie attributes for tests and diagnostics.
+ * Production persistence must use `confirmAgeStateAction` / `cookies().set`
+ * so `HttpOnly` is applied. Never assign this string via `document.cookie`.
+ */
 export function serializeAgeStateCookie(
   ageState: PersistedAgeState,
   environment?: string,

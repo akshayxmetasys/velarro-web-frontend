@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { CareersPositionsSearch } from "@/components/m09-careers/careers-positions-search";
@@ -40,7 +40,7 @@ describe("CareersPositionsSearch", () => {
       name: "Search by keywords",
     });
 
-    await user.type(searchField, "Production Manager");
+    fireEvent.change(searchField, { target: { value: "Production Manager" } });
     await user.click(screen.getByRole("button", { name: "Search Jobs" }));
 
     expect(document.querySelectorAll("[data-careers-position-card]")).toHaveLength(1);
@@ -49,7 +49,7 @@ describe("CareersPositionsSearch", () => {
       screen.getByText("1 position found", { selector: ".sr-only" }),
     ).toBeInTheDocument();
 
-    await user.clear(searchField);
+    fireEvent.change(searchField, { target: { value: "" } });
     await user.click(screen.getByRole("button", { name: "Search Jobs" }));
 
     expect(document.querySelectorAll("[data-careers-position-card]")).toHaveLength(6);
@@ -59,9 +59,9 @@ describe("CareersPositionsSearch", () => {
     const user = userEvent.setup();
     render(<CareersPositionsSearch />);
 
-    await user.type(
+    fireEvent.change(
       screen.getByRole("searchbox", { name: "Search by keywords" }),
-      "nonexistent role",
+      { target: { value: "nonexistent role" } },
     );
     await user.click(screen.getByRole("button", { name: "Search Jobs" }));
 

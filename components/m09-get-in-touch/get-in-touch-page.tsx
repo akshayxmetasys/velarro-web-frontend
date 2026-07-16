@@ -373,7 +373,7 @@ export function GetInTouchPage({ ageState }: GetInTouchPageProps) {
       data-age-state={ageState}
     >
       <MainNavbar />
-      <main className="-mt-[73px] w-full">
+      <main id="main-content" className="-mt-[73px] w-full">
         <HeroSection />
         <Breadcrumbs />
         <IntroSection />

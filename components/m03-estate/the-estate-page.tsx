@@ -318,7 +318,7 @@ export function TheEstatePage() {
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-background-page">
       <MainNavbar />
-      <main className="-mt-[73px] w-full">
+      <main id="main-content" className="-mt-[73px] w-full">
         <HeroSection />
         <div className="flex w-full flex-col desktop:flex-row">
           <FilterPanel />

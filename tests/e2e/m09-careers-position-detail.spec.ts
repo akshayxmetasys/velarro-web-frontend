@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 test.describe("M09 Careers position detail page", () => {
   test("navigates from listing to the approved detail page at 1440px", async ({
@@ -12,7 +12,7 @@ test.describe("M09 Careers position detail page", () => {
     });
 
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/careers/positions");
+    await page.goto("/careers/positions");
 
     const implementedLinks = page.locator(
       '[data-position-detail-status="implemented"] a',
@@ -50,7 +50,7 @@ test.describe("M09 Careers position detail page", () => {
     await expect(
       page.getByRole("heading", { name: "Qualification and Experience" }),
     ).toBeVisible();
-    await expect(page.getByText(/Bachelor’s degree in Business/i)).toBeVisible();
+    await expect(page.getByText(/Bachelor.?s degree in Business/i)).toBeVisible();
     await expect(page.getByRole("heading", { name: "What We Offer" })).toBeVisible();
     await expect(page.getByText(/growing luxury lifestyle brand/i)).toBeVisible();
     await expect(page.getByRole("heading", { name: "HR Contact" })).toBeVisible();
@@ -89,7 +89,7 @@ test.describe("M09 Careers position detail page", () => {
 
   test("returns not found for unsupported detail slugs", async ({ page }) => {
     const response = await page.goto(
-      "http://localhost:3000/careers/positions/production-manager",
+      "/careers/positions/production-manager",
     );
     expect(response?.status()).toBe(404);
   });

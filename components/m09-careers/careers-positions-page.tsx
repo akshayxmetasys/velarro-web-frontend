@@ -62,7 +62,7 @@ export function CareersPositionsPage({
       data-age-state={ageState}
     >
       <MainNavbar />
-      <main className="w-full pt-[12px]">
+      <main id="main-content" className="w-full pt-[12px]">
         <Breadcrumbs />
         <section
           aria-labelledby="careers-positions-page-heading"

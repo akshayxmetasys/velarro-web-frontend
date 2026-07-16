@@ -25,7 +25,7 @@ describe("RouteBackedModalShell", () => {
     expect(screen.getByRole("dialog", { name: "Sign out" })).toHaveFocus();
   });
 
-  it("keeps Tab focus within the overlay", async () => {
+  it("keeps Tab focus within the dialog panel and excludes the backdrop", async () => {
     const user = userEvent.setup();
     renderModal();
 
@@ -36,12 +36,11 @@ describe("RouteBackedModalShell", () => {
     const cancel = screen.getByRole("button", { name: "Cancel action" });
 
     expect(dialog).toHaveFocus();
-
-    await user.tab();
-    expect(backdrop).toHaveFocus();
+    expect(backdrop).toHaveAttribute("tabindex", "-1");
 
     await user.tab();
     expect(closeButton).toHaveFocus();
+    expect(backdrop).not.toHaveFocus();
 
     await user.tab();
     expect(confirm).toHaveFocus();
@@ -50,10 +49,10 @@ describe("RouteBackedModalShell", () => {
     expect(cancel).toHaveFocus();
 
     await user.tab();
-    expect(backdrop).toHaveFocus();
+    expect(closeButton).toHaveFocus();
   });
 
-  it("keeps Shift+Tab focus within the overlay", async () => {
+  it("keeps Shift+Tab focus within the dialog panel and excludes the backdrop", async () => {
     const user = userEvent.setup();
     renderModal();
 
@@ -64,15 +63,13 @@ describe("RouteBackedModalShell", () => {
 
     await user.tab({ shift: true });
     expect(cancel).toHaveFocus();
+    expect(screen.getByLabelText("Dismiss dialog backdrop")).not.toHaveFocus();
 
     await user.tab({ shift: true });
     expect(screen.getByRole("button", { name: "Confirm action" })).toHaveFocus();
 
     await user.tab({ shift: true });
     expect(screen.getByRole("button", { name: "Close dialog" })).toHaveFocus();
-
-    await user.tab({ shift: true });
-    expect(screen.getByLabelText("Dismiss dialog backdrop")).toHaveFocus();
 
     await user.tab({ shift: true });
     expect(cancel).toHaveFocus();
@@ -107,8 +104,12 @@ describe("RouteBackedModalShell", () => {
           <button type="button" onClick={() => setOpen(true)}>
             Open trigger
           </button>
-          <RouteBackedModalShell open={open} onClose={() => setOpen(false)} title="Sign out">
-            <p>Dialog body</p>
+          <RouteBackedModalShell
+            open={open}
+            onClose={() => setOpen(false)}
+            title="Sign out"
+          >
+            <p>Modal body</p>
           </RouteBackedModalShell>
         </>
       );

@@ -1,3 +1,4 @@
+import { AgeAccessBoundary } from "@/components/age/age-access-boundary";
 import { CareersPositionDetailPage } from "@/components/m09-careers/careers-position-detail-page";
 import type { CareerPositionDetail } from "@/components/m09-careers/careers-position-details-data";
 import type { CareerPosition } from "@/components/m09-careers/careers-positions-data";
@@ -15,10 +16,15 @@ export function CareersPositionDetailPageByAgeState({
   detail,
 }: CareersPositionDetailPageByAgeStateProps) {
   return (
-    <CareersPositionDetailPage
+    <AgeAccessBoundary
+      route={`/careers/positions/${position.slug}`}
       ageState={ageState}
-      position={position}
-      detail={detail}
-    />
+    >
+      <CareersPositionDetailPage
+        ageState={ageState}
+        position={position}
+        detail={detail}
+      />
+    </AgeAccessBoundary>
   );
 }

@@ -200,9 +200,9 @@ describe("FooterSection", () => {
       "Accessibility",
     ]) {
       expect(
-        screen.getByRole("link", {
-          name: `${label} (deferred: destination not approved for this scope)`,
-        }),
+        screen.getByLabelText(
+          `${label} (deferred: destination not approved for this scope)`,
+        ),
       ).not.toHaveAttribute("href");
     }
 

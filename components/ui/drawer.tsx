@@ -27,13 +27,12 @@ export function Drawer({
 }: DrawerProps) {
   const titleId = useId();
   const descriptionId = useId();
-  const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useOverlayFocusLock({
     open,
     onClose,
-    containerRef: overlayRef,
+    containerRef: panelRef,
     initialFocusRef: panelRef,
   });
 
@@ -42,9 +41,10 @@ export function Drawer({
   }
 
   return (
-    <div ref={overlayRef} className="fixed inset-0 z-50 flex">
+    <div className="fixed inset-0 z-50 flex">
       <button
         type="button"
+        tabIndex={-1}
         aria-label="Dismiss drawer backdrop"
         className="absolute inset-0 bg-velarro-text/40"
         onClick={onClose}

@@ -31,13 +31,12 @@ export function RouteBackedModalShell({
 }: RouteBackedModalShellProps) {
   const titleId = useId();
   const descriptionId = useId();
-  const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useOverlayFocusLock({
     open,
     onClose,
-    containerRef: overlayRef,
+    containerRef: dialogRef,
     initialFocusRef: dialogRef,
   });
 
@@ -46,12 +45,10 @@ export function RouteBackedModalShell({
   }
 
   return (
-    <div
-      ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-spacing-24"
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-spacing-24">
       <button
         type="button"
+        tabIndex={-1}
         aria-label="Dismiss dialog backdrop"
         className="absolute inset-0 bg-velarro-text/50"
         onClick={onClose}

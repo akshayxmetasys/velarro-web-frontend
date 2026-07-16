@@ -1,5 +1,4 @@
-import { AgeGate } from "@/components/age/age-gate";
-import { Under21HomeShell } from "@/components/m01-home/under21-home-shell";
+import { AgeAccessBoundary } from "@/components/age/age-access-boundary";
 import { ChroniclePage } from "@/components/m08-chronicle/chronicle-page";
 import type { AgeState } from "@/lib/age/age-state";
 
@@ -10,13 +9,9 @@ export interface ChroniclePageByAgeStateProps {
 export function ChroniclePageByAgeState({
   ageState,
 }: ChroniclePageByAgeStateProps) {
-  if (ageState === "unknown") {
-    return <AgeGate />;
-  }
-
-  if (ageState === "under21") {
-    return <Under21HomeShell />;
-  }
-
-  return <ChroniclePage />;
+  return (
+    <AgeAccessBoundary route="/the-chronicle" ageState={ageState}>
+      <ChroniclePage />
+    </AgeAccessBoundary>
+  );
 }

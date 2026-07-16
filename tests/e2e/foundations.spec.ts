@@ -1,7 +1,7 @@
-import { test, expect } from "@playwright/test";
+﻿import { test, expect } from "@playwright/test";
 
 /**
- * M00 placeholder — foundations E2E wiring only.
+ * M00 placeholder - foundations E2E wiring only.
  * Module-specific flows are added in M01+.
  */
 test.describe("M00 foundations", () => {

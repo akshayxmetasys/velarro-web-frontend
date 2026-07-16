@@ -74,7 +74,7 @@ export function MembershipPage({ ageState }: MembershipPageProps) {
       data-age-state={ageState}
     >
       <MainNavbar />
-      <main className="w-full pt-[12px]">
+      <main id="main-content" className="w-full pt-[12px]">
         <TierSection />
         <Breadcrumbs />
         <MembershipBenefitsTable />

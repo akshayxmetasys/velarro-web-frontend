@@ -13,7 +13,7 @@ export function Over21HomePage() {
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-background-page">
       <MainNavbar />
-      <main className="w-full">
+      <main id="main-content" className="w-full">
         <CollectorHeroSection />
         <CigarCarouselSection />
         <RoasteryHeroSection />

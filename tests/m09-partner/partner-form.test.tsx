@@ -57,12 +57,26 @@ describe("PartnerForm", () => {
     const user = userEvent.setup();
     render(<PartnerForm />);
 
-    await user.type(screen.getByLabelText("Email Address"), "not-an-email");
-    await user.type(screen.getByLabelText("Full name"), "Avery Stone");
-    await user.type(screen.getByLabelText("Phone number"), "+1 555 0100");
-    await user.type(screen.getByLabelText("Business name"), "Stone Retail");
-    await user.type(screen.getByLabelText("Country"), "United States");
-    await user.type(screen.getByLabelText("Your message"), "Partnership message.");
+    // Prefer change events over character-by-character typing to avoid
+    // intermittent user-event timeouts on longer partner fields.
+    fireEvent.change(screen.getByLabelText("Email Address"), {
+      target: { value: "not-an-email" },
+    });
+    fireEvent.change(screen.getByLabelText("Full name"), {
+      target: { value: "Avery Stone" },
+    });
+    fireEvent.change(screen.getByLabelText("Phone number"), {
+      target: { value: "+1 555 0100" },
+    });
+    fireEvent.change(screen.getByLabelText("Business name"), {
+      target: { value: "Stone Retail" },
+    });
+    fireEvent.change(screen.getByLabelText("Country"), {
+      target: { value: "United States" },
+    });
+    fireEvent.change(screen.getByLabelText("Your message"), {
+      target: { value: "Partnership message." },
+    });
     await user.click(screen.getByRole("button", { name: "SUBMIT" }));
 
     expect(screen.getByLabelText("Email Address")).toHaveFocus();

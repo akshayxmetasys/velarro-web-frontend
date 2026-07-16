@@ -1,3 +1,4 @@
+import { AgeAccessBoundary } from "@/components/age/age-access-boundary";
 import { CareersPositionsPage } from "@/components/m09-careers/careers-positions-page";
 import type { AgeState } from "@/lib/age/age-state";
 
@@ -10,5 +11,9 @@ export function CareersPositionsPageByAgeState({
   ageState,
   initialQuery,
 }: CareersPositionsPageByAgeStateProps) {
-  return <CareersPositionsPage ageState={ageState} initialQuery={initialQuery} />;
+  return (
+    <AgeAccessBoundary route="/careers/positions" ageState={ageState}>
+      <CareersPositionsPage ageState={ageState} initialQuery={initialQuery} />
+    </AgeAccessBoundary>
+  );
 }

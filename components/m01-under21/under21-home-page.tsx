@@ -9,7 +9,7 @@ export function Under21HomePage() {
       data-figma-node={UNDER21_HOME_PAGE_FIGMA_NODE}
     >
       <Under21Navbar />
-      <main className="w-full">
+      <main id="main-content" className="w-full">
         <Under21RoasteryHero />
       </main>
     </div>

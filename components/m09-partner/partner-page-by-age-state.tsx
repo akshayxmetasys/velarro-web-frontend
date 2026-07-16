@@ -1,3 +1,4 @@
+import { AgeAccessBoundary } from "@/components/age/age-access-boundary";
 import { PartnerPage } from "@/components/m09-partner/partner-page";
 import type { AgeState } from "@/lib/age/age-state";
 
@@ -8,5 +9,9 @@ export interface PartnerPageByAgeStateProps {
 export function PartnerPageByAgeState({
   ageState,
 }: PartnerPageByAgeStateProps) {
-  return <PartnerPage ageState={ageState} />;
+  return (
+    <AgeAccessBoundary route="/partner" ageState={ageState}>
+      <PartnerPage ageState={ageState} />
+    </AgeAccessBoundary>
+  );
 }

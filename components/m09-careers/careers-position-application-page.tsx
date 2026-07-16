@@ -95,7 +95,7 @@ export function CareersPositionApplicationPage({
       data-position-slug={position.slug}
     >
       <MainNavbar />
-      <main className="w-full pt-[12px]">
+      <main id="main-content" className="w-full pt-[12px]">
         <Breadcrumbs position={position} />
         <section
           className="flex w-full justify-center px-[24px] pb-[80px] pt-[24px] desktop:px-[80px] desktop:pt-[32px]"
