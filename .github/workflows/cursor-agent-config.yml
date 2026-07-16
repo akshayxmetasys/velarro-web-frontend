@@ -59,16 +59,16 @@ jobs:
           python-version: "3.11"
 
       - name: Check mirrored Codex skills
-        run: python -B scripts/sync_agent_skills.py --check
+        run: |
+          python -B scripts/sync_agent_skills.py --check
 
       - name: Validate Cursor package
-        run: python -B scripts/validate_cursor_pack.py
+        run: |
+          python -B scripts/validate_cursor_pack.py
 
       - name: Run Cursor hook tests
-        run: >
-          python -B -m unittest discover
-          -s .cursor/hooks/tests
-          -p "test_*.py"
+        run: |
+          python -B -m unittest discover -s .cursor/hooks/tests -p "test_*.py"
 
       - name: Validate Python syntax
         run: |
@@ -83,18 +83,19 @@ jobs:
           ]
 
           for path in files:
-              source = path.read_text(encoding="utf-8")
-              ast.parse(source, filename=str(path))
-              print(f"Syntax OK: {path}")
+              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+
+          print("syntax ok")
           PY
 
-      - name: Parse hook configuration
+      - name: Validate hook JSON
         run: |
           python -B -m json.tool .cursor/hooks.json > /dev/null
           python -B -m json.tool .cursor/hooks.windows.json > /dev/null
 
       - name: Detect stale generated files
-        run: git diff --exit-code
+        run: |
+          git diff --exit-code
 
       - name: Reject generated runtime artifacts
         run: |
@@ -110,6 +111,8 @@ jobs:
               \( \
                 -name "__pycache__" -o \
                 -name "*.pyc" -o \
+                -name "*.pyo" -o \
+                -name "*.pyd" -o \
                 -name "cursor-enterprise-engineering-pack*.zip" -o \
                 -name "cursor-pack-extract-*" \
               \) \
