@@ -1,4 +1,4 @@
-import { MainMenuSidebar } from "@/components/m01-home/main-menu-sidebar";
+import { MainMenuSidebar } from "@/components/layout/main-menu-sidebar";
 import {
   M01_HOME_APPROVED_IMAGES,
   assertApprovedImageUrl,
@@ -151,8 +151,7 @@ export function MainNavbar() {
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 backdrop-blur-[10px]"
-        style={{ backgroundColor: "rgba(29, 28, 26, 0.6)" }}
+        className="absolute inset-0 bg-background-navbar-overlay backdrop-blur-[10px]"
       />
       <div className="relative grid h-[73px] w-full grid-cols-[minmax(0,1fr)_173px_minmax(0,1fr)] items-center px-[40px] py-[8px]">
         <div className="flex min-w-0 items-center justify-start gap-[42px]">

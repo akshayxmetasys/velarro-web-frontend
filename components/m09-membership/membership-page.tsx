@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { FooterSection } from "@/components/m01-home/footer-section";
-import { MainNavbar } from "@/components/m01-home/main-navbar";
+import { FooterSection } from "@/components/layout/main-footer";
+import { MainNavbar } from "@/components/layout/main-navbar";
 import { MembershipBenefitsTable } from "@/components/m09-membership/membership-benefits-table";
 import { MembershipCta } from "@/components/m09-membership/membership-cta";
+import { MembershipDocumentOverflowLock } from "@/components/m09-membership/membership-document-overflow-lock";
 import {
   MEMBERSHIP_FIGMA_NODE,
   MEMBERSHIP_FIGMA_NODES,
@@ -46,15 +47,22 @@ function TierSection() {
   return (
     <section
       aria-label="Velarro membership tiers"
-      className="flex w-full justify-center px-[24px] pb-[24px] pt-[32px] desktop:px-[38px]"
+      className="flex w-full min-w-0 max-w-full justify-center px-[24px] pb-[24px] pt-[32px] desktop:px-[38px]"
       data-section="membership-tiers"
       data-figma-node={MEMBERSHIP_FIGMA_NODES.tierSection}
     >
       <div
-        className="w-full max-w-[1364px] overflow-x-auto rounded-[12px] bg-background-section px-[24px] py-[24px] desktop:px-[46px]"
+        role="region"
+        aria-label="Membership tiers. Scroll horizontally to compare all tiers."
+        tabIndex={0}
+        className="w-full min-w-0 max-w-[1364px] overflow-x-auto rounded-[12px] bg-background-section px-[24px] py-[24px] desktop:px-[46px]"
         data-figma-node={MEMBERSHIP_FIGMA_NODES.tierContainer}
+        data-membership-scroll-region="tiers"
       >
-        <div className="flex min-w-max gap-[8px] desktop:min-w-0 desktop:justify-center">
+        <p className="mb-[12px] font-[family-name:var(--velarro-body-label-font-family)] text-[14px] font-light leading-none text-text-secondary-body-text desktop:sr-only">
+          Scroll horizontally to compare membership tiers.
+        </p>
+        <div className="flex w-max gap-[8px] desktop:w-full desktop:min-w-0 desktop:max-w-full desktop:justify-center">
           {MEMBERSHIP_TIERS.map((tier) => (
             <MembershipTierCard key={tier.id} tier={tier} />
           ))}
@@ -67,20 +75,23 @@ function TierSection() {
 export function MembershipPage({ ageState }: MembershipPageProps) {
   return (
     <div
-      className="min-h-screen w-full overflow-x-hidden bg-background-page"
+      className="min-h-screen w-full min-w-0 max-w-full overflow-x-clip bg-background-page"
       data-figma-node={MEMBERSHIP_FIGMA_NODE}
       data-route="/membership"
       data-route-audience="review"
       data-age-state={ageState}
     >
+      <MembershipDocumentOverflowLock />
       <MainNavbar />
-      <main className="w-full pt-[12px]">
+      <main className="w-full min-w-0 max-w-full pt-[12px]">
         <TierSection />
         <Breadcrumbs />
         <MembershipBenefitsTable />
         <MembershipCta ageState={ageState} />
       </main>
-      <FooterSection />
+      <div className="w-full min-w-0 max-w-full overflow-x-clip">
+        <FooterSection />
+      </div>
     </div>
   );
 }

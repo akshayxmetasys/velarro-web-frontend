@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FooterSection } from "@/components/m01-home/footer-section";
-import { MainNavbar } from "@/components/m01-home/main-navbar";
+import { FooterSection } from "@/components/layout/main-footer";
+import { MainNavbar } from "@/components/layout/main-navbar";
 import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-assets";
 import {
   THE_ESTATE_CATEGORY_LABELS,

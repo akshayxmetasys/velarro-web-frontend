@@ -1,0 +1,58 @@
+---
+description: Frontend and TypeScript standards derived from the repository's supplied frontend coding standard.
+globs: "**/*.{ts,tsx,js,jsx,mjs,cjs,css,scss,html}"
+alwaysApply: false
+---
+
+# Frontend engineering standards
+
+## Structure and responsibilities
+
+- Use the existing application router (`app` or `pages`) and preserve a clear separation among components, hooks, services, utilities, constants, types, state, and styles.
+- Components MUST be small, reusable, focused on one responsibility, and free of unrelated business or data-access logic.
+- API and integration calls belong in typed service/client modules, not directly in presentation components.
+- Use local state for local behavior. Introduce shared state only when multiple independent consumers require coordinated state.
+- NEVER duplicate common controls or repeated UI logic; extract stable reusable components and hooks.
+
+## Naming and typing
+
+- Use intention-revealing names. Components use PascalCase; hooks use a `use` prefix; service, type, and constant files follow the repository's established suffix conventions.
+- TypeScript MUST run in strict mode where the repository supports it.
+- NEVER introduce `any`, blanket `@ts-ignore`, unchecked non-null assertions, or casts that bypass validation.
+- Component props, service results, events, state, and public functions MUST be explicitly typed.
+- Validate all external data at the boundary before using it as a trusted type.
+
+## Rendering and state
+
+- Represent loading, empty, success, partial, stale, unauthorized, and error states deliberately.
+- NEVER hide asynchronous failures or leave an interface indefinitely loading.
+- Prevent stale updates, race conditions, and updates after unmount through cancellation or framework-approved patterns.
+- Use memoization only when identity stability is required or profiling demonstrates value. NEVER cargo-cult `useMemo` or `useCallback`.
+- Lazy-load genuinely heavy, non-critical modules while preserving accessible loading behavior and error recovery.
+
+## Styling and responsive behavior
+
+- Use the repository's design tokens and Tailwind conventions. Avoid inline styles unless values are inherently dynamic and cannot be represented safely by tokens/classes.
+- Verify mobile, tablet, desktop, zoom, text reflow, long content, localization expansion, and reduced-motion behavior as relevant.
+- Do not encode critical information through color alone.
+- Preserve layout stability and avoid unnecessary client-side JavaScript.
+
+## Forms
+
+- Use the repository's established form and schema-validation libraries.
+- Validate required fields, type, range, format, length, cross-field invariants, and server-side authorization/business constraints.
+- Associate every validation error with its control and provide a clear summary for multi-error submissions when appropriate.
+- Disable duplicate submission safely without trapping retryable failures.
+
+## Accessibility
+
+- Use semantic HTML before ARIA.
+- Every interactive element MUST be keyboard operable, focus visible, correctly named, and reachable in logical order.
+- Inputs require persistent labels; buttons require specific accessible names.
+- Dialogs, menus, tabs, tables, live regions, and custom controls MUST follow established accessibility patterns.
+- Test critical journeys with automated checks and keyboard navigation; use screen-reader testing for complex interactions.
+
+## Hygiene and completion
+
+- NEVER commit unused imports, unused variables, debug logging, dead code, commented-out implementation, or unexplained lint suppressions.
+- Run formatter, linter, strict type check, tests, production build, responsive checks, and accessibility checks before completion.

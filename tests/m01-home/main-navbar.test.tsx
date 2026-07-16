@@ -6,8 +6,8 @@ import {
   MAIN_MENU_ITEMS,
   MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE,
   MAIN_MENU_SIDEBAR_FIGMA_NODE,
-} from "@/components/m01-home/main-menu-sidebar";
-import { MainNavbar } from "@/components/m01-home/main-navbar";
+} from "@/components/layout/main-menu-sidebar";
+import { MainNavbar } from "@/components/layout/main-navbar";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 
 vi.mock("next/image", () => ({

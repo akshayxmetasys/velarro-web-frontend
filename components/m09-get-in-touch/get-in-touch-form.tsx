@@ -221,12 +221,12 @@ export function GetInTouchForm() {
                   value={values[field.name]}
                   onChange={updateValue}
                   placeholder={field.placeholder}
-                  className={cn(inputClassName, hasError && "border-[#8a2c20]")}
+                  className={cn(inputClassName, hasError && "border-border-error")}
                 />
                 {hasError ? (
                   <p
                     id={errorId}
-                    className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-[#8a2c20]"
+                    className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-text-error"
                   >
                     {errors[field.name]}
                   </p>
@@ -270,12 +270,12 @@ export function GetInTouchForm() {
                   value={values[field.name]}
                   onChange={updateValue}
                   placeholder={field.placeholder}
-                  className={cn(inputClassName, hasError && "border-[#8a2c20]")}
+                  className={cn(inputClassName, hasError && "border-border-error")}
                 />
                 {hasError ? (
                   <p
                     id={errorId}
-                    className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-[#8a2c20]"
+                    className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-text-error"
                   >
                     {errors[field.name]}
                   </p>
@@ -312,12 +312,12 @@ export function GetInTouchForm() {
               value={values.subject}
               onChange={updateValue}
               placeholder={GET_IN_TOUCH_SUBJECT_FIELD.placeholder}
-              className={cn(inputClassName, errors.subject && "border-[#8a2c20]")}
+              className={cn(inputClassName, errors.subject && "border-border-error")}
             />
             {errors.subject ? (
               <p
                 id={`${idPrefix}-subject-error`}
-                className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-[#8a2c20]"
+                className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-text-error"
               >
                 {errors.subject}
               </p>
@@ -354,13 +354,13 @@ export function GetInTouchForm() {
             rows={6}
             className={cn(
               "min-h-[164px] w-full resize-none rounded-radius-sm border border-border-default bg-background-input px-[8px] py-[8px] font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-none text-text-body-text outline-none placeholder:text-text-secondary-body-text focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
-              errors.message && "border-[#8a2c20]",
+              errors.message && "border-border-error",
             )}
           />
           {errors.message ? (
             <p
               id={`${idPrefix}-message-error`}
-              className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-[#8a2c20]"
+              className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-text-error"
             >
               {errors.message}
             </p>

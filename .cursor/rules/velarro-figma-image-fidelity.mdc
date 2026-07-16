@@ -1,0 +1,40 @@
+---
+description: Velarro Figma image and hero fidelity workflow for image-led implementation and visual verification.
+globs: ["app/**", "components/**", "lib/assets/**", "public/images/**", "docs/figma/**", "docs/implementation/modules/**"]
+alwaysApply: false
+---
+
+For every Velarro Figma hero or image-led section, classify the runtime asset before implementing the crop.
+
+Before writing hero/image code:
+- Extract the complete route-specific asset inventory.
+- Ask Vishnu for every required image URL before writing image-dependent production UI.
+- Record each asset as one of: approved production URL supplied, explicitly deferred by Vishnu, or implementation blocked.
+- Identify whether the approved production asset is a raw uncropped source image or an already-cropped desktop/mobile production export.
+- Inspect the production asset natural dimensions and aspect ratio.
+- Record the Figma frame width, height, image transform, and visible subject landmarks.
+- Do not copy Figma internal image width, height, scale, or transform directly onto a separately exported production asset unless the runtime image is confirmed to be the same raw source file Figma used.
+
+For already-cropped production hero exports:
+- Use the fixed Figma frame ratio/height.
+- Render the image at width `100%` and height `100%`.
+- Use `object-fit: cover`.
+- Use `object-position` only for focal adjustment.
+- Do not use CSS transforms, scale utilities, or image dimensions above `100%`.
+
+Use explicit Figma transforms only when the runtime asset is verified as the same raw source image used by Figma.
+
+For explicitly deferred images:
+- Use a dimension-matched neutral surface.
+- Add a centralized typed asset slot and deferred status.
+- Do not substitute another image, generated image, temporary Figma asset, local screenshot, stock image, or unrelated approved product image.
+- Do not silently proceed with missing imagery.
+- Document the deferred asset in the module implementation notes.
+
+Before requesting visual approval:
+- Validate localhost at the exact Figma desktop viewport width.
+- Confirm visible landmarks such as hands, faces, objects, borders, and background edges.
+- Capture localhost or browser automation evidence.
+- Document the asset classification, natural dimensions, target ratio, final crop, and verification result.
+- Do not claim hero fidelity from lint, unit tests, or build success alone.
+- Do not implement another hero until the crop classification is documented.

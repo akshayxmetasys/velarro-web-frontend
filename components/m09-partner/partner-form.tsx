@@ -54,7 +54,7 @@ function CheckIcon() {
     <svg
       aria-hidden="true"
       viewBox="0 0 40 40"
-      className="h-[40px] w-[40px] text-[#465739]"
+      className="h-[40px] w-[40px] text-text-success"
       fill="none"
     >
       <circle cx="20" cy="20" r="13" stroke="currentColor" strokeWidth="2" />
@@ -120,10 +120,12 @@ export function PartnerForm() {
         aria-labelledby="partner-submitted-heading"
         className="flex w-full max-w-[500px] flex-col items-center overflow-hidden rounded-[12px] border border-border-strong bg-background-page"
         data-partner-submitted-state
+        data-submission-status="ui-only-not-connected"
+        data-submission-endpoint="none"
         data-figma-node={PARTNER_SUBMITTED_FIGMA_NODE}
       >
         <div className="flex w-full flex-col items-center pb-[24px] pt-[40px]">
-          <div className="flex h-[80px] w-[80px] items-center justify-center rounded-full border border-[#465739] bg-[#e6ebdd]">
+          <div className="flex h-[80px] w-[80px] items-center justify-center rounded-full border border-border-success bg-background-success">
             <CheckIcon />
           </div>
           <h2
@@ -132,25 +134,26 @@ export function PartnerForm() {
           >
             {PARTNER_SUBMITTED_COPY.title}
           </h2>
-          <p className="mt-[11px] font-[family-name:var(--velarro-ui-elements-form-font-family)] text-[18px] font-normal leading-none text-text-heading">
-            {PARTNER_SUBMITTED_COPY.id}
-          </p>
-          <p className="mt-[4px] font-[family-name:var(--velarro-ui-elements-form-font-family)] text-[14px] font-normal leading-none text-text-body-text">
-            {PARTNER_SUBMITTED_COPY.date}
-          </p>
         </div>
         <div className="px-[32px] pb-[32px]">
-          <p className="flex min-h-[86px] w-full max-w-[384px] items-center justify-center rounded-[8px] bg-background-card px-[8px] py-[12px] text-center font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[16px] font-normal leading-[24px] text-text-body-text">
+          <p className="flex min-h-[86px] w-full max-w-[384px] items-center justify-center rounded-radius-md bg-background-card px-[8px] py-[12px] text-center font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[16px] font-normal leading-[24px] text-text-body-text">
             {PARTNER_SUBMITTED_COPY.body}
           </p>
         </div>
-        <div className="w-full border-t border-background-card bg-background-card px-[32px] pb-[24px] pt-[25px] text-center">
+        <div className="flex w-full flex-col items-center gap-[16px] border-t border-background-card bg-background-card px-[32px] pb-[24px] pt-[25px] text-center">
           <p className="font-[family-name:var(--velarro-ui-elements-form-font-family)] text-[14px] font-normal leading-none text-text-secondary-body-text">
             {PARTNER_SUBMITTED_COPY.footer}
           </p>
+          <button
+            type="button"
+            onClick={() => setSubmitted(false)}
+            className="h-[40px] min-w-[160px] rounded-radius-md border border-border-default bg-button-fill px-[24px] font-[family-name:var(--velarro-heading-button-font-family)] text-[length:var(--velarro-heading-button-font-size)] font-light uppercase leading-normal text-text-heading focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2"
+          >
+            {PARTNER_SUBMITTED_COPY.backToForm}
+          </button>
         </div>
         <div aria-live="polite" className="sr-only">
-          {PARTNER_SUBMITTED_COPY.title}
+          {PARTNER_SUBMITTED_COPY.title}. {PARTNER_SUBMITTED_COPY.body}
         </div>
       </section>
     );
@@ -199,14 +202,14 @@ export function PartnerForm() {
                 onChange={updateValue}
                 placeholder={field.placeholder}
                 className={cn(
-                  "h-[30px] w-full rounded-[4px] border border-border-default bg-background-input px-[8px] font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-none text-text-body-text outline-none placeholder:text-text-secondary-body-text focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
-                  hasError && "border-[#8a2c20]",
+                  "h-[30px] w-full rounded-radius-sm border border-border-default bg-background-input px-[8px] font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-none text-text-body-text outline-none placeholder:text-text-secondary-body-text focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
+                  hasError && "border-border-error",
                 )}
               />
               {hasError ? (
                 <p
                   id={errorId}
-                  className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-[#8a2c20]"
+                  className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-text-error"
                 >
                   {errors[field.name]}
                 </p>
@@ -241,14 +244,14 @@ export function PartnerForm() {
             placeholder={PARTNER_MESSAGE_FIELD.placeholder}
             rows={1}
             className={cn(
-              "min-h-[30px] w-full resize-none rounded-[4px] border border-border-default bg-background-input px-[8px] py-[8px] font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-none text-text-body-text outline-none placeholder:text-text-secondary-body-text focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
-              errors.message && "border-[#8a2c20]",
+              "min-h-[30px] w-full resize-none rounded-radius-sm border border-border-default bg-background-input px-[8px] py-[8px] font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-none text-text-body-text outline-none placeholder:text-text-secondary-body-text focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
+              errors.message && "border-border-error",
             )}
           />
           {errors.message ? (
             <p
               id={`${idPrefix}-message-error`}
-              className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-[#8a2c20]"
+              className="font-[family-name:var(--velarro-body-small-font-family)] text-[12px] font-light leading-[16px] text-text-error"
             >
               {errors.message}
             </p>

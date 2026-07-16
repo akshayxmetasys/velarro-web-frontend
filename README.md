@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Velarro Estate — Web Frontend
 
-## Getting Started
+Private Next.js App Router frontend for [Velarro Estate](https://velarroestate.com).
 
-First, run the development server:
+## Stack (verified)
+
+| Layer | Technology |
+| --- | --- |
+| Framework | Next.js **16.2.10** (App Router, Turbopack) |
+| UI | React **19.2.4**, Server Components by default |
+| Language | TypeScript **5.9** (`strict: true`) |
+| Styling | Tailwind CSS **v4** + design tokens in `app/globals.css` |
+| Unit tests | Vitest **3** + Testing Library |
+| E2E | Playwright **1.61** (Chromium) |
+| Package manager | npm (`package-lock.json`) |
+
+There is **no** Redux/Zustand store, no Axios/`fetch` API layer, no React Hook Form/Zod, and no auth/cart/checkout implementation yet. Content is static module data; age state uses an httpOnly cookie via a server action.
+
+## Commands
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run test
+npm run build
+npm run start
+npm run test:e2e -- --list
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+CI (`.github/workflows/ci.yml`) runs lint → unit tests → production build → Playwright `--list`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Repository layout
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+app/           App Router pages, layout, robots, sitemap
+components/    UI primitives, layout, age gate, M0x feature modules
+lib/           Age, SEO, security, a11y, assets helpers
+tests/         Vitest unit/component tests + Playwright e2e
+docs/          Implementation notes and audits
+```
 
-## Learn More
+## Engineering guardrails
 
-To learn more about Next.js, take a look at the following resources:
+See `AGENTS.md`. Do not write production UI until the user provides:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`START VELARRO IMPLEMENTATION`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Audit artifacts
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Latest forensic tech-stack validation lives under `docs/audits/`.
