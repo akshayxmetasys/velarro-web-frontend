@@ -120,6 +120,8 @@ export function PartnerForm() {
         aria-labelledby="partner-submitted-heading"
         className="flex w-full max-w-[500px] flex-col items-center overflow-hidden rounded-[12px] border border-border-strong bg-background-page"
         data-partner-submitted-state
+        data-submission-status="ui-only-not-connected"
+        data-submission-endpoint="none"
         data-figma-node={PARTNER_SUBMITTED_FIGMA_NODE}
       >
         <div className="flex w-full flex-col items-center pb-[24px] pt-[40px]">

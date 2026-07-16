@@ -7,15 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  DEFAULT_AGE_STATE,
-  isPersistedAgeState,
-  type AgeState,
-} from "@/lib/age/age-state";
-import {
-  serializeAgeStateCookie,
-  serializeAgeStateCookieClear,
-} from "@/lib/age/age-cookie";
+import { DEFAULT_AGE_STATE, type AgeState } from "@/lib/age/age-state";
 
 export interface AgeStateContextValue {
   ageState: AgeState;
@@ -29,6 +21,12 @@ export interface AgeStateProviderProps {
   initialAgeState?: AgeState;
 }
 
+/**
+ * Client mirror of age state for interactive UI only.
+ * Persistence must go through `confirmAgeStateAction` (httpOnly cookie).
+ * Do not write `document.cookie` here — that would create a non-httpOnly
+ * cookie that conflicts with the server-set httpOnly `velarro_age_state`.
+ */
 export function AgeStateProvider({
   children,
   initialAgeState = DEFAULT_AGE_STATE,
@@ -38,17 +36,7 @@ export function AgeStateProvider({
   const value = useMemo<AgeStateContextValue>(
     () => ({
       ageState,
-      setAgeState(nextAgeState) {
-        setAgeStateValue(nextAgeState);
-
-        if (typeof document === "undefined") {
-          return;
-        }
-
-        document.cookie = isPersistedAgeState(nextAgeState)
-          ? serializeAgeStateCookie(nextAgeState)
-          : serializeAgeStateCookieClear();
-      },
+      setAgeState: setAgeStateValue,
     }),
     [ageState],
   );
