@@ -1,8 +1,15 @@
 # Velarro Estate — Master Implementation Plan
 
-Status: **M00 IN REVIEW — FOUNDATIONS IMPLEMENTED**
+> **STATUS BANNER (2026-07-16)**
+> Historical master plan retained. Live V-series fidelity sequencing is documented in:
+> `docs/implementation/current-main-route-fidelity-tracker.md` and
+> `docs/implementation/vishnu-v01-v09-fidelity-sequence.md`.
+> Post-15 Jul 2026 merges through PR #45 supersede "not started" implications for M00.5 shell/tokens and Under-21 home slice.
+> PR #40 was closed without merging; do not revive it.
 
-Last updated: 2026-07-01 (M00 implementation)
+Status: **HISTORICAL / PARTIALLY SUPERSEDED — see V-00 tracker**
+
+Last updated: 2026-07-01 (M00 implementation); banner added 2026-07-16
 
 ## Inputs
 
