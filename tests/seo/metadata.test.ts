@@ -1,6 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { metadata as rootMetadata } from "@/app/layout";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { buildCanonicalUrl } from "@/lib/seo/indexability";
+
+vi.mock("next/font/google", () => ({
+  Noto_Sans: () => ({ variable: "--font-noto-sans" }),
+}));
 
 describe("metadata helpers", () => {
   it("builds canonical URLs", () => {
@@ -19,5 +24,12 @@ describe("metadata helpers", () => {
 
     expect(metadata.robots).toMatchObject({ index: false, follow: false });
     expect(metadata.alternates?.canonical).toBe("https://velarroestate.com");
+  });
+
+  it("keeps root metadata safe for under-21 source rendering", () => {
+    const description = String(rootMetadata.description).toLowerCase();
+
+    expect(description).not.toContain("cigar");
+    expect(description).not.toContain("tobacco");
   });
 });
