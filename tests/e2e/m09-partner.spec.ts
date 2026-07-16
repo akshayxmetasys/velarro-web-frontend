@@ -47,8 +47,15 @@ test.describe("M09 Partner page", () => {
       .click();
 
     await expect(
-      page.getByRole("heading", { name: "Application submitted" }),
+      page.getByRole("heading", { name: "Preview recorded" }),
     ).toBeVisible();
+    await expect(
+      page
+        .locator("[data-partner-submitted-state] p")
+        .filter({ hasText: /No application has been submitted, stored, or delivered/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/Application ID #/i)).toHaveCount(0);
+    await expect(page.getByText(/confirmation has been sent/i)).toHaveCount(0);
     await expect(page.getByText("partner@example.com")).toHaveCount(0);
   });
 });

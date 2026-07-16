@@ -196,7 +196,7 @@ describe("CigarCarouselSection", () => {
       "utf8",
     );
     const footerSource = readFileSync(
-      join(process.cwd(), "components/m01-home/footer-section.tsx"),
+      join(process.cwd(), "components/layout/main-footer.tsx"),
       "utf8",
     );
     const over21Source = readFileSync(

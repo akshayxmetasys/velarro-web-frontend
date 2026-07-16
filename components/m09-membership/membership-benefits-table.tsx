@@ -67,11 +67,11 @@ export function MembershipBenefitsTable() {
   return (
     <section
       aria-labelledby="membership-benefits-heading"
-      className="flex w-full justify-center px-[24px] pb-[48px] desktop:px-[45px]"
+      className="flex w-full min-w-0 max-w-full justify-center px-[24px] pb-[48px] desktop:px-[45px]"
       data-section="membership-benefits"
       data-figma-node="15008:38412"
     >
-      <div className="flex w-full max-w-[1350px] flex-col gap-[24px]">
+      <div className="flex w-full max-w-[1350px] min-w-0 flex-col gap-[24px]">
         <h2
           id="membership-benefits-heading"
           className="text-center font-[family-name:var(--velarro-heading-page-font-family)] text-[28px] font-normal leading-none tracking-[0] text-text-heading desktop:text-[32px]"
@@ -81,11 +81,17 @@ export function MembershipBenefitsTable() {
         </h2>
 
         <div
-          aria-label="Membership tier benefits comparison"
-          className="overflow-x-auto rounded-[12px] bg-background-section px-[24px] py-[24px] desktop:px-[40px]"
+          role="region"
+          aria-label="Membership tier benefits comparison. Scroll horizontally to view all columns."
+          tabIndex={0}
+          className="w-full min-w-0 max-w-full overflow-x-auto rounded-[12px] bg-background-section px-[24px] py-[24px] desktop:px-[40px]"
           data-figma-node="15008:38417"
+          data-membership-scroll-region="benefits"
         >
-          <table className="min-w-[980px] w-full border-collapse">
+          <p className="mb-[12px] font-[family-name:var(--velarro-body-label-font-family)] text-[14px] font-light leading-none text-text-secondary-body-text desktop:sr-only">
+            Scroll horizontally to view the full benefits comparison.
+          </p>
+          <table className="w-full min-w-[980px] border-collapse">
             <caption className="sr-only">
               Comparison of Velarro membership tier benefits
             </caption>

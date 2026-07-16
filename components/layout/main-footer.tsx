@@ -154,7 +154,7 @@ export function FooterSection() {
   return (
     <footer
       aria-labelledby="footer-newsletter-heading"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 border-t border-border-default bg-background-page pt-[20px] text-text-body-text"
+      className="w-full border-t border-border-default bg-background-page pt-[20px] text-text-body-text"
       data-figma-node="14468:34842"
       data-slot="m01-over21-footer"
     >
@@ -343,3 +343,6 @@ export function FooterSection() {
     </footer>
   );
 }
+
+/** Canonical shared-layout name (shared-component-plan: main-footer). */
+export const MainFooter = FooterSection;

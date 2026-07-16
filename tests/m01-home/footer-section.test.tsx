@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   FooterSection,
   M01_FOOTER_ASSET_URLS,
-} from "@/components/m01-home/footer-section";
+} from "@/components/layout/main-footer";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 
 vi.mock("next/image", () => ({
@@ -124,7 +124,8 @@ describe("FooterSection", () => {
     );
     const mainRow = container.querySelector('[data-slot="footer-main-row"]');
 
-    expect(footer).toHaveClass("w-screen", "max-w-none", "left-1/2", "-translate-x-1/2");
+    expect(footer).toHaveClass("w-full");
+    expect(footer).not.toHaveClass("w-screen");
     expect(newsletterPanel).toHaveClass("w-full", "max-w-[1436px]");
     expect(mainRow).toHaveClass("w-full", "max-w-[1216px]");
   });

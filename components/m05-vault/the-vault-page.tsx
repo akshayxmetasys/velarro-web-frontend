@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FooterSection } from "@/components/m01-home/footer-section";
-import { MainNavbar } from "@/components/m01-home/main-navbar";
+import { FooterSection } from "@/components/layout/main-footer";
+import { MainNavbar } from "@/components/layout/main-navbar";
 import { THE_VAULT_HERO_IMAGE_STATUS } from "@/components/m05-vault/the-vault-assets";
 import {
   VAULT_HERO_COPY,
