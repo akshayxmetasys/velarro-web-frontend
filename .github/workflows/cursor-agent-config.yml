@@ -1,0 +1,91 @@
+name: Cursor Agent Config
+
+on:
+  pull_request:
+    paths:
+      - ".cursor/**"
+      - ".agents/**"
+      - ".cursorrules"
+      - "AGENTS.md"
+      - "docs/engineering/**"
+      - "scripts/sync_agent_skills.py"
+      - "scripts/validate_cursor_pack.py"
+      - ".github/workflows/cursor-agent-config.yml"
+      - "package.json"
+      - "package-lock.json"
+  push:
+    branches:
+      - main
+    paths:
+      - ".cursor/**"
+      - ".agents/**"
+      - ".cursorrules"
+      - "AGENTS.md"
+      - "docs/engineering/**"
+      - "scripts/sync_agent_skills.py"
+      - "scripts/validate_cursor_pack.py"
+      - ".github/workflows/cursor-agent-config.yml"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cursor-agent-config-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check mirrored Codex skills
+        run: python scripts/sync_agent_skills.py --check
+
+      - name: Validate Cursor package
+        run: python scripts/validate_cursor_pack.py
+
+      - name: Test Cursor hooks
+        run: python -m unittest discover .cursor/hooks/tests
+
+      - name: Compile hook and validation scripts
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          for path in [
+              Path(".cursor/hooks/guard.py"),
+              Path("scripts/validate_cursor_pack.py"),
+              Path("scripts/sync_agent_skills.py"),
+          ]:
+              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+          PY
+
+      - name: Parse hook configuration
+        run: python -m json.tool .cursor/hooks.json > /dev/null
+
+      - name: Detect stale generated files
+        run: git diff --exit-code
+
+      - name: Reject generated runtime artifacts
+        run: |
+          test ! -d .cursor/.state
+          test -z "$(find . -path './.git' -prune -o -path './node_modules' -prune -o -name '__pycache__' -print -quit)"
+          test -z "$(find . -path './.git' -prune -o -path './node_modules' -prune -o -name '*.pyc' -print -quit)"

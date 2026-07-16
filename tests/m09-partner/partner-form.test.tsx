@@ -90,6 +90,14 @@ describe("PartnerForm", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(PARTNER_SUBMITTED_COPY.id)).toBeInTheDocument();
     expect(screen.getByText(PARTNER_SUBMITTED_COPY.date)).toBeInTheDocument();
+    const submittedState = document.querySelector(
+      "[data-partner-submitted-state]",
+    );
+    expect(submittedState).toHaveAttribute(
+      "data-submission-status",
+      "ui-only-not-connected",
+    );
+    expect(submittedState).toHaveAttribute("data-submission-endpoint", "none");
     expect(screen.queryByDisplayValue("partner@example.com")).not.toBeInTheDocument();
     expect(screen.queryByText("Avery Stone")).not.toBeInTheDocument();
     expect(screen.queryByText("Stone Retail")).not.toBeInTheDocument();

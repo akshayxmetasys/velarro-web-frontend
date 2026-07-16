@@ -1,0 +1,39 @@
+---
+description: Apply when creating modules, moving code, changing dependencies, adding integrations, or modifying architectural boundaries.
+alwaysApply: false
+---
+
+# Architecture boundaries
+
+## Dependency direction
+
+- ALWAYS identify the repository's architectural layers before editing.
+- NEVER introduce a dependency from a lower-level domain or core layer to UI, transport, framework, persistence, or vendor-specific code.
+- NEVER allow infrastructure concerns to leak into domain contracts.
+- NEVER create circular dependencies, including indirect cycles hidden behind index/barrel files, dependency injection containers, event handlers, or generated code.
+- ALWAYS depend on stable abstractions owned by the consuming layer; place adapters at system edges.
+- ALWAYS keep dependency direction explicit and statically checkable.
+
+## Module cohesion
+
+- Each module MUST have one primary responsibility, one clear owner, and a narrow public surface.
+- Public APIs MUST expose contracts, not internal data structures.
+- Internal implementation details MUST remain private to their module.
+- Cross-module data transfer MUST use explicit typed contracts with versioning when persisted or exchanged across deployable boundaries.
+- NEVER create a generic `utils`, `helpers`, or `common` dumping ground. Shared code requires a stable domain-neutral purpose and at least two real consumers.
+- NEVER use service locator patterns, ambient mutable singletons, or runtime import tricks to bypass boundaries.
+
+## Change control
+
+- A new service, datastore, queue, cross-cutting framework, public API, or dependency inversion boundary REQUIRES an ADR.
+- A boundary exception MUST include: rationale, owner, risk, expiration/review date, and a removal plan.
+- ALWAYS add architecture tests or dependency-linter rules when introducing a new boundary.
+- NEVER rely on comments alone to enforce dependency direction.
+
+## Distributed-system boundaries
+
+- Treat networks, filesystems, clocks, queues, caches, and databases as unreliable external systems.
+- Every remote interaction MUST define timeout, cancellation, retry policy, idempotency behavior, error mapping, and observability.
+- NEVER retry non-idempotent operations blindly.
+- NEVER hold database transactions open across remote calls.
+- ALWAYS define consistency expectations and failure recovery for multi-resource workflows.
