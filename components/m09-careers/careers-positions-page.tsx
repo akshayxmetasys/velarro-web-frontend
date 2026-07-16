@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { FooterSection } from "@/components/m01-home/footer-section";
-import { MainNavbar } from "@/components/m01-home/main-navbar";
+import { FooterSection } from "@/components/layout/main-footer";
+import { MainNavbar } from "@/components/layout/main-navbar";
 import { CareersPositionsSearch } from "@/components/m09-careers/careers-positions-search";
 import {
   CAREERS_POSITIONS_FIGMA_NODE,

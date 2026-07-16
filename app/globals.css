@@ -30,9 +30,30 @@
   --color-background-input: #fcfbf8;
   --color-background-error: #f2e1de;
   --color-background-navbar: #1d1c1a;
+  /*
+   * Engineering: navbar glass overlay — Figma MAIN NAVBAR uses
+   * color/background/navbar (#1d1c1a) at 60% opacity with blur
+   * (docs/implementation/modules/M01-home/layer-by-layer-visual-specification.md).
+   */
+  --color-background-navbar-overlay: rgba(29, 28, 26, 0.6);
   --color-brand-logo: #b79a78;
   --color-color-info-links: #b79a78;
   --color-labels-active-selected: #efe7dc;
+  /*
+   * Engineering: form error foreground — repeated approved UI value in
+   * partner + get-in-touch validation (was hardcoded #8a2c20). Pairs with
+   * Figma color/background/error fill (#f2e1de).
+   */
+  --color-text-error: #8a2c20;
+  --color-border-error: #8a2c20;
+  /*
+   * Engineering: confirmation success accents — repeated in partner submitted
+   * UI (check ring #465739, fill #e6ebdd). Not present in design-tokens.json;
+   * retained as shared engineering tokens to remove hardcodes.
+   */
+  --color-text-success: #465739;
+  --color-border-success: #465739;
+  --color-background-success: #e6ebdd;
   --velarro-text: #1d1c1a;
   --velarro-neutral-neutral-11: #4a3f36;
 
@@ -45,6 +66,13 @@
   /* Figma verified: radii */
   --radius-md: 8px;
   --radius-none: 0px;
+  /*
+   * Engineering: radius-sm = 4px — repeated corner radius on form inputs,
+   * filter controls, and footer fields across Figma-derived modules. Not in
+   * design-tokens.json (only radius-md / radius-none). Required so
+   * Tailwind `rounded-radius-sm` resolves.
+   */
+  --radius-sm: 4px;
 
   /* Figma verified: shadows (design context) */
   --shadow-card-subtle: 0px 1px 1px rgba(0, 0, 0, 0.05);
@@ -210,9 +238,15 @@
   --color-background-input: var(--color-background-input);
   --color-background-error: var(--color-background-error);
   --color-background-navbar: var(--color-background-navbar);
+  --color-background-navbar-overlay: var(--color-background-navbar-overlay);
   --color-brand-logo: var(--color-brand-logo);
   --color-color-info-links: var(--color-color-info-links);
   --color-labels-active-selected: var(--color-labels-active-selected);
+  --color-text-error: var(--color-text-error);
+  --color-border-error: var(--color-border-error);
+  --color-text-success: var(--color-text-success);
+  --color-border-success: var(--color-border-success);
+  --color-background-success: var(--color-background-success);
   --color-velarro-text: var(--velarro-text);
   --color-velarro-neutral-neutral-11: var(--velarro-neutral-neutral-11);
 
@@ -222,6 +256,7 @@
   --spacing-48: var(--spacing-48);
 
   --radius-md: var(--radius-md);
+  --radius-sm: var(--radius-sm);
   --radius-none: var(--radius-none);
 
   --shadow-card-subtle: var(--shadow-card-subtle);

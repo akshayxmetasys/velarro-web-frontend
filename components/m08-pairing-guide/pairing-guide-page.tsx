@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { FooterSection } from "@/components/m01-home/footer-section";
-import { MainNavbar } from "@/components/m01-home/main-navbar";
+import { FooterSection } from "@/components/layout/main-footer";
+import { MainNavbar } from "@/components/layout/main-navbar";
 import {
   PAIRING_GUIDE_APPROVED_IMAGES,
   PAIRING_GUIDE_CARD_BACKGROUND_STATUS,

@@ -57,10 +57,10 @@ export const PARTNER_MESSAGE_FIELD = {
 } as const;
 
 export const PARTNER_SUBMITTED_COPY = {
-  title: "Application submitted",
-  id: "Application ID #VL-10482",
-  date: "Submission date : 21.02.26",
+  title: "Preview recorded",
   body:
-    "Our team will review your application and respond within 3-5 business days. You'll be notified via your registered email",
-  footer: "A confirmation has been sent to your registered email.",
+    "This on-page preview recorded your partnership inquiry only. No application has been submitted, stored, or delivered to Velarro.",
+  footer:
+    "This confirmation is shown in your browser only. No application ID was created and no email was sent.",
+  backToForm: "BACK TO FORM",
 } as const;

@@ -88,8 +88,12 @@ describe("PartnerForm", () => {
     expect(
       screen.getByRole("heading", { name: PARTNER_SUBMITTED_COPY.title }),
     ).toBeInTheDocument();
-    expect(screen.getByText(PARTNER_SUBMITTED_COPY.id)).toBeInTheDocument();
-    expect(screen.getByText(PARTNER_SUBMITTED_COPY.date)).toBeInTheDocument();
+    expect(screen.getByText(PARTNER_SUBMITTED_COPY.body)).toBeInTheDocument();
+    expect(screen.getByText(PARTNER_SUBMITTED_COPY.footer)).toBeInTheDocument();
+    expect(screen.queryByText(/Application ID #/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/confirmation has been sent/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/3-5 business days/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/You'll be notified via your registered email/i)).not.toBeInTheDocument();
     const submittedState = document.querySelector(
       "[data-partner-submitted-state]",
     );
@@ -101,6 +105,11 @@ describe("PartnerForm", () => {
     expect(screen.queryByDisplayValue("partner@example.com")).not.toBeInTheDocument();
     expect(screen.queryByText("Avery Stone")).not.toBeInTheDocument();
     expect(screen.queryByText("Stone Retail")).not.toBeInTheDocument();
+
+    await user.click(
+      screen.getByRole("button", { name: PARTNER_SUBMITTED_COPY.backToForm }),
+    );
+    expect(screen.getByRole("button", { name: "SUBMIT" })).toBeInTheDocument();
 
     vi.unstubAllGlobals();
     storageSetItemSpy.mockRestore();
