@@ -1,6 +1,10 @@
 {
-  "status": "M00 IN REVIEW — FOUNDATIONS IMPLEMENTED",
+  "status": "HISTORICAL — SUPERSEDED BY V-00 TRACKER (2026-07-16). See docs/implementation/current-main-route-fidelity-tracker.md and vishnu-v01-v09-fidelity-sequence.md. Do not use this queue as live SoT; M00.5 (#44) and Under-21 (#45) already merged.",
   "correctionRunDate": "2026-07-01",
+  "supersededBy": [
+    "docs/implementation/current-main-route-fidelity-tracker.md",
+    "docs/implementation/vishnu-v01-v09-fidelity-sequence.md"
+  ],
   "canonicalModuleOrder": [
     "M00-foundations",
     "M01-home",

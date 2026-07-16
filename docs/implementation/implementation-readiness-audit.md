@@ -1,7 +1,14 @@
 # Velarro Estate Implementation Readiness Audit
 
-Status: PR-0 planning only
-Last updated: 2026-07-09
+> **SUPERSEDED FOR LIVE READINESS (2026-07-16)**
+> Retained as PR-0 historical evidence. Current route/fidelity readiness and V-01–V-09 sequencing live in:
+> `docs/implementation/current-main-route-fidelity-tracker.md`,
+> `docs/implementation/vishnu-v01-v09-fidelity-sequence.md`,
+> `docs/implementation/v00-fidelity-evidence-index.md`.
+> Baseline at V-00: SHA `3f40c01` (includes PR #44 M00.5 and PR #45 Under-21).
+
+Status: PR-0 planning only (**historical**)
+Last updated: 2026-07-09; banner added 2026-07-16
 
 ## Audit Scope
 

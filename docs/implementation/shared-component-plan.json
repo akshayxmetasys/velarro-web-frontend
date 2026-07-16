@@ -1,6 +1,7 @@
 {
-  "status": "INGESTION COMPLETE \u2014 DOCUMENTATION CORRECTED \u2014 READY FOR M00",
+  "status": "HISTORICAL PLAN — paths partially stale vs post-M00.5 layout. Runtime shell SoT: components/layout/main-navbar.tsx, main-footer.tsx, main-menu-sidebar.tsx. See docs/implementation/current-main-route-fidelity-tracker.md (2026-07-16).",
   "correctionRunDate": "2026-07-01",
+  "supersededNote": "Do not recreate components solely because this plan lists alternate paths. Prefer filesystem + imports.",
   "conventions": {
     "directoryLayout": {
       "components/ui": "Reusable primitives and form controls",

@@ -1,6 +1,14 @@
 # Cursor / Codex Execution Plan
 
-Status: PR-0 planning only
+> **SUPERSEDED FOR CURRENT EXECUTION (2026-07-16)**
+> This document is retained as historical PR-0 planning evidence.
+> Authoritative current sequencing:
+> - `docs/implementation/current-main-route-fidelity-tracker.md`
+> - `docs/implementation/vishnu-v01-v09-fidelity-sequence.md`
+> Do not treat the PR sequence below as the live implementation queue.
+> Merged since this plan: PR #39, #43, #44 (M00.5), #45 (Under-21). PR #40 closed unmerged.
+
+Status: PR-0 planning only (**historical**)
 Last updated: 2026-07-09
 
 This plan is for sequencing work after PR-0. It must not be used as authorization to write production UI code.
