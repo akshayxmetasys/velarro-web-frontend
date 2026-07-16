@@ -7,6 +7,9 @@ Modes:
 - `before-shell`: returns `allow`, `ask`, or `deny` through Cursor's permission response.
 - `after-edit`: scans edited content and stores findings under `.cursor/.state/`.
 - `stop`: returns one consolidated `followup_message` and deletes the session state.
+  Transport fail-closed records (`shell.malformed-event`, `shell.empty-event-transport`)
+  are diagnostic only and are omitted from the followup so correct deny/allow-with-audit
+  behavior does not block agent finalization.
 
 Environment controls:
 

@@ -39,6 +39,7 @@ Key continuation changes:
 - ADR for age-gate indexability (F-003 external decision).
 - GHSA-qx2v-qp2m-jg93 accepted temporary risk (F-009).
 - Cursor shell hook recovers noisy/non-JSON command payloads (F-016 Fixed).
+- Stop hook omits diagnostic-only `shell.malformed-event` / `shell.empty-event-transport` from actionable followups (2026-07-16).
 
 ## 9–15. Findings
 
@@ -78,13 +79,15 @@ See final response validation table. Summary:
 | Gate | Status |
 | --- | --- |
 | Format | NOT CONFIGURED | Per AGENTS.md |
-| Unit tests | PASS | 59 files / 379 tests |
-| E2E discovery | PASS | 11 tests / 9 files / chromium |
-| E2E execution | PASS | 11/11 after baseURL path fix |
-| Hook tests | PASS | 20/20 |
+| Unit tests | PASS | 59 files / 379 tests (re-run 2026-07-16) |
+| E2E discovery | PASS | 11 tests / 9 files / chromium (re-run 2026-07-16) |
+| E2E execution | PASS | 11/11 after baseURL path fix (prior completion) |
+| Hook tests | PASS | 22/22 (2026-07-16) |
+| cursor:check | PASS | skills + pack validate + hooks (2026-07-16) |
+| Typecheck | PASS | `npm run typecheck` (2026-07-16) |
+| Lint | PASS | `npm run lint` (2026-07-16) |
 | npm audit | FAIL (accepted F-009) | GHSA-qx2v-qp2m-jg93 nested postcss |
-| Build | PASS | next build |
-| Format | NOT CONFIGURED | |
+| Build | PASS | next build (2026-07-16) |
 
 ## 20. Go / no-go
 

@@ -217,11 +217,11 @@
     "confidence": "high",
     "category": "tooling",
     "file": ".cursor/hooks/guard.py",
-    "evidence": "Hook denied all Shell calls until recovery for noisy JSON / plain-text command payloads was added.",
+    "evidence": "Hook denied all Shell calls until recovery for noisy JSON / plain-text command payloads was added. Stop hook previously resurfaced correct fail-closed shell.malformed-event denials as actionable followups; those rules are now diagnostic-only at stop.",
     "fixed": true,
     "finalStatus": "Fixed",
-    "fixReference": "guard.py recovery paths; hook unit tests (20 passing)",
+    "fixReference": "guard.py recovery paths; stop omits shell.malformed-event / shell.empty-event-transport; hook unit tests",
     "validationStatus": "verified-by-hook-tests",
-    "residualRisk": "If Cursor changes payload shape again, debug file last-before-shell.json records keys"
+    "residualRisk": "If Cursor changes payload shape again, debug file last-before-shell.json records keys; unrecoverable stdin still fails closed at before-shell"
   }
 ]

@@ -158,6 +158,26 @@ class EditAndStopTests(unittest.TestCase):
             self.assertIn("followup_message", result)
             self.assertIn("typing.escape", result["followup_message"])
 
+    def test_stop_omits_non_actionable_shell_transport_findings(self) -> None:
+        with tempfile.TemporaryDirectory() as state_dir:
+            run_json("before-shell", "{", state_dir=state_dir)
+            run_json("before-shell", {}, state_dir=state_dir)
+            result = run_json("stop", {}, state_dir=state_dir)
+            self.assertEqual(result, {})
+
+    def test_stop_still_reports_actionable_findings_alongside_transport_noise(self) -> None:
+        with tempfile.TemporaryDirectory() as state_dir:
+            run_json("before-shell", "{", state_dir=state_dir)
+            run_json(
+                "after-edit",
+                {"generation_id": "default", "file_path": "src/example.ts", "new_string": "export const value: any = 1;"},
+                state_dir=state_dir,
+            )
+            result = run_json("stop", {}, state_dir=state_dir)
+            self.assertIn("typing.escape", result["followup_message"])
+            self.assertNotIn("shell.malformed-event", result["followup_message"])
+            self.assertNotIn("shell.empty-event-transport", result["followup_message"])
+
     def test_stop_clears_state(self) -> None:
         with tempfile.TemporaryDirectory() as state_dir:
             run_json(

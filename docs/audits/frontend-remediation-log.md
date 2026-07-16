@@ -14,6 +14,15 @@ Cursor `beforeShellExecution` was denying all Shell tool calls because stdin was
 
 Invalid JSON that cannot be recovered still fails closed. Empty events allow with audit. Hook tests expanded.
 
+### `shell.malformed-event` stop-hook disposition (2026-07-16)
+
+**Justification (evidence-based):** CRITICAL `shell.malformed-event` entries recorded during the audit session were correct fail-closed denials of unrecoverable/non-command before-shell payloads from Cursor transport quirks (F-016). They are not application defects.
+
+- Recovery paths remain in `guard.py` (`raw_decode`, command-field regex, plain-text command).
+- Live probe after fix: Shell tool executes (`shell-probe-ok`); `last-before-shell.json` shows `extracted: true` / recovered command field.
+- `stop` no longer surfaces `shell.malformed-event` or `shell.empty-event-transport` as actionable followups; they stay diagnostic-only so fail-closed security does not block finalization.
+- Unrecoverable malformed stdin still denies at `before-shell` (security preserved).
+
 ## Phase B — Security
 
 | Change | Status |

@@ -353,8 +353,19 @@ def stop(event: dict[str, Any]) -> None:
         key_tuple = (str(f.get("severity")), str(f.get("rule")), str(f.get("file_path")))
         unique[key_tuple] = f
 
+    # Transport / fail-closed records are correct security behavior, not open product defects.
+    # They remain in session state for diagnostics but must not block agent finalization.
+    non_actionable_rules = {
+        "shell.malformed-event",
+        "shell.empty-event-transport",
+    }
+    actionable = [f for f in unique.values() if str(f.get("rule")) not in non_actionable_rules]
+    if not actionable:
+        emit({})
+        return
+
     order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
-    ranked = sorted(unique.values(), key=lambda f: (order.get(str(f.get("severity")), 9), str(f.get("rule"))))
+    ranked = sorted(actionable, key=lambda f: (order.get(str(f.get("severity")), 9), str(f.get("rule"))))
     lines = ["Cursor guard recorded policy findings. Before finalizing, resolve each item or provide a precise, evidence-based justification:"]
     for f in ranked[:25]:
         location = f" [{f.get('file_path')}]" if f.get("file_path") else ""
