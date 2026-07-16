@@ -11,7 +11,12 @@ on:
       - "scripts/sync_agent_skills.py"
       - "scripts/validate_cursor_pack.py"
       - ".github/workflows/cursor-agent-config.yml"
+      - "package.json"
+      - "package-lock.json"
+
   push:
+    branches:
+      - main
     paths:
       - ".cursor/**"
       - ".agents/**"
@@ -21,6 +26,8 @@ on:
       - "scripts/sync_agent_skills.py"
       - "scripts/validate_cursor_pack.py"
       - ".github/workflows/cursor-agent-config.yml"
+      - "package.json"
+      - "package-lock.json"
 
 permissions:
   contents: read
@@ -33,9 +40,18 @@ jobs:
   validate:
     runs-on: ubuntu-latest
 
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -45,22 +61,65 @@ jobs:
       - name: Check mirrored Codex skills
         run: python -B scripts/sync_agent_skills.py --check
 
-      - name: Validate Cursor configuration
+      - name: Validate Cursor package
         run: python -B scripts/validate_cursor_pack.py
 
-      - name: Test Cursor hooks
-        run: python -B -m unittest discover -s .cursor/hooks/tests -p "test_*.py"
+      - name: Run Cursor hook tests
+        run: >
+          python -B -m unittest discover
+          -s .cursor/hooks/tests
+          -p "test_*.py"
 
-      - name: Parse hook JSON
-        run: python -B -c "import json; json.load(open('.cursor/hooks.json', encoding='utf-8')); json.load(open('.cursor/hooks.windows.json', encoding='utf-8'))"
+      - name: Validate Python syntax
+        run: |
+          python -B - <<'PY'
+          import ast
+          from pathlib import Path
 
-      - name: Compile hook and validation scripts
-        run: python -B -m py_compile .cursor/hooks/guard.py scripts/sync_agent_skills.py scripts/validate_cursor_pack.py
+          files = [
+              Path(".cursor/hooks/guard.py"),
+              Path("scripts/validate_cursor_pack.py"),
+              Path("scripts/sync_agent_skills.py"),
+          ]
+
+          for path in files:
+              source = path.read_text(encoding="utf-8")
+              ast.parse(source, filename=str(path))
+              print(f"Syntax OK: {path}")
+          PY
+
+      - name: Parse hook configuration
+        run: |
+          python -B -m json.tool .cursor/hooks.json > /dev/null
+          python -B -m json.tool .cursor/hooks.windows.json > /dev/null
 
       - name: Detect stale generated files
         run: git diff --exit-code
 
-      - name: Reject generated installer artifacts
+      - name: Reject generated runtime artifacts
         run: |
-          test ! -d .cursor/.state
-          ! find . -path './node_modules' -prune -o \( -name '__pycache__' -o -name '*.pyc' -o -name 'cursor-enterprise-engineering-pack*.zip' -o -name 'cursor-pack-extract-*' \) -print -quit | grep .
+          if [ -d ".cursor/.state" ]; then
+            echo "::error::.cursor/.state must not exist in the repository tree."
+            exit 1
+          fi
+
+          artifacts="$(
+            find . \
+              -path "./.git" -prune -o \
+              -path "./node_modules" -prune -o \
+              \( \
+                -name "__pycache__" -o \
+                -name "*.pyc" -o \
+                -name "cursor-enterprise-engineering-pack*.zip" -o \
+                -name "cursor-pack-extract-*" \
+              \) \
+              -print
+          )"
+
+          if [ -n "$artifacts" ]; then
+            echo "::error::Generated runtime or installer artifacts detected:"
+            printf '%s\n' "$artifacts"
+            exit 1
+          fi
+
+          echo "No generated runtime or installer artifacts detected."
