@@ -7,8 +7,9 @@ import {
   ESTATE_COLLECTION_CARDS,
   ESTATE_COLLECTION_INITIAL_ACTIVE_INDEX,
 } from "@/lib/m01-home/estate-collection-data";
+import { cn } from "@/lib/cn";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 function CarouselArrowButton({
   direction,
@@ -28,7 +29,7 @@ function CarouselArrowButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="inline-flex size-[44px] shrink-0 items-center justify-center disabled:cursor-not-allowed disabled:opacity-50"
+      className="inline-flex size-[44px] shrink-0 items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <Image
         src={ESTATE_COLLECTION_ARROW_LEFT_URL}
@@ -58,6 +59,7 @@ export function EstateCollectionSection() {
   const [activeIndex, setActiveIndex] = useState(
     ESTATE_COLLECTION_INITIAL_ACTIVE_INDEX,
   );
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   const visibleIndexes = useMemo(
     () => getVisibleCardIndexes(activeIndex),
@@ -67,22 +69,63 @@ export function EstateCollectionSection() {
   const canGoPrevious = activeIndex > 0;
   const canGoNext = activeIndex < ESTATE_COLLECTION_CARDS.length - 1;
 
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) {
+      return;
+    }
+
+    const activeCard = viewport.querySelector('[aria-current="true"]');
+    if (!(activeCard instanceof HTMLElement)) {
+      return;
+    }
+
+    const viewportWidth = viewport.clientWidth;
+    const target =
+      activeCard.offsetLeft - (viewportWidth - activeCard.offsetWidth) / 2;
+    const maxScroll = Math.max(0, viewport.scrollWidth - viewportWidth);
+    const nextScrollLeft = Math.min(Math.max(0, target), maxScroll);
+
+    if (Math.abs(viewport.scrollLeft - nextScrollLeft) < 1) {
+      return;
+    }
+
+    viewport.scrollTo({
+      left: nextScrollLeft,
+      behavior: "instant",
+    });
+  }, [activeIndex, visibleIndexes]);
+
   return (
     <section
       aria-labelledby="estate-collection-heading"
-      className={`mx-auto w-full ${M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS} bg-background-section px-4 py-8 min-[1372px]:px-0`}
+      className={cn(
+        "mx-auto min-h-[688px] w-full",
+        M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS,
+        "bg-background-section",
+        "px-4",
+        "py-[32px]",
+        "min-[1372px]:px-0",
+      )}
       data-figma-node="13148:15145"
+      data-slot="estate-collection"
     >
-      <div className="mx-auto flex w-full flex-col items-center gap-16">
-        <header className="flex w-full flex-col items-center gap-5">
-          <div className="flex w-full max-w-[526px] items-center justify-center border-b border-border-strong pb-1">
-            <p className="w-[808px] max-w-full text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-display">
+      <div className="mx-auto flex w-full flex-col items-center gap-[64px]">
+        <header
+          className="flex w-full flex-col items-center gap-5"
+          data-slot="estate-collection-header"
+        >
+          <div
+            className="flex w-full max-w-[526px] items-center justify-center border-b border-border-strong pb-[4px]"
+            data-slot="estate-collection-divider"
+          >
+            <p className="w-[808px] max-w-full text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-[var(--velarro-heading-sectionsmall-line-height)] tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-display">
               Discover Timeless Luxury
             </p>
           </div>
           <h2
             id="estate-collection-heading"
-            className="w-full text-center font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-normal tracking-[var(--velarro-heading-section-letter-spacing)] text-text-heading"
+            className="w-full text-center font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-[var(--velarro-heading-section-line-height)] tracking-[var(--velarro-heading-section-letter-spacing)] text-text-heading"
           >
             Velarro Estate collection
           </h2>
@@ -107,11 +150,12 @@ export function EstateCollectionSection() {
           />
 
           <div
-            className="h-[455px] w-[1135px] max-w-[calc(100%-104px)] overflow-hidden"
+            className="h-[455px] w-[1135px] max-w-[calc(100%-104px)] overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             data-slot="estate-carousel-viewport"
+            ref={viewportRef}
           >
             <div
-              className="flex h-full items-end justify-start gap-[15px] motion-reduce:transition-none"
+              className="flex h-full w-max min-w-full items-end justify-start gap-[15px] motion-reduce:transition-none"
               data-slot="estate-carousel-track"
             >
               {visibleIndexes.map((cardIndex) => {

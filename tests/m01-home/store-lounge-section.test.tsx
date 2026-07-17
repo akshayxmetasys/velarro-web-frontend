@@ -113,7 +113,7 @@ describe("StoreLoungeSection", () => {
     });
 
     expect(contained).toHaveClass("rounded-[12px]", "desktop:h-[1065px]");
-    expect(image).toHaveClass("object-cover", "object-[center_8%]");
+    expect(image).toHaveClass("object-cover", "object-[center_32%]");
     expect(section?.innerHTML).toContain("bg-[rgba(21,20,20,0.4)]");
     expect(button.parentElement).toHaveClass(
       "rounded-[24px]",
