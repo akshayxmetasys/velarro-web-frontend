@@ -2,196 +2,146 @@ import Image from "next/image";
 import Link from "next/link";
 import { FooterSection } from "@/components/layout/main-footer";
 import { MainNavbar } from "@/components/layout/main-navbar";
-import { THE_VAULT_HERO_IMAGE_STATUS } from "@/components/m05-vault/the-vault-assets";
-import {
-  VAULT_HERO_COPY,
-  VAULT_OFFERS,
-  VAULT_SECTION_COPY,
-  type VaultOffer,
-} from "@/components/m05-vault/the-vault-data";
+import { THE_VAULT_COMING_SOON_BACKGROUND } from "@/components/m05-vault/the-vault-assets";
+import { THE_VAULT_COMING_SOON_COPY } from "@/components/m05-vault/the-vault-data";
+import { cn } from "@/lib/cn";
 
-function HeroSection() {
+const ACTION_CLASS =
+  "inline-flex w-[108px] items-center justify-center border-b border-border-strong pb-[4px] font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[16px] font-normal uppercase leading-none text-text-heading";
+
+const HOMEPAGE_LINK_CLASS = cn(
+  ACTION_CLASS,
+  "outline-none focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
+);
+
+/**
+ * Figma 12339:55474 applies the Mystique raster via a -90° rotated container
+ * (772×1440) with percentage crop. Reproduce that composition inside the
+ * 1440×772 visual region; clip oversized decorative content to this region only.
+ */
+function ComingSoonVisual() {
   return (
     <section
       aria-labelledby="the-vault-heading"
-      className="relative h-[520px] w-full overflow-hidden bg-background-navbar desktop:h-[654px]"
-      data-figma-node="14240:78029"
-      data-section="the-vault-hero"
-      data-image-status={THE_VAULT_HERO_IMAGE_STATUS}
-      data-vault-hero="deferred"
+      data-slot="the-vault-visual"
+      data-figma-node="12339:55474"
+      className="relative h-[560px] w-full overflow-hidden bg-background-page desktop:h-[772px]"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,20,20,0.96)_0%,rgba(47,41,36,0.86)_48%,rgba(21,20,20,0.92)_100%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-70 [background-image:linear-gradient(115deg,transparent_0%,rgba(198,180,157,0.12)_42%,transparent_68%),linear-gradient(0deg,rgba(0,0,0,0.22),rgba(0,0,0,0.22))]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-[58px] left-[8%] h-[118px] w-[54%] rounded-full border border-border-strong/25 opacity-40 blur-[1px]"
-      />
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-[24px] pt-[73px] text-center">
-        <h1
-          id="the-vault-heading"
-          className="font-[family-name:var(--velarro-display-light-font-family)] text-[44px] font-light uppercase leading-[var(--velarro-display-light-line-height)] tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[58px] desktop:text-[length:var(--velarro-display-light-font-size)]"
-        >
-          {VAULT_HERO_COPY.title}
-        </h1>
-        <p className="mt-[18px] max-w-[760px] font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[var(--velarro-body-default-letter-spacing)] text-text-text-white/90 tablet:text-[length:var(--velarro-body-default-font-size)]">
-          {VAULT_HERO_COPY.body}
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function Breadcrumbs() {
-  return (
-    <nav
-      aria-label="Breadcrumb"
-      className="flex min-h-[62px] items-center gap-[6px] px-[24px] font-[family-name:var(--velarro-heading-button-font-family)] text-[14px] leading-none desktop:px-[35px]"
-      data-section="the-vault-breadcrumbs"
-    >
-      <Link
-        href="/"
-        className="rounded-[5px] px-[12px] py-[6px] font-light text-text-heading"
+        data-slot="the-vault-background"
+        className="pointer-events-none absolute inset-0"
       >
-        Home
-      </Link>
-      <span
-        aria-hidden="true"
-        className="text-border-strong"
-      >
-        |
-      </span>
-      <span
-        aria-current="page"
-        className="border-b border-border-strong py-[4px] font-normal text-text-display"
-      >
-        The Vault
-      </span>
-    </nav>
-  );
-}
-
-function SectionHeading() {
-  return (
-    <header className="flex flex-col items-center gap-[12px] text-center">
-      <p className="font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-[var(--velarro-heading-sectionsmall-line-height)] tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-heading">
-        {VAULT_SECTION_COPY.eyebrow}
-      </p>
-      <h2
-        id="vault-offers-heading"
-        className="font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-[var(--velarro-heading-section-line-height)] tracking-[var(--velarro-heading-section-letter-spacing)] text-text-heading"
-      >
-        {VAULT_SECTION_COPY.title}
-      </h2>
-    </header>
-  );
-}
-
-function OfferImage({ offer }: { offer: VaultOffer }) {
-  return (
-    <div
-      className="relative flex h-[270px] w-full items-center justify-center overflow-hidden bg-background-navbar desktop:h-[398px] desktop:w-[390px] desktop:shrink-0 desktop:rounded-[8px] desktop:bg-white"
-      data-vault-offer-image-region
-    >
-      <div className="relative h-full w-full desktop:size-[390px]">
-        <Image
-          src={offer.imageUrl}
-          alt={offer.imageAlt}
-          fill
-          sizes="(min-width: 1440px) 390px, 90vw"
-          className="object-cover object-center"
-        />
+        {/*
+          Rotated composition: outer flex centers a -rotate-90 frame of
+          h-[1440] w-[772] so the raster fills the 1440×772 visual region.
+        */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="-rotate-90">
+            <div className="relative h-[1440px] w-[772px] overflow-hidden opacity-[0.29]">
+              {/*
+                Exact Figma crop percentages on the rotated Mystique raster
+                (natural 640×800 JPEG stored locally).
+              */}
+              <div data-slot="the-vault-background-image" className="contents">
+                {/*
+                  Local static JPEG with Figma crop percentages. unoptimized
+                  avoids optimizer interference with the oversized crop box.
+                */}
+                <Image
+                  src={THE_VAULT_COMING_SOON_BACKGROUND}
+                  alt=""
+                  width={640}
+                  height={800}
+                  priority
+                  unoptimized
+                  sizes="100vw"
+                  className="pointer-events-none absolute left-[-50.79%] top-[-1.88%] h-[101.87%] w-[152.1%] max-w-none"
+                />
+              </div>            </div>
+          </div>
+        </div>
         <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[rgba(21,20,20,0.18)]"
+          data-slot="the-vault-background-overlay"
+          className="absolute inset-0 bg-[rgba(216,201,180,0.22)]"
         />
       </div>
-    </div>
-  );
-}
 
-function OfferCopy({ offer }: { offer: VaultOffer }) {
-  return (
-    <div
-      className="flex min-w-0 flex-1 flex-col px-[22px] py-[20px] desktop:w-[796px] desktop:max-w-[796px] desktop:shrink-0 desktop:px-0 desktop:py-0"
-      data-vault-offer-content
-    >
-      <div className="flex items-start justify-between gap-[16px]">
-        <p className="font-[family-name:var(--velarro-heading-card-font-family)] text-[length:var(--velarro-heading-card-font-size)] font-normal leading-[var(--velarro-heading-card-line-height)] tracking-[var(--velarro-heading-card-letter-spacing)] text-text-display">
-          {offer.eyebrow}
-        </p>
-        <p className="text-right font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[var(--velarro-ui-elements-primary-letter-spacing)] text-text-heading">
-          {offer.status}
-        </p>
-      </div>
-      <h3 className="mt-[22px] font-[family-name:var(--velarro-heading-card-font-family)] text-[26px] font-medium leading-none text-text-display tablet:text-[30px]">
-        {offer.title}
-      </h3>
-      <p className="mt-[12px] font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[var(--velarro-body-default-letter-spacing)] text-text-body-text tablet:text-[length:var(--velarro-body-default-font-size)]">
-        {offer.date}
-      </p>
-      <p className="mt-[14px] font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[var(--velarro-body-default-letter-spacing)] text-text-body-text tablet:text-[length:var(--velarro-body-default-font-size)]">
-        {offer.description}
-      </p>
-      <div className="mt-[18px] font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[var(--velarro-body-default-letter-spacing)] text-text-body-text tablet:text-[length:var(--velarro-body-default-font-size)]">
-        <p>Benefits:</p>
-        <ul className="mt-[3px] list-disc pl-[18px]">
-          {offer.benefits.map((benefit) => (
-            <li key={benefit}>{benefit}</li>
-          ))}
-        </ul>
-      </div>
-      <button
-        type="button"
-        disabled
-        aria-label={`View details for ${offer.title} (deferred: offer detail behavior is not approved for this scope)`}
-        className="mt-[24px] h-[43px] w-full cursor-not-allowed rounded-[4px] border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[var(--velarro-ui-elements-primary-letter-spacing)] text-text-heading disabled:opacity-100 desktop:w-full"
+      <p
+        aria-hidden="true"
+        data-slot="the-vault-oops"
+        data-figma-node="12339:55473"
+        className="pointer-events-none absolute left-[calc(50%+7px)] top-[-120px] w-[min(1330px,200vw)] -translate-x-1/2 text-center font-[family-name:var(--velarro-heading-card-font-family)] text-[clamp(160px,35vw,502px)] font-medium leading-none tracking-[-5.02px] text-brand-logo opacity-[0.48] desktop:top-[-177px]"
       >
-        VIEW DETAILS
-      </button>
-    </div>
-  );
-}
+        {THE_VAULT_COMING_SOON_COPY.decorativeOops}
+      </p>
 
-function OfferCard({ offer }: { offer: VaultOffer }) {
-  const imageFirst = offer.imageSide === "left";
-
-  return (
-    <article
-      className="flex w-full flex-col overflow-hidden rounded-[12px] border-[1.5px] border-border-default bg-background-card shadow-card-subtle desktop:min-h-[438px] desktop:max-w-[1314px] desktop:flex-row desktop:items-start desktop:gap-[80px] desktop:p-[24px]"
-      data-offer-id={offer.id}
-      data-figma-node="14581:35996"
-      data-vault-offer-card
-    >
-      {imageFirst ? <OfferImage offer={offer} /> : null}
-      <OfferCopy offer={offer} />
-      {imageFirst ? null : <OfferImage offer={offer} />}
-    </article>
-  );
-}
-
-function OfferList() {
-  return (
-    <section
-      aria-labelledby="vault-offers-heading"
-      className="flex w-full flex-col gap-[30px] px-[24px] pb-[70px] pt-[22px]"
-      data-section="the-vault-offers"
-      data-figma-node="14240:78025"
-      data-vault-offer-list
-    >
-      <SectionHeading />
       <div
-        className="mx-auto mt-[10px] grid w-full max-w-[1314px] gap-[30px]"
-        data-vault-offer-grid
+        data-slot="the-vault-content"
+        data-figma-node="12379:13365"
+        className="absolute inset-x-0 top-[58%] z-10 flex -translate-y-1/2 flex-col items-center gap-[40px] px-[24px] desktop:top-[469px] desktop:translate-y-0 desktop:flex-row desktop:justify-center desktop:gap-[120px]"
       >
-        {VAULT_OFFERS.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} />
-        ))}
+        <div
+          data-slot="the-vault-title"
+          data-figma-node="12379:13366"
+          className="w-full max-w-[249px] text-center desktop:h-[146px] desktop:shrink-0 desktop:text-left"
+        >
+          <h1
+            id="the-vault-heading"
+            aria-label="Unveiling soon"
+            className="font-[family-name:var(--velarro-heading-card-font-family)] text-[clamp(40px,5vw,58px)] font-medium leading-none tracking-[-0.57px] text-brand-logo"
+          >
+            <span aria-hidden="true" className="block">
+              {THE_VAULT_COMING_SOON_COPY.title}
+            </span>
+            <span
+              aria-hidden="true"
+              className="mt-[4px] block font-[family-name:var(--velarro-heading-section-font-family)] text-[clamp(24px,3vw,32px)] font-light leading-none text-brand-logo"
+            >
+              {THE_VAULT_COMING_SOON_COPY.subtitle}
+            </span>
+          </h1>
+        </div>
+
+        <div
+          data-slot="the-vault-copy-actions"
+          data-figma-node="12379:13368"
+          className="flex w-full max-w-[588px] flex-col items-center gap-[32px] desktop:items-start desktop:gap-[48px]"
+        >
+          <p
+            data-slot="the-vault-description"
+            data-figma-node="12379:13369"
+            className="max-w-[588px] text-center font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[28px] text-text-body-text desktop:text-left desktop:text-[20px]"
+          >
+            {THE_VAULT_COMING_SOON_COPY.description}
+          </p>
+
+          <div
+            data-slot="the-vault-actions"
+            data-figma-node="12379:13370"
+            className="flex items-center gap-[41px]"
+          >
+            <Link
+              href="/"
+              data-slot="the-vault-homepage-link"
+              className={HOMEPAGE_LINK_CLASS}
+            >
+              {THE_VAULT_COMING_SOON_COPY.homepageLabel}
+            </Link>
+            <button
+              type="button"
+              disabled
+              aria-label={THE_VAULT_COMING_SOON_COPY.productsDeferredLabel}
+              data-slot="the-vault-products-deferred"
+              className={cn(
+                ACTION_CLASS,
+                "cursor-not-allowed disabled:opacity-100",
+              )}
+            >
+              {THE_VAULT_COMING_SOON_COPY.productsLabel}
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -199,12 +149,14 @@ function OfferList() {
 
 export function TheVaultPage() {
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-background-page">
+    <div
+      data-slot="the-vault-page"
+      data-figma-node="12339:55472"
+      className="min-h-screen w-full bg-background-page"
+    >
       <MainNavbar />
-      <main className="-mt-[73px] w-full">
-        <HeroSection />
-        <Breadcrumbs />
-        <OfferList />
+      <main data-slot="the-vault-main" className="-mt-[73px] w-full">
+        <ComingSoonVisual />
       </main>
       <FooterSection />
     </div>
