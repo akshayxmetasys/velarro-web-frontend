@@ -1,17 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FooterSection } from "@/components/layout/main-footer";
 import { MainNavbar } from "@/components/layout/main-navbar";
-import {
-  PAIRING_GUIDE_APPROVED_IMAGES,
-  PAIRING_GUIDE_CARD_BACKGROUND_STATUS,
-} from "@/components/m08-pairing-guide/pairing-guide-assets";
+import { PAIRING_GUIDE_APPROVED_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
 import {
   PAIRING_GUIDE_CARDS,
   PAIRING_GUIDE_CTA_COPY,
   PAIRING_GUIDE_FIGMA_NODE,
   PAIRING_GUIDE_HERO_COPY,
   PAIRING_GUIDE_SECTION_COPY,
-  type PairingGuideCard,
+  type PairingGuideCard as PairingGuideCardData,
 } from "@/components/m08-pairing-guide/pairing-guide-data";
 
 function HeroSection() {
@@ -54,9 +52,16 @@ function HeroSection() {
           }}
         />
       </div>
-      <div aria-hidden="true" className="absolute inset-0 bg-[rgba(21,20,20,0.4)]" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[rgba(21,20,20,0.4)]"
+        data-pairing-guide-hero-overlay="rgba(21,20,20,0.4)"
+      />
       <div className="absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center px-[24px] pt-[73px] text-center desktop:top-[281px] desktop:translate-y-0 desktop:pt-0">
-        <div className="flex w-full max-w-[777px] flex-col items-center gap-[20px]">
+        <div
+          className="flex w-full max-w-[777px] flex-col items-center gap-[20px]"
+          data-section="pairing-guide-hero-content"
+        >
           <h1
             id="pairing-guide-heading"
             className="font-[family-name:var(--velarro-display-light-font-family)] text-[42px] font-light uppercase leading-[var(--velarro-display-light-line-height)] tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[58px] desktop:text-[length:var(--velarro-display-light-font-size)]"
@@ -65,7 +70,7 @@ function HeroSection() {
             {PAIRING_GUIDE_HERO_COPY.title}
           </h1>
           <p
-            className="max-w-[777px] font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[var(--velarro-body-default-letter-spacing)] text-text-text-white tablet:text-[length:var(--velarro-body-default-font-size)]"
+            className="max-w-[777px] font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[28px] tracking-[var(--velarro-body-default-letter-spacing)] text-text-text-white tablet:text-[length:var(--velarro-body-default-font-size)]"
             data-pairing-guide-typography="hero-body"
           >
             {PAIRING_GUIDE_HERO_COPY.body}
@@ -80,13 +85,13 @@ function Breadcrumbs() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="flex min-h-[29px] items-center gap-[6px] px-[24px] font-[family-name:var(--velarro-heading-button-font-family)] text-[14px] leading-none desktop:px-[42px]"
+      className="mx-auto flex min-h-[29px] w-full max-w-[1356px] items-center gap-[6px] px-[24px] font-[family-name:var(--velarro-heading-button-font-family)] text-[14px] leading-none desktop:px-0"
       data-section="pairing-guide-breadcrumbs"
       data-figma-node="14585:39985"
     >
       <Link
         href="/"
-        className="rounded-[5px] px-[12px] py-[6px] font-light text-text-heading"
+        className="rounded-[5px] px-[12px] py-[6px] font-light text-text-heading outline-none focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2"
       >
         Home
       </Link>
@@ -103,53 +108,68 @@ function Breadcrumbs() {
   );
 }
 
-function DeferredCardBackground({ card }: { card: PairingGuideCard }) {
+function PairingCardImage({ card }: { card: PairingGuideCardData }) {
   return (
     <div
-      aria-hidden="true"
-      className="absolute inset-0 overflow-hidden rounded-radius-md border border-border-default bg-background-navbar blur-[3px]"
-      data-pairing-guide-card-background-status={
-        PAIRING_GUIDE_CARD_BACKGROUND_STATUS
-      }
-      data-deferred-image-key={card.deferredImageKey}
+      className="absolute inset-0 overflow-hidden rounded-radius-md"
+      data-pairing-guide-card-image
+      data-pairing-guide-card-image-id={card.id}
+      data-pairing-guide-card-image-node={card.figmaNodeId}
+      data-pairing-guide-card-image-width={String(card.cardWidthPx)}
+      data-pairing-guide-card-image-height={String(card.cardHeightPx)}
+      data-pairing-guide-card-image-object-position={card.objectPosition}
+      data-pairing-guide-card-image-blur={String(card.blurPx)}
     >
-      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(21,20,20,0.96)_0%,rgba(68,43,28,0.78)_35%,rgba(246,242,235,0.2)_63%,rgba(21,20,20,0.9)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(252,251,248,0.32),transparent_30%),radial-gradient(circle_at_80%_72%,rgba(198,180,157,0.34),transparent_35%)]" />
-      <div className="absolute left-[10%] top-[18%] h-[64%] w-[1px] rotate-[32deg] bg-border-default/40" />
-      <div className="absolute bottom-[18%] right-[9%] h-px w-[52%] bg-border-default/30" />
+      <Image
+        src={card.imageSrc}
+        alt={card.imageAlt}
+        width={card.intrinsicWidth}
+        height={card.intrinsicHeight}
+        sizes="(min-width: 1280px) 626px, 100vw"
+        className="absolute inset-0 h-full w-full max-w-none rounded-radius-md object-cover"
+        style={{
+          filter: `blur(${card.blurPx}px)`,
+          objectPosition: card.objectPosition,
+        }}
+        unoptimized
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-radius-md"
+        style={{ backgroundColor: card.overlay }}
+        data-pairing-guide-card-overlay={card.overlay}
+      />
     </div>
   );
 }
 
-function PairingCard({ card }: { card: PairingGuideCard }) {
+function PairingCard({ card }: { card: PairingGuideCardData }) {
   return (
     <article
-      className="relative h-[398px] w-full overflow-hidden rounded-radius-md desktop:w-[626px]"
+      className="relative h-[398px] w-full overflow-hidden rounded-radius-md border border-border-default desktop:w-[626px]"
       data-pairing-guide-card
       data-pairing-guide-card-id={card.id}
       data-pairing-guide-layout-card-width="626"
       data-pairing-guide-layout-card-height="398"
+      data-pairing-guide-layout-content-left="55"
+      data-pairing-guide-layout-content-top="88"
+      data-pairing-guide-layout-body-width="489"
       data-figma-node={card.figmaNodeId}
     >
-      <DeferredCardBackground card={card} />
-      <div aria-hidden="true" className="absolute inset-0 rounded-radius-md bg-[rgba(21,20,20,0.4)]" />
-      <div className="absolute left-[28px] right-[28px] top-[64px] z-10 flex flex-col items-start gap-[28px] desktop:left-[55px] desktop:right-auto desktop:top-[88px] desktop:gap-[32px]">
+      <PairingCardImage card={card} />
+      <div
+        className="absolute left-[28px] right-[28px] top-[64px] z-10 flex flex-col items-start gap-[28px] desktop:left-[55px] desktop:right-auto desktop:top-[88px] desktop:gap-[32px]"
+        data-pairing-guide-card-content
+      >
         <h3
-          className="font-[family-name:var(--velarro-display-light-font-family)] text-[24px] font-light leading-normal tracking-[0] text-text-text-white"
+          className="font-[family-name:var(--velarro-display-light-font-family)] text-[24px] font-light leading-normal tracking-[-0.12px] text-text-text-white"
           data-pairing-guide-typography="card-title"
-          data-pairing-guide-typography-font="velarro-display-light"
-          data-pairing-guide-typography-size="24"
-          data-pairing-guide-typography-weight="300"
-          data-pairing-guide-typography-figma-letter-spacing="-0.12px"
         >
           {card.title}
         </h3>
         <p
           className="w-full max-w-[489px] font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[length:var(--velarro-heading-product-cards-font-size)] font-normal leading-[24px] tracking-[var(--velarro-heading-product-cards-letter-spacing)] text-text-text-white desktop:w-[489px]"
           data-pairing-guide-typography="card-body"
-          data-pairing-guide-typography-font="velarro-heading-product-cards"
-          data-pairing-guide-typography-size="16"
-          data-pairing-guide-typography-weight="400"
         >
           {card.body}
         </p>
@@ -157,11 +177,9 @@ function PairingCard({ card }: { card: PairingGuideCard }) {
           type="button"
           disabled
           aria-label={`Explore ${card.title} (deferred: pairing detail page is not approved for this scope)`}
-          className="h-[35px] w-[283px] cursor-not-allowed rounded-radius-md border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[var(--velarro-ui-elements-primary-letter-spacing)] text-text-heading disabled:opacity-100"
+          className="flex w-[283px] cursor-not-allowed items-center justify-center rounded-radius-md border border-border-default bg-button-fill px-[16px] py-[16px] font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-none tracking-[var(--velarro-ui-elements-primary-letter-spacing)] text-text-heading disabled:opacity-100"
           data-pairing-guide-typography="button-text"
-          data-pairing-guide-typography-font="velarro-ui-elements-primary"
-          data-pairing-guide-typography-size="16"
-          data-pairing-guide-typography-weight="400"
+          data-pairing-guide-explore="deferred"
         >
           EXPLORE
         </button>
@@ -174,13 +192,14 @@ function PairingCardsSection() {
   return (
     <section
       aria-labelledby="pairing-guide-section-heading"
-      className="flex w-full justify-center px-[24px] pb-[80px] pt-[48px]"
+      className="mt-[48px] flex w-full justify-center px-[24px] pb-[48px]"
       data-section="pairing-guide-cards"
       data-figma-node="14585:39988"
     >
       <div className="flex w-full max-w-[1282px] flex-col items-center">
         <div
-          className="flex w-full max-w-[808px] flex-col items-center gap-[16px]"
+          className="flex w-full max-w-[414px] flex-col items-center gap-[16px]"
+          data-section="pairing-guide-heading"
           data-figma-node="14585:39987"
         >
           <p
@@ -200,6 +219,7 @@ function PairingCardsSection() {
 
         <div
           className="mt-[48px] grid w-full grid-cols-1 gap-y-[80px] desktop:grid-cols-2 desktop:gap-x-[28px]"
+          data-pairing-guide-card-grid
           data-pairing-guide-layout-grid-width="1282"
           data-pairing-guide-layout-column-gap="28"
           data-pairing-guide-layout-row-gap="80"
@@ -215,22 +235,25 @@ function PairingCardsSection() {
           className="mt-[80px] flex min-h-[225px] w-full items-center justify-center rounded-[24px] border border-border-default bg-background-card px-[24px] py-[28px] desktop:px-[50px]"
           data-section="pairing-guide-cta"
           data-figma-node="14406:85121"
+          data-pairing-guide-layout-cta-width="1282"
+          data-pairing-guide-layout-cta-content-width="874"
         >
           <div className="flex w-full max-w-[874px] flex-col items-center gap-[20px] text-center">
             <h2
               id="pairing-guide-cta-heading"
-              className="font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-[var(--velarro-heading-section-line-height)] tracking-[var(--velarro-heading-section-letter-spacing)] text-text-heading"
+              className="max-w-[491px] font-[family-name:var(--velarro-heading-section-font-family)] text-[length:var(--velarro-heading-section-font-size)] font-light leading-[var(--velarro-heading-section-line-height)] tracking-[var(--velarro-heading-section-letter-spacing)] text-text-heading"
             >
               {PAIRING_GUIDE_CTA_COPY.title}
             </h2>
-            <p className="font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[var(--velarro-body-default-line-height)] tracking-[var(--velarro-body-default-letter-spacing)] text-text-body-text tablet:text-[length:var(--velarro-body-default-font-size)]">
+            <p className="font-[family-name:var(--velarro-body-default-font-family)] text-[18px] font-light leading-[28px] tracking-[var(--velarro-body-default-letter-spacing)] text-text-body-text tablet:text-[length:var(--velarro-body-default-font-size)]">
               {PAIRING_GUIDE_CTA_COPY.body}
             </p>
             <button
               type="button"
               disabled
               aria-label="Find my pairing (deferred: interactive pairing flow is not approved for this scope)"
-              className="h-[35px] w-full max-w-[368px] cursor-not-allowed rounded-radius-md border border-border-default bg-button-fill font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-[var(--velarro-ui-elements-primary-line-height)] tracking-[var(--velarro-ui-elements-primary-letter-spacing)] text-text-heading disabled:opacity-100"
+              className="flex h-[35px] w-full max-w-[368px] cursor-not-allowed items-center justify-center rounded-radius-md border border-border-default bg-button-fill px-[16px] font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[length:var(--velarro-ui-elements-primary-font-size)] font-normal uppercase leading-none tracking-[var(--velarro-ui-elements-primary-letter-spacing)] text-text-heading disabled:opacity-100"
+              data-pairing-guide-find-pairing="deferred"
             >
               {PAIRING_GUIDE_CTA_COPY.button}
             </button>
@@ -244,14 +267,19 @@ function PairingCardsSection() {
 export function PairingGuidePage() {
   return (
     <div
-      className="min-h-screen w-full overflow-x-hidden bg-background-page"
+      className="min-h-screen w-full bg-background-page"
       data-figma-node={PAIRING_GUIDE_FIGMA_NODE}
       data-route="/pairing-guide"
     >
       <MainNavbar />
       <main className="-mt-[73px] w-full">
-        <HeroSection />
-        <Breadcrumbs />
+        <div
+          className="flex w-full flex-col gap-[12px]"
+          data-section="pairing-guide-hero-breadcrumb-group"
+        >
+          <HeroSection />
+          <Breadcrumbs />
+        </div>
         <PairingCardsSection />
       </main>
       <FooterSection />
