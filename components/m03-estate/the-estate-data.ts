@@ -15,6 +15,8 @@ export interface EstateProduct {
   length: string;
   enjoymentTime: string;
   intensityLabel: string;
+  /** Filled dots out of 5, verified per Figma MAIN PRODUCT CARD instances. */
+  intensityFilled: 1 | 2 | 3 | 4 | 5;
   notes: string;
   imageUrl: string;
   imageAlt: string;
@@ -53,6 +55,8 @@ export const THE_ESTATE_PRODUCTS = [
     length: "7.2 in",
     enjoymentTime: "120-130 min",
     intensityLabel: "Intensity",
+    // Figma 16576:98455 — five filled intensity dots
+    intensityFilled: 5,
     notes: "Dark chocolate, prune, vintage leather, cedar wood, roasted nuts",
     imageUrl: THE_ESTATE_APPROVED_IMAGES.limitedCompendiumSalomones,
     imageAlt: "Limited Compendium Salomones cigar product image",
@@ -66,6 +70,8 @@ export const THE_ESTATE_PRODUCTS = [
     length: "6.0 in",
     enjoymentTime: "70-80 min",
     intensityLabel: "Intensity",
+    // Figma 16576:98456 — four filled, one outline
+    intensityFilled: 4,
     notes: "Hazelnut, dark chocolate, oak wood, brioche, caramel",
     imageUrl: THE_ESTATE_APPROVED_IMAGES.grandCruToro,
     imageAlt: "Grand Cru Toro cigar product image",
@@ -79,6 +85,8 @@ export const THE_ESTATE_PRODUCTS = [
     length: "7.0 in",
     enjoymentTime: "90-100 min",
     intensityLabel: "Intensity",
+    // Figma 16576:98457 — four filled, one outline
+    intensityFilled: 4,
     notes: "Roasted nuts, cacao, cedar, pepper, molasses",
     imageUrl: THE_ESTATE_APPROVED_IMAGES.blackLabelReserveChurchill,
     imageAlt: "Black Label Reserve Churchill cigar product image",
@@ -92,6 +100,8 @@ export const THE_ESTATE_PRODUCTS = [
     length: "7.5 in",
     enjoymentTime: "100-120 min",
     intensityLabel: "Intensity",
+    // Figma 16576:98459 — four filled, one outline
+    intensityFilled: 4,
     notes: "Vanilla, brioche, roasted coffee, cream, honey",
     imageUrl: THE_ESTATE_APPROVED_IMAGES.platinumCelebrationGranChurchill,
     imageAlt: "Platinum Celebration Gran Churchill cigar product image",
@@ -105,6 +115,8 @@ export const THE_ESTATE_PRODUCTS = [
     length: "6.5 in",
     enjoymentTime: "90-100 min",
     intensityLabel: "Intensity",
+    // Figma 16576:98460 — five filled intensity dots
+    intensityFilled: 5,
     notes: "Black pepper, roasted almonds, cacao, oak wood, vintage leather",
     imageUrl: THE_ESTATE_APPROVED_IMAGES.centennialReserveToroGordo,
     imageAlt: "Centennial Reserve Toro Gordo cigar product image",
@@ -118,6 +130,8 @@ export const THE_ESTATE_PRODUCTS = [
     length: "4.5 in",
     enjoymentTime: "35-45 min",
     intensityLabel: "Intensity",
+    // Figma 16576:98461 — two filled, three outline
+    intensityFilled: 2,
     notes: "Floral spice, cedar wood, almonds, brioche, honey",
     imageUrl: THE_ESTATE_APPROVED_IMAGES.primeraCosechaPetitCorona,
     imageAlt: "Primera Cosecha Petit Corona cigar product image",
