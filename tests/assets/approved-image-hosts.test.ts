@@ -5,7 +5,7 @@ import { OUR_STORY_APPROVED_IMAGES } from "@/components/m02-our-story/our-story-
 import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-assets";
 import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-assets";
 import { THE_VAULT_COMING_SOON_BACKGROUND } from "@/components/m05-vault/the-vault-assets";
-import { CHRONICLE_APPROVED_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
+import { CHRONICLE_APPROVED_IMAGES, CHRONICLE_CARD_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
 import { PAIRING_GUIDE_APPROVED_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
 import { CAREERS_APPROVED_IMAGES } from "@/components/m09-careers/careers-assets";
 import { PARTNER_ASSETS } from "@/components/m09-partner/partner-assets";
@@ -173,7 +173,7 @@ describe("approved image hosts", () => {
     ).toBe(true);
   });
 
-  it("accepts approved M08 The Chronicle image URLs without adding local files", () => {
+  it("accepts the approved Chronicle hero URL and permanent local card assets", () => {
     expect(CHRONICLE_APPROVED_IMAGES.hero).toBe(
       "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/thechronicle-hero-20260709-023616-desktop-hero.webp",
     );
@@ -182,15 +182,30 @@ describe("approved image hosts", () => {
       expect(isApprovedImageUrl(url)).toBe(true);
     }
 
-    const serialized = JSON.stringify(CHRONICLE_APPROVED_IMAGES);
-    expect(serialized).not.toContain("figma.com");
-    expect(serialized).not.toContain("mcp/asset");
+    const heroSerialized = JSON.stringify(CHRONICLE_APPROVED_IMAGES);
+    expect(heroSerialized).not.toContain("figma.com");
+    expect(heroSerialized).not.toContain("mcp/asset");
+    expect(heroSerialized).not.toContain("/images/m08-chronicle");
+
+    const cardPaths = Object.values(CHRONICLE_CARD_IMAGES);
+    expect(cardPaths).toHaveLength(4);
+    expect(new Set(cardPaths).size).toBe(4);
+
+    for (const path of cardPaths) {
+      expect(path.startsWith("/images/m08-chronicle/")).toBe(true);
+      expect(path.startsWith("http")).toBe(false);
+      expect(path).not.toContain("figma.com");
+      expect(path).not.toContain("mcp/asset");
+      expect(
+        existsSync(
+          join(process.cwd(), "public", ...path.replace(/^\//, "").split("/")),
+        ),
+      ).toBe(true);
+    }
+
     expect(existsSync(join(process.cwd(), "public", "images", "m08"))).toBe(
       false,
     );
-    expect(
-      existsSync(join(process.cwd(), "public", "images", "m08-chronicle")),
-    ).toBe(false);
   });
 
   it("accepts approved M08 Pairing Guide image URLs without adding local files", () => {
