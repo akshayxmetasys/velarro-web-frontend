@@ -7,6 +7,7 @@ import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-a
 import { TheEstatePageByAgeState } from "@/components/m03-estate/the-estate-page-by-age-state";
 import {
   THE_ESTATE_CATEGORY_LABELS,
+  THE_ESTATE_FILTERS,
   THE_ESTATE_PRODUCTS,
 } from "@/components/m03-estate/the-estate-data";
 import { getInitialAgeStateFromCookies } from "@/lib/age/get-initial-age-state";
@@ -61,6 +62,9 @@ describe("TheEstatePageByAgeState", () => {
       screen.queryByRole("heading", { name: "COLLECTOR SERIES" }),
     ).not.toBeInTheDocument();
     expect(screen.queryByText("The Humidor")).not.toBeInTheDocument();
+    expect(
+      document.querySelector('[data-slot="the-estate-page"]'),
+    ).not.toBeInTheDocument();
   });
 
   it("blocks under-21 visitors from restricted Estate content", () => {
@@ -80,7 +84,12 @@ describe("TheEstatePageByAgeState", () => {
     ).not.toBeInTheDocument();
     expect(screen.queryByText("Limited Compendium")).not.toBeInTheDocument();
     expect(
-      screen.queryByAltText("Collector Series cigars arranged with estate accessories"),
+      screen.queryByAltText(
+        "Collector Series cigars arranged with estate accessories",
+      ),
+    ).not.toBeInTheDocument();
+    expect(
+      document.querySelector('[data-slot="the-estate-page"]'),
     ).not.toBeInTheDocument();
   });
 
@@ -105,13 +114,260 @@ describe("TheEstatePageByAgeState", () => {
     ).toBeInTheDocument();
   });
 
-  it("uses the approved hero and product image URLs", () => {
+  it("preserves verified section DOM order and Figma node contracts", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+
+    const orderedSlots = [
+      "the-estate-hero",
+      "the-estate-filters",
+      "the-estate-breadcrumbs",
+      "the-estate-categories",
+      "the-estate-product-grid",
+      "the-estate-pagination",
+    ];
+
+    const found = orderedSlots.map((slot) => {
+      const el = container.querySelector(`[data-slot="${slot}"]`);
+      expect(el, slot).not.toBeNull();
+      return el!;
+    });
+
+    for (let i = 1; i < found.length; i += 1) {
+      expect(
+        found[i - 1]!.compareDocumentPosition(found[i]!) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    }
+
+    expect(
+      container.querySelector('[data-figma-node="16576:98466"]'),
+    ).toHaveAttribute("data-slot", "the-estate-hero");
+    expect(
+      container.querySelector('[data-figma-node="16576:98465"]'),
+    ).toHaveAttribute("data-slot", "the-estate-filters");
+    expect(
+      container.querySelector('[data-figma-node="16576:98462"]'),
+    ).toHaveAttribute("data-slot", "the-estate-breadcrumbs");
+    expect(
+      container.querySelector('[data-figma-node="16576:98452"]'),
+    ).toHaveAttribute("data-slot", "the-estate-collection-nav");
+    expect(
+      container.querySelector('[data-figma-node="16604:97510"]'),
+    ).toHaveAttribute("data-slot", "the-estate-categories");
+    expect(
+      container.querySelector('[data-figma-node="16576:98463"]'),
+    ).toHaveAttribute("data-slot", "the-estate-pagination");
+    expect(container.innerHTML).not.toContain("MAIN PRODUCT CARD");
+  });
+
+  it("applies hero height, crop, and overlay contracts", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+    const hero = container.querySelector('[data-slot="the-estate-hero"]');
+    const image = screen.getByAltText(
+      "Collector Series cigars arranged with estate accessories",
+    );
+    const overlay = container.querySelector(
+      '[data-slot="the-estate-hero-overlay"]',
+    );
+
+    expect(hero).toHaveClass("desktop:h-[471px]");
+    expect(image).toHaveClass("object-cover");
+    expect(image).toHaveClass("object-center");
+    expect(image).toHaveAttribute("data-priority", "true");
+    expect(overlay).toHaveClass("bg-[rgba(21,20,20,0.4)]");
+    expect(overlay).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("uses breadcrumb semantics with current Humidor and focus-visible links", () => {
+    render(<TheEstatePageByAgeState ageState="over21" />);
+
+    const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
+    expect(nav).toHaveAttribute("data-figma-node", "16576:98462");
+
+    const home = within(nav).getByRole("link", { name: "Home" });
+    expect(home).toHaveAttribute("href", "/");
+    expect(home).toHaveClass("focus-visible:ring-2");
+
+    expect(within(nav).queryByRole("link", { name: "The Estate" })).toBeNull();
+    expect(within(nav).getByText("The Estate")).toBeInTheDocument();
+
+    const current = within(nav).getByText("The Humidor");
+    expect(current).toHaveAttribute("aria-current", "page");
+  });
+
+  it("applies filter rail geometry and disabled deferred state", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+    const filters = container.querySelector(
+      '[data-slot="the-estate-filters"]',
+    );
+    expect(filters).toHaveClass("desktop:w-[350px]");
+    expect(filters).toHaveClass("desktop:min-h-[1493px]");
+    expect(filters).toHaveClass("gap-[20px]");
+
+    expect(
+      screen.getByRole("button", {
+        name: "Clear filter (deferred: filtering is not approved for this scope)",
+      }),
+    ).toBeDisabled();
+
+    for (const filter of THE_ESTATE_FILTERS) {
+      expect(
+        screen.getByRole("button", {
+          name: `${filter} filter (deferred: filtering is not approved for this scope)`,
+        }),
+      ).toBeDisabled();
+    }
+  });
+
+  it("uses navigation semantics for Humidor/House without invalid aria-selected", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+
+    const collectionNav = screen.getByRole("navigation", {
+      name: "Estate collection",
+    });
+    expect(collectionNav).not.toHaveAttribute("role", "tablist");
+    expect(
+      within(collectionNav).getByText("THE HUMIDOR"),
+    ).toHaveAttribute("aria-current", "page");
+    expect(
+      within(collectionNav).getByRole("link", { name: "THE HOUSE" }),
+    ).toHaveAttribute("href", "/the-estate/the-house");
+    expect(collectionNav.innerHTML).not.toContain("aria-selected");
+    expect(container.querySelector('[role="tab"]')).toBeNull();
+  });
+
+  it("renders ten deferred category labels in exact order with rail containment contract", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+
+    expect(THE_ESTATE_CATEGORY_LABELS.map((c) => c.label)).toEqual([
+      "ALL SERIES",
+      "AFTER DARK",
+      "CELEBRATION",
+      "COLLECTOR",
+      "DARK",
+      "ESTATE",
+      "HERITAGE",
+      "PLATINUM",
+      "PRESTIGE",
+      "TERRIOR",
+    ]);
+
+    const tiles = container.querySelectorAll(
+      '[data-slot="the-estate-category-tile"]',
+    );
+    expect(tiles).toHaveLength(10);
+    expect(
+      Array.from(tiles).map(
+        (tile) => tile.querySelector("h3")?.textContent ?? "",
+      ),
+    ).toEqual(THE_ESTATE_CATEGORY_LABELS.map((c) => c.label));
+
+    const rail = container.querySelector(
+      '[data-slot="the-estate-category-rail"]',
+    );
+    expect(rail).toHaveAttribute("aria-label", "Collector Series categories");
+    expect(rail).toHaveClass("overflow-x-auto");
+
+    expect(tiles[0]).toHaveAttribute("data-category-selected", "true");
+    expect(
+      within(tiles[0] as HTMLElement).getByLabelText(
+        "ALL SERIES category image deferred",
+      ),
+    ).toHaveClass("size-[136px]");
+
+    for (const category of THE_ESTATE_CATEGORY_LABELS) {
+      expect(
+        screen.getByLabelText(`${category.label} category image deferred`),
+      ).toHaveAttribute("data-image-status", "deferred");
+    }
+
+    expect(
+      screen.getByRole("button", {
+        name: "Next category set (deferred: category navigation is not approved for this scope)",
+      }),
+    ).toBeDisabled();
+  });
+
+  it("renders six product cards in order with geometry and deferred Explore", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+
+    const cards = container.querySelectorAll(
+      '[data-slot="the-estate-product-card"]',
+    );
+    expect(cards).toHaveLength(6);
+    expect(
+      Array.from(cards).map(
+        (card) => card.querySelector("h3")?.textContent ?? "",
+      ),
+    ).toEqual(THE_ESTATE_PRODUCTS.map((product) => product.name));
+
+    const grid = container.querySelector(
+      '[data-slot="the-estate-product-grid"]',
+    );
+    expect(grid).toHaveClass("gap-x-[45px]");
+    expect(grid).toHaveClass("gap-y-[49px]");
+    expect(grid).toHaveClass("desktop:grid-cols-3");
+    expect(grid).toHaveClass("max-w-[966px]");
+
+    expect(cards[0]).toHaveClass("max-w-[292px]");
+    expect(cards[0]).toHaveClass("min-h-[471px]");
+    expect(cards[0]).toHaveClass("p-[14px]");
+    expect(cards[0]).toHaveClass("rounded-[8px]");
+    expect(cards[0]).toHaveClass("motion-reduce:transition-none");
+    expect(cards[0]).not.toHaveAttribute("tabindex");
+
+    for (const product of THE_ESTATE_PRODUCTS) {
+      const card = screen.getByText(product.name).closest("article");
+      expect(card).not.toBeNull();
+      expect(
+        within(card as HTMLElement).getByText(product.vitola),
+      ).toBeInTheDocument();
+      expect(
+        within(card as HTMLElement).getByText(new RegExp(product.ringGauge)),
+      ).toBeInTheDocument();
+      expect(
+        within(card as HTMLElement).getByText(product.notes),
+      ).toBeInTheDocument();
+      expect(
+        within(card as HTMLElement).getByRole("button", {
+          name: new RegExp(`Explore ${product.name}`),
+        }),
+      ).toBeDisabled();
+
+      const dots = (card as HTMLElement).querySelector(
+        '[data-slot="the-estate-intensity-dots"]',
+      );
+      expect(dots).not.toBeNull();
+      expect(dots!.querySelectorAll(".bg-border-strong")).toHaveLength(
+        product.intensityFilled,
+      );
+      expect(dots!.querySelectorAll(".border-border-strong")).toHaveLength(
+        5 - product.intensityFilled,
+      );
+    }
+  });
+
+  it("uses the approved hero and product image URLs and no Figma URLs", () => {
     const { container } = render(
       <TheEstatePageByAgeState ageState="over21" />,
     );
 
     expect(
-      screen.getByAltText("Collector Series cigars arranged with estate accessories"),
+      screen.getByAltText(
+        "Collector Series cigars arranged with estate accessories",
+      ),
     ).toHaveAttribute(
       "src",
       THE_ESTATE_APPROVED_IMAGES.collectorSeriesHeroBackground,
@@ -128,47 +384,62 @@ describe("TheEstatePageByAgeState", () => {
     expect(container.innerHTML).not.toContain("mcp/asset");
   });
 
-  it("renders category placeholders as explicitly deferred image areas", () => {
-    const { container } = render(
-      <TheEstatePageByAgeState ageState="over21" />,
-    );
-
-    for (const category of THE_ESTATE_CATEGORY_LABELS) {
-      expect(screen.getByText(category.label)).toBeInTheDocument();
-      expect(
-        screen.getByLabelText(`${category.label} category image deferred`),
-      ).toHaveAttribute("data-image-status", "deferred");
-    }
-
-    expect(container.innerHTML).not.toContain("figma.com");
-    expect(container.innerHTML).not.toContain("mcp/asset");
-  });
-
-  it("renders product card copy and deferred explore controls", () => {
+  it("keeps pagination deferred and disables all page controls", () => {
     render(<TheEstatePageByAgeState ageState="over21" />);
 
-    for (const product of THE_ESTATE_PRODUCTS) {
-      const card = screen.getByText(product.name).closest("article");
-
-      expect(card).not.toBeNull();
-      expect(within(card as HTMLElement).getByText(product.vitola)).toBeInTheDocument();
+    for (const pageNumber of [1, 2, 3, 4, 5, 6, 7]) {
       expect(
-        within(card as HTMLElement).getByText(new RegExp(product.ringGauge)),
-      ).toBeInTheDocument();
-      expect(within(card as HTMLElement).getByText(product.notes)).toBeInTheDocument();
-      expect(
-        within(card as HTMLElement).getByRole("button", {
-          name: new RegExp(`Explore ${product.name}`),
+        screen.getByRole("button", {
+          name: `Page ${pageNumber} (deferred: pagination is not approved for this scope)`,
         }),
       ).toBeDisabled();
     }
+    expect(
+      screen.getByRole("button", {
+        name: "Next page (deferred: pagination is not approved for this scope)",
+      }),
+    ).toBeDisabled();
+  });
+
+  it("does not mask document overflow at the Estate page root", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+    const page = container.querySelector('[data-slot="the-estate-page"]');
+    const main = container.querySelector('[data-slot="the-estate-main"]');
+    const content = container.querySelector(
+      '[data-slot="the-estate-content"]',
+    );
+
+    expect(page?.className).not.toMatch(/overflow-x-(hidden|clip)/);
+    expect(main?.className).not.toMatch(/overflow-x-(hidden|clip)/);
+    expect(content?.className).not.toMatch(/overflow-x-(hidden|clip)/);
+  });
+
+  it("does not introduce fake commerce destinations", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+    const page = container.querySelector('[data-slot="the-estate-page"]');
+    expect(page).not.toBeNull();
+
+    const hrefs = Array.from(page!.querySelectorAll("a[href]")).map((a) =>
+      a.getAttribute("href"),
+    );
+    expect(hrefs).not.toContain("/cart");
+    expect(hrefs).not.toContain("/checkout");
+    expect(hrefs.some((href) => href?.includes("/the-estate/the-humidor/"))).toBe(
+      false,
+    );
   });
 });
 
 describe("/the-estate route", () => {
   it("has noindex page metadata for the over-21 restricted page", () => {
     expect(metadata.title).toBe("The Estate");
-    expect(metadata.description).toBe("Collector Series cigars from The Humidor.");
+    expect(metadata.description).toBe(
+      "Collector Series cigars from The Humidor.",
+    );
     expect(metadata.alternates?.canonical).toBe(
       "https://velarroestate.com/the-estate",
     );
@@ -187,9 +458,9 @@ describe("/the-estate route", () => {
   });
 
   it("does not add local M03 image files", () => {
-    expect(
-      existsSync(join(process.cwd(), "public", "images", "m03")),
-    ).toBe(false);
+    expect(existsSync(join(process.cwd(), "public", "images", "m03"))).toBe(
+      false,
+    );
     expect(
       existsSync(join(process.cwd(), "public", "images", "m03-estate")),
     ).toBe(false);
