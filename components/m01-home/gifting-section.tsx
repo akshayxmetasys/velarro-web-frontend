@@ -4,8 +4,8 @@ import {
 } from "@/lib/assets/approved-image-hosts";
 import Image from "next/image";
 import {
-  M01_CONTAINED_SECTION_IMAGE_SIZES,
-  M01_CONTAINED_SECTION_WIDTH_CLASS,
+  M01_GIFTING_SECTION_IMAGE_SIZES,
+  M01_GIFTING_SECTION_WIDTH_CLASS,
 } from "@/components/m01-home/m01-section-layout";
 
 const GIFTING_BACKGROUND_URL = assertApprovedImageUrl(
@@ -16,15 +16,17 @@ export function GiftingSection() {
   return (
     <section
       aria-labelledby="gifting-heading"
-      className="w-full bg-background-section px-4 py-0"
+      className="w-full px-4 py-0"
       data-figma-node="13148:15113"
     >
-      <div className={`relative mx-auto h-[696px] w-full ${M01_CONTAINED_SECTION_WIDTH_CLASS} overflow-hidden rounded-[20px] bg-background-navbar`}>
+      <div
+        className={`relative mx-auto h-[696px] w-full ${M01_GIFTING_SECTION_WIDTH_CLASS} overflow-hidden rounded-[20px] bg-background-navbar`}
+      >
         <Image
           src={GIFTING_BACKGROUND_URL}
           alt="Velarro gifting collection imagery"
           fill
-          sizes={M01_CONTAINED_SECTION_IMAGE_SIZES}
+          sizes={M01_GIFTING_SECTION_IMAGE_SIZES}
           unoptimized
           className="pointer-events-none object-cover object-center"
         />

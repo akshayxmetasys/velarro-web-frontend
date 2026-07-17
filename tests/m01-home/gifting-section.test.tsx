@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { GiftingSection } from "@/components/m01-home/gifting-section";
 import {
-  M01_CONTAINED_SECTION_IMAGE_SIZES,
-  M01_CONTAINED_SECTION_WIDTH_CLASS,
+  M01_GIFTING_SECTION_IMAGE_SIZES,
+  M01_GIFTING_SECTION_WIDTH_CLASS,
 } from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 
@@ -82,16 +82,17 @@ describe("GiftingSection", () => {
     ).toBeDisabled();
   });
 
-  it("matches the approved Cigar Knowledge card-row width", () => {
+  it("matches the Figma gifting band width without full-bleed cream", () => {
     const { container } = render(<GiftingSection />);
 
     const section = container.querySelector('[data-figma-node="13148:15113"]');
     const block = section?.firstElementChild;
 
     expect(section).toHaveClass("px-4");
-    expect(block).toHaveClass("mx-auto", M01_CONTAINED_SECTION_WIDTH_CLASS);
+    expect(section).not.toHaveClass("bg-background-section");
+    expect(block).toHaveClass("mx-auto", M01_GIFTING_SECTION_WIDTH_CLASS);
     expect(
       screen.getByAltText("Velarro gifting collection imagery"),
-    ).toHaveAttribute("data-sizes", M01_CONTAINED_SECTION_IMAGE_SIZES);
+    ).toHaveAttribute("data-sizes", M01_GIFTING_SECTION_IMAGE_SIZES);
   });
 });

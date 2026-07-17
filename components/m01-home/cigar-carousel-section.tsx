@@ -1,6 +1,7 @@
 "use client";
 
 import { CigarCategoryCard } from "@/components/m01-home/cigar-category-card";
+import { M01_CAROUSEL_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
 import {
   CIGAR_CAROUSEL_ARROW_LEFT_URL,
   CIGAR_CAROUSEL_CARDS,
@@ -69,10 +70,10 @@ export function CigarCarouselSection() {
   return (
     <section
       aria-labelledby="cigar-carousel-heading"
-      className="w-full bg-background-section py-8"
+      className={`mx-auto w-full ${M01_CAROUSEL_SECTION_WIDTH_CLASS} bg-background-section px-4 py-8 min-[1346px]:px-0`}
       data-figma-node="13148:15033"
     >
-      <div className="mx-auto flex w-full max-w-[1314px] flex-col items-center gap-16">
+      <div className="mx-auto flex w-full flex-col items-center gap-16">
         <header className="flex w-full flex-col items-center gap-5">
           <div className="border-b border-border-strong pb-1">
             <p className="text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-display">
@@ -104,8 +105,14 @@ export function CigarCarouselSection() {
             }}
           />
 
-          <div className="h-[455px] w-[1135px] overflow-hidden">
-            <div className="flex h-full items-end justify-start gap-[15px] motion-reduce:transition-none">
+          <div
+            className="h-[455px] w-[1135px] max-w-full overflow-hidden"
+            data-slot="cigar-carousel-viewport"
+          >
+            <div
+              className="flex h-full items-end justify-start gap-[15px] motion-reduce:transition-none"
+              data-slot="cigar-carousel-track"
+            >
               {visibleIndexes.map((cardIndex) => {
                 const card = CIGAR_CAROUSEL_CARDS[cardIndex];
 

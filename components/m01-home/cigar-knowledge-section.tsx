@@ -1,5 +1,8 @@
 import Image from "next/image";
-import { M01_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
+import {
+  M01_CONTAINED_SECTION_WIDTH_CLASS,
+  M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS,
+} from "@/components/m01-home/m01-section-layout";
 import { CIGAR_KNOWLEDGE_CARDS } from "@/lib/m01-home/cigar-knowledge-data";
 
 function CigarKnowledgeCard({
@@ -65,12 +68,12 @@ export function CigarKnowledgeSection() {
   return (
     <section
       aria-labelledby="cigar-knowledge-heading"
-      className="w-full bg-background-section py-[19px]"
+      className={`mx-auto w-full ${M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS} bg-background-section px-4 py-[19px] min-[1372px]:px-0`}
       data-figma-node="13148:15081"
     >
-      <div className="mx-auto flex w-full max-w-[1340px] flex-col items-center gap-10 px-4 min-[1372px]:px-0">
-        <header className="flex flex-col items-center gap-5">
-          <div className="flex w-[344px] max-w-full flex-col items-center gap-1">
+      <div className="mx-auto flex w-full flex-col items-center gap-10">
+        <header className="flex w-full flex-col items-center gap-5">
+          <div className="flex w-full max-w-[344px] flex-col items-center gap-1">
             <p className="text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-display">
               Cigar Knowledge
             </p>

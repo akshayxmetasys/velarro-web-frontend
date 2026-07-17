@@ -11,7 +11,7 @@ export function StoreLoungeSection() {
   return (
     <section
       aria-labelledby="store-lounge-heading"
-      className="w-full bg-background-section px-4 py-8"
+      className="w-full px-4 py-0"
       data-figma-node="13148:15176"
     >
       <div
@@ -34,7 +34,7 @@ export function StoreLoungeSection() {
         <div className="absolute left-1/2 top-[44.13%] flex w-[737px] max-w-[calc(100%-32px)] -translate-x-1/2 flex-col items-center gap-[20px] rounded-[24px] bg-[rgba(29,28,26,0.6)] py-[24px]">
           <h2
             id="store-lounge-heading"
-            className="w-[1159px] max-w-[calc(100vw-32px)] text-center font-[family-name:var(--velarro-display-light-font-family)] text-[40px] font-light uppercase leading-none tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[56px] desktop:text-[length:var(--velarro-display-light-font-size)]"
+            className="w-[1159px] max-w-full text-center font-[family-name:var(--velarro-display-light-font-family)] text-[40px] font-light uppercase leading-none tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[56px] desktop:text-[length:var(--velarro-display-light-font-size)]"
           >
             FIND A STORE &amp; LOUNGE
           </h2>

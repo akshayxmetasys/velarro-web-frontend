@@ -141,6 +141,13 @@ function DeferredUtilityControl({
   );
 }
 
+/**
+ * Shared Over-21 MainNavbar.
+ * Desktop geometry follows Figma `14279:30062` / `14406:85640` at 1440px.
+ * Below desktop, progressive disclosure is engineering-derived (no approved
+ * responsive navbar frame): desktop links hide under `desktop`; deferred
+ * utilities hide under `min-[1024px]` so tablet/mobile rely on MainMenuSidebar.
+ */
 export function MainNavbar() {
   return (
     <nav
@@ -153,20 +160,23 @@ export function MainNavbar() {
         aria-hidden="true"
         className="absolute inset-0 bg-background-navbar-overlay backdrop-blur-[10px]"
       />
-      <div className="relative grid h-[73px] w-full grid-cols-[minmax(0,1fr)_173px_minmax(0,1fr)] items-center px-[40px] py-[8px]">
-        <div className="flex min-w-0 items-center justify-start gap-[42px]">
+      <div className="relative grid h-[73px] w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-4 py-[8px] tablet:px-6 desktop:px-[40px]">
+        <div className="flex min-w-0 items-center justify-start gap-4 desktop:gap-[42px]">
           <MainMenuSidebar />
-          <div className="flex items-center gap-[42px]">
+          <div
+            className="hidden items-center gap-[42px] desktop:flex"
+            data-navbar-cluster="desktop-links"
+          >
             <NavbarLink label="The Estate" href="/the-estate" />
             <NavbarLink label="Partner" href="/partner" />
+            <NavbarLink label="Our Story" href="/our-story" />
           </div>
-          <NavbarLink label="Our Story" href="/our-story" />
         </div>
 
         <Link
           href="/"
           aria-label="Go to Velarro homepage"
-          className="flex w-[173px] flex-col items-center justify-self-center"
+          className="flex w-[140px] max-w-full flex-col items-center justify-self-center tablet:w-[160px] desktop:w-[173px]"
         >
           <Image
             src={NAVBAR_LOGO_URL}
@@ -174,13 +184,16 @@ export function MainNavbar() {
             width={173}
             height={54}
             preload
-            className="h-[54px] w-[173px] object-contain"
+            className="h-auto w-full max-w-[173px] object-contain desktop:h-[54px] desktop:w-[173px]"
           />
         </Link>
 
-        <div className="flex h-[42px] min-w-0 items-center justify-end gap-[50px]">
+        <div
+          className="hidden h-[42px] min-w-0 items-center justify-end gap-6 min-[1024px]:flex desktop:gap-[50px]"
+          data-navbar-cluster="utilities"
+        >
           <DeferredSearchPill />
-          <div className="flex items-center gap-[50px]">
+          <div className="flex items-center gap-6 desktop:gap-[50px]">
             <DeferredUtilityControl
               label="Cart"
               icon={<CartIcon />}

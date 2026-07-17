@@ -1,6 +1,7 @@
 "use client";
 
 import { CigarCategoryCard } from "@/components/m01-home/cigar-category-card";
+import { M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
 import {
   ESTATE_COLLECTION_ARROW_LEFT_URL,
   ESTATE_COLLECTION_CARDS,
@@ -69,12 +70,12 @@ export function EstateCollectionSection() {
   return (
     <section
       aria-labelledby="estate-collection-heading"
-      className="w-full bg-background-section py-8"
+      className={`mx-auto w-full ${M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS} bg-background-section px-4 py-8 min-[1372px]:px-0`}
       data-figma-node="13148:15145"
     >
-      <div className="mx-auto flex w-full max-w-[1314px] flex-col items-center gap-16 px-4 min-[1346px]:px-0">
-        <header className="flex w-full max-w-[1318px] flex-col items-center gap-5">
-          <div className="flex w-[526px] max-w-full items-center justify-center border-b border-border-strong pb-1">
+      <div className="mx-auto flex w-full flex-col items-center gap-16">
+        <header className="flex w-full flex-col items-center gap-5">
+          <div className="flex w-full max-w-[526px] items-center justify-center border-b border-border-strong pb-1">
             <p className="w-[808px] max-w-full text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-display">
               Discover Timeless Luxury
             </p>
@@ -105,8 +106,14 @@ export function EstateCollectionSection() {
             }}
           />
 
-          <div className="h-[455px] w-[1135px] max-w-[calc(100%-104px)] overflow-hidden">
-            <div className="flex h-full items-end justify-start gap-[15px] motion-reduce:transition-none">
+          <div
+            className="h-[455px] w-[1135px] max-w-[calc(100%-104px)] overflow-hidden"
+            data-slot="estate-carousel-viewport"
+          >
+            <div
+              className="flex h-full items-end justify-start gap-[15px] motion-reduce:transition-none"
+              data-slot="estate-carousel-track"
+            >
               {visibleIndexes.map((cardIndex) => {
                 const card = ESTATE_COLLECTION_CARDS[cardIndex];
 

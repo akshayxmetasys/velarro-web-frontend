@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ClothierSection } from "@/components/m01-home/clothier-section";
-import { M01_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
+import { M01_CONTAINED_SECTION_WIDTH_CLASS, M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 import { CLOTHIER_CARDS } from "@/lib/m01-home/clothier-data";
 
@@ -127,7 +127,7 @@ describe("ClothierSection", () => {
     const row = container.querySelector('[data-slot="clothier-cards"]');
     const cards = screen.getAllByRole("article");
 
-    expect(section).toHaveClass("py-[32px]");
+    expect(section).toHaveClass(M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS, "py-[32px]");
     expect(row).toHaveClass(
       M01_CONTAINED_SECTION_WIDTH_CLASS,
       "justify-between",

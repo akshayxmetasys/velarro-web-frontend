@@ -57,9 +57,10 @@ describe("MainNavbar", () => {
       "54",
     );
     expect(screen.getByAltText("Velarro Estate")).toHaveClass(
-      "h-[54px]",
-      "w-[173px]",
+      "max-w-[173px]",
       "object-contain",
+      "desktop:h-[54px]",
+      "desktop:w-[173px]",
     );
     expect(
       screen.getByRole("link", { name: "Go to Velarro homepage" }),
@@ -161,5 +162,18 @@ describe("MainNavbar", () => {
     await user.click(vaultLink);
 
     expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
+  });
+
+  it("progressively discloses desktop link and utility clusters", () => {
+    render(<MainNavbar />);
+
+    const links = document.querySelector('[data-navbar-cluster="desktop-links"]');
+    const utilities = document.querySelector('[data-navbar-cluster="utilities"]');
+
+    expect(links).toHaveClass("hidden", "desktop:flex");
+    expect(utilities).toHaveClass("hidden", "min-[1024px]:flex");
+    expect(
+      screen.getByRole("navigation", { name: "Main navigation" }),
+    ).toContainElement(screen.getByRole("button", { name: "Open main menu" }));
   });
 });
