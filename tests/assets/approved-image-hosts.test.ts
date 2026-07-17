@@ -6,7 +6,7 @@ import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-a
 import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-assets";
 import { THE_VAULT_COMING_SOON_BACKGROUND } from "@/components/m05-vault/the-vault-assets";
 import { CHRONICLE_APPROVED_IMAGES, CHRONICLE_CARD_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
-import { PAIRING_GUIDE_APPROVED_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
+import { PAIRING_GUIDE_APPROVED_IMAGES, PAIRING_GUIDE_CARD_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
 import { CAREERS_APPROVED_IMAGES } from "@/components/m09-careers/careers-assets";
 import { PARTNER_ASSETS } from "@/components/m09-partner/partner-assets";
 import {
@@ -208,7 +208,7 @@ describe("approved image hosts", () => {
     );
   });
 
-  it("accepts approved M08 Pairing Guide image URLs without adding local files", () => {
+  it("accepts the approved Pairing Guide hero URL and permanent local card assets", () => {
     expect(PAIRING_GUIDE_APPROVED_IMAGES.hero).toBe(
       "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/perfect-pairing-hero-20260709-034623-desktop-hero.webp",
     );
@@ -217,15 +217,30 @@ describe("approved image hosts", () => {
       expect(isApprovedImageUrl(url)).toBe(true);
     }
 
-    const serialized = JSON.stringify(PAIRING_GUIDE_APPROVED_IMAGES);
-    expect(serialized).not.toContain("figma.com");
-    expect(serialized).not.toContain("mcp/asset");
+    const heroSerialized = JSON.stringify(PAIRING_GUIDE_APPROVED_IMAGES);
+    expect(heroSerialized).not.toContain("figma.com");
+    expect(heroSerialized).not.toContain("mcp/asset");
+    expect(heroSerialized).not.toContain("/images/m08-pairing-guide");
+
+    const cardPaths = Object.values(PAIRING_GUIDE_CARD_IMAGES);
+    expect(cardPaths).toHaveLength(6);
+    expect(new Set(cardPaths).size).toBe(6);
+
+    for (const path of cardPaths) {
+      expect(path.startsWith("/images/m08-pairing-guide/")).toBe(true);
+      expect(path.startsWith("http")).toBe(false);
+      expect(path).not.toContain("figma.com");
+      expect(path).not.toContain("mcp/asset");
+      expect(
+        existsSync(
+          join(process.cwd(), "public", ...path.replace(/^\//, "").split("/")),
+        ),
+      ).toBe(true);
+    }
+
     expect(existsSync(join(process.cwd(), "public", "images", "m08"))).toBe(
       false,
     );
-    expect(
-      existsSync(join(process.cwd(), "public", "images", "m08-pairing-guide")),
-    ).toBe(false);
   });
 
   it("accepts approved M09 Careers image URLs without adding local files", () => {
