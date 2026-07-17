@@ -215,11 +215,24 @@ describe("EstateCollectionSection", () => {
   it("uses the carousel width pattern instead of the 1236px contained card-row width", () => {
     const { container } = render(<EstateCollectionSection />);
 
+    const section = container.querySelector('[data-figma-node="13148:15145"]');
     const carousel = container.querySelector(
       '[data-slot="estate-collection-carousel"]',
     );
+    const viewport = container.querySelector(
+      '[data-slot="estate-carousel-viewport"]',
+    );
 
+    expect(section).toHaveClass("min-h-[688px]", "py-[32px]");
+    expect(section?.className).not.toMatch(
+      /max-w-\[1340px\]bg-background|py-\[32px\]min-\[1372px\]/,
+    );
     expect(carousel).toHaveClass("w-[1303px]", "gap-10");
     expect(carousel).not.toHaveClass("max-w-[1236px]");
+    expect(viewport).toHaveClass(
+      "h-[455px]",
+      "w-[1135px]",
+      "overflow-x-auto",
+    );
   });
 });

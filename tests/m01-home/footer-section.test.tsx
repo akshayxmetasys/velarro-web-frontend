@@ -169,6 +169,20 @@ describe("FooterSection", () => {
     ).toBeDisabled();
   });
 
+  it("matches verified footer layout contracts", () => {
+    const { container } = render(<FooterSection />);
+
+    const footer = container.querySelector('[data-slot="m01-over21-footer"]');
+    const newsletterForm = container.querySelector(
+      '[data-slot="footer-newsletter-form"]',
+    );
+    const nav = container.querySelector('[data-slot="footer-nav"]');
+
+    expect(footer).toHaveClass("desktop:min-h-[697px]", "pt-[20px]");
+    expect(newsletterForm).toHaveClass("gap-[22px]", "max-w-[775px]");
+    expect(nav).toHaveClass("gap-[20px]");
+  });
+
   it("does not invent social profile URLs", () => {
     render(<FooterSection />);
 
