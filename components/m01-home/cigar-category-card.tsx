@@ -60,7 +60,7 @@ export function CigarCategoryCard({
         <h3
           id={titleId}
           className={cn(
-            "font-[family-name:var(--velarro-heading-card-font-family)] text-[length:var(--velarro-heading-card-font-size)] font-normal leading-normal text-text-heading",
+            "font-[family-name:var(--velarro-heading-card-font-family)] text-[length:var(--velarro-heading-card-font-size)] font-normal leading-[var(--velarro-heading-card-line-height)] text-text-heading",
             isActive ? "" : "opacity-90",
           )}
         >
@@ -73,7 +73,7 @@ export function CigarCategoryCard({
           aria-label={`Explore ${label} (deferred: destination not approved for this scope)`}
           title={`Explore ${label} — destination not approved for this scope`}
           className={cn(
-            "w-full cursor-not-allowed rounded-radius-md border uppercase font-[family-name:var(--velarro-heading-card-font-family)] font-normal leading-normal text-text-heading",
+            "w-full cursor-not-allowed rounded-radius-md border uppercase font-[family-name:var(--velarro-heading-card-font-family)] font-normal leading-[var(--velarro-heading-card-line-height)] text-text-heading outline-none focus-visible:ring-2 focus-visible:ring-border-strong focus-visible:ring-offset-2",
             isActive
               ? "border-border-default bg-button-fill py-[11.735px] text-[15.65px]"
               : "border-border-light bg-button-disabled py-[10.438px] text-[13.92px] opacity-80",

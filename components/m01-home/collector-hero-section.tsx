@@ -13,6 +13,7 @@ function HeroArrowButton() {
     <span
       aria-hidden="true"
       className="inline-flex size-[44px] shrink-0 items-center justify-center rounded-radius-md bg-button-fill"
+      data-slot="hero-cta-arrow"
     >
       <svg
         width="16"
@@ -40,8 +41,9 @@ export function CollectorHeroSection() {
       aria-labelledby="collector-hero-heading"
       className="relative w-full overflow-hidden bg-background-navbar"
       data-figma-node="15081:25289"
+      data-slot="collector-hero"
     >
-      <div className="relative h-[851px] w-full">
+      <div className="relative h-[851px] w-full" data-slot="collector-hero-frame">
         <Image
           src={COLLECTOR_HERO_URL}
           alt="Collector Series lifestyle imagery"
@@ -52,24 +54,27 @@ export function CollectorHeroSection() {
         />
 
         <div
-          className="absolute left-4 right-4 top-[319px] mx-auto flex min-w-0 max-w-[998px] flex-col items-center gap-[37px] [&>*]:min-w-0 [&>*]:w-full"
+          className="absolute left-4 right-4 top-[319px] mx-auto flex min-w-0 max-w-[998px] flex-col items-center gap-[37px]"
           data-slot="hero-content"
         >
           <h1
             id="collector-hero-heading"
-            className="text-center font-[family-name:var(--velarro-display-light-font-family)] text-[length:var(--velarro-display-light-font-size)] font-light leading-normal tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white uppercase"
+            className="min-w-0 w-full text-center font-[family-name:var(--velarro-display-light-font-family)] text-[length:var(--velarro-display-light-font-size)] font-light uppercase leading-[var(--velarro-display-light-line-height)] tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white"
           >
             COLLECTOR SERIES
           </h1>
 
-          <div className="flex items-start gap-[24px]">
+          <div
+            className="flex shrink-0 items-start gap-[24px]"
+            data-slot="hero-cta-group"
+          >
             <button
               type="button"
               disabled
               aria-disabled="true"
               aria-label="Shop now (deferred: destination not approved for this scope)"
               title="Shop now — destination not approved for this scope"
-              className="cursor-not-allowed border-0 border-b-[1px] border-solid border-border-strong bg-transparent py-[9px] font-[family-name:var(--velarro-display-shop-now-font-family)] text-[length:var(--velarro-display-shop-now-font-size)] font-normal leading-normal text-text-hover-button uppercase"
+              className="cursor-not-allowed border-0 border-b-[1px] border-solid border-border-strong bg-transparent py-[9px] font-[family-name:var(--velarro-display-shop-now-font-family)] text-[length:var(--velarro-display-shop-now-font-size)] font-normal uppercase leading-[var(--velarro-display-shop-now-line-height)] text-text-hover-button"
             >
               SHOP NOW
             </button>

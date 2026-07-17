@@ -245,4 +245,107 @@ describe("CigarCarouselSection", () => {
       screen.getByRole("article", { name: "Verde Classico", current: true }),
     ).toBeInTheDocument();
   });
+
+  it("disables previous at the first card and next at the last card", async () => {
+    const user = userEvent.setup();
+
+    render(<CigarCarouselSection />);
+
+    const previous = screen.getByRole("button", {
+      name: "Previous cigar category",
+    });
+    const next = screen.getByRole("button", { name: "Next cigar category" });
+
+    await user.click(previous);
+    expect(
+      screen.getByRole("article", { name: "Ashtrays", current: true }),
+    ).toBeInTheDocument();
+    expect(previous).toBeDisabled();
+    expect(next).not.toBeDisabled();
+
+    for (let step = 0; step < 5; step += 1) {
+      await user.click(next);
+    }
+
+    expect(
+      screen.getByRole("article", { name: "Nocturne", current: true }),
+    ).toBeInTheDocument();
+    expect(next).toBeDisabled();
+    expect(previous).not.toBeDisabled();
+  });
+
+  it("activates next with keyboard Enter and Space without losing focus", async () => {
+    const user = userEvent.setup();
+
+    render(<CigarCarouselSection />);
+
+    const next = screen.getByRole("button", { name: "Next cigar category" });
+    next.focus();
+    expect(next).toHaveFocus();
+
+    await user.keyboard("{Enter}");
+    expect(
+      screen.getByRole("article", { name: "Lighters", current: true }),
+    ).toBeInTheDocument();
+    expect(next).toHaveFocus();
+
+    await user.keyboard(" ");
+    expect(
+      screen.getByRole("article", { name: "Vintage no. 88", current: true }),
+    ).toBeInTheDocument();
+    expect(next).toHaveFocus();
+  });
+
+  it("preserves Figma geometry contracts for gap, eyebrow, viewport, and track", () => {
+    const { container } = render(<CigarCarouselSection />);
+
+    const section = container.querySelector('[data-figma-node="13148:15033"]');
+    expect(section).not.toBeNull();
+    expect(section?.className).toContain("min-h-[645px]");
+    expect(section?.className).toContain("bg-background-section");
+    expect(section?.className).toContain("px-4");
+    expect(section?.className).toContain("py-8");
+    expect(section?.className).not.toContain("bg-background-sectionpx-4");
+
+    const stack = section?.querySelector(":scope > div");
+    expect(stack?.className).toContain("gap-10");
+
+    const eyebrowFrame = section?.querySelector("header > div");
+    expect(eyebrowFrame?.className).toContain("max-w-[526px]");
+    expect(eyebrowFrame?.className).toContain("pb-[4px]");
+
+    expect(
+      container.querySelector('[data-slot="cigar-carousel-viewport"]'),
+    ).not.toBeNull();
+    expect(
+      container.querySelector('[data-slot="cigar-carousel-track"]'),
+    ).not.toBeNull();
+
+    const viewport = container.querySelector(
+      '[data-slot="cigar-carousel-viewport"]',
+    );
+    expect(viewport?.className).toContain("h-[455px]");
+    expect(viewport?.className).toContain("w-[1135px]");
+    expect(viewport?.className).toContain("overflow-x-auto");
+  });
+
+  it("keeps inactive cards dimmed and active card emphasized without inventing motion", () => {
+    const { container } = render(<CigarCarouselSection />);
+
+    const active = screen.getByRole("article", {
+      name: "Verde Classico",
+      current: true,
+    });
+    expect(active.className).toContain("w-[395.07px]");
+    expect(active.className).not.toContain("opacity-75");
+
+    const inactive = screen.getByRole("article", { name: "Ashtrays" });
+    expect(inactive).not.toHaveAttribute("aria-current");
+    expect(inactive.className).toContain("w-[351.42px]");
+    expect(inactive.className).toContain("opacity-75");
+
+    const track = container.querySelector('[data-slot="cigar-carousel-track"]');
+    expect(track?.className).toContain("motion-reduce:transition-none");
+    expect(track?.className).not.toMatch(/animate-|transition-transform/);
+  });
 });
