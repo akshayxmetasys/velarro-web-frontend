@@ -6,4 +6,13 @@ export const CHRONICLE_APPROVED_IMAGES = {
   ),
 } as const;
 
-export const CHRONICLE_CARD_IMAGE_STATUS = "deferred" as const;
+/**
+ * Permanent local Chronicle card rasters (Figma nodes 14284:63217/63225/63233/63241).
+ * Not approved-host URLs — do not pass through assertApprovedImageUrl.
+ */
+export const CHRONICLE_CARD_IMAGES = {
+  internationalCigarDay: "/images/m08-chronicle/international-cigar-day.png",
+  internationalTeaDay: "/images/m08-chronicle/international-tea-day.png",
+  foundersReserveMonth: "/images/m08-chronicle/founders-reserve-month.png",
+  velarroEstateDay: "/images/m08-chronicle/velarro-estate-day.png",
+} as const;

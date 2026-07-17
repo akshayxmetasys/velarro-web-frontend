@@ -3,120 +3,155 @@
 ## Figma Source
 
 - Figma file: `92rhH51aErpYQWRrlJqMhn`
-- Figma page: `Velarro Wireframes`
 - Frame node: `14284:63187`
 - Frame name: `home/the chronicle`
-- Frame size: `1440 x 3884`
+- Frame size: `1440 × 3884`
 - Implemented route: `/the-chronicle`
 
-## Section Inventory
+## Inspected Nodes
 
-- Shared main navbar.
-- Hero section with approved Chronicle hero image, overlay, title, and body copy.
-- Breadcrumb: `Home | The Chronicle`.
-- Live news ticker.
-- Four event/editorial cards with deferred image regions.
-- Shared M01 footer.
+- `14284:63187` — full page
+- `14585:38740` — Main Navbar reference
+- `14284:63242` — Main Footer reference
+- `14284:63192` — hero
+- `14284:63193` / `14284:63194` / `14284:63196` / `14284:63197` — hero content
+- `14284:63198` / `14284:63199` — breadcrumb
+- `13505:52708` — Live News and Events ticker
+- `14284:63208` — card stack
+- Card/image pairs: `14284:63209`/`14284:63217`, `14284:63218`/`14284:63225`, `14284:63226`/`14284:63233`, `14284:63234`/`14284:63241`
 
-## Copy Implemented
+## Section Order (over-21)
 
-- Hero title: `THE CHRONICLE`
-- Hero body: `Explore the latest stories, product unveilings, special events, and lifestyle experiences that define the world of Velarro.`
-- Ticker:
-  - `Live News and Events`
-  - `*Velarro is Launching New Store in US*`
-  - `*Velarro Royal Leaf Like by most user*`
-  - `*Velarro is entering to switzerland Market*`
-  - `*Velarro is Accessories is most uniquet*`
-- Cards:
-  - `February 27` / `International Cigar Day`
-  - `May 21` / `International Tea Day`
-  - `August 1 - August 31` / `Founder's Reserve Month`
-  - `August 28` / `Velarro Estate Day`
-- Card controls: `VIEW EVENT DETAILS`
+1. Shared `MainNavbar` overlay
+2. Chronicle hero
+3. Breadcrumb
+4. Live News and Events ticker
+5. Four Chronicle event cards
+6. Shared `FooterSection` / `MainFooter`
 
 ## Assets
 
-- Approved hero URL:
+### Hero (approved external)
+
+- URL:
   `https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/thechronicle-hero-20260709-023616-desktop-hero.webp`
-- The hero URL is asserted through the existing approved Supabase host validator.
-- Hero crop fix completed against Figma hero node `14284:63192`.
-- The Chronicle hero keeps the approved Supabase URL and now uses the Figma image placement:
-  - image width: `99.99%`
-  - image height: `141.04%`
-  - image top: `-22.29%`
-  - image left: `0`
-- This replaced the prior desktop scale-based crop so the cup/cigar area, journal, and vase/leaves remain visible like the Figma screenshot.
-- The hero image uses explicit `1440 x 924` intrinsic dimensions rather than Next `Image` `fill`, because Next 16 does not allow `fill` images to override rendered width/height.
-- No temporary Figma URLs are used.
-- No local M08 image files were added.
-- CSP, Next image config, and approved image host config were not modified.
+- Asserted through `assertApprovedImageUrl`
+- Crop retained from Figma hero node `14284:63192`:
+  - width `99.99%`
+  - height `141.04%`
+  - left `0`
+  - top `-22.29%`
+- Intrinsic dimensions: `1440 × 924`
+- Overlay: `linear-gradient(0deg, rgba(21,20,20,0.5), rgba(123,117,117,0.5))`
+- Not duplicated locally; CSP / Next image / approved-host config unchanged
 
-## Visual Fidelity Audit
+### Card images (permanent local)
 
-- Figma hero node used: `14284:63192`.
-- Figma card stack node used: `14284:63208`.
-- Figma card nodes used: `14284:63209`, `14284:63218`, `14284:63226`, `14284:63234`.
-- Card width audit result:
-  - Existing natural desktop card width matched Figma at `1054px`.
-  - Existing content column width matched Figma at `360px`.
-  - Existing desktop card padding matched Figma at `40px`.
-  - Existing desktop card gap matched Figma at `80px`.
-  - Existing desktop image width matched Figma at `534px`.
-  - First card image region was corrected to `469px` tall; later image regions remain `479px` tall.
-- Typography audit result:
-  - Chronicle hero title/body, card date, card title, card body, and button text already used the existing Velarro token/fallback system.
-  - Local data markers were added so tests can assert the expected Velarro typography token classes.
-- Card images remain deferred.
+Downloaded from Figma MCP raster layers (not screenshots). No temporary Figma URLs remain in production source.
 
-## Deferred Card Images
+| Card | Figma image node | Local path | Content-Type | Binary | Natural size | Crop (W / L / T / H) |
+| --- | --- | --- | --- | --- | --- | --- |
+| International Cigar Day | `14284:63217` | `public/images/m08-chronicle/international-cigar-day.png` | `image/png` | PNG `89 50 4E 47` | `2172 × 724` | `263.48%` / `-21.67%` / `0.09%` / `100%` |
+| International Tea Day | `14284:63225` | `public/images/m08-chronicle/international-tea-day.png` | `image/png` | PNG `89 50 4E 47` | `2171 × 724` | `268.98%` / `-10.66%` / `0.18%` / `100%` |
+| Founder’s Reserve Month | `14284:63233` | `public/images/m08-chronicle/founders-reserve-month.png` | `image/png` | PNG `89 50 4E 47` | `2172 × 724` | `269.1%` / `-164.98%` / `-0.04%` / `100%` |
+| Velarro Estate Day | `14284:63241` | `public/images/m08-chronicle/velarro-estate-day.png` | `image/png` | PNG `89 50 4E 47` | `2172 × 724` | `269.1%` / `-21.59%` / `0` / `100%` |
 
-The final card images are deferred until Vishnu provides approved production Supabase URLs:
+- Overlay on each card image region: `rgba(21,20,20,0.4)`
+- Image region sizes: first `534 × 469`; cards 2–4 `534 × 479`
+- Paths live in `CHRONICLE_CARD_IMAGES` and are **not** passed through `assertApprovedImageUrl`
+- Placeholders (gradient, diagonal cross lines, deferred status markers) removed
 
-- `chronicle_card_1`
-- `chronicle_card_2`
-- `chronicle_card_3`
-- `chronicle_card_4`
+## Card Geometry
 
-Each card image region renders a neutral Figma-matched deferred surface and is marked with:
+- Stack width `1054px`, vertical gap `80px`
+- Card padding `40px`, internal gap `80px`, radius `24px`, border default
+- Content column `360px`
+- Outer heights: first ≈`549px`; later ≈`559px`
+- Desktop body region min-heights: `236` / `242` / `264` / `317`
 
-- `data-chronicle-card-image-status="deferred"`
-- `data-deferred-image-key="[chronicle_card_n]"`
-- `data-figma-node` matching the original Figma image node.
+## Deferred Event Detail
 
-## Route Visibility
+- All four controls remain disabled buttons labeled `VIEW EVENT DETAILS`
+- Accessible names include deferred scope language
+- No `href`, click handlers, modals, or article-detail routes
 
-- `/the-chronicle` is age-gated.
-- Unknown visitors see the existing age gate.
-- Under-21 visitors see the existing restricted under-21 shell and do not see Chronicle content.
-- Over-21 visitors see The Chronicle page.
-- Route manifest marks `/the-chronicle` as implemented, public, noindex, and `age-gated`.
+## Route And Age Contract
 
-## Known Mismatches
+- Unknown → `AgeGate`
+- Under-21 → `Under21HomeShell`
+- Over-21 → `ChroniclePage`
+- Metadata remains `noindex`
+- Canonical remains `/the-chronicle`
+- Route manifest entry unchanged (`age-gated`, `indexable: false`, figma `14284:63187`)
 
-- Four final Chronicle card images are deferred.
-- Article/detail behavior is deferred.
-- `VIEW EVENT DETAILS` controls are disabled because article detail behavior is not approved for this scope.
-- Responsive behavior is engineering-derived because the Figma source is desktop-only.
-- Exact Gotham rendering remains unavailable until licensed Gotham webfont files are provided.
+## Overflow
 
-## Validation Results
+- Removed route-root `overflow-x-hidden`
+- No root/main/html/body overflow masking for this page
+- Local crop containers may use `overflow-hidden` (hero crop + card image regions)
 
-- Latest visual-fidelity pass:
-  - `npm.cmd run lint`: passed.
-  - `npm.cmd run test`: passed, 40 files / 219 tests.
-  - `npm.cmd run build`: passed; Next route output includes `/the-chronicle`.
-  - `npm.cmd run test:e2e -- --list`: passed; 2 Playwright tests listed.
-  - Existing `npm.cmd run dev` server reused on `http://localhost:3000`.
-  - `http://localhost:3000/the-chronicle`: returned HTTP 200.
-- Runtime overlay fix:
-  - `npm.cmd run lint`: passed.
-  - `npm.cmd run test -- tests\m08-chronicle\chronicle-page-age-state.test.tsx`: passed, 13 tests.
-  - `npm.cmd run build`: passed; Next route output includes `/the-chronicle`.
-  - `http://localhost:3000/the-chronicle`: returned HTTP 200.
-- Previous implementation pass:
-  - `npm.cmd run lint`: passed.
-  - `npm.cmd run test`: passed, 40 files / 216 tests.
-  - `npm.cmd run build`: passed; Next route output includes `/the-chronicle`.
-  - `npm.cmd run test:e2e -- --list`: passed; 2 Playwright tests listed.
-  - `npm.cmd run dev`: started successfully on `http://localhost:3000`.
+## Shared Shell
+
+- `MainNavbar` and `FooterSection` reused and untouched
+- Figma footer is reference only; production shared footer height may differ
+
+## Responsive Behavior
+
+- Engineering-derived (no verified mobile/tablet Chronicle Figma frames)
+- Required viewports: 320, 375, 390, 768, 1024, 1280, 1440
+- Cards stack; image follows copy on narrow widths; document must not scroll horizontally
+
+## Known Differences
+
+- Gotham / OneSignature unavailable (FONT-BLOCKED)
+- Shared footer height differs from Figma ≈697px footer
+- Measured page height after V-08a: `4138px` vs Figma `3884px` (delta `+254px`), within the documented E2E tolerance driven mainly by the locked shared footer and fallback fonts
+- Responsive layouts are not claimed as exact Figma matches
+
+## Validation
+
+- `git diff HEAD --check`: pass
+- `npm.cmd run cursor:check`: pass
+- `npm.cmd run lint`: pass
+- `npm.cmd run typecheck`: pass
+- Focused unit: chronicle age-state + approved-image-hosts + route-access + seo: pass
+- `npm.cmd run build`: pass
+- Focused E2E `tests/e2e/m08-chronicle-fidelity.spec.ts`: 4 passed
+- Full unit: 417 passed
+- E2E list: 43 tests
+- Full E2E: 43 passed
+- Prohibited-pattern scan on Chronicle tests: no matches
+- Production temporary Figma URL scan: no matches
+
+## Cursor Guard Findings (V-08a finalize)
+
+Guard heuristics emitted medium/low policy reviews for temporary evidence helpers and presentational diffs. Resolution below is evidence-based; inventing OpenTelemetry or ad hoc browser console printing would violate repository rules.
+
+### Debug-style output — resolved by removal
+
+Temporary evidence-capture scripts under `%TEMP%` (`velarro-v08a-capture-before.mjs`, `velarro-v08a-capture-after.mjs`) wrote one-shot measurement dumps to the process stdout path. They were never part of the repository and have been deleted. No production Chronicle source contains debug-style output.
+
+### Observability — justified N/A
+
+Repo evidence (unchanged by V-08a):
+
+- `package.json` has no OpenTelemetry, Sentry, analytics, or structured logger dependency.
+- Audit finding `FE-016`: no approved third-party telemetry; production CSP `connect-src` is `'self'` only.
+- Project rules forbid production ad hoc console printing / debug prints.
+
+| Path | Operation boundary? | Decision |
+| --- | --- | --- |
+| `components/m08-chronicle/chronicle-assets.ts` | No — static approved hero URL + local path constants | **N/A** |
+| `components/m08-chronicle/chronicle-data.ts` | No — static copy/crop data model | **N/A** |
+| `components/m08-chronicle/chronicle-page.tsx` | No — presentational page assembly; no network, auth, persistence, or queue boundary | **N/A** |
+
+Wire tracing/metrics only when an approved client telemetry sink and CSP allowlist exist.
+
+### Testing — resolved with repository tests
+
+| Path | Coverage evidence |
+| --- | --- |
+| `chronicle-assets.ts` | `tests/assets/approved-image-hosts.test.ts` (hero approved URL; four local card paths exist, distinct, non-remote); unit age-state hero/card image assertions |
+| `chronicle-data.ts` | `tests/m08-chronicle/chronicle-page-age-state.test.tsx` (copy, punctuation, crops, geometry markers, deferred controls) |
+| `chronicle-page.tsx` | Same unit suite + `tests/e2e/m08-chronicle-fidelity.spec.ts` (desktop geometry, age states, disabled controls, viewport containment) |
+| Temp `%TEMP%` capture scripts | Not production code; deleted; no tests required |
