@@ -86,13 +86,34 @@ describe("GiftingSection", () => {
     const { container } = render(<GiftingSection />);
 
     const section = container.querySelector('[data-figma-node="13148:15113"]');
-    const block = section?.firstElementChild;
+    const band = container.querySelector('[data-slot="gifting-band"]');
 
     expect(section).toHaveClass("px-4");
     expect(section).not.toHaveClass("bg-background-section");
-    expect(block).toHaveClass("mx-auto", M01_GIFTING_SECTION_WIDTH_CLASS);
+    expect(band).toHaveClass("mx-auto", "h-[696px]", M01_GIFTING_SECTION_WIDTH_CLASS);
+    expect(band).toHaveClass("rounded-[20px]");
+    expect(band?.className).not.toMatch(/max-w-\[1338px\]overflow|h-\[696px\]w-full/);
     expect(
       screen.getByAltText("Velarro gifting collection imagery"),
     ).toHaveAttribute("data-sizes", M01_GIFTING_SECTION_IMAGE_SIZES);
+  });
+
+  it("keeps the verified crop, overlay, content, and divider contracts", () => {
+    const { container } = render(<GiftingSection />);
+
+    const image = screen.getByAltText("Velarro gifting collection imagery");
+    const overlay = container.querySelector('[data-slot="gifting-overlay"]');
+    const content = container.querySelector('[data-slot="gifting-content"]');
+    const divider = container.querySelector('[data-slot="gifting-divider"]');
+    const cta = container.querySelector('[data-slot="gifting-cta"]');
+
+    expect(image).toHaveClass("object-cover", "object-center");
+    expect(overlay).toHaveClass("bg-[rgba(71,70,70,0.6)]");
+    expect(overlay).toHaveAttribute("aria-hidden", "true");
+    expect(content).toHaveClass("top-[196px]", "w-[833px]", "gap-[64px]");
+    expect(divider).toHaveClass("border-t-2", "border-border-strong");
+    expect(divider).toHaveAttribute("aria-hidden", "true");
+    expect(cta).toHaveClass("h-[43px]", "w-[217px]", "cursor-not-allowed");
+    expect(cta).toBeDisabled();
   });
 });

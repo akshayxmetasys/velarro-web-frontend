@@ -1,7 +1,10 @@
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ClothierSection } from "@/components/m01-home/clothier-section";
-import { M01_CONTAINED_SECTION_WIDTH_CLASS, M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
+import {
+  M01_CONTAINED_SECTION_WIDTH_CLASS,
+  M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS,
+} from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 import { CLOTHIER_CARDS } from "@/lib/m01-home/clothier-data";
 
@@ -117,24 +120,61 @@ describe("ClothierSection", () => {
           name: `${card.title} color options`,
         }),
       ).toBeInTheDocument();
+
+      for (const swatch of card.swatches) {
+        expect(
+          within(article).getByRole("listitem", { name: swatch.label }),
+        ).toBeInTheDocument();
+      }
     }
   });
 
-  it("uses the shared M01 contained card-row width", () => {
+  it("matches Clothier section geometry and card-row contracts", () => {
     const { container } = render(<ClothierSection />);
 
     const section = container.querySelector('[data-figma-node="13148:15120"]');
+    const divider = container.querySelector('[data-slot="clothier-divider"]');
     const row = container.querySelector('[data-slot="clothier-cards"]');
     const cards = screen.getAllByRole("article");
 
     expect(section).toHaveClass(M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS, "py-[32px]");
+    expect(section?.className).not.toMatch(
+      /max-w-\[1340px\]bg-background|py-\[32px\]min-\[1372px\]/,
+    );
+    expect(divider).toHaveClass("max-w-[526px]", "border-b", "border-border-strong");
     expect(row).toHaveClass(
       M01_CONTAINED_SECTION_WIDTH_CLASS,
-      "justify-between",
+      "justify-center",
       "gap-[30px]",
     );
-    for (const card of cards) {
-      expect(card).toHaveClass("w-[355px]", "p-[17px]", "rounded-radius-md");
+    expect(row).not.toHaveClass("justify-between");
+
+    for (const card of CLOTHIER_CARDS) {
+      const article = screen.getByRole("article", { name: card.title });
+      expect(article).toHaveClass(
+        "w-[355px]",
+        "min-h-[518px]",
+        "p-[17px]",
+        "rounded-radius-md",
+      );
+      const imageFrame = article.querySelector(
+        '[data-slot="clothier-card-image"]',
+      );
+      const overlay = article.querySelector(
+        '[data-slot="clothier-card-overlay"]',
+      );
+      expect(imageFrame).toHaveClass(
+        "h-[321px]",
+        "w-[321px]",
+        "rounded-radius-md",
+      );
+      expect(overlay).toHaveClass("bg-[rgba(21,20,20,0.4)]");
+      expect(screen.getByAltText(card.imageAlt)).toHaveClass(
+        "object-cover",
+        "object-center",
+      );
     }
+
+    expect(cards).toHaveLength(3);
   });
 });
