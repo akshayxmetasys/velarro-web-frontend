@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata = buildPageMetadata({
   title: "The Vault",
   description:
-    "Curated Velarro collections, limited releases, and exclusive opportunities.",
+    "We're creating an experience worthy of the Velarro name while The Vault is prepared for its arrival.",
   path: "/the-vault",
   indexable: false,
 });

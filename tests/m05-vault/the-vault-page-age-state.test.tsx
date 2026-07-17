@@ -1,21 +1,17 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { usePathname } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import TheVaultRoute, { metadata } from "@/app/the-vault/page";
-import {
-  THE_VAULT_APPROVED_IMAGES,
-  THE_VAULT_HERO_IMAGE_STATUS,
-} from "@/components/m05-vault/the-vault-assets";
+import { THE_VAULT_COMING_SOON_BACKGROUND } from "@/components/m05-vault/the-vault-assets";
 import { TheVaultPageByAgeState } from "@/components/m05-vault/the-vault-page-by-age-state";
-import {
-  VAULT_HERO_COPY,
-  VAULT_OFFERS,
-  VAULT_SECTION_COPY,
-} from "@/components/m05-vault/the-vault-data";
+import { THE_VAULT_COMING_SOON_COPY } from "@/components/m05-vault/the-vault-data";
 import { getInitialAgeStateFromCookies } from "@/lib/age/get-initial-age-state";
-import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
+import {
+  findRouteManifestEntry,
+  ROUTE_MANIFEST,
+} from "@/lib/seo/route-manifest";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -26,6 +22,7 @@ vi.mock("next/image", () => ({
     width,
     height,
     className,
+    ...rest
   }: {
     src: string;
     alt: string;
@@ -34,6 +31,7 @@ vi.mock("next/image", () => ({
     width?: number;
     height?: number;
     className?: string;
+    "data-slot"?: string;
   }) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -43,6 +41,7 @@ vi.mock("next/image", () => ({
       data-fill={fill ? "true" : undefined}
       data-width={width}
       data-height={height}
+      data-slot={rest["data-slot"]}
       className={className}
     />
   ),
@@ -61,24 +60,26 @@ describe("TheVaultPageByAgeState", () => {
     vi.mocked(usePathname).mockReturnValue("/the-vault");
   });
 
-  it("shows the age gate for unknown visitors and hides Vault content", () => {
+  it("shows the age gate for unknown visitors and hides Coming Soon content", () => {
     render(<TheVaultPageByAgeState ageState="unknown" />);
 
     expect(
       screen.getByRole("heading", { name: "Age Verification Required" }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole("heading", { name: VAULT_HERO_COPY.title }),
+      screen.queryByRole("heading", { name: /Unveiling/i }),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText(VAULT_SECTION_COPY.title)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(THE_VAULT_COMING_SOON_COPY.description),
+    ).not.toBeInTheDocument();
+    expect(
+      document.querySelector('[data-slot="the-vault-page"]'),
+    ).not.toBeInTheDocument();
   });
 
-  it("blocks under-21 visitors from restricted Vault content", () => {
+  it("blocks under-21 visitors from Coming Soon content", () => {
     render(<TheVaultPageByAgeState ageState="under21" />);
 
-    expect(
-      screen.queryByRole("heading", { name: "Access restricted" }),
-    ).not.toBeInTheDocument();
     expect(
       screen.getByRole("navigation", { name: "Under-21 navigation" }),
     ).toBeInTheDocument();
@@ -86,302 +87,173 @@ describe("TheVaultPageByAgeState", () => {
       screen.getByRole("heading", { level: 1, name: "THE ROASTERY" }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole("heading", { name: VAULT_HERO_COPY.title }),
+      screen.queryByRole("heading", { name: /Unveiling/i }),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText("Build Your Collection")).not.toBeInTheDocument();
+    expect(screen.queryByText("Oops")).not.toBeInTheDocument();
     expect(
-      screen.queryByAltText("Verde Classico cigar product image"),
+      screen.queryByText(THE_VAULT_COMING_SOON_COPY.description),
+    ).not.toBeInTheDocument();
+    expect(
+      document.querySelector('[data-slot="the-vault-page"]'),
     ).not.toBeInTheDocument();
   });
 
-  it("renders the Figma Vault sections for over-21 visitors", () => {
+  it("renders the approved Coming Soon page for over-21 visitors", () => {
     render(<TheVaultPageByAgeState ageState="over21" />);
 
     expect(
       screen.getByRole("navigation", { name: "Main navigation" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 1, name: VAULT_HERO_COPY.title }),
+      screen.getByRole("heading", { level: 1, name: /Unveiling\s*soon/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(VAULT_HERO_COPY.body)).toBeInTheDocument();
-    expect(screen.getByText("The Vault")).toBeInTheDocument();
-    expect(screen.getByText(VAULT_SECTION_COPY.eyebrow)).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", {
-        level: 2,
-        name: VAULT_SECTION_COPY.title,
-      }),
+      screen.getByText(THE_VAULT_COMING_SOON_COPY.description),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("Build Your Collection")).toHaveLength(5);
-    expect(screen.getAllByText("VIEW DETAILS")).toHaveLength(5);
+    expect(
+      screen.getByRole("link", { name: THE_VAULT_COMING_SOON_COPY.homepageLabel }),
+    ).toHaveAttribute("href", "/");
+    expect(
+      screen.getByRole("button", {
+        name: THE_VAULT_COMING_SOON_COPY.productsDeferredLabel,
+      }),
+    ).toBeDisabled();
     expect(
       screen.getByRole("heading", { level: 2, name: "Stay in Know" }),
     ).toBeInTheDocument();
   });
 
-  it("uses Velarro typography tokens for Vault hero and section headings", () => {
-    render(<TheVaultPageByAgeState ageState="over21" />);
+  it("preserves section order and Figma node contracts", () => {
+    const { container } = render(
+      <TheVaultPageByAgeState ageState="over21" />,
+    );
 
-    const heroTitle = screen.getByRole("heading", {
-      level: 1,
-      name: VAULT_HERO_COPY.title,
+    const orderedSlots = [
+      "the-vault-visual",
+      "the-vault-content",
+      "the-vault-actions",
+    ];
+    const found = orderedSlots.map((slot) => {
+      const el = container.querySelector(`[data-slot="${slot}"]`);
+      expect(el, slot).not.toBeNull();
+      return el!;
     });
-    expect(heroTitle).toHaveClass(
-      "font-[family-name:var(--velarro-display-light-font-family)]",
-      "desktop:text-[length:var(--velarro-display-light-font-size)]",
-      "font-light",
-      "uppercase",
-      "leading-[var(--velarro-display-light-line-height)]",
-    );
-
-    expect(screen.getByText(VAULT_HERO_COPY.body)).toHaveClass(
-      "font-[family-name:var(--velarro-body-default-font-family)]",
-      "tablet:text-[length:var(--velarro-body-default-font-size)]",
-      "font-light",
-      "leading-[var(--velarro-body-default-line-height)]",
-    );
-
-    expect(screen.getByText(VAULT_SECTION_COPY.eyebrow)).toHaveClass(
-      "font-[family-name:var(--velarro-heading-sectionsmall-font-family)]",
-      "text-[length:var(--velarro-heading-sectionsmall-font-size)]",
-      "font-light",
-      "uppercase",
-    );
+    for (let i = 1; i < found.length; i += 1) {
+      expect(
+        found[i - 1]!.compareDocumentPosition(found[i]!) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    }
 
     expect(
-      screen.getByRole("heading", { level: 2, name: VAULT_SECTION_COPY.title }),
-    ).toHaveClass(
-      "font-[family-name:var(--velarro-heading-section-font-family)]",
-      "text-[length:var(--velarro-heading-section-font-size)]",
-      "font-light",
-    );
+      container.querySelector('[data-figma-node="12339:55472"]'),
+    ).toHaveAttribute("data-slot", "the-vault-page");
+    expect(
+      container.querySelector('[data-figma-node="12339:55474"]'),
+    ).toHaveAttribute("data-slot", "the-vault-visual");
+    expect(
+      container.querySelector('[data-figma-node="12339:55473"]'),
+    ).toHaveAttribute("data-slot", "the-vault-oops");
+    expect(
+      container.querySelector('[data-figma-node="12379:13365"]'),
+    ).toHaveAttribute("data-slot", "the-vault-content");
   });
 
-  it("marks the hero image as deferred without using a runtime image asset", () => {
+  it("applies visual region desktop height and decorative Oops semantics", () => {
     const { container } = render(
       <TheVaultPageByAgeState ageState="over21" />,
     );
-    const hero = container.querySelector("[data-section='the-vault-hero']");
+    const visual = container.querySelector('[data-slot="the-vault-visual"]');
+    const oops = container.querySelector('[data-slot="the-vault-oops"]');
 
-    expect(hero).toHaveAttribute(
-      "data-image-status",
-      THE_VAULT_HERO_IMAGE_STATUS,
-    );
-    expect(hero).toHaveAttribute("data-vault-hero", "deferred");
-    expect(hero?.querySelector("img")).toBeNull();
-    expect(container.innerHTML).not.toContain("figma.com");
-    expect(container.innerHTML).not.toContain("mcp/asset");
-    expect(container.innerHTML).not.toContain("/images/m05");
+    expect(visual).toHaveClass("desktop:h-[772px]");
+    expect(visual).toHaveClass("overflow-hidden");
+    expect(oops).toHaveAttribute("aria-hidden", "true");
+    expect(oops).toHaveTextContent(THE_VAULT_COMING_SOON_COPY.decorativeOops);
   });
 
-  it("uses the approved Verde Classico image for every offer card", () => {
+  it("uses the local Coming Soon background path without temporary Figma URLs", () => {
     const { container } = render(
       <TheVaultPageByAgeState ageState="over21" />,
     );
 
-    expect(THE_VAULT_APPROVED_IMAGES.offerVerdeClassico).toBe(
-      M01_HOME_APPROVED_IMAGES.cigarCarouselVerdeClassico,
-    );
-
-    const images = screen.getAllByAltText("Verde Classico cigar product image");
-    expect(images).toHaveLength(5);
-    for (const image of images) {
-      expect(image).toHaveAttribute(
-        "src",
-        THE_VAULT_APPROVED_IMAGES.offerVerdeClassico,
-      );
-    }
-
-    expect(container.innerHTML).not.toContain("figma.com");
-    expect(container.innerHTML).not.toContain("mcp/asset");
-  });
-
-  it("renders repeated offer copy and deferred detail controls", () => {
-    render(<TheVaultPageByAgeState ageState="over21" />);
-
-    const cards = screen
-      .getAllByText("Build Your Collection")
-      .map((heading) => heading.closest("article"));
-
-    expect(cards).toHaveLength(VAULT_OFFERS.length);
-
-    for (const card of cards) {
-      expect(card).not.toBeNull();
-      expect(within(card as HTMLElement).getByText("Offer 01")).toBeInTheDocument();
-      expect(
-        within(card as HTMLElement).getByText("ENROLLMENT OPEN"),
-      ).toBeInTheDocument();
-      expect(within(card as HTMLElement).getByText("February 27")).toBeInTheDocument();
-      expect(
-        within(card as HTMLElement).getByText("Preferred collection pricing"),
-      ).toBeInTheDocument();
-      expect(
-        within(card as HTMLElement).getByRole("button", {
-          name: /View details for Build Your Collection/,
-        }),
-      ).toBeDisabled();
-    }
-  });
-
-  it("uses the Figma typography scale for Vault offer cards", () => {
-    render(<TheVaultPageByAgeState ageState="over21" />);
-
-    const card = screen.getAllByText("Build Your Collection")[0].closest("article");
-    expect(card).not.toBeNull();
-
-    expect(within(card as HTMLElement).getByText("Offer 01")).toHaveClass(
-      "font-[family-name:var(--velarro-heading-card-font-family)]",
-      "text-[length:var(--velarro-heading-card-font-size)]",
-      "font-normal",
-    );
-    expect(within(card as HTMLElement).getByText("ENROLLMENT OPEN")).toHaveClass(
-      "font-[family-name:var(--velarro-ui-elements-primary-font-family)]",
-      "text-[length:var(--velarro-ui-elements-primary-font-size)]",
-      "font-normal",
-      "uppercase",
+    expect(THE_VAULT_COMING_SOON_BACKGROUND).toBe(
+      "/images/m05-vault/the-vault-coming-soon-background.jpg",
     );
     expect(
-      within(card as HTMLElement).getByRole("heading", {
-        level: 3,
-        name: "Build Your Collection",
-      }),
-    ).toHaveClass(
-      "font-[family-name:var(--velarro-heading-card-font-family)]",
-      "tablet:text-[30px]",
-      "font-medium",
+      existsSync(
+        join(
+          process.cwd(),
+          "public",
+          "images",
+          "m05-vault",
+          "the-vault-coming-soon-background.jpg",
+        ),
+      ),
+    ).toBe(true);
+
+    const background = container.querySelector(
+      '[data-slot="the-vault-background-image"] img',
     );
-    expect(within(card as HTMLElement).getByText(VAULT_OFFERS[0].description)).toHaveClass(
-      "font-[family-name:var(--velarro-body-default-font-family)]",
-      "tablet:text-[length:var(--velarro-body-default-font-size)]",
-      "font-light",
-      "leading-[var(--velarro-body-default-line-height)]",
+    expect(background).toHaveAttribute(
+      "src",
+      THE_VAULT_COMING_SOON_BACKGROUND,
     );
+    expect(background).toHaveAttribute("alt", "");
+    expect(background?.getAttribute("src") ?? "").not.toContain("figma.com");
+    expect(background?.getAttribute("src") ?? "").not.toContain("mcp/asset");
+    expect(background?.getAttribute("src") ?? "").not.toContain("http");
+    expect(container.innerHTML).not.toContain("figma.com/api/mcp/asset");
+  });
+
+  it("keeps Homepage active and Products deferred without href", () => {
+    const { container } = render(
+      <TheVaultPageByAgeState ageState="over21" />,
+    );
+
+    const homepage = screen.getByRole("link", {
+      name: THE_VAULT_COMING_SOON_COPY.homepageLabel,
+    });
+    expect(homepage).toHaveAttribute("href", "/");
+    expect(homepage).toHaveClass("focus-visible:ring-2");
+
+    const products = screen.getByRole("button", {
+      name: THE_VAULT_COMING_SOON_COPY.productsDeferredLabel,
+    });
+    expect(products).toBeDisabled();
+    expect(products).not.toHaveAttribute("href");
     expect(
-      within(card as HTMLElement).getByRole("button", {
-        name: /View details for Build Your Collection/,
-      }),
-    ).toHaveClass(
-      "font-[family-name:var(--velarro-ui-elements-primary-font-family)]",
-      "text-[length:var(--velarro-ui-elements-primary-font-size)]",
-      "font-normal",
-      "uppercase",
-    );
+      container.querySelector('[data-slot="the-vault-products-deferred"] a'),
+    ).toBeNull();
   });
 
-  it("keeps VIEW DETAILS buttons inside the offer content columns", () => {
+  it("removes obsolete Vault offer content from the runtime page", () => {
     render(<TheVaultPageByAgeState ageState="over21" />);
 
-    const cards = screen
-      .getAllByText("Build Your Collection")
-      .map((heading) => heading.closest("article"));
-
-    expect(cards).toHaveLength(VAULT_OFFERS.length);
-
-    for (const card of cards) {
-      expect(card).not.toBeNull();
-      const contentColumn = (card as HTMLElement).querySelector(
-        "[data-vault-offer-content]",
-      );
-      expect(contentColumn).not.toBeNull();
-
-      const button = within(contentColumn as HTMLElement).getByRole("button", {
-        name: /View details for Build Your Collection/,
-      });
-      expect(button.closest("article")).toBe(card);
-      expect(button.parentElement).toBe(contentColumn);
-      expect(button).toHaveClass("mt-[24px]", "desktop:w-full");
-      expect(button).not.toHaveClass("mt-auto", "absolute");
-    }
-  });
-
-  it("uses the Figma desktop width chain for Vault offer cards", () => {
-    const { container } = render(<TheVaultPageByAgeState ageState="over21" />);
-
-    const offerList = container.querySelector("[data-vault-offer-list]");
-    expect(offerList).not.toBeNull();
-    expect(offerList).toHaveClass("w-full", "px-[24px]");
-    expect(offerList).not.toHaveClass("max-w-[960px]");
-    expect(offerList).not.toHaveClass("max-w-[1024px]");
-    expect(offerList).not.toHaveClass("max-w-[1120px]");
-    expect(offerList).not.toHaveClass("max-w-[1200px]");
-    expect(offerList).not.toHaveClass("max-w-[1314px]");
-
-    const offerGrid = container.querySelector("[data-vault-offer-grid]");
-    expect(offerGrid).not.toBeNull();
-    expect(offerGrid).toHaveClass("mx-auto", "w-full", "max-w-[1314px]");
-
-    const cards = Array.from(
-      container.querySelectorAll("[data-vault-offer-card]"),
+    expect(screen.queryByText("THE VAULT")).not.toBeInTheDocument();
+    expect(screen.queryByText("Offer 01")).not.toBeInTheDocument();
+    expect(screen.queryByText("Build Your Collection")).not.toBeInTheDocument();
+    expect(screen.queryByText("ENROLLMENT OPEN")).not.toBeInTheDocument();
+    expect(screen.queryByText("VIEW DETAILS")).not.toBeInTheDocument();
+    expect(screen.queryByText("RARE OPPORTUNITIES")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Distinguished Selections"),
+    ).not.toBeInTheDocument();
+    expect(document.querySelectorAll("[data-vault-offer-card]")).toHaveLength(
+      0,
     );
-    expect(cards).toHaveLength(VAULT_OFFERS.length);
-
-    for (const card of cards) {
-      expect(card).toHaveAttribute("data-figma-node", "14581:35996");
-      expect(card).toHaveClass(
-        "w-full",
-        "desktop:max-w-[1314px]",
-        "desktop:gap-[80px]",
-        "desktop:p-[24px]",
-        "border-[1.5px]",
-        "rounded-[12px]",
-      );
-    }
+    expect(screen.queryByRole("navigation", { name: "Breadcrumb" })).toBeNull();
   });
 
-  it("keeps the Figma desktop image and content column dimensions", () => {
-    const { container } = render(<TheVaultPageByAgeState ageState="over21" />);
-
-    const cards = Array.from(
-      container.querySelectorAll("[data-vault-offer-card]"),
+  it("does not mask document overflow at the Vault page root", () => {
+    const { container } = render(
+      <TheVaultPageByAgeState ageState="over21" />,
     );
-    expect(cards).toHaveLength(VAULT_OFFERS.length);
+    const page = container.querySelector('[data-slot="the-vault-page"]');
+    const main = container.querySelector('[data-slot="the-vault-main"]');
 
-    for (const card of cards) {
-      const imageRegion = card.querySelector("[data-vault-offer-image-region]");
-      const contentColumn = card.querySelector("[data-vault-offer-content]");
-
-      expect(imageRegion).not.toBeNull();
-      expect(imageRegion).toHaveClass(
-        "desktop:h-[398px]",
-        "desktop:w-[390px]",
-        "desktop:shrink-0",
-      );
-      expect(imageRegion?.firstElementChild).toHaveClass("desktop:size-[390px]");
-
-      expect(contentColumn).not.toBeNull();
-      expect(contentColumn).toHaveClass(
-        "desktop:w-[796px]",
-        "desktop:max-w-[796px]",
-        "desktop:shrink-0",
-      );
-
-      const button = within(contentColumn as HTMLElement).getByRole("button", {
-        name: /View details for Build Your Collection/,
-      });
-      expect(button.parentElement).toBe(contentColumn);
-      expect(button).toHaveClass("desktop:w-full");
-    }
-  });
-
-  it("does not add hover animation classes to Vault offer cards", () => {
-    render(<TheVaultPageByAgeState ageState="over21" />);
-
-    const cards = screen
-      .getAllByText("Build Your Collection")
-      .map((heading) => heading.closest("article"));
-
-    expect(cards).toHaveLength(VAULT_OFFERS.length);
-
-    for (const card of cards) {
-      expect(card).not.toBeNull();
-      expect(card).not.toHaveClass("transition-[transform,box-shadow]");
-      expect(card).not.toHaveClass("[@media(hover:hover)]:hover:-translate-y-1");
-      expect(card).not.toHaveClass(
-        "[@media(hover:hover)]:hover:shadow-[0_14px_28px_rgba(47,41,36,0.12)]",
-      );
-      expect(card?.className).not.toContain("hover:");
-      expect(card?.className).not.toContain("group-hover");
-    }
+    expect(page?.className).not.toMatch(/overflow-x-(hidden|clip)/);
+    expect(main?.className).not.toMatch(/overflow-x-(hidden|clip)/);
   });
 
   it("keeps the shared navbar links intact", () => {
@@ -394,17 +266,14 @@ describe("TheVaultPageByAgeState", () => {
       "href",
       "/our-story",
     );
-    expect(
-      screen.getAllByRole("link", { name: "The Estate" })[0],
-    ).toHaveAttribute("href", "/the-estate");
   });
 });
 
 describe("/the-vault route", () => {
-  it("has noindex page metadata for the over-21 restricted page", () => {
+  it("preserves noindex metadata with Coming Soon description", () => {
     expect(metadata.title).toBe("The Vault");
     expect(metadata.description).toBe(
-      "Curated Velarro collections, limited releases, and exclusive opportunities.",
+      "We're creating an experience worthy of the Velarro name while The Vault is prepared for its arrival.",
     );
     expect(metadata.alternates?.canonical).toBe(
       "https://velarroestate.com/the-vault",
@@ -419,16 +288,33 @@ describe("/the-vault route", () => {
 
     expect(getInitialAgeStateFromCookies).toHaveBeenCalledOnce();
     expect(
-      screen.getByRole("heading", { level: 1, name: VAULT_HERO_COPY.title }),
+      screen.getByRole("heading", { level: 1, name: /Unveiling\s*soon/i }),
     ).toBeInTheDocument();
   });
 
-  it("does not add local M05 image files", () => {
+  it("marks /the-vault manifest at Coming Soon node and leaves /coming-soon unimplemented", () => {
+    expect(findRouteManifestEntry("/the-vault")).toMatchObject({
+      route: "/the-vault",
+      module: "M05-vault",
+      figmaNodeId: "12339:55472",
+      implemented: true,
+      public: true,
+      indexable: false,
+      audience: "age-gated",
+    });
+
+    expect(findRouteManifestEntry("/coming-soon")).toMatchObject({
+      route: "/coming-soon",
+      module: "M01-home",
+      figmaNodeId: "12339:55472",
+      implemented: false,
+      public: true,
+      indexable: false,
+      audience: "review",
+    });
+
     expect(
-      existsSync(join(process.cwd(), "public", "images", "m05")),
-    ).toBe(false);
-    expect(
-      existsSync(join(process.cwd(), "public", "images", "m05-vault")),
-    ).toBe(false);
+      ROUTE_MANIFEST.filter((entry) => entry.figmaNodeId === "12339:55472"),
+    ).toHaveLength(2);
   });
 });
