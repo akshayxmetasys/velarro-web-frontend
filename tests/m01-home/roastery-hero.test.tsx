@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { RoasteryHeroSection } from "@/components/m01-home/roastery-hero-section";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
@@ -61,5 +61,68 @@ describe("RoasteryHeroSection", () => {
     );
     expect(serialized).not.toContain("figma.com");
     expect(serialized).not.toContain("mcp/asset");
+  });
+
+  it("marks the Figma node and preserves desktop geometry contracts", () => {
+    const { container } = render(<RoasteryHeroSection />);
+    const section = container.querySelector('[data-figma-node="15451:37609"]');
+    expect(section).not.toBeNull();
+
+    const frame = container.querySelector('[data-slot="roastery-hero-frame"]');
+    expect(frame?.className).toContain("h-[851px]");
+
+    const image = screen.getByAltText("Roastery hero imagery");
+    expect(image.className).toContain("object-cover");
+    expect(image.className).toContain("object-center");
+
+    const overlay = container.querySelector(
+      '[data-slot="roastery-hero-overlay"]',
+    );
+    expect(overlay).toHaveAttribute("aria-hidden", "true");
+    expect(overlay?.className).toContain("bg-[rgba(21,20,20,0.4)]");
+
+    const content = container.querySelector(
+      '[data-slot="roastery-hero-content"]',
+    );
+    expect(content?.className).toContain("top-[319px]");
+    expect(content?.className).toContain("max-w-[998px]");
+    expect(content?.className).toContain("gap-[37px]");
+    expect(content?.className).not.toContain("[&>*]:w-full");
+
+    const heading = screen.getByRole("heading", { name: "THE ROASTERY" });
+    expect(heading.className).toContain(
+      "leading-[var(--velarro-display-light-line-height)]",
+    );
+
+    const ctaGroup = container.querySelector('[data-slot="roastery-cta-group"]');
+    expect(ctaGroup?.className).toContain("shrink-0");
+    expect(ctaGroup?.className).toContain("gap-[24px]");
+  });
+
+  it("keeps arrow and indicators decorative without fabricated carousel controls", () => {
+    const { container } = render(<RoasteryHeroSection />);
+
+    const arrow = container.querySelector('[data-slot="roastery-cta-arrow"]');
+    expect(arrow).toHaveAttribute("aria-hidden", "true");
+
+    const dots = container.querySelector(
+      '[data-slot="roastery-slider-dots-static"]',
+    );
+    expect(dots).toHaveAttribute("aria-hidden", "true");
+    expect(dots?.className).toContain("top-[546px]");
+    expect(dots?.children).toHaveLength(5);
+    expect(dots?.children[0]?.className).toContain("w-[89px]");
+    expect(within(dots as HTMLElement).queryAllByRole("button")).toHaveLength(
+      0,
+    );
+
+    expect(
+      screen.getByText(
+        "Slide indicators are decorative only. Carousel behavior is not yet approved.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      container.querySelectorAll("button:not([disabled])"),
+    ).toHaveLength(0);
   });
 });

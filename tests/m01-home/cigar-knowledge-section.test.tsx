@@ -1,7 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { CigarKnowledgeSection } from "@/components/m01-home/cigar-knowledge-section";
-import { M01_CONTAINED_SECTION_WIDTH_CLASS, M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
+import {
+  M01_CONTAINED_SECTION_WIDTH_CLASS,
+  M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS,
+} from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 import { CIGAR_KNOWLEDGE_CARDS } from "@/lib/m01-home/cigar-knowledge-data";
 
@@ -144,9 +147,47 @@ describe("CigarKnowledgeSection", () => {
     );
 
     expect(section).toHaveClass(M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS);
+    expect(section?.className).toContain("min-h-[719px]");
+    expect(section?.className).toContain("bg-background-section");
+    expect(section?.className).toContain("px-4");
+    expect(section?.className).toContain("py-[19px]");
+    expect(section?.className).not.toContain("bg-background-sectionpx-4");
+
     expect(cardsRow).toHaveClass(
       M01_CONTAINED_SECTION_WIDTH_CLASS,
       "gap-[30px]",
     );
+  });
+
+  it("aligns card and image geometry to Figma card contracts", () => {
+    const { container } = render(<CigarKnowledgeSection />);
+    const cards = container.querySelectorAll(
+      '[data-slot="cigar-knowledge-card"]',
+    );
+    expect(cards).toHaveLength(3);
+
+    for (const card of cards) {
+      expect(card.className).toContain("w-[392px]");
+      expect(card.className).toContain("h-[555px]");
+      const imageFrame = card.querySelector(
+        '[data-slot="cigar-knowledge-card-image"]',
+      );
+      expect(imageFrame?.className).toContain("h-[309px]");
+      expect(imageFrame?.className).toContain("w-[356px]");
+      expect(imageFrame?.className).toContain("rounded-[8px]");
+    }
+
+    const overlays = container.querySelectorAll(
+      '[data-slot="cigar-knowledge-card-overlay"]',
+    );
+    expect(overlays).toHaveLength(3);
+    for (const overlay of overlays) {
+      expect(overlay.className).toContain("bg-[rgba(21,20,20,0.4)]");
+    }
+
+    const divider = container.querySelector(
+      '[data-slot="cigar-knowledge-divider"]',
+    );
+    expect(divider?.parentElement?.className).toContain("max-w-[344px]");
   });
 });
