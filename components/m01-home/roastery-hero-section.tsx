@@ -13,6 +13,7 @@ function RoasteryHeroArrowButton() {
     <span
       aria-hidden="true"
       className="inline-flex size-[44px] shrink-0 items-center justify-center rounded-radius-md bg-button-fill"
+      data-slot="roastery-cta-arrow"
     >
       <svg
         width="16"
@@ -40,8 +41,12 @@ export function RoasteryHeroSection() {
       aria-labelledby="roastery-hero-heading"
       className="relative w-full overflow-hidden bg-background-navbar"
       data-figma-node="15451:37609"
+      data-slot="roastery-hero"
     >
-      <div className="relative h-[851px] w-full">
+      <div
+        className="relative h-[851px] w-full"
+        data-slot="roastery-hero-frame"
+      >
         <Image
           src={ROASTERY_HERO_URL}
           alt="Roastery hero imagery"
@@ -53,27 +58,31 @@ export function RoasteryHeroSection() {
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[rgba(21,20,20,0.4)]"
+          data-slot="roastery-hero-overlay"
         />
 
         <div
-          className="absolute left-4 right-4 top-[319px] mx-auto flex min-w-0 max-w-[998px] flex-col items-center gap-[37px] [&>*]:min-w-0 [&>*]:w-full"
+          className="absolute left-4 right-4 top-[319px] mx-auto flex min-w-0 max-w-[998px] flex-col items-center gap-[37px]"
           data-slot="roastery-hero-content"
         >
           <h2
             id="roastery-hero-heading"
-            className="text-center font-[family-name:var(--velarro-display-light-font-family)] text-[length:var(--velarro-display-light-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white"
+            className="min-w-0 w-full text-center font-[family-name:var(--velarro-display-light-font-family)] text-[length:var(--velarro-display-light-font-size)] font-light uppercase leading-[var(--velarro-display-light-line-height)] tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white"
           >
             THE ROASTERY
           </h2>
 
-          <div className="flex items-start gap-[24px]">
+          <div
+            className="flex shrink-0 items-start gap-[24px]"
+            data-slot="roastery-cta-group"
+          >
             <button
               type="button"
               disabled
               aria-disabled="true"
               aria-label="Shop now (deferred: destination not approved for this scope)"
               title="Shop now — destination not approved for this scope"
-              className="cursor-not-allowed border-0 border-b-[1px] border-solid border-border-strong bg-transparent py-[9px] font-[family-name:var(--velarro-display-shop-now-font-family)] text-[length:var(--velarro-display-shop-now-font-size)] font-normal uppercase leading-normal text-text-hover-button"
+              className="cursor-not-allowed border-0 border-b-[1px] border-solid border-border-strong bg-transparent py-[9px] font-[family-name:var(--velarro-display-shop-now-font-family)] text-[length:var(--velarro-display-shop-now-font-size)] font-normal uppercase leading-[var(--velarro-display-shop-now-line-height)] text-text-hover-button"
             >
               SHOP NOW
             </button>
