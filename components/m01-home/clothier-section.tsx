@@ -1,5 +1,8 @@
 import Image from "next/image";
-import { M01_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
+import {
+  M01_CONTAINED_SECTION_WIDTH_CLASS,
+  M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS,
+} from "@/components/m01-home/m01-section-layout";
 import { CLOTHIER_CARDS } from "@/lib/m01-home/clothier-data";
 
 function ClothierCard({ card }: { card: (typeof CLOTHIER_CARDS)[number] }) {
@@ -81,12 +84,12 @@ export function ClothierSection() {
   return (
     <section
       aria-labelledby="clothier-heading"
-      className="w-full bg-background-section py-[32px]"
+      className={`mx-auto w-full ${M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS} bg-background-section px-4 py-[32px] min-[1372px]:px-0`}
       data-figma-node="13148:15120"
     >
-      <div className="mx-auto flex w-full max-w-[1340px] flex-col items-center justify-center gap-[40px] px-4 min-[1372px]:px-0">
+      <div className="mx-auto flex w-full flex-col items-center justify-center gap-[40px]">
         <header className="flex w-full max-w-[1314px] flex-col items-center gap-[20px]">
-          <div className="flex w-[526px] max-w-full items-center justify-center border-b border-border-strong pb-[4px]">
+          <div className="flex w-full max-w-[526px] items-center justify-center border-b border-border-strong pb-[4px]">
             <p className="w-[808px] max-w-full text-center font-[family-name:var(--velarro-heading-sectionsmall-font-family)] text-[length:var(--velarro-heading-sectionsmall-font-size)] font-light uppercase leading-normal tracking-[var(--velarro-heading-sectionsmall-letter-spacing)] text-text-display">
               Curated for the Exceptional
             </p>

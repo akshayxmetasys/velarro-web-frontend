@@ -95,7 +95,8 @@ describe("StoreLoungeSection", () => {
       '[data-slot="store-lounge-contained-section"]',
     );
 
-    expect(section).toHaveClass("px-4");
+    expect(section).toHaveClass("px-4", "py-0");
+    expect(section).not.toHaveClass("py-8");
     expect(contained).toHaveClass("mx-auto", M01_CONTAINED_SECTION_WIDTH_CLASS);
   });
 

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { CigarKnowledgeSection } from "@/components/m01-home/cigar-knowledge-section";
-import { M01_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
+import { M01_CONTAINED_SECTION_WIDTH_CLASS, M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS } from "@/components/m01-home/m01-section-layout";
 import { M01_HOME_APPROVED_IMAGES } from "@/lib/assets/approved-image-hosts";
 import { CIGAR_KNOWLEDGE_CARDS } from "@/lib/m01-home/cigar-knowledge-data";
 
@@ -139,12 +139,11 @@ describe("CigarKnowledgeSection", () => {
     const { container } = render(<CigarKnowledgeSection />);
 
     const section = container.querySelector('[data-figma-node="13148:15081"]');
-    const outerWrapper = section?.firstElementChild;
     const cardsRow = container.querySelector(
       '[data-slot="cigar-knowledge-cards"]',
     );
 
-    expect(outerWrapper).toHaveClass("max-w-[1340px]");
+    expect(section).toHaveClass(M01_WIDE_CONTAINED_SECTION_WIDTH_CLASS);
     expect(cardsRow).toHaveClass(
       M01_CONTAINED_SECTION_WIDTH_CLASS,
       "gap-[30px]",

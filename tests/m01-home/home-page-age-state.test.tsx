@@ -78,6 +78,12 @@ describe("HomePageByAgeState", () => {
     render(<HomePageByAgeState ageState="over21" />);
 
     expect(screen.getByRole("navigation", { name: "Main navigation" })).toBeInTheDocument();
+    const shell = document.querySelector('[data-m01-shell="over21"]');
+    expect(shell).toBeInTheDocument();
+    expect(shell?.className).not.toMatch(/overflow-x-(clip|hidden)/);
+    expect(
+      document.querySelector('[data-m01-section-stack="over21"]'),
+    ).toHaveClass("gap-[80px]", "-mt-[73px]", "pb-[80px]");
     expect(screen.getByRole("heading", { name: "COLLECTOR SERIES" })).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 2, name: "Velarro cigars" }),

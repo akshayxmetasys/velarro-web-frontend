@@ -52,7 +52,7 @@ export function CollectorHeroSection() {
         />
 
         <div
-          className="absolute top-[319px] left-1/2 flex w-[998px] max-w-[calc(100vw-80px)] -translate-x-1/2 flex-col items-center gap-[37px]"
+          className="absolute left-4 right-4 top-[319px] mx-auto flex min-w-0 max-w-[998px] flex-col items-center gap-[37px] [&>*]:min-w-0 [&>*]:w-full"
           data-slot="hero-content"
         >
           <h1
