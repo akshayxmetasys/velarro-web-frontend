@@ -18,8 +18,25 @@ export const MEMBERSHIP_FIGMA_NODES = {
   benefitsSection: "15008:38412",
   benefitsTitle: "15008:38413",
   comparisonTable: "15008:38417",
+  tableHeadingRegion: "15008:38418",
+  tableHouseEmblem: "15008:38424",
+  tableReserveEmblem: "15008:38427",
+  tableEstateEmblem: "15008:38430",
+  tableAtelierEmblem: "15008:38433",
+  tablePrivateCircleEmblem: "15008:38436",
+  benefitRows: "15008:38438",
   ctaSection: "15008:38590",
   ctaBackground: "15008:38591",
+  ctaHeading: "15008:38592",
+  ctaBody: "15008:38593",
+  ctaControl: "15008:38594",
+  ctaLogoGroup: "15008:38595",
+} as const;
+
+/** Verified Figma frame size for `home/membership` (`15008:38309`). */
+export const MEMBERSHIP_FIGMA_FRAME = {
+  width: 1440,
+  height: 3184,
 } as const;
 
 export type MembershipTierId =
@@ -47,6 +64,7 @@ export interface MembershipTier {
   testId: string;
   figmaGroupNode: string;
   figmaEmblemNode: string;
+  figmaTableEmblemNode: string;
 }
 
 export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
@@ -60,9 +78,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     threshold: "$0",
     thresholdLabel: "Entry",
     assetKey: "tierHouse",
-    testId: "membership-tier-house-deferred",
+    testId: "membership-tier-house-emblem",
     figmaGroupNode: "15008:38392",
     figmaEmblemNode: "15008:38411",
+    figmaTableEmblemNode: "15008:38424",
   },
   {
     id: "reserve",
@@ -74,9 +93,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     threshold: "$1 – $499",
     thresholdLabel: "Lifetime spend",
     assetKey: "tierReserve",
-    testId: "membership-tier-reserve-deferred",
+    testId: "membership-tier-reserve-emblem",
     figmaGroupNode: "15008:38312",
     figmaEmblemNode: "15008:38331",
+    figmaTableEmblemNode: "15008:38427",
   },
   {
     id: "estate",
@@ -89,9 +109,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     threshold: "$500 – $2,499",
     thresholdLabel: "Lifetime spend",
     assetKey: "tierEstate",
-    testId: "membership-tier-estate-deferred",
+    testId: "membership-tier-estate-emblem",
     figmaGroupNode: "15008:38332",
     figmaEmblemNode: "15008:38351",
+    figmaTableEmblemNode: "15008:38430",
   },
   {
     id: "atelier",
@@ -103,9 +124,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     threshold: "$2,500 – $9,999",
     thresholdLabel: "Lifetime spend",
     assetKey: "tierAtelier",
-    testId: "membership-tier-atelier-deferred",
+    testId: "membership-tier-atelier-emblem",
     figmaGroupNode: "15008:38352",
     figmaEmblemNode: "15008:38371",
+    figmaTableEmblemNode: "15008:38433",
   },
   {
     id: "private-circle",
@@ -117,9 +139,10 @@ export const MEMBERSHIP_TIERS: readonly MembershipTier[] = [
     threshold: "$10,000+",
     thresholdLabel: "Lifetime spend",
     assetKey: "tierPrivateCircle",
-    testId: "membership-tier-private-circle-deferred",
+    testId: "membership-tier-private-circle-emblem",
     figmaGroupNode: "15008:38372",
     figmaEmblemNode: "15008:38391",
+    figmaTableEmblemNode: "15008:38436",
   },
 ] as const;
 
@@ -129,22 +152,40 @@ export const MEMBERSHIP_BENEFITS_COPY = {
 } as const;
 
 export const MEMBERSHIP_BENEFIT_TIER_COLUMNS = [
-  { id: "house" as const, label: "HOUSE", accessibleName: "Velarro House" },
+  {
+    id: "house" as const,
+    label: "HOUSE",
+    accessibleName: "Velarro House",
+    assetKey: "tierHouse" as const,
+    figmaEmblemNode: "15008:38424",
+  },
   {
     id: "reserve" as const,
     label: "RESERVE",
     accessibleName: "Velarro Reserve",
+    assetKey: "tierReserve" as const,
+    figmaEmblemNode: "15008:38427",
   },
-  { id: "estate" as const, label: "ESTATE", accessibleName: "Velarro Estate" },
+  {
+    id: "estate" as const,
+    label: "ESTATE",
+    accessibleName: "Velarro Estate",
+    assetKey: "tierEstate" as const,
+    figmaEmblemNode: "15008:38430",
+  },
   {
     id: "atelier" as const,
     label: "ATELIER",
     accessibleName: "Velarro Atelier",
+    assetKey: "tierAtelier" as const,
+    figmaEmblemNode: "15008:38433",
   },
   {
     id: "private-circle" as const,
     label: "PRIVATE CIRCLE",
     accessibleName: "Velarro Private Circle",
+    assetKey: "tierPrivateCircle" as const,
+    figmaEmblemNode: "15008:38436",
   },
 ] as const;
 

@@ -7,6 +7,7 @@ import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-asse
 import { THE_VAULT_COMING_SOON_BACKGROUND } from "@/components/m05-vault/the-vault-assets";
 import { CHRONICLE_APPROVED_IMAGES, CHRONICLE_CARD_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
 import { PAIRING_GUIDE_APPROVED_IMAGES, PAIRING_GUIDE_CARD_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
+import { MEMBERSHIP_ASSETS, MEMBERSHIP_EMBLEM_ASSET_KEYS } from "@/components/m09-membership/membership-assets";
 import { CAREERS_APPROVED_IMAGES } from "@/components/m09-careers/careers-assets";
 import { PARTNER_ASSETS } from "@/components/m09-partner/partner-assets";
 import {
@@ -241,6 +242,54 @@ describe("approved image hosts", () => {
     expect(existsSync(join(process.cwd(), "public", "images", "m08"))).toBe(
       false,
     );
+  });
+
+  it("keeps permanent Membership emblems and CTA banner local without remote URLs", () => {
+    const emblemPaths = MEMBERSHIP_EMBLEM_ASSET_KEYS.map(
+      (key) => MEMBERSHIP_ASSETS[key].path,
+    );
+    expect(emblemPaths).toHaveLength(5);
+    expect(new Set(emblemPaths).size).toBe(5);
+
+    for (const key of MEMBERSHIP_EMBLEM_ASSET_KEYS) {
+      const asset = MEMBERSHIP_ASSETS[key];
+      expect(asset.status).toBe("permanent");
+      expect(asset.path.startsWith("/images/m09-membership/")).toBe(true);
+      expect(asset.path.startsWith("http")).toBe(false);
+      expect(asset.path).not.toContain("figma.com");
+      expect(asset.path).not.toContain("mcp/asset");
+      expect(
+        existsSync(
+          join(
+            process.cwd(),
+            "public",
+            ...asset.path.replace(/^\//, "").split("/"),
+          ),
+        ),
+      ).toBe(true);
+    }
+
+    expect(MEMBERSHIP_ASSETS.ctaBanner.path).toBe(
+      "/images/m09-membership/membership-cta-banner.png",
+    );
+    expect(MEMBERSHIP_ASSETS.ctaBanner.status).toBe("permanent");
+    expect(
+      existsSync(
+        join(
+          process.cwd(),
+          "public",
+          "images",
+          "m09-membership",
+          "membership-cta-banner.png",
+        ),
+      ),
+    ).toBe(true);
+
+    const serialized = JSON.stringify(MEMBERSHIP_ASSETS);
+    expect(serialized).not.toContain("figma.com");
+    expect(serialized).not.toContain("mcp/asset");
+    expect(serialized).not.toContain('"deferred"');
+    expect(serialized).not.toContain('"url":null');
   });
 
   it("accepts approved M09 Careers image URLs without adding local files", () => {
