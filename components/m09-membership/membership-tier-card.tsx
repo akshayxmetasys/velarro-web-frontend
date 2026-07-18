@@ -1,4 +1,9 @@
-import { MEMBERSHIP_ASSETS } from "@/components/m09-membership/membership-assets";
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import {
+  MEMBERSHIP_ASSETS,
+  type MembershipEmblemCrop,
+} from "@/components/m09-membership/membership-assets";
 import type { MembershipTier } from "@/components/m09-membership/membership-data";
 
 function InfoIcon() {
@@ -21,25 +26,70 @@ function InfoIcon() {
   );
 }
 
-function DeferredTierEmblem({
-  tier,
-}: {
-  tier: MembershipTier;
-}) {
+function emblemImageStyle(crop: MembershipEmblemCrop): {
+  className: string;
+  style?: CSSProperties;
+} {
+  if (crop.mode === "cover") {
+    return {
+      className: "object-cover",
+      style: { objectPosition: crop.objectPosition },
+    };
+  }
+
+  return {
+    className: "max-w-none",
+    style: {
+      width: crop.width,
+      height: crop.height,
+      left: crop.left,
+      top: crop.top,
+      maxWidth: "none",
+    },
+  };
+}
+
+function TierEmblem({ tier }: { tier: MembershipTier }) {
   const asset = MEMBERSHIP_ASSETS[tier.assetKey];
+  const imageProps = emblemImageStyle(asset.cardCrop);
 
   return (
     <div
       aria-hidden="true"
-      className="absolute left-1/2 top-[81px] z-10 h-[206px] w-[124px] -translate-x-1/2 overflow-hidden rounded-[8px] border border-border-default/40 bg-[linear-gradient(145deg,rgba(216,201,180,0.28)_0%,rgba(246,242,235,0.92)_48%,rgba(138,121,96,0.18)_100%)]"
+      className="absolute left-1/2 z-10 w-[124px] -translate-x-1/2 overflow-hidden rounded-[8px]"
+      style={{
+        top: asset.cardEmblemTopPx,
+        height: asset.cardEmblemHeightPx,
+      }}
       data-testid={tier.testId}
       data-asset-slot={asset.slot}
       data-asset-status={asset.status}
       data-figma-node={asset.figmaNodeId}
+      data-membership-emblem-width="124"
+      data-membership-emblem-height={String(asset.cardEmblemHeightPx)}
     >
-      <div className="absolute inset-[12px] rounded-[inherit] border border-border-default/50" />
-      <div className="absolute left-1/2 top-1/2 h-[58%] w-px -translate-x-1/2 -translate-y-1/2 bg-border-default/30" />
-      <div className="absolute left-1/2 top-1/2 h-px w-[58%] -translate-x-1/2 -translate-y-1/2 bg-border-default/30" />
+      {asset.cardCrop.mode === "cover" ? (
+        <Image
+          src={asset.path}
+          alt=""
+          fill
+          unoptimized
+          className={imageProps.className}
+          style={imageProps.style}
+          sizes="124px"
+        />
+      ) : (
+        <Image
+          src={asset.path}
+          alt=""
+          width={asset.naturalWidth}
+          height={asset.naturalHeight}
+          unoptimized
+          className={`absolute ${imageProps.className}`}
+          style={imageProps.style}
+          sizes="124px"
+        />
+      )}
     </div>
   );
 }
@@ -52,13 +102,15 @@ export function MembershipTierCard({ tier }: { tier: MembershipTier }) {
       data-membership-tier-card
       data-membership-tier-id={tier.id}
       data-figma-node={tier.figmaGroupNode}
+      data-membership-card-width="248"
+      data-membership-card-height="624"
     >
       <div className="relative h-[624px] w-[248px]">
         <div
           aria-hidden="true"
           className="absolute left-0 top-0 h-[222px] w-full rounded-t-[12px] border border-border-default bg-[rgba(239,231,220,0.4)]"
         />
-        <DeferredTierEmblem tier={tier} />
+        <TierEmblem tier={tier} />
         <div className="absolute left-0 top-[206px] flex h-[418px] w-full flex-col items-center overflow-hidden rounded-[12px] border border-border-default bg-background-card px-[16px] pb-[24px] pt-[86px] text-center">
           <div className="flex flex-col items-center gap-[4px]">
             <p className="font-[family-name:var(--velarro-ui-elements-primary-font-family)] text-[16px] font-normal uppercase leading-none tracking-[0] text-text-heading">

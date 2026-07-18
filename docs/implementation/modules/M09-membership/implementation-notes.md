@@ -3,17 +3,19 @@
 ## Route and branch
 
 - Route: `/membership`
-- Branch: `feature/m09-membership-page`
+- Module: `M09-membership` (route-manifest module remains `M09-engagement`)
+- Branch: `feature/m09-membership-fidelity`
+- Baseline: `8d99c7df128ec23f78ceea4c829b739b01268f4f`
 - Figma file: `92rhH51aErpYQWRrlJqMhn`
 - Full frame: `15008:38309` — `home/membership`
+- Verified frame size (MCP screenshot metadata): **1440 × 3184**
 
-## Figma section node IDs
+## Inspected Figma nodes
 
 | Section | Node ID |
 | --- | --- |
 | Full page | `15008:38309` |
-| Tier section | `15008:38310` |
-| Tier container | `15008:38311` |
+| Tier section / container | `15008:38310` / `15008:38311` |
 | House group / emblem | `15008:38392` / `15008:38411` |
 | Reserve group / emblem | `15008:38312` / `15008:38331` |
 | Estate group / emblem | `15008:38332` / `15008:38351` |
@@ -21,124 +23,140 @@
 | Private Circle group / emblem | `15008:38372` / `15008:38391` |
 | Breadcrumb | `15087:39647` |
 | Benefits section / title / table | `15008:38412` / `15008:38413` / `15008:38417` |
-| CTA section / background | `15008:38590` / `15008:38591` |
+| Table heading / emblems | `15008:38418`, `15008:38424`–`15008:38436` |
+| Benefit rows | `15008:38438` |
+| CTA section / background / copy / control / logo | `15008:38590`–`15008:38595` |
+| Navbar / footer references | `15640:23662` / `15008:38600` |
 
-## Desktop measurements
+## Permanent assets (V-09a)
 
-- Frame: approximately `1440 × 3184`
-- Tier section: approximately `1440 × 625`
-- Tier container: approximately `1272px` wide
-- Cards: `248 × 624`, `8px` gap, five in one row
-- Deferred emblem area: `124 × 206` within `222px` top panel
-- Benefits panel: approximately `1350px` centered
-- CTA: approximately `1328 × 339`, `24px` radius
+All six Membership-specific images are permanent local PNGs under `public/images/m09-membership/`. Table headers reuse the same five emblem paths (no duplicate files).
+
+| Asset | Source node | Path | Content-Type | Signature | Natural size | Crop notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| House emblem | `15008:38411` | `/images/m09-membership/house-emblem.png` | `image/png` | `89 50 4E 47 0D 0A 1A 0A` | 1024×1536 | Card absolute crop `151.59% / 130.05% / -23.97% / -12.3%`; top `82px`; height `205px` |
+| Reserve emblem | `15008:38331` | `/images/m09-membership/reserve-emblem.png` | `image/png` | `89 50 4E 47 0D 0A 1A 0A` | 683×1024 | `object-cover` + `50% 100%` (Figma `object-bottom`); top `81px`; height `206px` |
+| Estate emblem | `15008:38351` | `/images/m09-membership/estate-emblem.png` | `image/png` | `89 50 4E 47 0D 0A 1A 0A` | 1024×1536 | Card absolute crop `146.89% / 128.84% / -23.85% / -10.44%`; top `78px` |
+| Atelier emblem | `15008:38371` | `/images/m09-membership/atelier-emblem.png` | `image/png` | `89 50 4E 47 0D 0A 1A 0A` | 1024×1536 | Card absolute crop `138.77% / 125.91% / -19.15% / -9.3%`; top `81px` |
+| Private Circle emblem | `15008:38391` | `/images/m09-membership/private-circle-emblem.png` | `image/png` | `89 50 4E 47 0D 0A 1A 0A` | 1024×1536 | Card absolute crop `134.23% / 125.28% / -16.78% / -8.92%`; top `81px` |
+| CTA banner | `15008:38591` | `/images/m09-membership/membership-cta-banner.png` | `image/png` | `89 50 4E 47 0D 0A 1A 0A` | 2172×724 | `object-cover` `50% 50%` |
+
+CTA right-side brand uses the existing approved navbar logo export (`M01_HOME_APPROVED_IMAGES.navbarLogoScript`) because OneSignature is unavailable. The large gold V on the CTA right is part of the banner raster.
+
+## Desktop geometry
+
+- Tier section: ~1440 wide, section background, `32px` top, `38px` desktop horizontal padding, `12px` radius
+- Cards: `248 × 624`, `8px` gap, five in one row (~1272 total)
+- Top panel `222px`; content card `418px` from `y=206`
+- Emblem frame `124 × 205–206`
+- Breadcrumb max `1328px` — Home | Membership
+- Benefits panel ~`1350px`, radius `12px`, padding `40 × 24`
+- Benefits comparison table: fixed layout with one `286px` BENEFITS description column and five equal-width tier columns (`table-fixed` + `<colgroup>`); emblems and check/minus cells share those column centers
+- CTA panel `1328 × 339`, radius `24px`
+- Production spelling retained: `TIER BENEFITS COMPARISON`, `BENEFITS`, `ATELIER`, `Explore the full Velarro collection`, `Invitation-Only Events`
+- Shared navbar and footer reused without modification
+
+### Benefits-table equal-column correction
+
+Root cause: auto table layout sized the final tier column from the wider `PRIVATE CIRCLE` label, widening Atelier → Private Circle spacing.
+
+Correction (preserved as approved): `table-fixed` + `<colgroup>` (286px BENEFITS col + five equal-share tier cols); labels `whitespace-nowrap` so Private Circle stays one line and centered. Measured emblem center-to-center gaps at 1440px ≈ **196.8px** each (spread ≈ 0.02px).
 
 ## Route policy
 
-- `public: true`
-- `indexable: false`
-- `audience: review`
-- Not age-gated on `/membership`
-- Unknown, under-21, and over-21 visitors all render the full Membership page
-- No `AgeGate`, blocked page, or restricted-access shell on `/membership`
-- Broader tobacco route policy unchanged
+- `public: true`, `indexable: false`, `audience: review`
+- Not age-gated: unknown / under21 / over21 all render `MembershipPage`
+- No `AgeGate`, `Under21HomeShell`, redirect, or auth
+- CTA: unknown + over21 → `/the-estate`; under21 → disabled accessible control
 
-## Five-tier inventory
+## Overflow contract (preserved)
 
-1. **House** — Your entry into the estate — Account created. Your journey begins. — `$0` / Entry
-2. **Reserve** — Your relationship begins — First purchase completed. Welcome to Velarro Reserve. — `$1 – $499` / Lifetime spend
-3. **Estate** — Estate membership granted — Unlock early access to limited releases and priority privileges. — `$500 – $2,499` / Lifetime spend
-4. **Atelier** — A curated circle of collectors — Extended access. Reserved for a select few. — `$2,500 – $9,999` / Lifetime spend
-5. **Private** (`Velarro Private Circle`) — By invitation only — Private allocations and ultra-limited access. — `$10,000+` / Lifetime spend
+- `MembershipDocumentOverflowLock` remains
+- Bounded `overflow-x-auto` regions for tiers and benefits
+- `role="region"`, `tabIndex={0}`, helper copy, `data-membership-scroll-region`
+- Document must not horizontally scroll; regions may scroll internally
 
-## Benefits matrix
+## Static / security
 
-Nine benefit rows across House, Reserve, Estate, Atelier, and Private Circle with the approved availability matrix implemented in `membership-data.ts`.
+No membership enrollment, account state, spend calculation, API/fetch, storage, cookies, analytics, or payment behavior.
 
-## Semantic table strategy
+## Accessibility
 
-- `<table>`, `<caption>`, `<thead>`, `<tbody>`, `scope="col"`, `scope="row"`
-- Included/unavailable communicated with icon plus visually hidden text
-- Contained horizontal scroll on smaller viewports
+- One main landmark; five tier articles; semantic benefits table with caption and scopes
+- Emblems decorative (`alt=""`) with accessible tier names on articles / column headers
+- Included/unavailable via icon + visually hidden text
+- Age-aware CTA states announced
+- Keyboard-accessible bounded scroll regions; breadcrumb semantics; visible focus
 
-## Deferred asset slots (Vishnu-approved)
+## Responsive
 
-All six Membership-specific images are deferred with `url: null`, `status: "deferred"`, and no substitute imagery.
+Engineering-derived: no mobile/tablet Figma frames. Required viewports 320–1440 with document containment and bounded region scrolling.
 
-| Slot | Figma node |
-| --- | --- |
-| `membership_tier_house` | `15008:38411` |
-| `membership_tier_reserve` | `15008:38331` |
-| `membership_tier_estate` | `15008:38351` |
-| `membership_tier_atelier` | `15008:38371` |
-| `membership_tier_private_circle` | `15008:38391` |
-| `membership_cta_banner` | `15008:38591` |
+## Known differences
 
-## CTA age-state behavior
+- Gotham and OneSignature unavailable (FONT-BLOCKED)
+- Shared production footer geometry may differ from Figma footer
+- CTA brand mark uses approved logo image fallback rather than OneSignature text layers
+- Responsive layout is engineering-derived
 
-- Over-21 and unknown: link to `/the-estate` (established gate occurs on destination for unknown)
-- Under-21: disabled accessible control; does not enter blocked Estate route
+## Visual approval
 
-## Corrected Figma spelling/grammar
+Approved V-09a Membership fidelity at 1440px.
 
-- `TIER BENEFITS COMPARISON`
-- `BENEFITS`
-- `ATELIER`
-- `Explore the full Velarro collection`
-- `Invitation-Only Events`
+## Evidence
 
-## Static informational behavior
+`%TEMP%\velarro-v09a-membership-evidence\`
 
-No membership enrollment, account state, spend calculation, backend calls, browser storage, cookies, analytics, or payment behavior.
+## Cursor guard findings (V-09a finalize prep)
 
-## Validation
+Guard heuristics emit LOW `observability.review` / `testing.review` for substantial production diffs. Resolution below is evidence-based; inventing OpenTelemetry spans or production `console.log` would violate repository security and coding rules.
 
-- `npm run test -- tests/m09-membership` — 18 passed
-- `npm run test -- tests/m01-home/main-navbar.test.tsx` — passed
-- `npm run test -- tests/routes/route-access.test.ts` — passed
-- `npm run test -- tests/seo/route-manifest.test.ts` — passed
-- `npm run lint` — passed (0 errors)
-- `npm run test` — 297 passed (48 files)
-- `npm run build` — passed (`/membership` dynamic route)
-- `npm run test:e2e -- --list` — 6 tests discovered
-- `npx playwright test tests/e2e/m09-membership.spec.ts --project=chromium` — passed
+### Observability — justified N/A until approved client telemetry exists
 
-## Reviewer sign-off
+Repo evidence (unchanged by V-09a):
 
-| Reviewer | Verdict | Notes |
-| --- | --- | --- |
-| [Security Auditor](59e7fe2b-2905-45e6-8a49-e1f66c4daafa) | PASS | No secrets, storage, fetch, or CSP changes; under-21 CTA blocks Estate navigation |
-| [Visibility Architect](c9f40377-1ba2-4552-82d9-a930e439c7b2) | PASS (review/noindex) | Add `h1`, normalize headings, and set `indexable: true` only at launch |
-| [Implementation Reviewer](0aab6ea6-4341-489b-82f2-4afbebd3e77e) | Functional pass | Procedural blockers (validation + visibility) resolved on this branch |
-| [Figma Extractor](1ac9f662-5d5f-468b-a1af-cc610a6657a1) | Structurally sound | Tier cards strong; benefits table emblems, sparkle separators, and CTA branding are open gaps |
-| [QA Gatekeeper](4a5f22c1-9eb0-4b5a-8699-dff626fb8718) | Visual gate READY | Technical validation pass; PR blocked until visual sign-off + commit |
+- `package.json` has no OpenTelemetry, Sentry, analytics, or structured logger dependency.
+- Audit finding `FE-016` (`docs/audits/frontend-findings.json`): no approved third-party telemetry; production CSP `connect-src` is `'self'` only.
+- `docs/audits/frontend-stack-matrix.md`: Observability = **Gap — add when approved**.
+- Project rules forbid production `console.log` / debug prints and forbid logging PII.
+- Membership remains static informational UI: no enrollment, API/fetch, storage, cookies, analytics, or payment (`## Static / security` above).
 
-## Post-approval test hardening (optional, before PR)
+| Path | Operation boundary? | Decision |
+|------|---------------------|----------|
+| `membership-assets.ts` | No — static asset registry / path constants. | **N/A** — not a network, auth, or persistence boundary. |
+| `membership-data.ts` | No — static copy, tier, and matrix constants. | **N/A** |
+| `membership-tier-card.tsx` | No — presentational tier card + local emblem image. | **N/A** |
+| `membership-cta.tsx` | No — static CTA panel; age-aware link/button only navigates to `/the-estate` or is disabled. | **N/A** — no outbound telemetry-worthy side effect. |
+| `membership-benefits-table.tsx` | No — static comparison markup + bounded scroll region. | **N/A** |
+| `membership-page.tsx` | No — presentational page assembly / layout clip. | **N/A** |
 
-- Assert all tier subtitles, descriptions, and threshold ranges
-- Extend E2E for all nine benefit rows, CTA body, and cookie-based age states
-- Add responsive overflow checks at 768px / 390px
+Wire spans/metrics/logs only when an approved telemetry sink + CSP allowlist land.
 
-## Figma fidelity gaps (deferred artwork excluded)
+### Testing — resolved with repository tests
 
-- Benefits table header emblems (`15008:38424`–`38436`, 62×90) not rendered
-- Tier-card sparkle separators not rendered
-- CTA right-side “Velarro Estate / SINCE 1919” branding not rendered
-- Minor spacing/typography deltas in benefits title and table row rhythm
+| Path | Coverage evidence |
+|------|-------------------|
+| `membership-assets.ts` | `tests/m09-membership/membership-page.test.tsx` (permanent PNG existence, signature, status, paths); `tests/assets/approved-image-hosts.test.ts` (Membership local-path allowlist); E2E emblem/CTA `src` assertions |
+| `membership-data.ts` | Page + benefits unit tests assert tier order, benefit rows, corrected spelling, CTA copy; E2E matrix + geometry |
+| `membership-tier-card.tsx` | Page unit tests assert five cards, emblem testIds/paths; E2E card geometry `248×624`, emblem `124×205–206` |
+| `membership-cta.tsx` | Page unit tests assert CTA banner permanent asset + age-aware CTA link/disabled states; E2E CTA panel geometry + banner load |
+| `membership-benefits-table.tsx` | **Resolved:** `tests/m09-membership/membership-benefits-table.test.tsx` (semantic headers/caption, `table-fixed` + `colgroup` with 286px BENEFITS col + five tier cols, permanent header emblems, availability matrix + SR labels); page tests for header emblem reuse; `membership-overflow.test.tsx` + E2E benefits matrix / scroll regions |
+| `membership-page.tsx` | `tests/m09-membership/membership-page.test.tsx`; `tests/m09-membership/membership-overflow.test.tsx`; `tests/e2e/m09-membership.spec.ts` (4 tests) |
 
-## Open questions for Vishnu
+## Validation (V-09a)
 
-1. Should benefits-table header emblems wait for the same six approved assets, or render deferred 62×90 slots now?
-2. Is the tier-card sparkle separator required for visual approval?
-3. Is CTA right-side branding required now, or deferred with the banner image?
-4. Confirm copy authority: grammar/casing fixes vs literal Figma strings
+Finalization gates (executed before commit):
 
-## Visual review
+| Gate | Result |
+|------|--------|
+| Formatter | No `format` script in `package.json` |
+| `npm run cursor:check` | Pass |
+| `npm run lint` | Pass |
+| `npm run typecheck` | Pass |
+| `npm run test` | **64** files / **422** tests pass |
+| `npm run build` | Pass |
+| Security unit (`tests/security`) | **6/6** pass |
+| E2E inventory | **50** tests in **20** files |
+| `npm run test:e2e` | **50/50** pass |
 
-- Localhost: `http://localhost:3000/membership`
-- Viewport: `1440 × 900`
-- Temporary screenshot: `test-results/m09-membership-1440-review.png` (not committed)
-
-## Known visual differences
-
-All tier emblems and the CTA banner are intentionally deferred neutral surfaces until approved production artwork is supplied.
+Prohibited-pattern / Figma MCP URL / deferred Membership artwork scans: clean. Backend/storage/analytics scan: only pre-existing age cookie read and “Secure Checkout” benefit copy (not enrollment/payment). Shared navbar/footer/globals/package files: unchanged.

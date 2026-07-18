@@ -12,8 +12,6 @@ export function MembershipDocumentOverflowLock() {
     const body = document.body;
     const previousHtml = html.style.overflowX;
     const previousBody = body.style.overflowX;
-    html.style.overflowX = "hidden";
-    body.style.overflowX = "hidden";
     html.style.setProperty("overflow-x", "hidden", "important");
     body.style.setProperty("overflow-x", "hidden", "important");
     return () => {

@@ -47,25 +47,30 @@ function TierSection() {
   return (
     <section
       aria-label="Velarro membership tiers"
-      className="flex w-full min-w-0 max-w-full justify-center px-[24px] pb-[24px] pt-[32px] desktop:px-[38px]"
+      className="flex w-full min-w-0 max-w-full justify-center overflow-x-clip px-[24px] pb-[24px] pt-[32px] desktop:px-[38px]"
       data-section="membership-tiers"
       data-figma-node={MEMBERSHIP_FIGMA_NODES.tierSection}
     >
-      <div
-        role="region"
-        aria-label="Membership tiers. Scroll horizontally to compare all tiers."
-        tabIndex={0}
-        className="w-full min-w-0 max-w-[1364px] overflow-x-auto rounded-[12px] bg-background-section px-[24px] py-[24px] desktop:px-[46px]"
-        data-figma-node={MEMBERSHIP_FIGMA_NODES.tierContainer}
-        data-membership-scroll-region="tiers"
-      >
-        <p className="mb-[12px] font-[family-name:var(--velarro-body-label-font-family)] text-[14px] font-light leading-none text-text-secondary-body-text desktop:sr-only">
-          Scroll horizontally to compare membership tiers.
-        </p>
-        <div className="flex w-max gap-[8px] desktop:w-full desktop:min-w-0 desktop:max-w-full desktop:justify-center">
-          {MEMBERSHIP_TIERS.map((tier) => (
-            <MembershipTierCard key={tier.id} tier={tier} />
-          ))}
+      <div className="w-full min-w-0 max-w-[1364px] overflow-x-clip">
+        <div
+          role="region"
+          aria-label="Membership tiers. Scroll horizontally to compare all tiers."
+          tabIndex={0}
+          className="w-full min-w-0 max-w-full overflow-x-auto rounded-[12px] bg-background-section px-[24px] py-[24px] [contain:inline-size] [transform:translateZ(0)] desktop:px-[46px]"
+          data-figma-node={MEMBERSHIP_FIGMA_NODES.tierContainer}
+          data-membership-scroll-region="tiers"
+        >
+          <p className="mb-[12px] font-[family-name:var(--velarro-body-label-font-family)] text-[14px] font-light leading-none text-text-secondary-body-text desktop:sr-only">
+            Scroll horizontally to compare membership tiers.
+          </p>
+          <div
+            className="flex w-max gap-[8px] desktop:w-full desktop:min-w-0 desktop:max-w-full desktop:justify-center"
+            data-membership-tier-row
+          >
+            {MEMBERSHIP_TIERS.map((tier) => (
+              <MembershipTierCard key={tier.id} tier={tier} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -83,7 +88,7 @@ export function MembershipPage({ ageState }: MembershipPageProps) {
     >
       <MembershipDocumentOverflowLock />
       <MainNavbar />
-      <main className="w-full min-w-0 max-w-full pt-[12px]">
+      <main className="w-full min-w-0 max-w-full overflow-x-clip pt-[12px]">
         <TierSection />
         <Breadcrumbs />
         <MembershipBenefitsTable />

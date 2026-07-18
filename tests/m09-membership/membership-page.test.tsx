@@ -1,12 +1,15 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import MembershipRoute, { metadata } from "@/app/membership/page";
-import { MEMBERSHIP_ASSETS } from "@/components/m09-membership/membership-assets";
+import {
+  MEMBERSHIP_ASSETS,
+  MEMBERSHIP_EMBLEM_ASSET_KEYS,
+} from "@/components/m09-membership/membership-assets";
 import { MembershipPageByAgeState } from "@/components/m09-membership/membership-page-by-age-state";
 import {
   MEMBERSHIP_BENEFITS_COPY,
@@ -29,6 +32,7 @@ vi.mock("next/image", () => ({
     className,
     style,
     unoptimized,
+    fill,
     ...props
   }: {
     src: string;
@@ -39,6 +43,7 @@ vi.mock("next/image", () => ({
     className?: string;
     style?: CSSProperties;
     unoptimized?: boolean;
+    fill?: boolean;
     [key: string]: unknown;
   }) => (
     // eslint-disable-next-line @next/next/no-img-element
@@ -48,6 +53,7 @@ vi.mock("next/image", () => ({
       data-preload={preload ? "true" : undefined}
       data-width={width}
       data-height={height}
+      data-fill={fill ? "true" : undefined}
       data-unoptimized={unoptimized ? "true" : undefined}
       className={className}
       style={style}
@@ -59,6 +65,17 @@ vi.mock("next/image", () => ({
 vi.mock("@/lib/age/get-initial-age-state", () => ({
   getInitialAgeStateFromCookies: vi.fn(),
 }));
+
+function localAssetPath(path: string) {
+  return join(process.cwd(), "public", ...path.replace(/^\//, "").split("/"));
+}
+
+function pngSignature(path: string) {
+  const bytes = readFileSync(path).subarray(0, 8);
+  return Array.from(bytes)
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join(" ");
+}
 
 describe("MembershipPageByAgeState", () => {
   beforeEach(() => {
@@ -91,7 +108,7 @@ describe("MembershipPageByAgeState", () => {
     },
   );
 
-  it("renders all five tier cards in order with deferred emblem markers", () => {
+  it("renders all five tier cards in order with permanent emblem assets", () => {
     const { container } = render(
       <MembershipPageByAgeState ageState="unknown" />,
     );
@@ -99,14 +116,22 @@ describe("MembershipPageByAgeState", () => {
     const cards = container.querySelectorAll("[data-membership-tier-card]");
     expect(cards).toHaveLength(5);
     expect(cards[0]).toHaveAttribute("data-membership-tier-id", "house");
-    expect(cards[4]).toHaveAttribute("data-membership-tier-id", "private-circle");
+    expect(cards[4]).toHaveAttribute(
+      "data-membership-tier-id",
+      "private-circle",
+    );
 
     for (const tier of MEMBERSHIP_TIERS) {
       const marker = screen.getByTestId(tier.testId);
       const asset = MEMBERSHIP_ASSETS[tier.assetKey];
       expect(marker).toHaveAttribute("data-asset-slot", asset.slot);
-      expect(marker).toHaveAttribute("data-asset-status", "deferred");
-      expect(marker.querySelector("img")).toBeNull();
+      expect(marker).toHaveAttribute("data-asset-status", "permanent");
+      expect(marker).toHaveAttribute("data-figma-node", asset.figmaNodeId);
+      expect(marker).toHaveAttribute("data-membership-emblem-width", "124");
+      const image = marker.querySelector("img");
+      expect(image).not.toBeNull();
+      expect(image).toHaveAttribute("src", asset.path);
+      expect(image).toHaveAttribute("alt", "");
     }
   });
 
@@ -114,10 +139,9 @@ describe("MembershipPageByAgeState", () => {
     render(<MembershipPageByAgeState ageState="unknown" />);
 
     const breadcrumb = screen.getByRole("navigation", { name: "Breadcrumb" });
-    expect(within(breadcrumb).getByRole("link", { name: "Home" })).toHaveAttribute(
-      "href",
-      "/",
-    );
+    expect(
+      within(breadcrumb).getByRole("link", { name: "Home" }),
+    ).toHaveAttribute("href", "/");
     expect(within(breadcrumb).getByText("Membership")).toHaveAttribute(
       "aria-current",
       "page",
@@ -170,20 +194,65 @@ describe("MembershipPageByAgeState", () => {
     expect(gatedButton).not.toHaveAttribute("href");
   });
 
-  it("does not use temporary Figma URLs or local membership images", () => {
+  it("uses permanent local Membership assets without temporary Figma URLs", () => {
     const { container } = render(
       <MembershipPageByAgeState ageState="unknown" />,
     );
 
     expect(container.innerHTML).not.toContain("figma.com");
     expect(container.innerHTML).not.toContain("mcp/asset");
-    expect(
-      existsSync(join(process.cwd(), "public", "images", "m09-membership")),
-    ).toBe(false);
+    expect(container.querySelectorAll('[data-asset-status="deferred"]')).toHaveLength(
+      0,
+    );
+    expect(container.querySelector('[data-testid$="-deferred"]')).toBeNull();
 
-    for (const asset of Object.values(MEMBERSHIP_ASSETS)) {
-      expect(asset.url).toBeNull();
-      expect(asset.status).toBe("deferred");
+    const emblemPaths = MEMBERSHIP_EMBLEM_ASSET_KEYS.map(
+      (key) => MEMBERSHIP_ASSETS[key].path,
+    );
+    expect(new Set(emblemPaths).size).toBe(5);
+
+    for (const key of MEMBERSHIP_EMBLEM_ASSET_KEYS) {
+      const asset = MEMBERSHIP_ASSETS[key];
+      expect(asset.status).toBe("permanent");
+      expect(asset.path.startsWith("/images/m09-membership/")).toBe(true);
+      expect(asset.path.startsWith("http")).toBe(false);
+      expect(existsSync(localAssetPath(asset.path))).toBe(true);
+      expect(pngSignature(localAssetPath(asset.path))).toBe(
+        "89 50 4e 47 0d 0a 1a 0a",
+      );
+    }
+
+    const cta = MEMBERSHIP_ASSETS.ctaBanner;
+    expect(cta.status).toBe("permanent");
+    expect(cta.path).toBe("/images/m09-membership/membership-cta-banner.png");
+    expect(existsSync(localAssetPath(cta.path))).toBe(true);
+    expect(pngSignature(localAssetPath(cta.path))).toBe(
+      "89 50 4e 47 0d 0a 1a 0a",
+    );
+
+    expect(screen.getByTestId("membership-cta-banner")).toHaveAttribute(
+      "data-asset-status",
+      "permanent",
+    );
+    expect(
+      screen.getByTestId("membership-cta-banner").querySelector("img"),
+    ).toHaveAttribute("src", cta.path);
+  });
+
+  it("reuses the five emblem assets in benefits table headers", () => {
+    const { container } = render(
+      <MembershipPageByAgeState ageState="unknown" />,
+    );
+
+    for (const key of MEMBERSHIP_EMBLEM_ASSET_KEYS) {
+      const header = container.querySelector(
+        `[data-membership-table-emblem="${key}"]`,
+      );
+      expect(header).not.toBeNull();
+      expect(header?.querySelector("img")).toHaveAttribute(
+        "src",
+        MEMBERSHIP_ASSETS[key].path,
+      );
     }
   });
 
@@ -191,12 +260,15 @@ describe("MembershipPageByAgeState", () => {
     const { container } = render(
       <MembershipPageByAgeState ageState="unknown" />,
     );
-    const imageSources = Array.from(container.querySelectorAll("img")).map((image) =>
-      image.getAttribute("src"),
+    const imageSources = Array.from(container.querySelectorAll("img")).map(
+      (image) => image.getAttribute("src"),
     );
 
     for (const src of imageSources) {
       expect(src).not.toBeNull();
+      if ((src as string).startsWith("/images/m09-membership/")) {
+        continue;
+      }
       expect(isApprovedImageUrl(src as string)).toBe(true);
     }
   });
@@ -214,7 +286,9 @@ describe("MembershipPageByAgeState", () => {
       within(menu).getByRole("link", { name: "Pairing Guide" }),
     ).toHaveAttribute("href", "/pairing-guide");
 
-    const membershipLink = within(menu).getByRole("link", { name: "Membership" });
+    const membershipLink = within(menu).getByRole("link", {
+      name: "Membership",
+    });
     expect(membershipLink).toHaveAttribute("href", "/membership");
     expect(membershipLink).toHaveAttribute("aria-current", "page");
     expect(membershipLink).toHaveAttribute("data-route-implemented", "true");
@@ -249,7 +323,9 @@ describe("/membership route", () => {
   it.each(["unknown", "under21", "over21"] as const)(
     "keeps /membership visible for %s visitors",
     (ageState) => {
-      expect(getRouteAccess("/membership", ageState).decision).not.toBe("block");
+      expect(getRouteAccess("/membership", ageState).decision).not.toBe(
+        "block",
+      );
       expect(getRouteAccess("/membership", ageState).decision).not.toBe("gate");
     },
   );
