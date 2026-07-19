@@ -7,12 +7,11 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import ChronicleRoute, { metadata } from "@/app/the-chronicle/page";
 import {
   CHRONICLE_APPROVED_IMAGES,
-  CHRONICLE_CARD_IMAGES,
+  CHRONICLE_CARD_IMAGE_STATUS,
 } from "@/components/m08-chronicle/chronicle-assets";
 import { ChroniclePageByAgeState } from "@/components/m08-chronicle/chronicle-page-by-age-state";
 import {
   CHRONICLE_CARDS,
-  CHRONICLE_CARD_IMAGE_OVERLAY,
   CHRONICLE_FIGMA_NODE,
   CHRONICLE_HERO_COPY,
   CHRONICLE_NEWS_TICKER,
@@ -62,9 +61,12 @@ vi.mock("@/lib/age/get-initial-age-state", () => ({
   getInitialAgeStateFromCookies: vi.fn(),
 }));
 
-function publicImagePath(src: string): string {
-  return join(process.cwd(), "public", ...src.replace(/^\//, "").split("/"));
-}
+const PROHIBITED_CHRONICLE_CARD_FILES = [
+  "founders-reserve-month.png",
+  "international-cigar-day.png",
+  "international-tea-day.png",
+  "velarro-estate-day.png",
+] as const;
 
 describe("ChroniclePageByAgeState", () => {
   beforeEach(() => {
@@ -235,13 +237,10 @@ describe("ChroniclePageByAgeState", () => {
     expect(firstImage).toHaveClass("desktop:h-[469px]");
   });
 
-  it("renders exact local card images with Figma crops and no placeholders", () => {
+  it("renders deferred card artwork surfaces without production images", () => {
     const { container } = render(
       <ChroniclePageByAgeState ageState="over21" />,
     );
-
-    const imagePaths = Object.values(CHRONICLE_CARD_IMAGES);
-    expect(new Set(imagePaths).size).toBe(4);
 
     for (const cardData of CHRONICLE_CARDS) {
       const card = container.querySelector(
@@ -261,55 +260,40 @@ describe("ChroniclePageByAgeState", () => {
         cardData.id,
       );
       expect(imageRegion).toHaveAttribute(
-        "data-chronicle-card-image-crop-width",
-        cardData.cropWidth,
+        "data-chronicle-card-image-status",
+        CHRONICLE_CARD_IMAGE_STATUS,
       );
       expect(imageRegion).toHaveAttribute(
-        "data-chronicle-card-image-crop-left",
-        cardData.cropLeft,
+        "data-deferred-image-key",
+        cardData.deferredImageKey,
       );
-      expect(imageRegion).toHaveAttribute(
-        "data-chronicle-card-image-crop-top",
-        cardData.cropTop,
-      );
+      expect(imageRegion).toHaveAttribute("data-asset-status", "deferred");
+      expect(imageRegion).toHaveAttribute("data-asset-url-status", "none");
       expect(imageRegion).toHaveAttribute("data-figma-node", cardData.imageNodeId);
-      expect(imageRegion?.getAttribute("data-deferred-image-key")).toBeNull();
+      expect(imageRegion?.querySelector("img")).toBeNull();
       expect(
-        imageRegion?.getAttribute("data-chronicle-card-image-status"),
-      ).toBeNull();
-
-      const img = imageRegion?.querySelector("img");
-      expect(img).toHaveAttribute("src", cardData.imageSrc);
-      expect(img).toHaveAttribute("alt", cardData.imageAlt);
-      expect(img?.getAttribute("alt")?.trim().length).toBeGreaterThan(0);
-      expect(img).toHaveAttribute("data-width", String(cardData.intrinsicWidth));
-      expect(img).toHaveAttribute("data-height", String(cardData.intrinsicHeight));
-      expect(img?.getAttribute("src")).toMatch(/^\/images\/m08-chronicle\//);
-      expect(img?.getAttribute("src")).not.toMatch(/^https?:/);
-      expect(img?.getAttribute("src")).not.toContain("figma.com");
-      expect(img?.getAttribute("src")).not.toContain("mcp/asset");
-      expect(img).toHaveStyle({
-        height: cardData.cropHeight,
-        left: cardData.cropLeft,
-        objectFit: "fill",
-        top: cardData.cropTop,
-        width: cardData.cropWidth,
-      });
-      expect(existsSync(publicImagePath(cardData.imageSrc))).toBe(true);
-
-      const overlay = imageRegion?.querySelector(
-        "[data-chronicle-card-image-overlay]",
-      );
-      expect(overlay).toHaveAttribute(
-        "data-chronicle-card-image-overlay",
-        CHRONICLE_CARD_IMAGE_OVERLAY,
-      );
+        within(card as HTMLElement).getByText(
+          `Artwork for ${cardData.title} is deferred pending approved production imagery.`,
+        ),
+      ).toBeInTheDocument();
     }
 
+    expect(container.querySelectorAll("[data-chronicle-card-image] img")).toHaveLength(
+      0,
+    );
+    expect(container.innerHTML).not.toContain("/images/m08-chronicle/");
     expect(container.innerHTML).not.toContain("linear-gradient(135deg");
-    expect(container.innerHTML).not.toContain("data-deferred-image-key");
-    expect(container.innerHTML).not.toContain("data-chronicle-card-image-status");
     expect(container.innerHTML).not.toContain("rotate-45");
+    expect(container.innerHTML).not.toContain("data-chronicle-card-image-overlay");
+
+    for (const name of PROHIBITED_CHRONICLE_CARD_FILES) {
+      expect(
+        existsSync(join(process.cwd(), "public", "images", "m08-chronicle", name)),
+      ).toBe(false);
+    }
+    expect(existsSync(join(process.cwd(), "public", "images", "m08-chronicle"))).toBe(
+      false,
+    );
   });
 
   it("preserves exact ticker and typographic card punctuation", () => {

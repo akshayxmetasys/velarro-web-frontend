@@ -6,13 +6,49 @@ export const CHRONICLE_APPROVED_IMAGES = {
   ),
 } as const;
 
+export const CHRONICLE_CARD_IMAGE_STATUS = "deferred" as const;
+
+export type ChronicleCardAssetStatus = "deferred";
+
+export interface ChronicleDeferredCardAsset {
+  readonly slot: string;
+  readonly url: null;
+  readonly status: ChronicleCardAssetStatus;
+  readonly figmaNodeId: string;
+  readonly deferredImageKey: string;
+}
+
 /**
- * Permanent local Chronicle card rasters (Figma nodes 14284:63217/63225/63233/63241).
- * Not approved-host URLs — do not pass through assertApprovedImageUrl.
+ * Event-card artwork slots are explicitly deferred. No production URL and no
+ * substitute imagery — approved replacement assets remain an owner dependency.
  */
-export const CHRONICLE_CARD_IMAGES = {
-  internationalCigarDay: "/images/m08-chronicle/international-cigar-day.png",
-  internationalTeaDay: "/images/m08-chronicle/international-tea-day.png",
-  foundersReserveMonth: "/images/m08-chronicle/founders-reserve-month.png",
-  velarroEstateDay: "/images/m08-chronicle/velarro-estate-day.png",
-} as const;
+export const CHRONICLE_CARD_ASSETS = {
+  internationalCigarDay: {
+    slot: "chronicle_card_1",
+    url: null,
+    status: "deferred",
+    figmaNodeId: "14284:63217",
+    deferredImageKey: "chronicle_card_1",
+  },
+  internationalTeaDay: {
+    slot: "chronicle_card_2",
+    url: null,
+    status: "deferred",
+    figmaNodeId: "14284:63225",
+    deferredImageKey: "chronicle_card_2",
+  },
+  foundersReserveMonth: {
+    slot: "chronicle_card_3",
+    url: null,
+    status: "deferred",
+    figmaNodeId: "14284:63233",
+    deferredImageKey: "chronicle_card_3",
+  },
+  velarroEstateDay: {
+    slot: "chronicle_card_4",
+    url: null,
+    status: "deferred",
+    figmaNodeId: "14284:63241",
+    deferredImageKey: "chronicle_card_4",
+  },
+} as const satisfies Record<string, ChronicleDeferredCardAsset>;
