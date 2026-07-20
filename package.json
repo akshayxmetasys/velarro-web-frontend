@@ -7,11 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "test:e2e:playwright": "playwright test",
     "agent-skills:sync": "python -B scripts/sync_agent_skills.py",
     "agent-skills:check": "python -B scripts/sync_agent_skills.py --check",
     "cursor:validate": "python -B scripts/validate_cursor_pack.py",
