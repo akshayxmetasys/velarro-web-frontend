@@ -329,6 +329,21 @@ describe("CigarCarouselSection", () => {
     expect(viewport?.className).toContain("overflow-x-auto");
   });
 
+  it("centers the active card in a layout effect before mobile geometry is measured", () => {
+    const carouselSource = readFileSync(
+      join(process.cwd(), "components/m01-home/cigar-carousel-section.tsx"),
+      "utf8",
+    );
+
+    expect(carouselSource).toContain(
+      'import { useLayoutEffect, useMemo, useRef, useState } from "react";',
+    );
+    expect(carouselSource).toContain("useLayoutEffect(() =>");
+    expect(carouselSource).toContain("viewport.scrollTo({");
+    expect(carouselSource).toContain('behavior: "instant"');
+    expect(carouselSource).not.toContain("useEffect(() =>");
+  });
+
   it("keeps inactive cards dimmed and active card emphasized without inventing motion", () => {
     const { container } = render(<CigarCarouselSection />);
 
