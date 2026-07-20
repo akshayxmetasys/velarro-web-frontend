@@ -44,6 +44,92 @@ vi.mock("next/image", () => ({
   ),
 }));
 
+function installCarouselLayoutStub() {
+  const descriptors = {
+    clientWidth: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "clientWidth",
+    ),
+    offsetLeft: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetLeft",
+    ),
+    offsetWidth: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetWidth",
+    ),
+    scrollTo: Object.getOwnPropertyDescriptor(HTMLElement.prototype, "scrollTo"),
+    scrollWidth: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "scrollWidth",
+    ),
+  };
+  const scrollTo = vi.fn();
+  const cardLeftByLabel = new Map([
+    ["Ashtrays", 0],
+    ["Verde Classico", 366],
+    ["Lighters", 776],
+    ["Vintage no. 88", 1186],
+    ["Pipes", 1596],
+    ["Nocturne", 2006],
+  ]);
+
+  Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "cigar-carousel-viewport"
+        ? 320
+        : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "scrollWidth", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "cigar-carousel-viewport"
+        ? 2401
+        : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
+    configurable: true,
+    get() {
+      if (this.getAttribute("aria-current") === "true") {
+        return 395;
+      }
+      if (this.tagName.toLowerCase() === "article") {
+        return 351;
+      }
+      return 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "offsetLeft", {
+    configurable: true,
+    get() {
+      const label = this.querySelector("h3")?.textContent?.trim();
+      return label ? (cardLeftByLabel.get(label) ?? 0) : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "scrollTo", {
+    configurable: true,
+    value: scrollTo,
+  });
+
+  return {
+    scrollTo,
+    restore() {
+      for (const [property, descriptor] of Object.entries(descriptors)) {
+        if (descriptor) {
+          Object.defineProperty(HTMLElement.prototype, property, descriptor);
+        } else {
+          delete (HTMLElement.prototype as unknown as Record<string, unknown>)[
+            property
+          ];
+        }
+      }
+    },
+  };
+}
+
 describe("CigarCarouselSection", () => {
   it("renders the section heading stack and initial visible cards", () => {
     render(<CigarCarouselSection />);
@@ -233,6 +319,49 @@ describe("CigarCarouselSection", () => {
     ).toBeInTheDocument();
   });
 
+  it("requests active-card centering on initial render using the real component", () => {
+    const layout = installCarouselLayoutStub();
+    try {
+      render(<CigarCarouselSection />);
+
+      expect(
+        screen.getByRole("article", { name: "Verde Classico", current: true }),
+      ).toBeInTheDocument();
+      expect(layout.scrollTo).toHaveBeenCalledWith({
+        behavior: "instant",
+        left: expect.any(Number),
+      });
+      expect(layout.scrollTo.mock.calls[0]?.[0]?.left).toBeGreaterThan(0);
+    } finally {
+      layout.restore();
+    }
+  });
+
+  it("requests active-card centering after active-index navigation", async () => {
+    const user = userEvent.setup();
+    const layout = installCarouselLayoutStub();
+    try {
+      render(<CigarCarouselSection />);
+      layout.scrollTo.mockClear();
+
+      await user.click(screen.getByRole("button", { name: "Next cigar category" }));
+
+      expect(
+        screen.getByRole("article", { name: "Lighters", current: true }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("article", { name: "Verde Classico" }),
+      ).not.toHaveAttribute("aria-current");
+      expect(layout.scrollTo).toHaveBeenCalledWith({
+        behavior: "instant",
+        left: expect.any(Number),
+      });
+      expect(layout.scrollTo.mock.calls[0]?.[0]?.left).toBeGreaterThan(0);
+    } finally {
+      layout.restore();
+    }
+  });
+
   it("moves back to the previous active card when previous is activated", async () => {
     const user = userEvent.setup();
 
@@ -262,6 +391,10 @@ describe("CigarCarouselSection", () => {
     ).toBeInTheDocument();
     expect(previous).toBeDisabled();
     expect(next).not.toBeDisabled();
+    await user.click(previous);
+    expect(
+      screen.getByRole("article", { name: "Ashtrays", current: true }),
+    ).toBeInTheDocument();
 
     for (let step = 0; step < 5; step += 1) {
       await user.click(next);
@@ -272,6 +405,10 @@ describe("CigarCarouselSection", () => {
     ).toBeInTheDocument();
     expect(next).toBeDisabled();
     expect(previous).not.toBeDisabled();
+    await user.click(next);
+    expect(
+      screen.getByRole("article", { name: "Nocturne", current: true }),
+    ).toBeInTheDocument();
   });
 
   it("activates next with keyboard Enter and Space without losing focus", async () => {

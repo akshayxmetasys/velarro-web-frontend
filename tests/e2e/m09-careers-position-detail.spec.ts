@@ -12,7 +12,7 @@ test.describe("M09 Careers position detail page", () => {
     });
 
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/careers/positions");
+    await page.goto("/careers/positions");
 
     const implementedLinks = page.locator(
       '[data-position-detail-status="implemented"] a',
@@ -88,9 +88,7 @@ test.describe("M09 Careers position detail page", () => {
   });
 
   test("returns not found for unsupported detail slugs", async ({ page }) => {
-    const response = await page.goto(
-      "http://localhost:3000/careers/positions/production-manager",
-    );
+    const response = await page.goto("/careers/positions/production-manager");
     expect(response?.status()).toBe(404);
   });
 });
