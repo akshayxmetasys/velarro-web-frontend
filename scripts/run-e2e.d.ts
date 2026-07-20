@@ -64,6 +64,8 @@ export interface CleanupResult {
   warning?: string;
 }
 
+export type CleanupMode = "next-server" | "playwright";
+
 export interface ManagedChildLifecycle {
   child: ManagedChild;
   cleanupPromise?: Promise<CleanupResult>;
@@ -127,6 +129,7 @@ export interface RunE2EOptions {
 
 export interface CleanupOwnedProcessOptions {
   cleanupTimeoutMs?: number;
+  cleanupMode?: CleanupMode;
   clearTimeoutFn?: (timeout: ReturnType<typeof setTimeout> | number) => void;
   killFn?: (pid: number, signal?: NodeJS.Signals | number) => boolean;
   lifecycle?: ManagedChildLifecycle;
@@ -153,6 +156,7 @@ export function cleanupUnixProcessGroup(options?: {
   signal?: NodeJS.Signals;
 }): Promise<CleanupResult>;
 export function cleanupWindowsProcessTree(options?: {
+  cleanupMode?: CleanupMode;
   cleanupTimeoutMs?: number;
   clearTimeoutFn?: (timeout: ReturnType<typeof setTimeout> | number) => void;
   lifecycle?: ManagedChildLifecycle;

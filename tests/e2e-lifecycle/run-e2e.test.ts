@@ -693,6 +693,113 @@ describe("outer E2E runner", () => {
     expect(taskkillSpawn).not.toHaveBeenCalled();
   });
 
+  it("starts Playwright Windows cleanup with exact-PID tree cleanup before direct root kill", async () => {
+    const order: string[] = [];
+    const lifecycle = createControlledLifecycle(4567);
+    lifecycle.child.kill = vi.fn(() => {
+      order.push("direct-child-kill");
+      lifecycle.resolveExit(0);
+      return true;
+    });
+    const taskkillSpawn = vi.fn<SpawnFunction>(() => {
+      order.push("taskkill-spawn");
+      const child = new FakeChildProcess(9000);
+      queueMicrotask(() => {
+        order.push("root-exit");
+        lifecycle.resolveExit(0);
+        child.emit("exit", 0, null);
+      });
+      return child;
+    });
+
+    await expect(
+      cleanupWindowsProcessTree({
+        cleanupMode: "playwright",
+        lifecycle,
+        setTimeoutFn: vi.fn(microtaskTimer),
+        spawnFn: taskkillSpawn,
+      }),
+    ).resolves.toMatchObject({ forced: true, ok: true });
+
+    expect(order).toEqual(["taskkill-spawn", "root-exit"]);
+    expect(lifecycle.child.kill).not.toHaveBeenCalled();
+    expect(taskkillSpawn).toHaveBeenCalledWith(
+      "taskkill",
+      ["/PID", "4567", "/T", "/F"],
+      expect.objectContaining({ shell: false }),
+    );
+    expect(JSON.stringify(taskkillSpawn.mock.calls)).not.toMatch(
+      /\/IM|node\.exe|\bnode\b|localhost|3000/i,
+    );
+  });
+
+  it("does not report Playwright Windows cleanup success solely because the root already exited", async () => {
+    const lifecycle = createLifecycle(4567, 0);
+    const taskkillSpawn = createTaskkillSpawn();
+
+    await expect(
+      cleanupOwnedProcess({
+        cleanupMode: "playwright",
+        lifecycle,
+        platform: "win32",
+        spawnFn: taskkillSpawn,
+      }),
+    ).resolves.toMatchObject({
+      alreadyExited: true,
+      error: expect.objectContaining({
+        message: expect.stringContaining("before Windows tree cleanup"),
+      }),
+      ok: false,
+    });
+
+    expect(lifecycle.child.killed).toBe(false);
+    expect(taskkillSpawn).not.toHaveBeenCalled();
+  });
+
+  it("fails Playwright Windows cleanup when taskkill can no longer target the owned root", async () => {
+    const lifecycle = createControlledLifecycle(4567);
+    const taskkillSpawn = createTaskkillSpawn({
+      afterExit: () => lifecycle.resolveExit(0),
+      status: 128,
+      stderr: 'ERROR: The process "4567" not found.',
+    });
+
+    await expect(
+      cleanupWindowsProcessTree({
+        cleanupMode: "playwright",
+        lifecycle,
+        setTimeoutFn: vi.fn(microtaskTimer),
+        spawnFn: taskkillSpawn,
+      }),
+    ).resolves.toMatchObject({
+      error: expect.objectContaining({
+        message: expect.stringContaining("before Windows tree cleanup"),
+      }),
+      ok: false,
+      output: expect.stringContaining("not found"),
+    });
+  });
+
+  it("fails unresolved Playwright Windows tree cleanup even when taskkill exits zero", async () => {
+    const lifecycle = createControlledLifecycle(4567);
+    const taskkillSpawn = createTaskkillSpawn();
+
+    await expect(
+      cleanupWindowsProcessTree({
+        cleanupMode: "playwright",
+        cleanupTimeoutMs: 12,
+        lifecycle,
+        setTimeoutFn: vi.fn(microtaskTimer),
+        spawnFn: taskkillSpawn,
+      }),
+    ).resolves.toMatchObject({
+      error: expect.objectContaining({
+        message: "owned PID 4567 did not exit after taskkill",
+      }),
+      ok: false,
+    });
+  });
+
   it("treats taskkill success as cleanup only after the Windows child exits", async () => {
     const lifecycle = createControlledLifecycle(4567);
     const taskkillSpawn = createTaskkillSpawn({

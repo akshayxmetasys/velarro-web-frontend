@@ -57,6 +57,8 @@ const requireFromScript = createRequire(import.meta.url);
  *   warning?: string,
  * }} CleanupResult
  *
+ * @typedef {"next-server" | "playwright"} CleanupMode
+ *
  * @typedef {{
  *   child: ManagedChild,
  *   cleanupPromise?: Promise<CleanupResult>,
@@ -347,6 +349,7 @@ function collectProcessOutput(child) {
 
 /**
  * @param {{
+ *   cleanupMode?: CleanupMode,
  *   lifecycle?: ManagedChildLifecycle,
  *   pid?: number,
  *   cleanupTimeoutMs?: number,
@@ -359,22 +362,32 @@ function collectProcessOutput(child) {
 export async function cleanupWindowsProcessTree({
   pid,
   lifecycle,
+  cleanupMode = "next-server",
   cleanupTimeoutMs = PROCESS_CLEANUP_TIMEOUT_MS,
   clearTimeoutFn = clearTimeout,
   setTimeoutFn = setTimeout,
   spawnFn = spawn,
 } = {}) {
+  const ownedPid = pid ?? lifecycle?.child.pid;
+
   if (lifecycle?.hasExited()) {
+    if (cleanupMode === "playwright") {
+      return {
+        alreadyExited: true,
+        ok: false,
+        error: new Error(
+          `owned Playwright root PID ${ownedPid ?? "unknown"} exited before Windows tree cleanup could verify descendants`,
+        ),
+      };
+    }
     return { alreadyExited: true, ok: true };
   }
-
-  const ownedPid = pid ?? lifecycle?.child.pid;
 
   if (!Number.isInteger(ownedPid) || ownedPid <= 0) {
     return { ok: true, skipped: true };
   }
 
-  if (lifecycle) {
+  if (lifecycle && cleanupMode === "next-server") {
     try {
       lifecycle.child.kill?.();
     } catch (error) {
@@ -416,6 +429,21 @@ export async function cleanupWindowsProcessTree({
       setTimeoutFn,
     )
   ) {
+    if (cleanupMode === "playwright") {
+      if (taskkillResult.ok && !taskkillResult.alreadyExited) {
+        return { ...taskkillResult, forced: true, ok: true };
+      }
+      return {
+        ok: false,
+        output: taskkillResult.output,
+        error:
+          taskkillResult.error ??
+          new Error(
+            `owned Playwright root PID ${ownedPid} exited before Windows tree cleanup could verify descendants`,
+          ),
+      };
+    }
+
     if (taskkillResult.ok) {
       return { ...taskkillResult, forced: true, ok: true };
     }
@@ -594,6 +622,7 @@ export async function cleanupUnixProcessGroup({
 /**
  * @param {{
  *   cleanupTimeoutMs?: number,
+ *   cleanupMode?: CleanupMode,
  *   clearTimeoutFn?: ClearTimeoutFunction,
  *   killFn?: (pid: number, signal?: NodeJS.Signals | number) => boolean,
  *   lifecycle?: ManagedChildLifecycle,
@@ -606,6 +635,7 @@ export async function cleanupUnixProcessGroup({
  */
 export async function cleanupOwnedProcess({
   cleanupTimeoutMs = PROCESS_CLEANUP_TIMEOUT_MS,
+  cleanupMode = "next-server",
   clearTimeoutFn = clearTimeout,
   killFn = process.kill,
   lifecycle,
@@ -614,7 +644,7 @@ export async function cleanupOwnedProcess({
   spawnFn = spawn,
   signal = "SIGTERM",
 } = {}) {
-  if (!lifecycle || lifecycle.hasExited?.()) {
+  if (!lifecycle) {
     return { alreadyExited: true, ok: true };
   }
 
@@ -625,12 +655,17 @@ export async function cleanupOwnedProcess({
   lifecycle.cleanupPromise = (async () => {
     if (platform === "win32") {
       return cleanupWindowsProcessTree({
+        cleanupMode,
         cleanupTimeoutMs,
         clearTimeoutFn,
         lifecycle,
         setTimeoutFn,
         spawnFn,
       });
+    }
+
+    if (lifecycle.hasExited?.()) {
+      return { alreadyExited: true, ok: true };
     }
 
     return cleanupUnixProcessGroup({
@@ -687,6 +722,7 @@ function registerInterruptionHandlers({
 
     const playwrightCleanup = await cleanupOwnedProcess({
       cleanupTimeoutMs,
+      cleanupMode: "playwright",
       clearTimeoutFn,
       killFn,
       lifecycle: getPlaywrightLifecycle(),

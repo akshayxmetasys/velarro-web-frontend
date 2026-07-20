@@ -34,6 +34,7 @@ npm run test:e2e
      -> HTTP readiness polling
      -> direct Playwright CLI child
      -> preserve Playwright exit code
+     -> stop any exact owned Playwright tree on interruption
      -> stop the exact owned Next server tree
 ```
 
@@ -60,7 +61,10 @@ The runner tracks the exact child PIDs it creates. Cleanup is idempotent and
 bounded, and it never terminates by executable name, every Node process, or
 every process using a port.
 
-On Windows, the runner first checks whether the exact owned Next child has
+On Windows, cleanup distinguishes the Next server from Playwright because their
+ownership risks differ.
+
+For the Next server, the runner first checks whether the exact owned child has
 already emitted `exit`. If it has, cleanup is complete and the old PID is not
 targeted again. If the child is still active, the runner requests shutdown
 through that child object and waits a bounded grace period for the same child's
@@ -69,7 +73,7 @@ through that child object and waits a bounded grace period for the same child's
 Only after that grace period does Windows cleanup escalate to:
 
 ```text
-taskkill /PID <owned-next-pid> /T /F
+taskkill /PID <owned-pid> /T /F
 ```
 
 `taskkill` is invoked without a shell, with the exact owned child PID, and with
@@ -79,6 +83,21 @@ retained as a diagnostic warning, but it is not authoritative when the exact
 owned child is confirmed exited. Cleanup fails only when the exact owned child
 still has not exited after all bounded stages, or when cleanup cannot confirm
 that exit.
+
+For Playwright on Windows, graceful direct-child shutdown is not used. Browser
+descendants are owned through the Playwright root tree, so interruption cleanup
+immediately starts exact-PID tree cleanup with:
+
+```text
+taskkill /PID <owned-playwright-root-pid> /T /F
+```
+
+The direct Playwright CLI root exiting is not sufficient proof that browser
+descendants were cleaned up. If the root has already exited before tree cleanup
+starts, if `taskkill` reports that the root can no longer be targeted, or if
+the exact root exit cannot be confirmed after tree cleanup, the Playwright
+cleanup result is a failure. This fails closed rather than reporting success
+while an owned browser descendant may remain.
 
 On Linux and macOS, the Next server starts in an owned process group. Cleanup
 sends `SIGTERM` to only that group and escalates to `SIGKILL` only after a
@@ -146,6 +165,17 @@ Before removing repository copies, preserve the relevant artifacts externally
 with recursive inventories, sizes, timestamps, and copy verification. Do not
 use `git clean` for this remediation workflow.
 
+## Windows Integration Fixture
+
+The regression coverage for Playwright cleanup is production-path unit coverage
+with deterministic fake process lifecycles. A live Windows fixture that spawns a
+real child and grandchild was not added because it would need platform-specific
+process inspection and timing-sensitive orphan detection outside the repository
+runner's existing boundaries. The unit coverage instead proves the safety
+invariants that matter for the runner: exact PID targeting, no process-name or
+port-wide termination, tree cleanup before direct root kill, failure when the
+root is already gone, bounded escalation, and no cleanup-promise leakage.
+
 ## Rollback
 
 Rollback is a single infrastructure revert:
@@ -154,7 +184,9 @@ Rollback is a single infrastructure revert:
 2. Restore the previous Playwright `webServer` configuration only if the
    Windows teardown risk is intentionally accepted.
 3. Remove `scripts/run-e2e.mjs`, its declaration file, lifecycle tests, and
-   this document update.
+   this document update. This also removes the separate Windows Playwright
+   tree-cleanup mode and returns interrupted runs to Playwright-owned server
+   lifecycle behavior.
 
 ## Remediation Scope
 
