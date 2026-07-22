@@ -167,14 +167,51 @@ use `git clean` for this remediation workflow.
 
 ## Windows Integration Fixture
 
-The regression coverage for Playwright cleanup is production-path unit coverage
-with deterministic fake process lifecycles. A live Windows fixture that spawns a
-real child and grandchild was not added because it would need platform-specific
-process inspection and timing-sensitive orphan detection outside the repository
-runner's existing boundaries. The unit coverage instead proves the safety
-invariants that matter for the runner: exact PID targeting, no process-name or
-port-wide termination, tree cleanup before direct root kill, failure when the
-root is already gone, bounded escalation, and no cleanup-promise leakage.
+The live Windows regression fixture is:
+
+```text
+npm.cmd run test:e2e-lifecycle:windows
+```
+
+It runs only through that dedicated command and is executed in CI by the
+`windows-process-tree` job on `windows-latest`. The CI job checks out the exact
+PR head commit, installs dependencies with `npm ci`, and runs only this
+process-tree integration command. It does not install Playwright browsers or run
+the full E2E suite.
+
+The fixture spawns a real owned Node process tree on Windows:
+
+```text
+root process
+  -> child process
+     -> grandchild process
+```
+
+It also spawns a separate sentinel Node process that is not a descendant of the
+owned root. The root, child, grandchild, and sentinel PIDs are reported by the
+fixtures themselves through direct child process channels and stdout; the test
+does not discover them through broad process enumeration.
+
+Before cleanup, the test verifies exact-PID liveness for all four processes. It
+then imports `cleanupWindowsProcessTree` from `scripts/run-e2e.mjs` and invokes
+the production Windows Playwright cleanup path:
+
+```text
+cleanupWindowsProcessTree({ cleanupMode: "playwright", lifecycle, ... })
+```
+
+The command uses the real root process lifecycle, real Windows `taskkill`,
+`shell: false`, and bounded timers. It proves that exact-PID tree cleanup
+removes the owned root, child, and grandchild, that cleanup reports success only
+after the owned root exit is observed, and that the unrelated sentinel PID
+survives. Fixture cleanup terminates only the exact PIDs created by the test.
+
+This fixture does not launch Chromium or claim browser-specific behavior. It
+proves the Windows operating-system process-tree boundary used by the production
+Playwright cleanup path with real Node fixture processes. Remaining limitations:
+it does not prove Playwright's internal browser topology, vendor signal
+handling, or Chromium teardown behavior; those are covered only indirectly by
+the owned-root process-tree contract and by normal E2E runs.
 
 ## Rollback
 
