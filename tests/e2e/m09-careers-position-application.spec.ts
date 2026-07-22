@@ -21,7 +21,7 @@ test.describe("M09 Careers position application page", () => {
     });
 
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/careers/positions/area-sales-manager");
+    await page.goto("/careers/positions/area-sales-manager");
 
     const applyLink = page.getByRole("link", { name: "Apply for this job" });
     await expect(applyLink).toHaveAttribute(
@@ -122,7 +122,7 @@ test.describe("M09 Careers position application page", () => {
 
   test("returns not found for unsupported application slugs", async ({ page }) => {
     const response = await page.goto(
-      "http://localhost:3000/careers/positions/production-manager/apply",
+      "/careers/positions/production-manager/apply",
     );
     expect(response?.status()).toBe(404);
   });

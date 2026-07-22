@@ -18,7 +18,7 @@ test.describe("M09 Careers positions page", () => {
     });
 
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("http://localhost:3000/careers/positions");
+    await page.goto("/careers/positions");
 
     await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
     await expect(page.getByRole("contentinfo")).toBeVisible();

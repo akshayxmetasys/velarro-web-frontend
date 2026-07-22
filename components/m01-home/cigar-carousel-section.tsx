@@ -9,7 +9,7 @@ import {
 } from "@/lib/m01-home/cigar-carousel-data";
 import { cn } from "@/lib/cn";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
 function CarouselArrowButton({
   direction,
@@ -69,7 +69,7 @@ export function CigarCarouselSection() {
   const canGoPrevious = activeIndex > 0;
   const canGoNext = activeIndex < CIGAR_CAROUSEL_CARDS.length - 1;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) {
       return;
