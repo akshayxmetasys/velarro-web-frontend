@@ -37,3 +37,24 @@ jobs:
 
       - name: List E2E tests
         run: npm run test:e2e -- --list
+
+  windows-process-tree:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Verify Windows Playwright process-tree cleanup
+        run: npm run test:e2e-lifecycle:windows
