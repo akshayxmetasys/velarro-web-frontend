@@ -44,11 +44,77 @@ vi.mock("next/image", () => ({
   ),
 }));
 
-function installCarouselLayoutStub() {
+interface CarouselLayoutStubOptions {
+  viewportLeft?: number;
+  viewportClientLeft?: number;
+  viewportClientWidth?: number;
+  scrollWidth?: number;
+  initialScrollLeft?: number;
+  activeCardWidth?: number;
+  inactiveCardWidth?: number;
+}
+
+const cigarCardScrollLeftByLabel = new Map([
+  ["Ashtrays", 0],
+  ["Verde Classico", 366],
+  ["Lighters", 776],
+  ["Vintage no. 88", 1186],
+  ["Pipes", 1596],
+  ["Nocturne", 2006],
+]);
+
+const cigarCardOffsetLeftByLabel = new Map([
+  ["Ashtrays", 280],
+  ["Verde Classico", 790],
+  ["Lighters", 1190],
+  ["Vintage no. 88", 1580],
+  ["Pipes", 1970],
+  ["Nocturne", 2360],
+]);
+
+function makeDomRect({
+  left,
+  width,
+  height = 100,
+}: {
+  left: number;
+  width: number;
+  height?: number;
+}): DOMRect {
+  return {
+    bottom: height,
+    height,
+    left,
+    right: left + width,
+    top: 0,
+    width,
+    x: left,
+    y: 0,
+    toJSON: () => ({}),
+  } as DOMRect;
+}
+
+function installCarouselLayoutStub({
+  viewportLeft = 100,
+  viewportClientLeft = 6,
+  viewportClientWidth = 320,
+  scrollWidth = 2401,
+  initialScrollLeft = 120,
+  activeCardWidth = 395,
+  inactiveCardWidth = 351,
+}: CarouselLayoutStubOptions = {}) {
   const descriptors = {
+    clientLeft: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "clientLeft",
+    ),
     clientWidth: Object.getOwnPropertyDescriptor(
       HTMLElement.prototype,
       "clientWidth",
+    ),
+    getBoundingClientRect: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "getBoundingClientRect",
     ),
     offsetLeft: Object.getOwnPropertyDescriptor(
       HTMLElement.prototype,
@@ -63,22 +129,31 @@ function installCarouselLayoutStub() {
       HTMLElement.prototype,
       "scrollWidth",
     ),
+    scrollLeft: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "scrollLeft",
+    ),
   };
-  const scrollTo = vi.fn();
-  const cardLeftByLabel = new Map([
-    ["Ashtrays", 0],
-    ["Verde Classico", 366],
-    ["Lighters", 776],
-    ["Vintage no. 88", 1186],
-    ["Pipes", 1596],
-    ["Nocturne", 2006],
-  ]);
+  let currentScrollLeft = initialScrollLeft;
+  const scrollTo = vi.fn((options?: ScrollToOptions) => {
+    if (typeof options?.left === "number") {
+      currentScrollLeft = options.left;
+    }
+  });
 
+  Object.defineProperty(HTMLElement.prototype, "clientLeft", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "cigar-carousel-viewport"
+        ? viewportClientLeft
+        : 0;
+    },
+  });
   Object.defineProperty(HTMLElement.prototype, "clientWidth", {
     configurable: true,
     get() {
       return this.getAttribute("data-slot") === "cigar-carousel-viewport"
-        ? 320
+        ? viewportClientWidth
         : 0;
     },
   });
@@ -86,18 +161,31 @@ function installCarouselLayoutStub() {
     configurable: true,
     get() {
       return this.getAttribute("data-slot") === "cigar-carousel-viewport"
-        ? 2401
+        ? scrollWidth
         : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "scrollLeft", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "cigar-carousel-viewport"
+        ? currentScrollLeft
+        : 0;
+    },
+    set(value: number) {
+      if (this.getAttribute("data-slot") === "cigar-carousel-viewport") {
+        currentScrollLeft = value;
+      }
     },
   });
   Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
     configurable: true,
     get() {
       if (this.getAttribute("aria-current") === "true") {
-        return 395;
+        return activeCardWidth;
       }
       if (this.tagName.toLowerCase() === "article") {
-        return 351;
+        return inactiveCardWidth;
       }
       return 0;
     },
@@ -106,7 +194,37 @@ function installCarouselLayoutStub() {
     configurable: true,
     get() {
       const label = this.querySelector("h3")?.textContent?.trim();
-      return label ? (cardLeftByLabel.get(label) ?? 0) : 0;
+      return label ? (cigarCardOffsetLeftByLabel.get(label) ?? 0) : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "getBoundingClientRect", {
+    configurable: true,
+    value() {
+      if (this.getAttribute("data-slot") === "cigar-carousel-viewport") {
+        return makeDomRect({ left: viewportLeft, width: viewportClientWidth });
+      }
+
+      if (this.tagName.toLowerCase() === "article") {
+        const label = this.querySelector("h3")?.textContent?.trim();
+        const cardScrollLeft = label
+          ? (cigarCardScrollLeftByLabel.get(label) ?? 0)
+          : 0;
+        const width =
+          this.getAttribute("aria-current") === "true"
+            ? activeCardWidth
+            : inactiveCardWidth;
+
+        return makeDomRect({
+          left:
+            viewportLeft +
+            viewportClientLeft +
+            cardScrollLeft -
+            currentScrollLeft,
+          width,
+        });
+      }
+
+      return makeDomRect({ left: 0, width: 0 });
     },
   });
   Object.defineProperty(HTMLElement.prototype, "scrollTo", {
@@ -116,6 +234,23 @@ function installCarouselLayoutStub() {
 
   return {
     scrollTo,
+    expectedScrollLeftFor(label: string) {
+      const cardScrollLeft = cigarCardScrollLeftByLabel.get(label);
+      if (typeof cardScrollLeft !== "number") {
+        throw new Error(`Missing cigar card geometry for ${label}`);
+      }
+      const target =
+        cardScrollLeft - (viewportClientWidth - activeCardWidth) / 2;
+      const maxScroll = Math.max(0, scrollWidth - viewportClientWidth);
+      return Math.min(Math.max(0, target), maxScroll);
+    },
+    oldOffsetLeftScrollLeftFor(label: string) {
+      const offsetLeft = cigarCardOffsetLeftByLabel.get(label);
+      if (typeof offsetLeft !== "number") {
+        throw new Error(`Missing cigar offset geometry for ${label}`);
+      }
+      return offsetLeft - (viewportClientWidth - activeCardWidth) / 2;
+    },
     restore() {
       for (const [property, descriptor] of Object.entries(descriptors)) {
         if (descriptor) {
@@ -319,7 +454,7 @@ describe("CigarCarouselSection", () => {
     ).toBeInTheDocument();
   });
 
-  it("requests active-card centering on initial render using the real component", () => {
+  it("requests exact initial active-card centering from viewport-relative geometry", () => {
     const layout = installCarouselLayoutStub();
     try {
       render(<CigarCarouselSection />);
@@ -327,17 +462,18 @@ describe("CigarCarouselSection", () => {
       expect(
         screen.getByRole("article", { name: "Verde Classico", current: true }),
       ).toBeInTheDocument();
+      expect(layout.expectedScrollLeftFor("Verde Classico")).toBe(403.5);
+      expect(layout.oldOffsetLeftScrollLeftFor("Verde Classico")).toBe(827.5);
       expect(layout.scrollTo).toHaveBeenCalledWith({
         behavior: "instant",
-        left: expect.any(Number),
+        left: 403.5,
       });
-      expect(layout.scrollTo.mock.calls[0]?.[0]?.left).toBeGreaterThan(0);
     } finally {
       layout.restore();
     }
   });
 
-  it("requests active-card centering after active-index navigation", async () => {
+  it("requests exact active-card centering after active-index navigation", async () => {
     const user = userEvent.setup();
     const layout = installCarouselLayoutStub();
     try {
@@ -352,11 +488,81 @@ describe("CigarCarouselSection", () => {
       expect(
         screen.getByRole("article", { name: "Verde Classico" }),
       ).not.toHaveAttribute("aria-current");
+      expect(layout.expectedScrollLeftFor("Lighters")).toBe(813.5);
+      expect(layout.oldOffsetLeftScrollLeftFor("Lighters")).toBe(1227.5);
       expect(layout.scrollTo).toHaveBeenCalledWith({
         behavior: "instant",
-        left: expect.any(Number),
+        left: 813.5,
       });
-      expect(layout.scrollTo.mock.calls[0]?.[0]?.left).toBeGreaterThan(0);
+    } finally {
+      layout.restore();
+    }
+  });
+
+  it("clamps active-card centering at the left boundary", async () => {
+    const user = userEvent.setup();
+    const layout = installCarouselLayoutStub({
+      initialScrollLeft: 12,
+      viewportClientWidth: 500,
+    });
+    try {
+      render(<CigarCarouselSection />);
+      layout.scrollTo.mockClear();
+
+      await user.click(
+        screen.getByRole("button", { name: "Previous cigar category" }),
+      );
+
+      expect(
+        screen.getByRole("article", { name: "Ashtrays", current: true }),
+      ).toBeInTheDocument();
+      expect(layout.expectedScrollLeftFor("Ashtrays")).toBe(0);
+      expect(layout.scrollTo).toHaveBeenCalledWith({
+        behavior: "instant",
+        left: 0,
+      });
+    } finally {
+      layout.restore();
+    }
+  });
+
+  it("clamps active-card centering at maxScroll for the last card", async () => {
+    const user = userEvent.setup();
+    const layout = installCarouselLayoutStub({
+      initialScrollLeft: 100,
+      scrollWidth: 2200,
+      viewportClientWidth: 500,
+    });
+    try {
+      render(<CigarCarouselSection />);
+      layout.scrollTo.mockClear();
+
+      for (let step = 0; step < 4; step += 1) {
+        await user.click(screen.getByRole("button", { name: "Next cigar category" }));
+      }
+
+      expect(
+        screen.getByRole("article", { name: "Nocturne", current: true }),
+      ).toBeInTheDocument();
+      expect(layout.expectedScrollLeftFor("Nocturne")).toBe(1700);
+      expect(layout.scrollTo).toHaveBeenLastCalledWith({
+        behavior: "instant",
+        left: 1700,
+      });
+    } finally {
+      layout.restore();
+    }
+  });
+
+  it("skips active-card centering when already within the no-op threshold", () => {
+    const layout = installCarouselLayoutStub({
+      initialScrollLeft: 404,
+    });
+    try {
+      render(<CigarCarouselSection />);
+
+      expect(layout.expectedScrollLeftFor("Verde Classico")).toBe(403.5);
+      expect(layout.scrollTo).not.toHaveBeenCalled();
     } finally {
       layout.restore();
     }

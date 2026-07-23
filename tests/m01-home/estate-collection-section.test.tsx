@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -40,6 +40,227 @@ vi.mock("next/image", () => ({
     />
   ),
 }));
+
+interface CarouselLayoutStubOptions {
+  viewportLeft?: number;
+  viewportClientLeft?: number;
+  viewportClientWidth?: number;
+  scrollWidth?: number;
+  initialScrollLeft?: number;
+  activeCardWidth?: number;
+  inactiveCardWidth?: number;
+}
+
+const estateCardScrollLeftByLabel = new Map<string, number>([
+  [ESTATE_COLLECTION_CARDS[0].label, 0],
+  [ESTATE_COLLECTION_CARDS[1].label, 366],
+  [ESTATE_COLLECTION_CARDS[2].label, 776],
+  [ESTATE_COLLECTION_CARDS[3].label, 1186],
+  [ESTATE_COLLECTION_CARDS[4].label, 1596],
+  [ESTATE_COLLECTION_CARDS[5].label, 2006],
+]);
+
+const estateCardOffsetLeftByLabel = new Map<string, number>([
+  [ESTATE_COLLECTION_CARDS[0].label, 280],
+  [ESTATE_COLLECTION_CARDS[1].label, 790],
+  [ESTATE_COLLECTION_CARDS[2].label, 1190],
+  [ESTATE_COLLECTION_CARDS[3].label, 1580],
+  [ESTATE_COLLECTION_CARDS[4].label, 1970],
+  [ESTATE_COLLECTION_CARDS[5].label, 2360],
+]);
+
+function makeDomRect({
+  left,
+  width,
+  height = 100,
+}: {
+  left: number;
+  width: number;
+  height?: number;
+}): DOMRect {
+  return {
+    bottom: height,
+    height,
+    left,
+    right: left + width,
+    top: 0,
+    width,
+    x: left,
+    y: 0,
+    toJSON: () => ({}),
+  } as DOMRect;
+}
+
+function installEstateCarouselLayoutStub({
+  viewportLeft = 100,
+  viewportClientLeft = 6,
+  viewportClientWidth = 320,
+  scrollWidth = 2401,
+  initialScrollLeft = 120,
+  activeCardWidth = 395,
+  inactiveCardWidth = 351,
+}: CarouselLayoutStubOptions = {}) {
+  const descriptors = {
+    clientLeft: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "clientLeft",
+    ),
+    clientWidth: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "clientWidth",
+    ),
+    getBoundingClientRect: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "getBoundingClientRect",
+    ),
+    offsetLeft: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetLeft",
+    ),
+    offsetWidth: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetWidth",
+    ),
+    scrollLeft: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "scrollLeft",
+    ),
+    scrollTo: Object.getOwnPropertyDescriptor(HTMLElement.prototype, "scrollTo"),
+    scrollWidth: Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "scrollWidth",
+    ),
+  };
+  let currentScrollLeft = initialScrollLeft;
+  const scrollTo = vi.fn((options?: ScrollToOptions) => {
+    if (typeof options?.left === "number") {
+      currentScrollLeft = options.left;
+    }
+  });
+
+  Object.defineProperty(HTMLElement.prototype, "clientLeft", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "estate-carousel-viewport"
+        ? viewportClientLeft
+        : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "estate-carousel-viewport"
+        ? viewportClientWidth
+        : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "scrollWidth", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "estate-carousel-viewport"
+        ? scrollWidth
+        : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "scrollLeft", {
+    configurable: true,
+    get() {
+      return this.getAttribute("data-slot") === "estate-carousel-viewport"
+        ? currentScrollLeft
+        : 0;
+    },
+    set(value: number) {
+      if (this.getAttribute("data-slot") === "estate-carousel-viewport") {
+        currentScrollLeft = value;
+      }
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
+    configurable: true,
+    get() {
+      if (this.getAttribute("aria-current") === "true") {
+        return activeCardWidth;
+      }
+      if (this.tagName.toLowerCase() === "article") {
+        return inactiveCardWidth;
+      }
+      return 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "offsetLeft", {
+    configurable: true,
+    get() {
+      const label = this.querySelector("h3")?.textContent?.trim();
+      return label ? (estateCardOffsetLeftByLabel.get(label) ?? 0) : 0;
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "getBoundingClientRect", {
+    configurable: true,
+    value() {
+      if (this.getAttribute("data-slot") === "estate-carousel-viewport") {
+        return makeDomRect({ left: viewportLeft, width: viewportClientWidth });
+      }
+
+      if (this.tagName.toLowerCase() === "article") {
+        const label = this.querySelector("h3")?.textContent?.trim();
+        const cardScrollLeft = label
+          ? (estateCardScrollLeftByLabel.get(label) ?? 0)
+          : 0;
+        const width =
+          this.getAttribute("aria-current") === "true"
+            ? activeCardWidth
+            : inactiveCardWidth;
+
+        return makeDomRect({
+          left:
+            viewportLeft +
+            viewportClientLeft +
+            cardScrollLeft -
+            currentScrollLeft,
+          width,
+        });
+      }
+
+      return makeDomRect({ left: 0, width: 0 });
+    },
+  });
+  Object.defineProperty(HTMLElement.prototype, "scrollTo", {
+    configurable: true,
+    value: scrollTo,
+  });
+
+  return {
+    scrollTo,
+    expectedScrollLeftFor(label: string) {
+      const cardScrollLeft = estateCardScrollLeftByLabel.get(label);
+      if (typeof cardScrollLeft !== "number") {
+        throw new Error(`Missing estate card geometry for ${label}`);
+      }
+      const target =
+        cardScrollLeft - (viewportClientWidth - activeCardWidth) / 2;
+      const maxScroll = Math.max(0, scrollWidth - viewportClientWidth);
+      return Math.min(Math.max(0, target), maxScroll);
+    },
+    oldOffsetLeftScrollLeftFor(label: string) {
+      const offsetLeft = estateCardOffsetLeftByLabel.get(label);
+      if (typeof offsetLeft !== "number") {
+        throw new Error(`Missing estate offset geometry for ${label}`);
+      }
+      return offsetLeft - (viewportClientWidth - activeCardWidth) / 2;
+    },
+    restore() {
+      for (const [property, descriptor] of Object.entries(descriptors)) {
+        if (descriptor) {
+          Object.defineProperty(HTMLElement.prototype, property, descriptor);
+        } else {
+          delete (HTMLElement.prototype as unknown as Record<string, unknown>)[
+            property
+          ];
+        }
+      }
+    },
+  };
+}
 
 describe("EstateCollectionSection", () => {
   it("renders the exact Figma heading stack", () => {
@@ -210,6 +431,117 @@ describe("EstateCollectionSection", () => {
     expect(
       screen.getByRole("article", { name: "Roastery", current: true }),
     ).toBeInTheDocument();
+  });
+
+  it("requests exact viewport-relative centering on initial render", async () => {
+    const layout = installEstateCarouselLayoutStub();
+    const activeLabel = ESTATE_COLLECTION_CARDS[ESTATE_COLLECTION_INITIAL_ACTIVE_INDEX].label;
+    try {
+      render(<EstateCollectionSection />);
+
+      expect(
+        screen.getByRole("article", {
+          name: activeLabel,
+          current: true,
+        }),
+      ).toBeInTheDocument();
+      expect(layout.expectedScrollLeftFor(activeLabel)).toBe(403.5);
+      expect(layout.oldOffsetLeftScrollLeftFor(activeLabel)).toBe(827.5);
+      await waitFor(() => {
+        expect(layout.scrollTo).toHaveBeenCalledWith({
+          behavior: "instant",
+          left: 403.5,
+        });
+      });
+    } finally {
+      layout.restore();
+    }
+  });
+
+  it("requests exact viewport-relative centering after navigation", async () => {
+    const user = userEvent.setup();
+    const layout = installEstateCarouselLayoutStub();
+    const activeLabel = ESTATE_COLLECTION_CARDS[2].label;
+    try {
+      render(<EstateCollectionSection />);
+      await waitFor(() => expect(layout.scrollTo).toHaveBeenCalled());
+      layout.scrollTo.mockClear();
+
+      await user.click(
+        screen.getByRole("button", { name: "Next estate collection item" }),
+      );
+
+      expect(
+        screen.getByRole("article", { name: activeLabel, current: true }),
+      ).toBeInTheDocument();
+      expect(layout.expectedScrollLeftFor(activeLabel)).toBe(813.5);
+      expect(layout.oldOffsetLeftScrollLeftFor(activeLabel)).toBe(1227.5);
+      await waitFor(() => {
+        expect(layout.scrollTo).toHaveBeenCalledWith({
+          behavior: "instant",
+          left: 813.5,
+        });
+      });
+    } finally {
+      layout.restore();
+    }
+  });
+
+  it("clamps viewport-relative centering at the scroll boundaries", async () => {
+    const user = userEvent.setup();
+    const layout = installEstateCarouselLayoutStub({
+      initialScrollLeft: 12,
+      scrollWidth: 2200,
+      viewportClientWidth: 500,
+    });
+    try {
+      render(<EstateCollectionSection />);
+      await waitFor(() => expect(layout.scrollTo).toHaveBeenCalled());
+      layout.scrollTo.mockClear();
+
+      await user.click(
+        screen.getByRole("button", { name: "Previous estate collection item" }),
+      );
+
+      expect(
+        screen.getByRole("article", {
+          name: ESTATE_COLLECTION_CARDS[0].label,
+          current: true,
+        }),
+      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(layout.scrollTo).toHaveBeenCalledWith({
+          behavior: "instant",
+          left: 0,
+        });
+      });
+
+      layout.scrollTo.mockClear();
+
+      for (let step = 0; step < 5; step += 1) {
+        await user.click(
+          screen.getByRole("button", { name: "Next estate collection item" }),
+        );
+      }
+
+      expect(
+        screen.getByRole("article", {
+          name: ESTATE_COLLECTION_CARDS[5].label,
+          current: true,
+        }),
+      ).toBeInTheDocument();
+      expect(layout.expectedScrollLeftFor(ESTATE_COLLECTION_CARDS[5].label)).toBe(
+        1700,
+      );
+      await waitFor(() => {
+        expect(layout.scrollTo).toHaveBeenLastCalledWith({
+          behavior: "instant",
+          left: 1700,
+        });
+      });
+    } finally {
+      layout.restore();
+    }
   });
 
   it("uses the carousel width pattern instead of the 1236px contained card-row width", () => {
