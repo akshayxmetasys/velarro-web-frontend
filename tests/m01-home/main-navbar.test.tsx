@@ -123,6 +123,11 @@ describe("MainNavbar", () => {
       "data-figma-component-set",
       MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE,
     );
+    expect(dialog).toHaveClass(
+      "overflow-x-hidden",
+      "overflow-y-auto",
+      "overscroll-contain",
+    );
     expect(
       screen.getByRole("button", { name: "Open main menu" }),
     ).toHaveAttribute("aria-expanded", "true");

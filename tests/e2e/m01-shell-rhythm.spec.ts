@@ -101,6 +101,35 @@ async function expectMenuLinkVisibleAndContained(
   expect(box!.x + box!.width, label).toBeLessThanOrEqual(viewport!.width + 1);
 }
 
+async function expectDialogLinkFullyInViewport(
+  page: Page,
+  label: string,
+  href: string,
+) {
+  const link = page.getByRole("dialog", { name: "Estate Index" }).getByRole(
+    "link",
+    { name: label },
+  );
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute("href", href);
+
+  const box = await link.boundingBox();
+  const viewport = page.viewportSize();
+  expect(box, label).not.toBeNull();
+  expect(viewport, label).not.toBeNull();
+  expect(box!.x, label).toBeGreaterThanOrEqual(-1);
+  expect(box!.y, label).toBeGreaterThanOrEqual(-1);
+  expect(box!.x + box!.width, label).toBeLessThanOrEqual(viewport!.width + 1);
+  expect(box!.y + box!.height, label).toBeLessThanOrEqual(viewport!.height + 1);
+}
+
+async function expectFocusInsideDialog(page: Page, label: string) {
+  const contained = await page
+    .getByRole("dialog", { name: "Estate Index" })
+    .evaluate((dialog) => dialog.contains(document.activeElement));
+  expect(contained, label).toBe(true);
+}
+
 async function focusSidebarPrimaryLinksWithKeyboard(page: Page) {
   await page.keyboard.press("Tab");
   await expect(
@@ -120,6 +149,96 @@ async function focusSidebarPrimaryLinksWithKeyboard(page: Page) {
 
   await page.keyboard.press("Shift+Tab");
   await expect(dialog.getByRole("link", { name: "Partner" })).toBeFocused();
+}
+
+async function expectShortHeightSidebarReachability(
+  page: Page,
+  viewport: { width: number; height: number },
+  options: { requiresScrollablePanel: boolean },
+) {
+  await page.setViewportSize(viewport);
+  await gotoOver21Home(page);
+  await page.evaluate(() => window.scrollTo(0, 240));
+
+  const pageScrollBeforeOpen = await page.evaluate(() => window.scrollY);
+  const { dialog, trigger } = await openMainMenu(page);
+
+  await expectMenuLinkVisibleAndContained(page, "Partner", "/partner");
+  await expectMenuLinkVisibleAndContained(page, "Our Story", "/our-story");
+
+  const panelMetrics = await dialog.evaluate((panel) => {
+    const style = getComputedStyle(panel);
+
+    return {
+      clientHeight: panel.clientHeight,
+      overflowX: style.overflowX,
+      overflowY: style.overflowY,
+      scrollHeight: panel.scrollHeight,
+      scrollTop: panel.scrollTop,
+    };
+  });
+
+  expect(panelMetrics.overflowY).toBe("auto");
+  expect(panelMetrics.overflowX).toBe("hidden");
+  if (options.requiresScrollablePanel) {
+    expect(panelMetrics.scrollHeight).toBeGreaterThan(panelMetrics.clientHeight);
+  } else {
+    expect(panelMetrics.scrollHeight).toBeGreaterThanOrEqual(
+      panelMetrics.clientHeight,
+    );
+  }
+  expect(panelMetrics.scrollTop).toBe(0);
+
+  await focusSidebarPrimaryLinksWithKeyboard(page);
+  await expectFocusInsideDialog(
+    page,
+    `${viewport.width}x${viewport.height} primary-link focus containment`,
+  );
+
+  await dialog.hover();
+  await page.mouse.wheel(0, 700);
+  if (options.requiresScrollablePanel) {
+    await expect
+      .poll(() => dialog.evaluate((panel) => panel.scrollTop))
+      .toBeGreaterThan(0);
+  }
+
+  await expectDialogLinkFullyInViewport(page, "Get in touch", "/get-in-touch");
+
+  for (const label of [
+    "Our Story",
+    "The House",
+    "The Vault",
+    "Careers",
+    "News & Events",
+    "Pairing Guide",
+    "Membership",
+    "Get in touch",
+  ]) {
+    await page.keyboard.press("Tab");
+    await expect(dialog.getByRole("link", { name: label })).toBeFocused();
+    await expectFocusInsideDialog(
+      page,
+      `${viewport.width}x${viewport.height} ${label} focus containment`,
+    );
+  }
+
+  await expectDialogLinkFullyInViewport(page, "Get in touch", "/get-in-touch");
+
+  const pageScrollWhileOpen = await page.evaluate(() => ({
+    bodyOverflow: document.body.style.overflow,
+    scrollY: window.scrollY,
+  }));
+  expect(pageScrollWhileOpen.bodyOverflow).toBe("hidden");
+  expect(pageScrollWhileOpen.scrollY).toBe(pageScrollBeforeOpen);
+  await expectDocumentContained(
+    page,
+    `${viewport.width}x${viewport.height} short-height drawer`,
+  );
+
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(trigger).toBeFocused();
 }
 
 test.describe("V-01 Over-21 homepage shell rhythm", () => {
@@ -475,5 +594,20 @@ test.describe("V-01 Over-21 homepage shell rhythm", () => {
     await expectMenuLinkVisibleAndContained(page, "Partner", "/partner");
     await expectMenuLinkVisibleAndContained(page, "Our Story", "/our-story");
     await expectDocumentContained(page, "320px restored drawer links");
+  });
+
+  test("keeps every sidebar entry reachable on short mobile viewports", async ({
+    page,
+  }) => {
+    await expectShortHeightSidebarReachability(
+      page,
+      { width: 320, height: 568 },
+      { requiresScrollablePanel: true },
+    );
+    await expectShortHeightSidebarReachability(
+      page,
+      { width: 375, height: 667 },
+      { requiresScrollablePanel: false },
+    );
   });
 });
