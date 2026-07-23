@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./support/e2e-test";
 
 test.describe("M09 Careers position application page", () => {
   test("renders the review application flow at 1440px", async ({ page }) => {

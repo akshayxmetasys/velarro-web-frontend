@@ -11,6 +11,8 @@ export const MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE = "14351:51939" as const;
 
 export const MAIN_MENU_ITEMS = [
   { label: "Estate Index", href: "/the-estate", implemented: true },
+  { label: "Partner", href: "/partner", implemented: true },
+  { label: "Our Story", href: "/our-story", implemented: true },
   { label: "The House", href: "/the-estate/the-house", implemented: true },
   { label: "The Vault", href: "/the-vault", implemented: true },
   { label: "Careers", href: "/careers", implemented: true },
@@ -81,7 +83,7 @@ export function MainMenuSidebar() {
             aria-modal="true"
             aria-labelledby={titleId}
             tabIndex={-1}
-            className="relative z-10 flex h-full w-[220px] flex-col items-center gap-[24px] bg-background-section pt-[72px] shadow-confirmation-modal outline-none"
+            className="relative z-10 flex h-full w-[220px] flex-col items-center gap-[24px] overflow-x-hidden overflow-y-auto overscroll-contain bg-background-section pt-[72px] shadow-confirmation-modal outline-none"
             data-figma-node={MAIN_MENU_SIDEBAR_FIGMA_NODE}
             data-figma-component-set={MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE}
           >

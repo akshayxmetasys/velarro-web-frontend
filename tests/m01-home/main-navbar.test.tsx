@@ -86,6 +86,31 @@ describe("MainNavbar", () => {
     expect(screen.getByLabelText(/Login \(deferred/i)).toBeDisabled();
   });
 
+  it("preserves the approved desktop primary link order without sidebar duplicates", () => {
+    render(<MainNavbar />);
+
+    const desktopLinks = document.querySelector(
+      '[data-navbar-cluster="desktop-links"]',
+    );
+    expect(desktopLinks).not.toBeNull();
+
+    const anchors = Array.from(
+      desktopLinks!.querySelectorAll<HTMLAnchorElement>("a"),
+    );
+    expect(anchors.map((link) => link.textContent)).toEqual([
+      "The Estate",
+      "Partner",
+      "Our Story",
+    ]);
+    expect(anchors.map((link) => link.getAttribute("href"))).toEqual([
+      "/the-estate",
+      "/partner",
+      "/our-story",
+    ]);
+    expect(screen.queryByRole("dialog", { name: "Estate Index" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Estate Index" })).toBeNull();
+  });
+
   it("opens the Figma main menu sidebar with the approved route links", async () => {
     const user = userEvent.setup();
     render(<MainNavbar />);
@@ -97,6 +122,11 @@ describe("MainNavbar", () => {
     expect(dialog).toHaveAttribute(
       "data-figma-component-set",
       MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE,
+    );
+    expect(dialog).toHaveClass(
+      "overflow-x-hidden",
+      "overflow-y-auto",
+      "overscroll-contain",
     );
     expect(
       screen.getByRole("button", { name: "Open main menu" }),
@@ -113,6 +143,16 @@ describe("MainNavbar", () => {
         item.href,
       );
     }
+
+    expect(
+      within(menu).getAllByRole("link").map((link) => link.textContent),
+    ).toEqual(MAIN_MENU_ITEMS.map((item) => item.label));
+    expect(
+      within(menu).getByRole("link", { name: "Partner" }),
+    ).toHaveAttribute("href", "/partner");
+    expect(
+      within(menu).getByRole("link", { name: "Our Story" }),
+    ).toHaveAttribute("href", "/our-story");
 
     expect(within(menu).getByRole("link", { name: "The Vault" })).toHaveAttribute(
       "aria-current",
@@ -136,6 +176,35 @@ describe("MainNavbar", () => {
     ).toHaveAttribute("data-route-implemented", "true");
   });
 
+  it("keeps Partner and Our Story keyboard reachable inside the sidebar focus loop", async () => {
+    const user = userEvent.setup();
+    render(<MainNavbar />);
+
+    await user.click(screen.getByRole("button", { name: "Open main menu" }));
+    const dialog = screen.getByRole("dialog", { name: "Estate Index" });
+    expect(dialog).toHaveFocus();
+
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Dismiss main menu backdrop" })).toHaveFocus();
+
+    await user.tab();
+    expect(screen.getByRole("link", { name: "Estate Index" })).toHaveFocus();
+
+    await user.tab();
+    const partnerLink = within(dialog).getByRole("link", { name: "Partner" });
+    expect(partnerLink).toHaveFocus();
+
+    await user.tab();
+    const ourStoryLink = within(dialog).getByRole("link", { name: "Our Story" });
+    expect(ourStoryLink).toHaveFocus();
+
+    await user.tab({ shift: true });
+    expect(partnerLink).toHaveFocus();
+
+    await user.tab({ shift: true });
+    expect(screen.getByRole("link", { name: "Estate Index" })).toHaveFocus();
+  });
+
   it("closes the sidebar on Escape and restores focus to the menu button", async () => {
     const user = userEvent.setup();
     render(<MainNavbar />);
@@ -145,6 +214,18 @@ describe("MainNavbar", () => {
     expect(screen.getByRole("dialog", { name: "Estate Index" })).toBeInTheDocument();
 
     await user.keyboard("{Escape}");
+
+    expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it("closes the sidebar from the backdrop and restores focus to the menu button", async () => {
+    const user = userEvent.setup();
+    render(<MainNavbar />);
+
+    const trigger = screen.getByRole("button", { name: "Open main menu" });
+    await user.click(trigger);
+    await user.click(screen.getByRole("button", { name: "Dismiss main menu backdrop" }));
 
     expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
     expect(trigger).toHaveFocus();
@@ -162,6 +243,47 @@ describe("MainNavbar", () => {
     await user.click(vaultLink);
 
     expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
+  });
+
+  it.each([
+    { label: "Partner", href: "/partner" },
+    { label: "Our Story", href: "/our-story" },
+  ] as const)(
+    "activates $label from the keyboard and releases the closed sidebar",
+    async ({ label, href }) => {
+      const user = userEvent.setup();
+      render(<MainNavbar />);
+
+      const trigger = screen.getByRole("button", { name: "Open main menu" });
+      await user.click(trigger);
+      const dialog = screen.getByRole("dialog", { name: "Estate Index" });
+
+      const link = within(dialog).getByRole("link", { name: label });
+      expect(link).toHaveAttribute("href", href);
+      link.addEventListener("click", (event) => event.preventDefault(), {
+        once: true,
+      });
+
+      link.focus();
+      await user.keyboard("{Enter}");
+
+      expect(screen.queryByRole("dialog", { name: "Estate Index" })).not.toBeInTheDocument();
+      expect(trigger).toHaveFocus();
+
+      await user.tab();
+      expect(document.activeElement).not.toBe(link);
+    },
+  );
+
+  it("keeps deferred sidebar menu behavior unchanged", async () => {
+    const user = userEvent.setup();
+    render(<MainNavbar />);
+
+    await user.click(screen.getByRole("button", { name: "Open main menu" }));
+
+    const newsLink = screen.getByRole("link", { name: "News & Events" });
+    expect(newsLink).toHaveAttribute("href", "/the-chronicle");
+    expect(newsLink).toHaveAttribute("data-route-implemented", "false");
   });
 
   it("progressively discloses desktop link and utility clusters", () => {

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./support/e2e-test";
 import { CAREER_POSITIONS } from "../../components/m09-careers/careers-positions-data";
 
 test.describe("M09 Careers positions page", () => {

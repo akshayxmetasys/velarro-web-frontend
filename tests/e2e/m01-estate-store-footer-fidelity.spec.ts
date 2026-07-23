@@ -1,4 +1,9 @@
-import { expect, test, type Page } from "@playwright/test";
+import {
+  expect,
+  expectStableBoundingBox,
+  test,
+  type Page,
+} from "./support/e2e-test";
 
 const VIEWPORTS = [
   { width: 320, height: 800 },
@@ -58,14 +63,18 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
     await expect(store).toBeVisible();
     await expect(footer).toBeVisible();
 
-    const clothierBox = await clothier.boundingBox();
-    const estateBox = await estate.boundingBox();
+    const clothierBox = await expectStableBoundingBox(page, clothier, "Clothier");
+    const estateBox = await expectStableBoundingBox(page, estate, "Estate");
     const storeBand = store.locator(
       '[data-slot="store-lounge-contained-section"]',
     );
-    const storeBandBox = await storeBand.boundingBox();
-    const storeBox = await store.boundingBox();
-    const footerBox = await footer.boundingBox();
+    const storeBandBox = await expectStableBoundingBox(
+      page,
+      storeBand,
+      "Store/Lounge contained section",
+    );
+    const storeBox = await expectStableBoundingBox(page, store, "Store/Lounge");
+    const footerBox = await expectStableBoundingBox(page, footer, "Footer");
 
     expect(clothierBox).not.toBeNull();
     expect(estateBox).not.toBeNull();
