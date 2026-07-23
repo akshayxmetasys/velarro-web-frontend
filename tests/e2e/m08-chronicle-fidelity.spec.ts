@@ -120,6 +120,15 @@ test.describe("V-08a The Chronicle fidelity", () => {
       expect(Math.abs(box!.height - 479)).toBeLessThanOrEqual(FIXED_TOLERANCE_PX);
     }
 
+    for (let i = 0; i < 4; i += 1) {
+      const region = imageRegions.nth(i);
+      await expect(region).toHaveAttribute(
+        "data-chronicle-card-image-status",
+        "deferred",
+      );
+      await expect(region.locator("img")).toHaveCount(0);
+    }
+
     const cardsList = page.locator("[data-chronicle-card]");
     await expect(cardsList).toHaveCount(4);
     const first = await cardsList.nth(0).boundingBox();
@@ -129,49 +138,6 @@ test.describe("V-08a The Chronicle fidelity", () => {
     expect(Math.abs(second!.y - (first!.y + first!.height) - 80)).toBeLessThanOrEqual(
       FIXED_TOLERANCE_PX,
     );
-
-    const expectedCrops = [
-      { width: "263.48%", left: "-21.67%", top: "0.09%", height: "100%" },
-      { width: "268.98%", left: "-10.66%", top: "0.18%", height: "100%" },
-      { width: "269.1%", left: "-164.98%", top: "-0.04%", height: "100%" },
-      { width: "269.1%", left: "-21.59%", top: "0px", height: "100%" },
-    ] as const;
-
-    for (let i = 0; i < 4; i += 1) {
-      const region = imageRegions.nth(i);
-      const img = region.locator("img");
-      await expect
-        .poll(
-          async () =>
-            img.evaluate(
-              (node: HTMLImageElement) =>
-                node.complete && node.naturalWidth > 0,
-            ),
-          { timeout: 15_000 },
-        )
-        .toBe(true);
-
-      const metrics = await img.evaluate((node: HTMLImageElement) => ({
-        src: node.getAttribute("src") ?? "",
-        naturalWidth: node.naturalWidth,
-        naturalHeight: node.naturalHeight,
-        width: node.style.width,
-        height: node.style.height,
-        left: node.style.left,
-        top: node.style.top,
-      }));
-
-      expect(metrics.src).toContain("/images/m08-chronicle/");
-      expect(metrics.src).not.toContain("figma.com");
-      expect(metrics.naturalWidth).toBeGreaterThan(1000);
-      expect(metrics.naturalHeight).toBeGreaterThan(500);
-      expect(metrics.width).toBe(expectedCrops[i].width);
-      expect(metrics.height).toBe(expectedCrops[i].height);
-      expect(metrics.left).toBe(expectedCrops[i].left);
-      expect(metrics.top === expectedCrops[i].top || metrics.top === "0").toBe(
-        true,
-      );
-    }
 
     const stackBox = await cardStack.boundingBox();
     expect(stackBox).not.toBeNull();
@@ -196,6 +162,20 @@ test.describe("V-08a The Chronicle fidelity", () => {
   }) => {
     await context.clearCookies();
     await page.setViewportSize({ width: 1440, height: 900 });
+
+    const cardImageRequests: string[] = [];
+    page.on("request", (request) => {
+      const url = request.url();
+      if (
+        url.includes("/images/m08-chronicle/") ||
+        /founders-reserve-month|international-cigar-day|international-tea-day|velarro-estate-day/.test(
+          url,
+        )
+      ) {
+        cardImageRequests.push(url);
+      }
+    });
+
     await gotoChronicle(page);
 
     await expect(
@@ -240,6 +220,11 @@ test.describe("V-08a The Chronicle fidelity", () => {
       page.getByRole("heading", { level: 1, name: "THE CHRONICLE" }),
     ).toBeVisible();
     await expect(page.locator("[data-chronicle-card]")).toHaveCount(4);
+    await expect(
+      page.locator("[data-chronicle-card-image-status='deferred']"),
+    ).toHaveCount(4);
+    await expect(page.locator("[data-chronicle-card-image] img")).toHaveCount(0);
+    expect(cardImageRequests).toEqual([]);
   });
 
   test("keeps event-detail controls truthful and disabled", async ({ page }) => {

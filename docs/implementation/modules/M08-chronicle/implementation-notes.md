@@ -45,21 +45,28 @@
 - Overlay: `linear-gradient(0deg, rgba(21,20,20,0.5), rgba(123,117,117,0.5))`
 - Not duplicated locally; CSP / Next image / approved-host config unchanged
 
-### Card images (permanent local)
+### Card artwork (deferred — REM-001)
 
-Downloaded from Figma MCP raster layers (not screenshots). No temporary Figma URLs remain in production source.
+The four previously published local card PNGs were removed because binary
+forensics identified C2PA / OpenAI Media Service / `gpt-image` /
+`trainedAlgorithmicMedia` markers. `AGENTS.md` prohibits generated, stock,
+temporary Figma, or unrelated substitutes for missing production imagery. No
+explicit production approval for those binaries was found.
 
-| Card | Figma image node | Local path | Content-Type | Binary | Natural size | Crop (W / L / T / H) |
-| --- | --- | --- | --- | --- | --- | --- |
-| International Cigar Day | `14284:63217` | `public/images/m08-chronicle/international-cigar-day.png` | `image/png` | PNG `89 50 4E 47` | `2172 × 724` | `263.48%` / `-21.67%` / `0.09%` / `100%` |
-| International Tea Day | `14284:63225` | `public/images/m08-chronicle/international-tea-day.png` | `image/png` | PNG `89 50 4E 47` | `2171 × 724` | `268.98%` / `-10.66%` / `0.18%` / `100%` |
-| Founder’s Reserve Month | `14284:63233` | `public/images/m08-chronicle/founders-reserve-month.png` | `image/png` | PNG `89 50 4E 47` | `2172 × 724` | `269.1%` / `-164.98%` / `-0.04%` / `100%` |
-| Velarro Estate Day | `14284:63241` | `public/images/m08-chronicle/velarro-estate-day.png` | `image/png` | PNG `89 50 4E 47` | `2172 × 724` | `269.1%` / `-21.59%` / `0` / `100%` |
+| Card | Figma image node | Asset state | Production URL |
+| --- | --- | --- | --- |
+| International Cigar Day | `14284:63217` | `deferred` (`chronicle_card_1`) | `null` |
+| International Tea Day | `14284:63225` | `deferred` (`chronicle_card_2`) | `null` |
+| Founder’s Reserve Month | `14284:63233` | `deferred` (`chronicle_card_3`) | `null` |
+| Velarro Estate Day | `14284:63241` | `deferred` (`chronicle_card_4`) | `null` |
 
-- Overlay on each card image region: `rgba(21,20,20,0.4)`
-- Image region sizes: first `534 × 469`; cards 2–4 `534 × 479`
-- Paths live in `CHRONICLE_CARD_IMAGES` and are **not** passed through `assertApprovedImageUrl`
-- Placeholders (gradient, diagonal cross lines, deferred status markers) removed
+- Slots live in `CHRONICLE_CARD_ASSETS` with `status: "deferred"` and `url: null`
+- No replacement imagery was invented (no stock, generated, temporary Figma MCP, remote placeholder, data URL, or synthetic gradient “fake art”)
+- Card image regions keep intentional design-system surface styling (`bg-background-section` + `border-border-default`) and dimensions: first `534 × 469`; cards 2–4 `534 × 479`
+- Screen readers receive a single sr-only deferred-artwork statement per card; the surface itself is decorative (`aria-hidden`)
+- Approved replacement imagery remains an owner/design dependency and must pass provenance, optimization, responsive, accessibility, and pre-merge review before production use
+- The Chronicle page is **not** claimed pixel-perfect while required card artwork is deferred
+- The approved hero remains unchanged
 
 ## Card Geometry
 
@@ -141,8 +148,8 @@ Repo evidence (unchanged by V-08a):
 
 | Path | Operation boundary? | Decision |
 | --- | --- | --- |
-| `components/m08-chronicle/chronicle-assets.ts` | No — static approved hero URL + local path constants | **N/A** |
-| `components/m08-chronicle/chronicle-data.ts` | No — static copy/crop data model | **N/A** |
+| `components/m08-chronicle/chronicle-assets.ts` | No — static approved hero URL + deferred card slots (`url: null`) | **N/A** |
+| `components/m08-chronicle/chronicle-data.ts` | No — static copy/layout data model | **N/A** |
 | `components/m08-chronicle/chronicle-page.tsx` | No — presentational page assembly; no network, auth, persistence, or queue boundary | **N/A** |
 
 Wire tracing/metrics only when an approved client telemetry sink and CSP allowlist exist.
@@ -151,7 +158,55 @@ Wire tracing/metrics only when an approved client telemetry sink and CSP allowli
 
 | Path | Coverage evidence |
 | --- | --- |
-| `chronicle-assets.ts` | `tests/assets/approved-image-hosts.test.ts` (hero approved URL; four local card paths exist, distinct, non-remote); unit age-state hero/card image assertions |
-| `chronicle-data.ts` | `tests/m08-chronicle/chronicle-page-age-state.test.tsx` (copy, punctuation, crops, geometry markers, deferred controls) |
-| `chronicle-page.tsx` | Same unit suite + `tests/e2e/m08-chronicle-fidelity.spec.ts` (desktop geometry, age states, disabled controls, viewport containment) |
+| `chronicle-assets.ts` | `tests/assets/approved-image-hosts.test.ts` (hero approved URL; card slots deferred with `url: null`; prohibited PNGs absent); `tests/m08-chronicle/chronicle-card-artwork-policy.test.ts` |
+| `chronicle-data.ts` | `tests/m08-chronicle/chronicle-page-age-state.test.tsx` (copy, punctuation, deferred artwork, geometry markers, deferred controls) |
+| `chronicle-page.tsx` | Same unit suite + `tests/e2e/m08-chronicle-fidelity.spec.ts` (desktop geometry, age states, deferred artwork, disabled controls, viewport containment) |
 | Temp `%TEMP%` capture scripts | Not production code; deleted; no tests required |
+## REM-001 Cursor Guard Findings
+
+Guard heuristics re-emitted LOW `observability.review` and LOW `testing.review` for the REM-001 deferred-artwork remediation. Resolutions below are evidence-based for this branch.
+
+### Observability — justified N/A (no operation boundary)
+
+These modules remain static asset constants, static copy/layout data, and presentational React assembly. They do not perform network I/O, authz decisions, persistence, queue/job work, or external integrations. Adding tracing/metrics/logging here would invent an unapproved telemetry sink and conflict with CSP `connect-src 'self'` plus the ban on production console/debug prints.
+
+| Path | Guard item | Operation boundary? | Decision |
+| --- | --- | --- | --- |
+| `chronicle-assets.ts` | LOW observability.review | No — compile-time constants (`CHRONICLE_APPROVED_IMAGES`, `CHRONICLE_CARD_ASSETS` with `url: null`) | **N/A — no telemetry required** |
+| `chronicle-data.ts` | LOW observability.review | No — static `CHRONICLE_CARDS` copy/geometry model | **N/A — no telemetry required** |
+| `chronicle-page.tsx` | (same boundary analysis) | No — presentational page; hero uses approved Image URL only; card slots render deferred surfaces with no card-image fetch | **N/A — no telemetry required** |
+
+Repo evidence re-checked:
+
+- `package.json` has no OpenTelemetry, Sentry, analytics, or structured logger dependency
+- No architecture suite script is present
+- No formatter script is present
+
+### Testing — resolved with repository tests
+
+| Path | Guard item | Repository tests covering behavior |
+| --- | --- | --- |
+| `chronicle-assets.ts` | LOW testing.review | `tests/assets/approved-image-hosts.test.ts`; `tests/m08-chronicle/chronicle-card-artwork-policy.test.ts` |
+| `chronicle-data.ts` | LOW testing.review | `tests/m08-chronicle/chronicle-page-age-state.test.tsx` (copy, deferredImageKey, geometry, no card `<img>`) |
+| `chronicle-page.tsx` | LOW testing.review | Same age-state units + `tests/e2e/m08-chronicle-fidelity.spec.ts` (deferred regions, age gates, disabled controls, containment, no card-image requests) |
+
+### REM-001 guard-finalize validation (executed)
+
+| Check | Result |
+| --- | --- |
+| Formatter | Not configured |
+| Architecture suite | Not present |
+| `npm.cmd run cursor:check` | exit 0 |
+| `npm.cmd run lint` | exit 0 |
+| `npm.cmd run typecheck` | exit 0 |
+| Focused Chronicle units | exit 0 (29 passed) |
+| `npm.cmd run test` | exit 0 (425 passed) |
+| `npm.cmd run build` | exit 0 |
+| `npm.cmd run test:e2e -- --list` | exit 0 (50 tests) |
+| Focused Chronicle E2E | exit 0 (4 passed) |
+| `npm.cmd run test:e2e` | exit 0 (50 passed) |
+| `npm.cmd run test -- tests/security` | exit 0 (6 passed) |
+| `npm.cmd audit --omit=dev` | exit 1 (2 moderate postcss via next; no fix applied) |
+| `git diff HEAD --check` | exit 0 |
+
+Evidence directory: `%TEMP%\velarro-remediation-m08-chronicle-evidence\guard-finalize\`

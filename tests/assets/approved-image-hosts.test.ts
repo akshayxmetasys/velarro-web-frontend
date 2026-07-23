@@ -5,7 +5,7 @@ import { OUR_STORY_APPROVED_IMAGES } from "@/components/m02-our-story/our-story-
 import { THE_ESTATE_APPROVED_IMAGES } from "@/components/m03-estate/the-estate-assets";
 import { THE_HOUSE_APPROVED_IMAGES } from "@/components/m04-house/the-house-assets";
 import { THE_VAULT_COMING_SOON_BACKGROUND } from "@/components/m05-vault/the-vault-assets";
-import { CHRONICLE_APPROVED_IMAGES, CHRONICLE_CARD_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
+import { CHRONICLE_APPROVED_IMAGES, CHRONICLE_CARD_ASSETS, CHRONICLE_CARD_IMAGE_STATUS } from "@/components/m08-chronicle/chronicle-assets";
 import { PAIRING_GUIDE_APPROVED_IMAGES, PAIRING_GUIDE_CARD_IMAGES } from "@/components/m08-pairing-guide/pairing-guide-assets";
 import { MEMBERSHIP_ASSETS, MEMBERSHIP_EMBLEM_ASSET_KEYS } from "@/components/m09-membership/membership-assets";
 import { CAREERS_APPROVED_IMAGES } from "@/components/m09-careers/careers-assets";
@@ -174,7 +174,7 @@ describe("approved image hosts", () => {
     ).toBe(true);
   });
 
-  it("accepts the approved Chronicle hero URL and permanent local card assets", () => {
+  it("accepts the approved Chronicle hero URL and keeps card artwork deferred", () => {
     expect(CHRONICLE_APPROVED_IMAGES.hero).toBe(
       "https://lpnrhpvmrnoqkzoxukov.supabase.co/storage/v1/object/public/product-images/thechronicle-hero-20260709-023616-desktop-hero.webp",
     );
@@ -188,20 +188,33 @@ describe("approved image hosts", () => {
     expect(heroSerialized).not.toContain("mcp/asset");
     expect(heroSerialized).not.toContain("/images/m08-chronicle");
 
-    const cardPaths = Object.values(CHRONICLE_CARD_IMAGES);
-    expect(cardPaths).toHaveLength(4);
-    expect(new Set(cardPaths).size).toBe(4);
+    const cards = Object.values(CHRONICLE_CARD_ASSETS);
+    expect(cards).toHaveLength(4);
+    expect(CHRONICLE_CARD_IMAGE_STATUS).toBe("deferred");
 
-    for (const path of cardPaths) {
-      expect(path.startsWith("/images/m08-chronicle/")).toBe(true);
-      expect(path.startsWith("http")).toBe(false);
-      expect(path).not.toContain("figma.com");
-      expect(path).not.toContain("mcp/asset");
+    for (const card of cards) {
+      expect(card.status).toBe("deferred");
+      expect(card.url).toBeNull();
+      expect(card.deferredImageKey.length).toBeGreaterThan(0);
+      expect(card.figmaNodeId).toMatch(/^\d+:\d+$/);
+    }
+
+    const cardSerialized = JSON.stringify(CHRONICLE_CARD_ASSETS);
+    expect(cardSerialized).not.toContain("/images/m08-chronicle");
+    expect(cardSerialized).not.toContain("figma.com/api/mcp/asset");
+    expect(cardSerialized).not.toContain("gpt-image");
+    expect(cardSerialized).not.toContain(".png");
+
+    const prohibitedNames = [
+      "founders-reserve-month.png",
+      "international-cigar-day.png",
+      "international-tea-day.png",
+      "velarro-estate-day.png",
+    ] as const;
+    for (const name of prohibitedNames) {
       expect(
-        existsSync(
-          join(process.cwd(), "public", ...path.replace(/^\//, "").split("/")),
-        ),
-      ).toBe(true);
+        existsSync(join(process.cwd(), "public", "images", "m08-chronicle", name)),
+      ).toBe(false);
     }
 
     expect(existsSync(join(process.cwd(), "public", "images", "m08"))).toBe(

@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { FooterSection } from "@/components/layout/main-footer";
 import { MainNavbar } from "@/components/layout/main-navbar";
-import { CHRONICLE_APPROVED_IMAGES } from "@/components/m08-chronicle/chronicle-assets";
+import {
+  CHRONICLE_APPROVED_IMAGES,
+  CHRONICLE_CARD_IMAGE_STATUS,
+} from "@/components/m08-chronicle/chronicle-assets";
 import {
   CHRONICLE_CARDS,
-  CHRONICLE_CARD_IMAGE_OVERLAY,
   CHRONICLE_FIGMA_NODE,
   CHRONICLE_HERO_COPY,
   CHRONICLE_NEWS_TICKER,
@@ -142,7 +144,7 @@ function NewsTicker() {
   );
 }
 
-function ChronicleCardImage({ card }: { card: ChronicleCardData }) {
+function DeferredCardImage({ card }: { card: ChronicleCardData }) {
   const isFirstCard = card.id === "international-cigar-day";
 
   return (
@@ -152,37 +154,22 @@ function ChronicleCardImage({ card }: { card: ChronicleCardData }) {
       }`}
       data-chronicle-card-image
       data-chronicle-card-image-id={card.id}
+      data-chronicle-card-image-status={CHRONICLE_CARD_IMAGE_STATUS}
       data-chronicle-card-image-width={String(card.imageRegionWidth)}
       data-chronicle-card-image-height={String(card.imageRegionHeight)}
-      data-chronicle-card-image-crop-width={card.cropWidth}
-      data-chronicle-card-image-crop-height={card.cropHeight}
-      data-chronicle-card-image-crop-left={card.cropLeft}
-      data-chronicle-card-image-crop-top={card.cropTop}
       data-chronicle-layout-image-width={String(card.imageRegionWidth)}
       data-chronicle-layout-image-height={String(card.imageRegionHeight)}
+      data-deferred-image-key={card.deferredImageKey}
+      data-asset-status={CHRONICLE_CARD_IMAGE_STATUS}
+      data-asset-url-status="none"
       data-figma-node={card.imageNodeId}
     >
-      <Image
-        src={card.imageSrc}
-        alt={card.imageAlt}
-        width={card.intrinsicWidth}
-        height={card.intrinsicHeight}
-        sizes="(min-width: 1280px) 534px, 100vw"
-        unoptimized
-        className="absolute max-w-none"
-        style={{
-          height: card.cropHeight,
-          left: card.cropLeft,
-          objectFit: "fill",
-          top: card.cropTop,
-          width: card.cropWidth,
-        }}
-      />
+      <span className="sr-only">
+        Artwork for {card.title} is deferred pending approved production imagery.
+      </span>
       <div
         aria-hidden="true"
-        className="absolute inset-0 rounded-[12px]"
-        style={{ backgroundColor: CHRONICLE_CARD_IMAGE_OVERLAY }}
-        data-chronicle-card-image-overlay={CHRONICLE_CARD_IMAGE_OVERLAY}
+        className="absolute inset-0 rounded-[12px] border border-border-default bg-background-section"
       />
     </div>
   );
@@ -249,7 +236,7 @@ function ChronicleCard({ card }: { card: ChronicleCardData }) {
           VIEW EVENT DETAILS
         </button>
       </div>
-      <ChronicleCardImage card={card} />
+      <DeferredCardImage card={card} />
     </article>
   );
 }
