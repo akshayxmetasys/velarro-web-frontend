@@ -1,7 +1,13 @@
 import {
+  activeCarouselCard,
   expect,
   expectStableBoundingBox,
+  expectCarouselActiveCardReady,
+  expectImageReady,
+  STORE_LOUNGE_E2E_IMAGE_PATH,
   test,
+  trackImageNetworkEvents,
+  waitForClientClickHandler,
   type Page,
 } from "./support/e2e-test";
 
@@ -28,6 +34,7 @@ const LOCAL_OVERFLOW_EXEMPT_SELECTORS = [
   '[data-slot="estate-carousel-viewport"]',
   '[data-slot="estate-carousel-track"]',
 ] as const;
+const ESTATE_VIEWPORT_SELECTOR = '[data-slot="estate-carousel-viewport"]';
 
 async function gotoOver21Home(page: Page) {
   await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -91,6 +98,10 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
   test("aligns Estate, Store/Lounge, and Footer desktop geometry at 1440", async ({
     page,
   }) => {
+    const storeImageNetworkEvents = trackImageNetworkEvents(
+      page,
+      STORE_LOUNGE_E2E_IMAGE_PATH,
+    );
     await page.setViewportSize({ width: 1440, height: 900 });
     await gotoOver21Home(page);
 
@@ -176,21 +187,17 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
       estate.getByRole("button", { name: "Next estate collection item" }),
     ).toBeVisible();
     await expect(
-      estate.locator('[data-slot="estate-carousel-viewport"]'),
+      estate.locator(ESTATE_VIEWPORT_SELECTOR),
     ).toBeVisible();
 
     const storeImage = store.locator("img").first();
     await store.scrollIntoViewIfNeeded();
-    await expect(storeImage).toBeVisible();
-    await expect
-      .poll(
-        async () =>
-          storeImage.evaluate(
-            (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
-          ),
-        { timeout: 15_000 },
-      )
-      .toBe(true);
+    const storeImageMetrics = await expectImageReady(storeImage, {
+      expectedSourcePath: STORE_LOUNGE_E2E_IMAGE_PATH,
+      label: "Store/Lounge background",
+      networkEvents: storeImageNetworkEvents,
+    });
+    expect(storeImageMetrics.expectedSourceMatched).toBe(true);
     const storeImageTreatment = await storeImage.evaluate((img) => ({
       objectFit: getComputedStyle(img).objectFit,
       objectPosition: getComputedStyle(img).objectPosition,
@@ -245,15 +252,27 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
     ] as const) {
       await page.setViewportSize(viewport);
       await gotoOver21Home(page);
+      const estateViewport = page.locator(ESTATE_VIEWPORT_SELECTOR);
+      const nextButton = page.getByRole("button", {
+        name: "Next estate collection item",
+      });
 
-      await page
-        .getByRole("button", { name: "Next estate collection item" })
-        .click();
+      await expectCarouselActiveCardReady(page, {
+        activeCardName: "Founder’s Boxy hoodie",
+        label: `${viewport.width}px Estate Collection initial`,
+        viewportSelector: ESTATE_VIEWPORT_SELECTOR,
+      });
+      await waitForClientClickHandler(nextButton, "Estate Collection next");
+
+      await nextButton.click();
       await expect(
-        page.getByRole("article", { name: "Roastery" }).and(
-          page.locator('[aria-current="true"]'),
-        ),
+        activeCarouselCard(estateViewport, "Roastery"),
       ).toBeVisible();
+      await expectCarouselActiveCardReady(page, {
+        activeCardName: "Roastery",
+        label: `${viewport.width}px Estate Collection after next`,
+        viewportSelector: ESTATE_VIEWPORT_SELECTOR,
+      });
 
       await expect
         .poll(
@@ -262,7 +281,7 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
               (
                 await getCarouselCenteringMetrics(
                   page,
-                  '[data-slot="estate-carousel-viewport"]',
+                  ESTATE_VIEWPORT_SELECTOR,
                   "Roastery",
                 )
               ).centerDelta,
@@ -275,7 +294,7 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
 
       const metrics = await getCarouselCenteringMetrics(
         page,
-        '[data-slot="estate-carousel-viewport"]',
+        ESTATE_VIEWPORT_SELECTOR,
         "Roastery",
       );
       expect(Math.abs(metrics.centerDelta)).toBeLessThanOrEqual(4);
