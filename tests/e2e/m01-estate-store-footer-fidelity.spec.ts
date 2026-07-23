@@ -3,7 +3,10 @@ import {
   expect,
   expectStableBoundingBox,
   expectCarouselActiveCardReady,
+  expectImageReady,
+  STORE_LOUNGE_E2E_IMAGE_PATH,
   test,
+  trackImageNetworkEvents,
   waitForClientClickHandler,
   type Page,
 } from "./support/e2e-test";
@@ -95,6 +98,10 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
   test("aligns Estate, Store/Lounge, and Footer desktop geometry at 1440", async ({
     page,
   }) => {
+    const storeImageNetworkEvents = trackImageNetworkEvents(
+      page,
+      STORE_LOUNGE_E2E_IMAGE_PATH,
+    );
     await page.setViewportSize({ width: 1440, height: 900 });
     await gotoOver21Home(page);
 
@@ -185,16 +192,12 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
 
     const storeImage = store.locator("img").first();
     await store.scrollIntoViewIfNeeded();
-    await expect(storeImage).toBeVisible();
-    await expect
-      .poll(
-        async () =>
-          storeImage.evaluate(
-            (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
-          ),
-        { timeout: 15_000 },
-      )
-      .toBe(true);
+    const storeImageMetrics = await expectImageReady(storeImage, {
+      expectedSourcePath: STORE_LOUNGE_E2E_IMAGE_PATH,
+      label: "Store/Lounge background",
+      networkEvents: storeImageNetworkEvents,
+    });
+    expect(storeImageMetrics.expectedSourceMatched).toBe(true);
     const storeImageTreatment = await storeImage.evaluate((img) => ({
       objectFit: getComputedStyle(img).objectFit,
       objectPosition: getComputedStyle(img).objectPosition,

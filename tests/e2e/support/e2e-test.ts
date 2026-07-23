@@ -18,6 +18,46 @@ const APPROVED_IMAGE_FIXTURE = Buffer.from(
     "</svg>",
   ].join(""),
 );
+export const STORE_LOUNGE_E2E_IMAGE_PATH =
+  "/images/m01-home/store-lounge-background.png" as const;
+
+export interface ImageNetworkEvent {
+  contentType?: string | null;
+  failureText?: string | null;
+  resourceType: string;
+  status?: number;
+  type: "request" | "response" | "requestfailed";
+  url: string;
+}
+
+export interface ImageReadinessMetrics {
+  boundingBox: {
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+  };
+  complete: boolean;
+  currentSrc: string;
+  expectedSourceMatched: boolean;
+  loading: string;
+  naturalHeight: number;
+  naturalWidth: number;
+  nextImageUrlParam: string | null;
+  src: string | null;
+  usesNextImage: boolean;
+}
+
+export interface ImageReadinessOptions {
+  expectedSourcePath: string;
+  label: string;
+  networkEvents?: () => readonly ImageNetworkEvent[];
+  timeout?: number;
+}
+
+function isLocalhostE2EOrigin(origin: string) {
+  return origin === "http://127.0.0.1:3000" || origin === "http://localhost:3000";
+}
 
 function isApprovedRemoteImageUrl(value: string | null): boolean {
   if (!value) {
@@ -51,6 +91,30 @@ function isApprovedNextImageProxyUrl(value: string): boolean {
   }
 }
 
+export function isExactLocalImageUrl(value: string, expectedPath: string): boolean {
+  try {
+    const url = new URL(value, "http://127.0.0.1:3000");
+    if (!isLocalhostE2EOrigin(url.origin)) {
+      return false;
+    }
+
+    if (url.pathname === expectedPath) {
+      return true;
+    }
+
+    return (
+      url.pathname === "/_next/image" &&
+      url.searchParams.get("url") === expectedPath
+    );
+  } catch {
+    return false;
+  }
+}
+
+function isApprovedStoreLoungeImageUrl(value: string) {
+  return isExactLocalImageUrl(value, STORE_LOUNGE_E2E_IMAGE_PATH);
+}
+
 export const test = base.extend({
   page: async ({ page }, runPage) => {
     await page.route("**/*", async (route) => {
@@ -59,7 +123,9 @@ export const test = base.extend({
 
       if (
         request.resourceType() === "image" &&
-        (isApprovedRemoteImageUrl(url) || isApprovedNextImageProxyUrl(url))
+        (isApprovedRemoteImageUrl(url) ||
+          isApprovedNextImageProxyUrl(url) ||
+          isApprovedStoreLoungeImageUrl(url))
       ) {
         await route.fulfill({
           body: APPROVED_IMAGE_FIXTURE,
@@ -119,6 +185,143 @@ export function activeCarouselCard(viewport: Locator, name: string) {
   return viewport
     .getByRole("article", { name })
     .and(viewport.locator('[aria-current="true"]'));
+}
+
+export function trackImageNetworkEvents(
+  page: Page,
+  expectedSourcePath: string,
+) {
+  const events: ImageNetworkEvent[] = [];
+  const matchesExpectedImage = (url: string) =>
+    isExactLocalImageUrl(url, expectedSourcePath);
+
+  page.on("request", (request) => {
+    const url = request.url();
+    if (!matchesExpectedImage(url)) {
+      return;
+    }
+
+    events.push({
+      resourceType: request.resourceType(),
+      type: "request",
+      url,
+    });
+  });
+
+  page.on("response", (response) => {
+    const url = response.url();
+    if (!matchesExpectedImage(url)) {
+      return;
+    }
+
+    events.push({
+      contentType: response.headers()["content-type"] ?? null,
+      resourceType: response.request().resourceType(),
+      status: response.status(),
+      type: "response",
+      url,
+    });
+  });
+
+  page.on("requestfailed", (request) => {
+    const url = request.url();
+    if (!matchesExpectedImage(url)) {
+      return;
+    }
+
+    events.push({
+      failureText: request.failure()?.errorText ?? null,
+      resourceType: request.resourceType(),
+      type: "requestfailed",
+      url,
+    });
+  });
+
+  return () => [...events];
+}
+
+export async function expectImageReady(
+  locator: Locator,
+  {
+    expectedSourcePath,
+    label,
+    networkEvents,
+    timeout = 15_000,
+  }: ImageReadinessOptions,
+): Promise<ImageReadinessMetrics> {
+  await expect(locator, label).toBeVisible();
+
+  let lastMetrics: ImageReadinessMetrics | null = null;
+  try {
+    await expect
+      .poll(
+        async () => {
+          lastMetrics = await locator.evaluate((img, expectedPath) => {
+            if (!(img instanceof HTMLImageElement)) {
+              throw new Error("Target element is not an HTMLImageElement");
+            }
+
+            const rect = img.getBoundingClientRect();
+            const currentUrl = new URL(img.currentSrc || img.src, location.href);
+            const sourcePath =
+              currentUrl.pathname === "/_next/image"
+                ? currentUrl.searchParams.get("url")
+                : currentUrl.pathname;
+            const expectedSourceMatched = sourcePath === expectedPath;
+
+            return {
+              boundingBox: {
+                height: rect.height,
+                width: rect.width,
+                x: rect.x,
+                y: rect.y,
+              },
+              complete: img.complete,
+              currentSrc: img.currentSrc,
+              expectedSourceMatched,
+              loading: img.loading,
+              naturalHeight: img.naturalHeight,
+              naturalWidth: img.naturalWidth,
+              nextImageUrlParam:
+                currentUrl.pathname === "/_next/image"
+                  ? currentUrl.searchParams.get("url")
+                  : null,
+              src: img.getAttribute("src"),
+              usesNextImage: currentUrl.pathname === "/_next/image",
+            } satisfies ImageReadinessMetrics;
+          }, expectedSourcePath);
+
+          return (
+            lastMetrics.expectedSourceMatched &&
+            lastMetrics.complete &&
+            lastMetrics.naturalWidth > 0 &&
+            lastMetrics.naturalHeight > 0 &&
+            lastMetrics.boundingBox.width > 0 &&
+            lastMetrics.boundingBox.height > 0
+          );
+        },
+        {
+          message: `${label} image has expected source, decoded dimensions, and rendered geometry`,
+          timeout,
+        },
+      )
+      .toBe(true);
+  } catch (error) {
+    throw new Error(
+      [
+        `${label} image readiness failed`,
+        `lastMetrics=${JSON.stringify(lastMetrics, null, 2)}`,
+        `networkEvents=${JSON.stringify(networkEvents?.() ?? [], null, 2)}`,
+        error instanceof Error ? error.message : String(error),
+      ].join("\n"),
+    );
+  }
+
+  if (!lastMetrics) {
+    throw new Error(`${label} image readiness did not collect metrics`);
+  }
+
+  return lastMetrics;
 }
 
 export async function expectCarouselActiveCardReady(
