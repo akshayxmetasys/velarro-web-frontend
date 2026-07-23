@@ -1,4 +1,11 @@
-import { expect, test, type Locator, type Page } from "./support/e2e-test";
+import {
+  activeCarouselCard,
+  expect,
+  expectCarouselActiveCardReady,
+  test,
+  waitForClientClickHandler,
+  type Page,
+} from "./support/e2e-test";
 
 const VIEWPORTS = [
   { width: 320, height: 800 },
@@ -19,6 +26,7 @@ const LOCAL_OVERFLOW_EXEMPT_SELECTORS = [
   '[data-slot="estate-carousel-viewport"]',
   '[data-slot="estate-carousel-track"]',
 ] as const;
+const CIGAR_VIEWPORT_SELECTOR = '[data-slot="cigar-carousel-viewport"]';
 
 async function gotoOver21Home(page: Page) {
   await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -26,10 +34,6 @@ async function gotoOver21Home(page: Page) {
     page.getByRole("navigation", { name: "Main navigation" }),
   ).toBeVisible();
   await expect(page.locator('[data-m01-section-stack="over21"]')).toBeVisible();
-}
-
-function activeCategoryCard(root: Page | Locator, name: string) {
-  return root.getByRole("article", { name }).and(root.locator('[aria-current="true"]'));
 }
 
 async function getCarouselCenteringMetrics(
@@ -91,6 +95,7 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
 
     const hero = page.locator('[data-figma-node="15081:25289"]');
     const carousel = page.locator('[data-figma-node="13148:15033"]');
+    const cigarViewport = page.locator(CIGAR_VIEWPORT_SELECTOR);
     const roastery = page.locator('[data-figma-node="15451:37609"]');
 
     await expect(hero).toBeVisible();
@@ -152,7 +157,7 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
       carousel.getByRole("heading", { level: 2, name: "Velarro cigars" }),
     ).toBeVisible();
     await expect(
-      activeCategoryCard(carousel, "Verde Classico"),
+      activeCarouselCard(cigarViewport, "Verde Classico"),
     ).toBeVisible();
     await expect(
       carousel.getByRole("heading", { level: 3, name: "Ashtrays" }),
@@ -162,7 +167,7 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
     ).toBeVisible();
 
     await expect(
-      page.locator('[data-slot="cigar-carousel-viewport"]'),
+      cigarViewport,
     ).toBeVisible();
     await expect(
       page.locator('[data-slot="cigar-carousel-track"]'),
@@ -184,8 +189,13 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
       carouselBox!.x + carouselBox!.width + 1,
     );
 
-    const activeCard = activeCategoryCard(page, "Verde Classico");
-    const inactiveCard = page.getByRole("article", { name: "Ashtrays" });
+    await expectCarouselActiveCardReady(page, {
+      activeCardName: "Verde Classico",
+      label: "Cigar Carousel initial desktop",
+      viewportSelector: CIGAR_VIEWPORT_SELECTOR,
+    });
+    const activeCard = activeCarouselCard(cigarViewport, "Verde Classico");
+    const inactiveCard = cigarViewport.getByRole("article", { name: "Ashtrays" });
     const activeBox = await activeCard.boundingBox();
     const inactiveBox = await inactiveCard.boundingBox();
     expect(activeBox).not.toBeNull();
@@ -220,20 +230,29 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
       name: "Previous cigar category",
     });
     const next = page.getByRole("button", { name: "Next cigar category" });
+    const cigarViewport = page.locator(CIGAR_VIEWPORT_SELECTOR);
+
+    await expectCarouselActiveCardReady(page, {
+      activeCardName: "Verde Classico",
+      label: "Cigar Carousel initial state",
+      viewportSelector: CIGAR_VIEWPORT_SELECTOR,
+    });
+    await waitForClientClickHandler(next, "Cigar Carousel next");
+    await waitForClientClickHandler(previous, "Cigar Carousel previous");
 
     await next.click();
     await expect(
-      activeCategoryCard(page, "Lighters"),
+      activeCarouselCard(cigarViewport, "Lighters"),
     ).toBeVisible();
 
     await previous.click();
     await expect(
-      activeCategoryCard(page, "Verde Classico"),
+      activeCarouselCard(cigarViewport, "Verde Classico"),
     ).toBeVisible();
 
     await previous.click();
     await expect(
-      activeCategoryCard(page, "Ashtrays"),
+      activeCarouselCard(cigarViewport, "Ashtrays"),
     ).toBeVisible();
     await expect(previous).toBeDisabled();
 
@@ -241,7 +260,7 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
       await next.click();
     }
     await expect(
-      activeCategoryCard(page, "Nocturne"),
+      activeCarouselCard(cigarViewport, "Nocturne"),
     ).toBeVisible();
     await expect(next).toBeDisabled();
 
@@ -249,13 +268,13 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
     await expect(previous).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(
-      activeCategoryCard(page, "Pipes"),
+      activeCarouselCard(cigarViewport, "Pipes"),
     ).toBeVisible();
     await expect(previous).toBeFocused();
 
     await page.keyboard.press("Space");
     await expect(
-      activeCategoryCard(page, "Vintage no. 88"),
+      activeCarouselCard(cigarViewport, "Vintage no. 88"),
     ).toBeVisible();
     await expect(previous).toBeFocused();
 
@@ -271,9 +290,21 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
     ] as const) {
       await page.setViewportSize(viewport);
       await gotoOver21Home(page);
+      const nextButton = page.getByRole("button", { name: "Next cigar category" });
 
-      await page.getByRole("button", { name: "Next cigar category" }).click();
-      await expect(activeCategoryCard(page, "Lighters")).toBeVisible();
+      await expectCarouselActiveCardReady(page, {
+        activeCardName: "Verde Classico",
+        label: `${viewport.width}px Cigar Carousel initial`,
+        viewportSelector: CIGAR_VIEWPORT_SELECTOR,
+      });
+      await waitForClientClickHandler(nextButton, "Cigar Carousel next");
+
+      await nextButton.click();
+      await expectCarouselActiveCardReady(page, {
+        activeCardName: "Lighters",
+        label: `${viewport.width}px Cigar Carousel after next`,
+        viewportSelector: CIGAR_VIEWPORT_SELECTOR,
+      });
 
       await expect
         .poll(
@@ -282,7 +313,7 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
               (
                 await getCarouselCenteringMetrics(
                   page,
-                  '[data-slot="cigar-carousel-viewport"]',
+                  CIGAR_VIEWPORT_SELECTOR,
                   "Lighters",
                 )
               ).centerDelta,
@@ -293,7 +324,7 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
 
       const metrics = await getCarouselCenteringMetrics(
         page,
-        '[data-slot="cigar-carousel-viewport"]',
+        CIGAR_VIEWPORT_SELECTOR,
         "Lighters",
       );
       expect(Math.abs(metrics.centerDelta)).toBeLessThanOrEqual(4);
@@ -314,6 +345,11 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
     for (const viewport of VIEWPORTS) {
       await page.setViewportSize(viewport);
       await gotoOver21Home(page);
+      await expectCarouselActiveCardReady(page, {
+        activeCardName: "Verde Classico",
+        label: `${viewport.width}px Cigar Carousel usable state`,
+        viewportSelector: CIGAR_VIEWPORT_SELECTOR,
+      });
 
       const metrics = await page.evaluate(
         ({ exemptSelectors, viewportWidth }) => {
@@ -334,9 +370,10 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
           const next = document.querySelector(
             'button[aria-label="Next cigar category"]',
           );
-          const active = document.querySelector(
-            'article[aria-current="true"]',
+          const cigarViewport = document.querySelector(
+            '[data-slot="cigar-carousel-viewport"]',
           );
+          const active = cigarViewport?.querySelector('article[aria-current="true"]');
 
           const isExempt = (el: Element) =>
             exemptSelectors.some((selector) => {
