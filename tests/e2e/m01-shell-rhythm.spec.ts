@@ -1,4 +1,9 @@
-import { expect, test, type Page } from "@playwright/test";
+import {
+  expect,
+  test,
+  waitForClientClickHandler,
+  type Page,
+} from "./support/e2e-test";
 
 const VIEWPORTS = [
   { width: 320, height: 800 },
@@ -67,8 +72,7 @@ async function expectDocumentContained(page: Page, label: string) {
 
 async function openMainMenu(page: Page) {
   const trigger = page.getByRole("button", { name: "Open main menu" });
-  await expect(trigger).toBeVisible();
-  await expect(trigger).toBeEnabled();
+  await waitForClientClickHandler(trigger, "main menu trigger");
   await trigger.focus();
   await expect(trigger).toBeFocused();
   await page.keyboard.press("Enter");
@@ -493,7 +497,7 @@ test.describe("V-01 Over-21 homepage shell rhythm", () => {
       await gotoOver21Home(page);
 
       const trigger = page.getByRole("button", { name: "Open main menu" });
-      await expect(trigger).toBeVisible();
+      await waitForClientClickHandler(trigger, "main menu trigger");
       await expect(
         page.getByRole("link", { name: "Go to Velarro homepage" }),
       ).toBeVisible();
