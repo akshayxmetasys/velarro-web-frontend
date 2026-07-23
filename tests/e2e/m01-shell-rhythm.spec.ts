@@ -44,6 +44,84 @@ async function gotoOver21Home(page: Page) {
   await expect(page.locator('[data-m01-section-stack="over21"]')).toBeVisible();
 }
 
+async function expectDocumentContained(page: Page, label: string) {
+  const metrics = await page.evaluate(() => {
+    const root = document.documentElement;
+    const body = document.body;
+
+    return {
+      bodyClientWidth: body.clientWidth,
+      bodyScrollWidth: body.scrollWidth,
+      clientWidth: root.clientWidth,
+      scrollWidth: root.scrollWidth,
+    };
+  });
+
+  expect(metrics.scrollWidth, `${label} document overflow`).toBeLessThanOrEqual(
+    metrics.clientWidth + 1,
+  );
+  expect(metrics.bodyScrollWidth, `${label} body overflow`).toBeLessThanOrEqual(
+    metrics.bodyClientWidth + 1,
+  );
+}
+
+async function openMainMenu(page: Page) {
+  const trigger = page.getByRole("button", { name: "Open main menu" });
+  await expect(trigger).toBeVisible();
+  await expect(trigger).toBeEnabled();
+  await trigger.focus();
+  await expect(trigger).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+  const dialog = page.getByRole("dialog", { name: "Estate Index" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toBeFocused();
+
+  return { dialog, trigger };
+}
+
+async function expectMenuLinkVisibleAndContained(
+  page: Page,
+  label: string,
+  href: string,
+) {
+  const link = page.getByRole("dialog", { name: "Estate Index" }).getByRole(
+    "link",
+    { name: label },
+  );
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute("href", href);
+
+  const box = await link.boundingBox();
+  const viewport = page.viewportSize();
+  expect(box, label).not.toBeNull();
+  expect(viewport, label).not.toBeNull();
+  expect(box!.x, label).toBeGreaterThanOrEqual(-1);
+  expect(box!.x + box!.width, label).toBeLessThanOrEqual(viewport!.width + 1);
+}
+
+async function focusSidebarPrimaryLinksWithKeyboard(page: Page) {
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("button", { name: "Dismiss main menu backdrop" }),
+  ).toBeFocused();
+
+  await page.keyboard.press("Tab");
+  const dialog = page.getByRole("dialog", { name: "Estate Index" });
+
+  await expect(dialog.getByRole("link", { name: "Estate Index" })).toBeFocused();
+
+  await page.keyboard.press("Tab");
+  await expect(dialog.getByRole("link", { name: "Partner" })).toBeFocused();
+
+  await page.keyboard.press("Tab");
+  await expect(dialog.getByRole("link", { name: "Our Story" })).toBeFocused();
+
+  await page.keyboard.press("Shift+Tab");
+  await expect(dialog.getByRole("link", { name: "Partner" })).toBeFocused();
+}
+
 test.describe("V-01 Over-21 homepage shell rhythm", () => {
   test.beforeEach(async ({ context }) => {
     await context.addCookies([
@@ -269,6 +347,11 @@ test.describe("V-01 Over-21 homepage shell rhythm", () => {
     await expect(nav.getByRole("link", { name: "The Estate" })).toBeVisible();
     await expect(nav.getByRole("link", { name: "Partner" })).toBeVisible();
     await expect(nav.getByRole("link", { name: "Our Story" })).toBeVisible();
+    await expect(page.getByRole("dialog", { name: "Estate Index" })).toHaveCount(
+      0,
+    );
+    await expect(nav.getByRole("link", { name: "Partner" })).toHaveCount(1);
+    await expect(nav.getByRole("link", { name: "Our Story" })).toHaveCount(1);
     await expect(
       nav.getByRole("button", { name: /Search \(deferred/i }),
     ).toBeVisible();
@@ -303,10 +386,94 @@ test.describe("V-01 Over-21 homepage shell rhythm", () => {
       const dialog = page.getByRole("dialog", { name: "Estate Index" });
       await expect(dialog).toBeVisible();
       await expect(dialog).toBeFocused();
+      await expectMenuLinkVisibleAndContained(page, "Partner", "/partner");
+      await expectMenuLinkVisibleAndContained(page, "Our Story", "/our-story");
+      await expectDocumentContained(page, `open mobile menu ${viewport.width}px`);
 
       await page.keyboard.press("Escape");
       await expect(dialog).toHaveCount(0);
       await expect(trigger).toBeFocused();
     }
+  });
+
+  test("restores Partner and Our Story in tablet and mobile keyboard navigation", async ({
+    page,
+  }) => {
+    for (const viewport of [
+      { width: 768, height: 1024 },
+      { width: 375, height: 812 },
+    ] as const) {
+      await page.setViewportSize(viewport);
+      await gotoOver21Home(page);
+
+      const { dialog, trigger } = await openMainMenu(page);
+      await expectMenuLinkVisibleAndContained(page, "Partner", "/partner");
+      await expectMenuLinkVisibleAndContained(page, "Our Story", "/our-story");
+
+      await focusSidebarPrimaryLinksWithKeyboard(page);
+
+      await page.keyboard.press("Escape");
+      await expect(dialog).toHaveCount(0);
+      await expect(trigger).toBeFocused();
+      await expectDocumentContained(page, `${viewport.width}px after Escape`);
+    }
+  });
+
+  test("navigates to Partner and Our Story from the drawer at tablet and mobile widths", async ({
+    page,
+  }) => {
+    for (const viewport of [
+      { width: 768, height: 1024 },
+      { width: 375, height: 812 },
+    ] as const) {
+      for (const destination of [
+        {
+          heading: "Partner with Velarro",
+          href: "/partner",
+          label: "Partner",
+        },
+        {
+          heading: "OUR STORY",
+          href: "/our-story",
+          label: "Our Story",
+        },
+      ] as const) {
+        await page.setViewportSize(viewport);
+        await gotoOver21Home(page);
+        await openMainMenu(page);
+
+        const link = page
+          .getByRole("dialog", { name: "Estate Index" })
+          .getByRole("link", { name: destination.label });
+        await expect(link).toBeVisible();
+        await link.focus();
+        await page.keyboard.press("Enter");
+
+        await expect(page).toHaveURL(new RegExp(`${destination.href}$`));
+        await expect(
+          page.getByRole("heading", { name: destination.heading }),
+        ).toBeVisible();
+        await expect(page.getByRole("dialog", { name: "Estate Index" })).toHaveCount(
+          0,
+        );
+        await page.keyboard.press("Tab");
+        await expectDocumentContained(
+          page,
+          `${viewport.width}px ${destination.label} navigation`,
+        );
+      }
+    }
+  });
+
+  test("keeps restored drawer links visible and contained at 320px", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await gotoOver21Home(page);
+
+    await openMainMenu(page);
+    await expectMenuLinkVisibleAndContained(page, "Partner", "/partner");
+    await expectMenuLinkVisibleAndContained(page, "Our Story", "/our-story");
+    await expectDocumentContained(page, "320px restored drawer links");
   });
 });

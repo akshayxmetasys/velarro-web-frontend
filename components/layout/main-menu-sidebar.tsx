@@ -11,6 +11,8 @@ export const MAIN_MENU_SIDEBAR_COMPONENT_SET_NODE = "14351:51939" as const;
 
 export const MAIN_MENU_ITEMS = [
   { label: "Estate Index", href: "/the-estate", implemented: true },
+  { label: "Partner", href: "/partner", implemented: true },
+  { label: "Our Story", href: "/our-story", implemented: true },
   { label: "The House", href: "/the-estate/the-house", implemented: true },
   { label: "The Vault", href: "/the-vault", implemented: true },
   { label: "Careers", href: "/careers", implemented: true },
