@@ -32,6 +32,46 @@ function activeCategoryCard(root: Page | Locator, name: string) {
   return root.getByRole("article", { name }).and(root.locator('[aria-current="true"]'));
 }
 
+async function getCarouselCenteringMetrics(
+  page: Page,
+  viewportSelector: string,
+  activeCardName: string,
+) {
+  return page.locator(viewportSelector).evaluate((viewport, cardName) => {
+    if (!(viewport instanceof HTMLElement)) {
+      throw new Error("Carousel viewport is not an HTMLElement");
+    }
+
+    const activeCard = Array.from(viewport.querySelectorAll("article")).find(
+      (card) =>
+        card.getAttribute("aria-current") === "true" &&
+        card.querySelector("h3")?.textContent?.trim() === cardName,
+    );
+
+    if (!(activeCard instanceof HTMLElement)) {
+      throw new Error(`Active card ${cardName} was not found`);
+    }
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const cardRect = activeCard.getBoundingClientRect();
+    const viewportCenter =
+      viewportRect.left + viewport.clientLeft + viewport.clientWidth / 2;
+    const cardCenter = cardRect.left + cardRect.width / 2;
+    const cardScrollLeft =
+      cardRect.left - viewportRect.left - viewport.clientLeft + viewport.scrollLeft;
+    const target =
+      cardScrollLeft - (viewport.clientWidth - cardRect.width) / 2;
+    const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+
+    return {
+      centerDelta: cardCenter - viewportCenter,
+      maxScroll,
+      scrollLeft: viewport.scrollLeft,
+      target,
+    };
+  }, activeCardName);
+}
+
 test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
   test.beforeEach(async ({ context }) => {
     await context.addCookies([
@@ -220,6 +260,52 @@ test.describe("V-02 Collector Hero + Cigar Carousel fidelity", () => {
     await expect(previous).toBeFocused();
 
     expect(consoleErrors).toEqual([]);
+  });
+
+  test("centers the active Cigar Carousel card after navigation at desktop and narrow widths", async ({
+    page,
+  }) => {
+    for (const viewport of [
+      { width: 1440, height: 900 },
+      { width: 375, height: 812 },
+    ] as const) {
+      await page.setViewportSize(viewport);
+      await gotoOver21Home(page);
+
+      await page.getByRole("button", { name: "Next cigar category" }).click();
+      await expect(activeCategoryCard(page, "Lighters")).toBeVisible();
+
+      await expect
+        .poll(
+          async () =>
+            Math.abs(
+              (
+                await getCarouselCenteringMetrics(
+                  page,
+                  '[data-slot="cigar-carousel-viewport"]',
+                  "Lighters",
+                )
+              ).centerDelta,
+            ),
+          { message: `${viewport.width}px Cigar Carousel active card centering` },
+        )
+        .toBeLessThanOrEqual(4);
+
+      const metrics = await getCarouselCenteringMetrics(
+        page,
+        '[data-slot="cigar-carousel-viewport"]',
+        "Lighters",
+      );
+      expect(Math.abs(metrics.centerDelta)).toBeLessThanOrEqual(4);
+
+      if (viewport.width === 375) {
+        expect(metrics.target).toBeGreaterThan(0);
+        expect(metrics.target).toBeLessThan(metrics.maxScroll);
+        expect(Math.abs(metrics.scrollLeft - metrics.target)).toBeLessThanOrEqual(
+          4,
+        );
+      }
+    }
   });
 
   test("keeps hero and carousel usable across required viewports without root overflow masking", async ({

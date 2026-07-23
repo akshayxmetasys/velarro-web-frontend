@@ -37,6 +37,46 @@ async function gotoOver21Home(page: Page) {
   await expect(page.locator('[data-m01-section-stack="over21"]')).toBeVisible();
 }
 
+async function getCarouselCenteringMetrics(
+  page: Page,
+  viewportSelector: string,
+  activeCardName: string,
+) {
+  return page.locator(viewportSelector).evaluate((viewport, cardName) => {
+    if (!(viewport instanceof HTMLElement)) {
+      throw new Error("Carousel viewport is not an HTMLElement");
+    }
+
+    const activeCard = Array.from(viewport.querySelectorAll("article")).find(
+      (card) =>
+        card.getAttribute("aria-current") === "true" &&
+        card.querySelector("h3")?.textContent?.trim() === cardName,
+    );
+
+    if (!(activeCard instanceof HTMLElement)) {
+      throw new Error(`Active card ${cardName} was not found`);
+    }
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const cardRect = activeCard.getBoundingClientRect();
+    const viewportCenter =
+      viewportRect.left + viewport.clientLeft + viewport.clientWidth / 2;
+    const cardCenter = cardRect.left + cardRect.width / 2;
+    const cardScrollLeft =
+      cardRect.left - viewportRect.left - viewport.clientLeft + viewport.scrollLeft;
+    const target =
+      cardScrollLeft - (viewport.clientWidth - cardRect.width) / 2;
+    const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+
+    return {
+      centerDelta: cardCenter - viewportCenter,
+      maxScroll,
+      scrollLeft: viewport.scrollLeft,
+      target,
+    };
+  }, activeCardName);
+}
+
 test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
   test.beforeEach(async ({ context }) => {
     await context.addCookies([
@@ -194,6 +234,60 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
     );
     expect(pageHeight).toBeGreaterThan(7400);
     expect(pageHeight).toBeLessThan(7900);
+  });
+
+  test("centers the active Estate Collection card after navigation at desktop and narrow widths", async ({
+    page,
+  }) => {
+    for (const viewport of [
+      { width: 1440, height: 900 },
+      { width: 375, height: 812 },
+    ] as const) {
+      await page.setViewportSize(viewport);
+      await gotoOver21Home(page);
+
+      await page
+        .getByRole("button", { name: "Next estate collection item" })
+        .click();
+      await expect(
+        page.getByRole("article", { name: "Roastery" }).and(
+          page.locator('[aria-current="true"]'),
+        ),
+      ).toBeVisible();
+
+      await expect
+        .poll(
+          async () =>
+            Math.abs(
+              (
+                await getCarouselCenteringMetrics(
+                  page,
+                  '[data-slot="estate-carousel-viewport"]',
+                  "Roastery",
+                )
+              ).centerDelta,
+            ),
+          {
+            message: `${viewport.width}px Estate Collection active card centering`,
+          },
+        )
+        .toBeLessThanOrEqual(4);
+
+      const metrics = await getCarouselCenteringMetrics(
+        page,
+        '[data-slot="estate-carousel-viewport"]',
+        "Roastery",
+      );
+      expect(Math.abs(metrics.centerDelta)).toBeLessThanOrEqual(4);
+
+      if (viewport.width === 375) {
+        expect(metrics.target).toBeGreaterThan(0);
+        expect(metrics.target).toBeLessThan(metrics.maxScroll);
+        expect(Math.abs(metrics.scrollLeft - metrics.target)).toBeLessThanOrEqual(
+          4,
+        );
+      }
+    }
   });
 
   test("keeps Estate, Store/Lounge, and Footer usable across required viewports without root overflow masking", async ({

@@ -7,6 +7,7 @@ import {
   CIGAR_CAROUSEL_CARDS,
   CIGAR_CAROUSEL_INITIAL_ACTIVE_INDEX,
 } from "@/lib/m01-home/cigar-carousel-data";
+import { calculateCenteredScrollLeft } from "@/lib/m01-home/carousel-centering";
 import { cn } from "@/lib/cn";
 import Image from "next/image";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
@@ -80,11 +81,17 @@ export function CigarCarouselSection() {
       return;
     }
 
-    const viewportWidth = viewport.clientWidth;
-    const target =
-      activeCard.offsetLeft - (viewportWidth - activeCard.offsetWidth) / 2;
-    const maxScroll = Math.max(0, viewport.scrollWidth - viewportWidth);
-    const nextScrollLeft = Math.min(Math.max(0, target), maxScroll);
+    const viewportRect = viewport.getBoundingClientRect();
+    const activeCardRect = activeCard.getBoundingClientRect();
+    const nextScrollLeft = calculateCenteredScrollLeft({
+      viewportLeft: viewportRect.left,
+      viewportClientLeft: viewport.clientLeft,
+      viewportClientWidth: viewport.clientWidth,
+      viewportScrollLeft: viewport.scrollLeft,
+      viewportScrollWidth: viewport.scrollWidth,
+      activeCardLeft: activeCardRect.left,
+      activeCardWidth: activeCardRect.width,
+    });
 
     if (Math.abs(viewport.scrollLeft - nextScrollLeft) < 1) {
       return;
