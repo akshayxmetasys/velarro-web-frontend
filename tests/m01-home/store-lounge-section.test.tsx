@@ -100,6 +100,21 @@ describe("StoreLoungeSection", () => {
     expect(contained).toHaveClass("mx-auto", M01_CONTAINED_SECTION_WIDTH_CLASS);
   });
 
+  it("uses a consistent responsive panel and heading width contract", () => {
+    const { container } = render(<StoreLoungeSection />);
+
+    const panel = container.querySelector('[data-slot="store-lounge-content"]');
+    const heading = screen.getByRole("heading", {
+      level: 2,
+      name: "FIND A STORE & LOUNGE",
+    });
+
+    expect(panel).toHaveClass("w-[1159px]", "max-w-[calc(100%-32px)]");
+    expect(panel).not.toHaveClass("w-[737px]");
+    expect(heading).toHaveClass("w-full", "max-w-full");
+    expect(heading).not.toHaveClass("w-[1159px]");
+  });
+
   it("matches the Figma overlay, glass panel, and crop treatment", () => {
     const { container } = render(<StoreLoungeSection />);
 

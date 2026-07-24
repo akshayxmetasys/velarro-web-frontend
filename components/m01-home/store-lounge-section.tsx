@@ -48,12 +48,12 @@ export function StoreLoungeSection() {
         />
 
         <div
-          className="absolute left-1/2 top-[44.13%] flex w-[737px] max-w-[calc(100%-32px)] -translate-x-1/2 flex-col items-center gap-[20px] rounded-[24px] bg-[rgba(29,28,26,0.6)] py-[24px]"
+          className="absolute left-1/2 top-[44.13%] flex w-[1159px] max-w-[calc(100%-32px)] -translate-x-1/2 flex-col items-center gap-[20px] rounded-[24px] bg-[rgba(29,28,26,0.6)] py-[24px]"
           data-slot="store-lounge-content"
         >
           <h2
             id="store-lounge-heading"
-            className="w-[1159px] max-w-full text-center font-[family-name:var(--velarro-display-light-font-family)] text-[40px] font-light uppercase leading-[var(--velarro-display-light-line-height)] tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[56px] desktop:text-[length:var(--velarro-display-light-font-size)]"
+            className="w-full max-w-full text-center font-[family-name:var(--velarro-display-light-font-family)] text-[40px] font-light uppercase leading-[var(--velarro-display-light-line-height)] tracking-[var(--velarro-display-light-letter-spacing)] text-text-text-white tablet:text-[56px] desktop:text-[length:var(--velarro-display-light-font-size)]"
           >
             FIND A STORE &amp; LOUNGE
           </h2>
