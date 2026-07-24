@@ -109,10 +109,17 @@ describe("StoreLoungeSection", () => {
       name: "FIND A STORE & LOUNGE",
     });
 
-    expect(panel).toHaveClass("w-[1159px]", "max-w-[calc(100%-32px)]");
-    expect(panel).not.toHaveClass("w-[737px]");
-    expect(heading).toHaveClass("w-full", "max-w-full");
-    expect(heading).not.toHaveClass("w-[1159px]");
+    expect(panel).toHaveClass(
+      "w-[737px]",
+      "max-w-[calc(100%-32px)]",
+      "overflow-visible",
+    );
+    expect(panel).not.toHaveClass("w-[1159px]");
+    expect(heading).toHaveClass(
+      "w-[1159px]",
+      "max-w-[calc(100vw-32px)]",
+    );
+    expect(heading).not.toHaveClass("max-w-full", "w-full");
   });
 
   it("matches the Figma overlay, glass panel, and crop treatment", () => {
