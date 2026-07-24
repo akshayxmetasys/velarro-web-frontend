@@ -30,6 +30,40 @@ const THE_ESTATE_FILTERS = [
   "ENJOYMENT TIME",
 ] as const;
 
+/** Intensity expectations mirrored from the-estate-data (do not hardcode one global). */
+const THE_ESTATE_PRODUCT_INTENSITY = [
+  {
+    id: "limited-compendium-salomones",
+    intensityLabel: "Intensity",
+    intensityFilled: 5,
+  },
+  {
+    id: "grand-cru-toro",
+    intensityLabel: "Intensity",
+    intensityFilled: 4,
+  },
+  {
+    id: "black-label-reserve-churchill",
+    intensityLabel: "Intensity",
+    intensityFilled: 4,
+  },
+  {
+    id: "platinum-celebration-gran-churchill",
+    intensityLabel: "Intensity",
+    intensityFilled: 4,
+  },
+  {
+    id: "centennial-reserve-toro-gordo",
+    intensityLabel: "Intensity",
+    intensityFilled: 5,
+  },
+  {
+    id: "primera-cosecha-petit-corona",
+    intensityLabel: "Intensity",
+    intensityFilled: 2,
+  },
+] as const;
+
 /** Explicit local exemption: category rail may scroll horizontally when narrow. */
 const LOCAL_OVERFLOW_EXEMPT_SELECTORS = [
   '[data-slot="the-estate-category-rail"]',
@@ -555,6 +589,168 @@ test.describe("V-07a The Estate fidelity", () => {
       const footer = page.getByRole("contentinfo");
       await footer.scrollIntoViewIfNeeded();
       await expect(footer).toBeVisible();
+    }
+  });
+
+  test("keeps the selected Estate category fully visible and semantically current", async ({
+    page,
+  }) => {
+    const requiredViewports = [
+      { width: 320, height: 800 },
+      { width: 375, height: 812 },
+      { width: 390, height: 844 },
+      { width: 768, height: 1024 },
+      { width: 1440, height: 900 },
+    ] as const;
+
+    for (const viewport of requiredViewports) {
+      await page.setViewportSize(viewport);
+      await gotoEstate(page);
+
+      const categoryRail = page.locator(
+        '[data-slot="the-estate-category-rail"]',
+      );
+      await expect(categoryRail).toBeVisible();
+
+      await expect
+        .poll(async () => categoryRail.evaluate((el) => el.scrollLeft))
+        .toBe(0);
+
+      const tiles = page.locator('[data-slot="the-estate-category-tile"]');
+      await expect(tiles).toHaveCount(10);
+
+      const selectedTile = tiles.first();
+      await expect(selectedTile).toHaveAttribute("aria-current", "true");
+      await expect(selectedTile).toHaveAttribute(
+        "data-category-selected",
+        "true",
+      );
+      await expect(selectedTile.getByRole("heading", { level: 3 })).toHaveText(
+        "ALL SERIES",
+      );
+
+      for (let i = 1; i < 10; i += 1) {
+        await expect(tiles.nth(i)).not.toHaveAttribute("aria-current");
+        await expect(tiles.nth(i)).toHaveAttribute(
+          "data-category-selected",
+          "false",
+        );
+      }
+
+      await expect(categoryRail).toHaveAttribute("role", "list");
+      await expect(selectedTile).toHaveAttribute("role", "listitem");
+
+      const geometry = await page.evaluate(() => {
+        const rail = document.querySelector(
+          '[data-slot="the-estate-category-rail"]',
+        ) as HTMLElement | null;
+        const selected = document.querySelector(
+          '[data-slot="the-estate-category-tile"][data-category-selected="true"]',
+        ) as HTMLElement | null;
+        const surface = selected?.querySelector(
+          '[data-image-status="deferred"]',
+        ) as HTMLElement | null;
+        const label = selected?.querySelector("h3") as HTMLElement | null;
+        if (!rail || !selected || !surface || !label) {
+          return null;
+        }
+
+        const railRect = rail.getBoundingClientRect();
+        const surfaceRect = surface.getBoundingClientRect();
+        const labelRect = label.getBoundingClientRect();
+        const style = getComputedStyle(rail);
+        const padL = parseFloat(style.paddingLeft);
+        const padR = parseFloat(style.paddingRight);
+        const contentLeft = railRect.left + padL;
+        const contentRight = railRect.right - padR;
+
+        return {
+          scrollLeft: rail.scrollLeft,
+          surfaceWidth: Number(surfaceRect.width.toFixed(2)),
+          surfaceHeight: Number(surfaceRect.height.toFixed(2)),
+          leftInside: surfaceRect.left >= contentLeft - 0.5,
+          rightInside: surfaceRect.right <= contentRight + 0.5,
+          labelVisible:
+            labelRect.width > 0 &&
+            labelRect.left >= contentLeft - 0.5 &&
+            labelRect.right <= contentRight + 0.5,
+          railScrollable: rail.scrollWidth > rail.clientWidth + 1,
+          documentScrollWidth: document.documentElement.scrollWidth,
+          documentClientWidth: document.documentElement.clientWidth,
+          bodyScrollWidth: document.body.scrollWidth,
+          bodyClientWidth: document.body.clientWidth,
+          rootOverflowX: getComputedStyle(document.documentElement).overflowX,
+          bodyOverflowX: getComputedStyle(document.body).overflowX,
+          pageOverflowX: getComputedStyle(
+            document.querySelector('[data-slot="the-estate-page"]')!,
+          ).overflowX,
+          mainOverflowX: getComputedStyle(
+            document.querySelector('[data-slot="the-estate-main"]')!,
+          ).overflowX,
+          railOverflowX: style.overflowX,
+          selectedHasEnabledControl: Boolean(
+            selected.querySelector("a, button:not([disabled])"),
+          ),
+          ariaSelectedPresent: Boolean(
+            document.querySelector(
+              '[data-slot="the-estate-category-tile"][aria-selected]',
+            ),
+          ),
+        };
+      });
+
+      expect(geometry, `${viewport.width} geometry`).not.toBeNull();
+      expect(geometry!.scrollLeft).toBe(0);
+      expect(Math.abs(geometry!.surfaceWidth - 136)).toBeLessThanOrEqual(
+        SIZE_TOLERANCE_PX,
+      );
+      expect(Math.abs(geometry!.surfaceHeight - 136)).toBeLessThanOrEqual(
+        SIZE_TOLERANCE_PX,
+      );
+      expect(geometry!.leftInside, `${viewport.width} left border`).toBe(true);
+      expect(geometry!.rightInside, `${viewport.width} right border`).toBe(
+        true,
+      );
+      expect(geometry!.labelVisible, `${viewport.width} label`).toBe(true);
+      expect(geometry!.documentScrollWidth).toBeLessThanOrEqual(
+        geometry!.documentClientWidth + 1,
+      );
+      expect(geometry!.bodyScrollWidth).toBeLessThanOrEqual(
+        geometry!.bodyClientWidth + 1,
+      );
+      expect(geometry!.rootOverflowX).not.toMatch(/hidden|clip/);
+      expect(geometry!.bodyOverflowX).not.toMatch(/hidden|clip/);
+      expect(geometry!.pageOverflowX).not.toMatch(/hidden|clip/);
+      expect(geometry!.mainOverflowX).not.toMatch(/hidden|clip/);
+      expect(geometry!.railOverflowX).toBe("auto");
+      expect(geometry!.selectedHasEnabledControl).toBe(false);
+      expect(geometry!.ariaSelectedPresent).toBe(false);
+      if (viewport.width <= 768) {
+        expect(geometry!.railScrollable).toBe(true);
+      }
+
+      await expect(
+        page.getByRole("button", {
+          name: "Next category set (deferred: category navigation is not approved for this scope)",
+        }),
+      ).toBeDisabled();
+
+      for (const product of THE_ESTATE_PRODUCT_INTENSITY) {
+        const card = page.locator(
+          `[data-slot="the-estate-product-card"][data-product-id="${product.id}"]`,
+        );
+        await expect(
+          card.locator('[data-slot="the-estate-intensity-value"]'),
+        ).toHaveText(
+          `Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`,
+        );
+        await expect(
+          card.locator('[data-slot="the-estate-intensity-dots"]'),
+        ).toHaveAttribute("aria-hidden", "true");
+        await expect(
+          card.locator('[data-slot="the-estate-intensity-dots"] > span'),
+        ).toHaveCount(5);
+      }
     }
   });
 });

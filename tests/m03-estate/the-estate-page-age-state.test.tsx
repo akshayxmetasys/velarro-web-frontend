@@ -275,20 +275,129 @@ describe("TheEstatePageByAgeState", () => {
     const rail = container.querySelector(
       '[data-slot="the-estate-category-rail"]',
     );
+    expect(rail).toHaveAttribute("role", "list");
     expect(rail).toHaveAttribute("aria-label", "Collector Series categories");
     expect(rail).toHaveClass("overflow-x-auto");
+    expect(rail?.className).not.toMatch(/overflow-(hidden|clip)/);
 
+    expect(tiles[0]).toHaveAttribute("role", "listitem");
     expect(tiles[0]).toHaveAttribute("data-category-selected", "true");
+    expect(tiles[0]).toHaveAttribute("aria-current", "true");
+    expect(tiles[0]).toHaveClass("w-[136px]");
+    expect(tiles[0]).not.toHaveClass("w-[120px]");
+    expect(tiles[0]).not.toHaveAttribute("aria-selected");
     expect(
-      within(tiles[0] as HTMLElement).getByLabelText(
-        "ALL SERIES category image deferred",
-      ),
+      within(tiles[0] as HTMLElement).getByRole("img", {
+        name: "ALL SERIES category image deferred",
+      }),
     ).toHaveClass("size-[136px]");
+
+    for (const tile of Array.from(tiles).slice(1)) {
+      expect(tile).toHaveAttribute("role", "listitem");
+      expect(tile).toHaveAttribute("data-category-selected", "false");
+      expect(tile).not.toHaveAttribute("aria-current");
+      expect(tile).not.toHaveAttribute("aria-selected");
+      expect(tile).toHaveClass("w-[120px]");
+      expect(tile.querySelector("a")).toBeNull();
+      expect(tile.querySelector("button")).toBeNull();
+    }
 
     for (const category of THE_ESTATE_CATEGORY_LABELS) {
       expect(
-        screen.getByLabelText(`${category.label} category image deferred`),
+        screen.getByRole("img", {
+          name: `${category.label} category image deferred`,
+        }),
       ).toHaveAttribute("data-image-status", "deferred");
+    }
+
+    expect(
+      screen.getByRole("button", {
+        name: "Next category set (deferred: category navigation is not approved for this scope)",
+      }),
+    ).toBeDisabled();
+  });
+
+  it("announces each product intensity value while keeping dots decorative", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+
+    const cards = container.querySelectorAll(
+      '[data-slot="the-estate-product-card"]',
+    );
+    expect(cards).toHaveLength(THE_ESTATE_PRODUCTS.length);
+
+    for (const product of THE_ESTATE_PRODUCTS) {
+      const card = screen.getByText(product.name).closest("article");
+      expect(card).not.toBeNull();
+
+      const intensityValue = within(card as HTMLElement).getByText(
+        `Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`,
+      );
+      expect(intensityValue).toHaveAttribute(
+        "data-slot",
+        "the-estate-intensity-value",
+      );
+      expect(intensityValue).toHaveClass("sr-only");
+
+      const dots = (card as HTMLElement).querySelector(
+        '[data-slot="the-estate-intensity-dots"]',
+      );
+      expect(dots).not.toBeNull();
+      expect(dots).toHaveAttribute("aria-hidden", "true");
+      expect(dots!.querySelectorAll("span")).toHaveLength(5);
+      expect(dots!.querySelectorAll(".bg-border-strong")).toHaveLength(
+        product.intensityFilled,
+      );
+      expect(dots!.querySelectorAll(".border-border-strong")).toHaveLength(
+        5 - product.intensityFilled,
+      );
+    }
+
+    const intensityValues = container.querySelectorAll(
+      '[data-slot="the-estate-intensity-value"]',
+    );
+    expect(intensityValues).toHaveLength(THE_ESTATE_PRODUCTS.length);
+    const spokenValues = Array.from(intensityValues).map(
+      (node) => node.textContent ?? "",
+    );
+    expect(new Set(spokenValues).size).toBeGreaterThan(1);
+    expect(spokenValues).toEqual(
+      THE_ESTATE_PRODUCTS.map(
+        (product) =>
+          `Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`,
+      ),
+    );
+  });
+
+  it("exposes the current Estate category and prevents selected-rail clipping contract", () => {
+    const { container } = render(
+      <TheEstatePageByAgeState ageState="over21" />,
+    );
+
+    const rail = container.querySelector(
+      '[data-slot="the-estate-category-rail"]',
+    );
+    const tiles = container.querySelectorAll(
+      '[data-slot="the-estate-category-tile"]',
+    );
+    const selected = tiles[0] as HTMLElement;
+    const selectedSurface = within(selected).getByRole("img", {
+      name: "ALL SERIES category image deferred",
+    });
+
+    expect(rail).toHaveAttribute("role", "list");
+    expect(rail).toHaveClass("overflow-x-auto");
+    expect(rail?.className).not.toMatch(/overflow-(hidden|clip)/);
+    expect(selected).toHaveAttribute("aria-current", "true");
+    expect(selected).toHaveClass("w-[136px]");
+    expect(selectedSurface).toHaveClass("size-[136px]");
+    expect(selected.className).not.toMatch(/w-\[120px\]/);
+    expect(container.innerHTML).not.toContain('aria-selected="');
+
+    for (const tile of Array.from(tiles).slice(1)) {
+      expect(tile).not.toHaveAttribute("aria-current");
+      expect(tile).toHaveClass("w-[120px]");
     }
 
     expect(
