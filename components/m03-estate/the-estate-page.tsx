@@ -192,8 +192,14 @@ function CategoryRail() {
           Local horizontal scroll for narrow viewports only. Must not expand
           document width. Category imagery remains deferred (neutral surfaces).
         */}
+        {/*
+          Figma 16604:97510 / 16284:45269: selected ALL SERIES tile frame is
+          136px wide with a 136px surface. Non-selected tiles remain 120px with
+          111px surfaces. Sizing the selected track to 136px contains the
+          selected chrome at scrollLeft 0 without rail padding or overflow masking.
+        */}
         <div
-          role="region"
+          role="list"
           aria-label="Collector Series categories"
           data-slot="the-estate-category-rail"
           className="flex min-w-0 flex-1 gap-[40px] overflow-x-auto pb-[8px]"
@@ -203,12 +209,18 @@ function CategoryRail() {
             return (
               <article
                 key={category.id}
+                role="listitem"
                 data-slot="the-estate-category-tile"
                 data-category-id={category.id}
                 data-category-selected={isSelected ? "true" : "false"}
-                className="flex w-[120px] shrink-0 flex-col items-center gap-[15px]"
+                aria-current={isSelected ? "true" : undefined}
+                className={cn(
+                  "flex shrink-0 flex-col items-center gap-[15px]",
+                  isSelected ? "w-[136px]" : "w-[120px]",
+                )}
               >
                 <div
+                  role="img"
                   aria-label={`${category.label} category image deferred`}
                   data-image-status="deferred"
                   className={cn(
@@ -321,10 +333,19 @@ function ProductCard({ product }: { product: EstateProduct }) {
             <span>{product.enjoymentTime}</span>
           </p>
           <div className="flex items-center gap-[13px]">
-            <span className="font-[family-name:var(--velarro-ui-elements-secondary-font-family)] text-[12px] font-normal leading-none text-text-body-text">
+            <span
+              aria-hidden="true"
+              className="font-[family-name:var(--velarro-ui-elements-secondary-font-family)] text-[12px] font-normal leading-none text-text-body-text"
+            >
               {product.intensityLabel}
             </span>
             <IntensityDots filled={product.intensityFilled} />
+            <span
+              className="sr-only"
+              data-slot="the-estate-intensity-value"
+            >
+              {`${product.intensityLabel}: ${product.intensityFilled} out of 5`}
+            </span>
           </div>
           <p className="min-h-[36px] font-[family-name:var(--velarro-ui-elements-secondary-font-family)] text-[10px] font-light leading-none text-text-body-text">
             {product.notes}
