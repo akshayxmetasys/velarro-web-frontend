@@ -24,6 +24,14 @@ const VIEWPORTS = [
 const GAP_TOLERANCE_PX = 4;
 const EXPECTED_SECTION_GAP_PX = 80;
 const SIZE_TOLERANCE_PX = 1;
+const STORE_LOUNGE_PANEL_WIDTH_PX = 737;
+const STORE_LOUNGE_PANEL_HEIGHT_PX = 197;
+const STORE_LOUNGE_HEADING_WIDTH_PX = 1159;
+const STORE_LOUNGE_HEADING_HEIGHT_PX = 86;
+const STORE_LOUNGE_HEADING_PANEL_OVERFLOW_PX = 211;
+const STORE_LOUNGE_CONTENT_TOP_PX = 470;
+const STORE_LOUNGE_CENTER_TOLERANCE_PX = 2;
+const STORE_LOUNGE_HEIGHT_TOLERANCE_PX = 10;
 
 /**
  * Existing V-01/V-02 local carousel overflow only. V-05 does not add exemptions.
@@ -223,6 +231,111 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
       }),
     ).toBeDisabled();
 
+    const storeLayout = await store.evaluate(() => {
+      const contained = document.querySelector(
+        '[data-slot="store-lounge-contained-section"]',
+      );
+      const panel = document.querySelector('[data-slot="store-lounge-content"]');
+      const heading = document.querySelector("#store-lounge-heading");
+      const cta = document.querySelector('[data-slot="store-lounge-cta"]');
+      if (!contained || !panel || !heading || !cta) {
+        throw new Error("Store/Lounge layout elements were not found");
+      }
+
+      const rect = (element: Element) => {
+        const box = element.getBoundingClientRect();
+        return {
+          bottom: box.bottom,
+          height: box.height,
+          left: box.left,
+          right: box.right,
+          top: box.top,
+          width: box.width,
+          x: box.x,
+          y: box.y,
+        };
+      };
+      const center = (box: { left: number; width: number }) =>
+        box.left + box.width / 2;
+      const viewportWidth = window.innerWidth;
+      const range = document.createRange();
+      range.selectNodeContents(heading);
+      const lineRects = Array.from(range.getClientRects()).filter(
+        (box) => box.width > 0 && box.height > 0,
+      );
+      range.detach();
+
+      const containedBox = rect(contained);
+      const panelBox = rect(panel);
+      const headingBox = rect(heading);
+      const ctaBox = rect(cta);
+
+      return {
+        ctaBox,
+        ctaInsidePanel:
+          ctaBox.left >= panelBox.left - 0.5 &&
+          ctaBox.right <= panelBox.right + 0.5,
+        ctaCenterDeltaFromPanel: center(ctaBox) - center(panelBox),
+        documentScrollWidth: document.documentElement.scrollWidth,
+        documentClientWidth: document.documentElement.clientWidth,
+        headingBox,
+        headingCenterDeltaFromPanel: center(headingBox) - center(panelBox),
+        headingExtendsBeyondPanel:
+          headingBox.left < panelBox.left && headingBox.right > panelBox.right,
+        headingInsideViewport:
+          headingBox.left >= -0.5 && headingBox.right <= viewportWidth + 0.5,
+        headingInsideOwnBox: heading.scrollWidth <= heading.clientWidth + 1,
+        headingLeftOverflowFromPanel: panelBox.left - headingBox.left,
+        headingRightOverflowFromPanel: headingBox.right - panelBox.right,
+        lineCount: lineRects.length,
+        panelBox,
+        panelCenterDeltaFromContained: center(panelBox) - center(containedBox),
+        panelTopWithinContained: panelBox.top - containedBox.top,
+      };
+    });
+
+    expect(storeLayout.lineCount).toBe(1);
+    expect(storeLayout.documentScrollWidth).toBeLessThanOrEqual(
+      storeLayout.documentClientWidth + 1,
+    );
+    expect(storeLayout.headingExtendsBeyondPanel).toBe(true);
+    expect(storeLayout.headingInsideViewport).toBe(true);
+    expect(storeLayout.headingInsideOwnBox).toBe(true);
+    expect(Math.abs(storeLayout.panelBox.width - STORE_LOUNGE_PANEL_WIDTH_PX))
+      .toBeLessThanOrEqual(SIZE_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.panelBox.height - STORE_LOUNGE_PANEL_HEIGHT_PX))
+      .toBeLessThanOrEqual(STORE_LOUNGE_HEIGHT_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.headingBox.width - STORE_LOUNGE_HEADING_WIDTH_PX))
+      .toBeLessThanOrEqual(SIZE_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.headingBox.height - STORE_LOUNGE_HEADING_HEIGHT_PX))
+      .toBeLessThanOrEqual(STORE_LOUNGE_HEIGHT_TOLERANCE_PX);
+    expect(
+      Math.abs(
+        storeLayout.headingLeftOverflowFromPanel -
+          STORE_LOUNGE_HEADING_PANEL_OVERFLOW_PX,
+      ),
+    ).toBeLessThanOrEqual(STORE_LOUNGE_CENTER_TOLERANCE_PX);
+    expect(
+      Math.abs(
+        storeLayout.headingRightOverflowFromPanel -
+          STORE_LOUNGE_HEADING_PANEL_OVERFLOW_PX,
+      ),
+    ).toBeLessThanOrEqual(STORE_LOUNGE_CENTER_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.ctaBox.width - 355)).toBeLessThanOrEqual(
+      SIZE_TOLERANCE_PX,
+    );
+    expect(storeLayout.ctaInsidePanel).toBe(true);
+    expect(
+      Math.abs(storeLayout.panelTopWithinContained - STORE_LOUNGE_CONTENT_TOP_PX),
+    ).toBeLessThanOrEqual(STORE_LOUNGE_CENTER_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.panelCenterDeltaFromContained))
+      .toBeLessThanOrEqual(STORE_LOUNGE_CENTER_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.headingCenterDeltaFromPanel))
+      .toBeLessThanOrEqual(STORE_LOUNGE_CENTER_TOLERANCE_PX);
+    expect(Math.abs(storeLayout.ctaCenterDeltaFromPanel)).toBeLessThanOrEqual(
+      STORE_LOUNGE_CENTER_TOLERANCE_PX,
+    );
+
     await expect(
       footer.getByRole("heading", { level: 2, name: "Stay in Know" }),
     ).toBeVisible();
@@ -330,6 +443,10 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
           const storeContent = store?.querySelector(
             '[data-slot="store-lounge-content"]',
           );
+          const storeHeading = store?.querySelector("#store-lounge-heading");
+          const storeCta = store?.querySelector(
+            '[data-slot="store-lounge-cta"]',
+          );
           const footer = document.querySelector(
             '[data-figma-node="14468:34842"]',
           );
@@ -379,6 +496,41 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
           };
 
           const inside = (el: Element | null | undefined) => {
+            if (!el) {
+              return false;
+            }
+            const rect = el.getBoundingClientRect();
+            return rect.left >= -1 && rect.right <= viewportWidth + 1;
+          };
+          const containedBy = (
+            child: Element | null | undefined,
+            parent: Element | null | undefined,
+          ) => {
+            if (!child || !parent) {
+              return false;
+            }
+            const childRect = child.getBoundingClientRect();
+            const parentRect = parent.getBoundingClientRect();
+            return (
+              childRect.left >= parentRect.left - 1 &&
+              childRect.right <= parentRect.right + 1 &&
+              childRect.top >= parentRect.top - 1 &&
+              childRect.bottom <= parentRect.bottom + 1
+            );
+          };
+          const textLineCount = (element: Element | null | undefined) => {
+            if (!element) {
+              return 0;
+            }
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            const count = Array.from(range.getClientRects()).filter(
+              (rect) => rect.width > 0 && rect.height > 0,
+            ).length;
+            range.detach();
+            return count;
+          };
+          const viewportContained = (el: Element | null | undefined) => {
             if (!el) {
               return false;
             }
@@ -437,6 +589,12 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
             }),
             storeInside: inside(store),
             storeContentInside: inside(storeContent),
+            storeHeadingInsideViewport: viewportContained(storeHeading),
+            storeHeadingInsideOwnBox:
+              storeHeading instanceof HTMLElement &&
+              storeHeading.scrollWidth <= storeHeading.clientWidth + 1,
+            storeHeadingLineCount: textLineCount(storeHeading),
+            storeCtaInsideContent: containedBy(storeCta, storeContent),
             footerInside: inside(footer),
             newsletterInside: inside(newsletter),
             legalInside: inside(legal),
@@ -474,6 +632,22 @@ test.describe("V-05 Estate + Store/Lounge + Footer fidelity", () => {
       expect(
         metrics.storeContentInside,
         `${viewport.width} store content`,
+      ).toBe(true);
+      expect(
+        metrics.storeHeadingInsideViewport,
+        `${viewport.width} store heading inside viewport`,
+      ).toBe(true);
+      expect(
+        metrics.storeHeadingInsideOwnBox,
+        `${viewport.width} store heading not clipped`,
+      ).toBe(true);
+      expect(
+        metrics.storeHeadingLineCount,
+        `${viewport.width} store heading readable lines`,
+      ).toBeGreaterThan(0);
+      expect(
+        metrics.storeCtaInsideContent,
+        `${viewport.width} store CTA inside content`,
       ).toBe(true);
       expect(metrics.footerInside, `${viewport.width} footer`).toBe(true);
       expect(
