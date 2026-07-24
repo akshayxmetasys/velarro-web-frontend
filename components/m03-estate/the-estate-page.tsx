@@ -344,7 +344,7 @@ function ProductCard({ product }: { product: EstateProduct }) {
               className="sr-only"
               data-slot="the-estate-intensity-value"
             >
-              {`Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`}
+              {`${product.intensityLabel}: ${product.intensityFilled} out of 5`}
             </span>
           </div>
           <p className="min-h-[36px] font-[family-name:var(--velarro-ui-elements-secondary-font-family)] text-[10px] font-light leading-none text-text-body-text">

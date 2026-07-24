@@ -332,13 +332,24 @@ describe("TheEstatePageByAgeState", () => {
       expect(card).not.toBeNull();
 
       const intensityValue = within(card as HTMLElement).getByText(
-        `Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`,
+        `${product.intensityLabel}: ${product.intensityFilled} out of 5`,
       );
       expect(intensityValue).toHaveAttribute(
         "data-slot",
         "the-estate-intensity-value",
       );
       expect(intensityValue).toHaveClass("sr-only");
+
+      const visibleIntensityLabel = Array.from(
+        (card as HTMLElement).querySelectorAll("span"),
+      ).find(
+        (span) =>
+          span.getAttribute("aria-hidden") === "true" &&
+          span.textContent === product.intensityLabel &&
+          !span.hasAttribute("data-slot"),
+      );
+      expect(visibleIntensityLabel).toBeDefined();
+      expect(visibleIntensityLabel).toHaveAttribute("aria-hidden", "true");
 
       const dots = (card as HTMLElement).querySelector(
         '[data-slot="the-estate-intensity-dots"]',
@@ -365,9 +376,10 @@ describe("TheEstatePageByAgeState", () => {
     expect(spokenValues).toEqual(
       THE_ESTATE_PRODUCTS.map(
         (product) =>
-          `Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`,
+          `${product.intensityLabel}: ${product.intensityFilled} out of 5`,
       ),
     );
+    expect(container.innerHTML).not.toContain("Intensity: Intensity,");
   });
 
   it("exposes the current Estate category and prevents selected-rail clipping contract", () => {

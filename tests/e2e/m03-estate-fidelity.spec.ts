@@ -742,7 +742,7 @@ test.describe("V-07a The Estate fidelity", () => {
         await expect(
           card.locator('[data-slot="the-estate-intensity-value"]'),
         ).toHaveText(
-          `Intensity: ${product.intensityLabel}, ${product.intensityFilled} out of 5`,
+          `${product.intensityLabel}: ${product.intensityFilled} out of 5`,
         );
         await expect(
           card.locator('[data-slot="the-estate-intensity-dots"]'),
@@ -750,7 +750,13 @@ test.describe("V-07a The Estate fidelity", () => {
         await expect(
           card.locator('[data-slot="the-estate-intensity-dots"] > span'),
         ).toHaveCount(5);
+        await expect(
+          card.locator('[data-slot="the-estate-intensity-value"]'),
+        ).not.toContainText("Intensity: Intensity,");
       }
+
+      const estatePage = page.locator('[data-slot="the-estate-page"]');
+      await expect(estatePage).not.toContainText("Intensity: Intensity,");
     }
   });
 });
