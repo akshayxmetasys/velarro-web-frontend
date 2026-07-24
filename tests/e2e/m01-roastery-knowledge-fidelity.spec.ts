@@ -3,10 +3,17 @@ import { expect, test, type Page } from "./support/e2e-test";
 const VIEWPORTS = [
   { width: 320, height: 800 },
   { width: 375, height: 812 },
+  { width: 390, height: 844 },
   { width: 768, height: 1024 },
   { width: 1024, height: 768 },
   { width: 1280, height: 800 },
   { width: 1440, height: 900 },
+] as const;
+
+const NARROW_CARD_VIEWPORTS = [
+  { width: 320, height: 800 },
+  { width: 375, height: 812 },
+  { width: 390, height: 844 },
 ] as const;
 
 const GAP_TOLERANCE_PX = 4;
@@ -349,6 +356,155 @@ test.describe("V-03 Roastery Hero + Cigar Knowledge fidelity", () => {
       const footer = page.getByRole("contentinfo");
       await footer.scrollIntoViewIfNeeded();
       await expect(footer).toBeVisible();
+    }
+  });
+
+  test("allows Cigar Knowledge cards to grow without clipping at narrow viewports", async ({
+    page,
+  }) => {
+    const titles = ["Limited Compendium", "Reserve", "Night Series"] as const;
+
+    for (const viewport of NARROW_CARD_VIEWPORTS) {
+      await page.setViewportSize(viewport);
+      await gotoOver21Home(page);
+
+      const knowledge = page.locator('[data-figma-node="13148:15081"]');
+      await expect(knowledge).toBeVisible();
+      await knowledge.scrollIntoViewIfNeeded();
+
+      const cards = knowledge.locator('[data-slot="cigar-knowledge-card"]');
+      await expect(cards).toHaveCount(3);
+
+      const metrics = await page.evaluate(
+        ({ viewportWidth, expectedTitles }) => {
+          const root = document.documentElement;
+          const body = document.body;
+          const shell = document.querySelector('[data-m01-shell="over21"]');
+          const cardElements = Array.from(
+            document.querySelectorAll('[data-slot="cigar-knowledge-card"]'),
+          );
+
+          const contained = (child: Element | null, parent: Element) => {
+            if (!child) {
+              return false;
+            }
+            const c = child.getBoundingClientRect();
+            const p = parent.getBoundingClientRect();
+            return (
+              c.top >= p.top - 1 &&
+              c.bottom <= p.bottom + 1 &&
+              c.left >= p.left - 1 &&
+              c.right <= p.right + 1
+            );
+          };
+
+          return {
+            documentScrollWidth: root.scrollWidth,
+            documentClientWidth: root.clientWidth,
+            bodyScrollWidth: body.scrollWidth,
+            bodyClientWidth: body.clientWidth,
+            rootOverflowX: getComputedStyle(root).overflowX,
+            bodyOverflowX: getComputedStyle(body).overflowX,
+            shellOverflowX: shell ? getComputedStyle(shell).overflowX : null,
+            cards: cardElements.map((card, index) => {
+              const cardBox = card.getBoundingClientRect();
+              const image = card.querySelector(
+                '[data-slot="cigar-knowledge-card-image"]',
+              );
+              const title = card.querySelector("h3");
+              const paras = Array.from(card.querySelectorAll("p"));
+              const eyebrow = paras[0] ?? null;
+              const description = paras[1] ?? null;
+              const cta = card.querySelector("button");
+              const descBox = description?.getBoundingClientRect() ?? null;
+              const ctaBox = cta?.getBoundingClientRect() ?? null;
+              const titleText = title?.textContent?.trim() ?? "";
+
+              return {
+                index,
+                title: titleText,
+                expectedTitle: expectedTitles[index] ?? null,
+                width: cardBox.width,
+                height: cardBox.height,
+                clientHeight: (card as HTMLElement).clientHeight,
+                scrollHeight: (card as HTMLElement).scrollHeight,
+                insideViewport:
+                  cardBox.left >= -1 && cardBox.right <= viewportWidth + 1,
+                widthWithinViewport: cardBox.width <= viewportWidth + 1,
+                imageInside: contained(image, card),
+                titleInside: contained(title, card),
+                eyebrowInside: contained(eyebrow, card),
+                descriptionInside: contained(description, card),
+                ctaInside: contained(cta, card),
+                ctaOverlapsDescription:
+                  descBox !== null &&
+                  ctaBox !== null &&
+                  ctaBox.top < descBox.bottom - 1,
+                ctaBottomInside:
+                  ctaBox !== null && ctaBox.bottom <= cardBox.bottom + 1,
+                ctaDisabled: cta instanceof HTMLButtonElement && cta.disabled,
+                ctaAriaLabel: cta?.getAttribute("aria-label") ?? "",
+                meaningfulTextVisible: Boolean(
+                  title &&
+                    eyebrow &&
+                    description &&
+                    title.getClientRects().length > 0 &&
+                    eyebrow.getClientRects().length > 0 &&
+                    description.getClientRects().length > 0,
+                ),
+              };
+            }),
+          };
+        },
+        {
+          viewportWidth: viewport.width,
+          expectedTitles: [...titles],
+        },
+      );
+
+      expect(
+        metrics.documentScrollWidth,
+        `${viewport.width} document scrollWidth`,
+      ).toBeLessThanOrEqual(metrics.documentClientWidth + 1);
+      expect(
+        metrics.bodyScrollWidth,
+        `${viewport.width} body scrollWidth`,
+      ).toBeLessThanOrEqual(metrics.bodyClientWidth + 1);
+      expect(metrics.rootOverflowX).not.toMatch(/hidden|clip/);
+      expect(metrics.bodyOverflowX).not.toMatch(/hidden|clip/);
+      expect(metrics.shellOverflowX).not.toMatch(/hidden|clip/);
+      expect(metrics.cards).toHaveLength(3);
+
+      for (const card of metrics.cards) {
+        expect(card.insideViewport, `${viewport.width} card ${card.index}`).toBe(
+          true,
+        );
+        expect(
+          card.widthWithinViewport,
+          `${viewport.width} card ${card.index} width`,
+        ).toBe(true);
+        expect(
+          card.height,
+          `${viewport.width} card ${card.index} min height`,
+        ).toBeGreaterThanOrEqual(555 - CARD_SIZE_TOLERANCE_PX);
+        expect(
+          card.scrollHeight,
+          `${viewport.width} card ${card.index} scrollHeight`,
+        ).toBeLessThanOrEqual(card.clientHeight + 1);
+        expect(card.imageInside).toBe(true);
+        expect(card.titleInside).toBe(true);
+        expect(card.eyebrowInside).toBe(true);
+        expect(card.descriptionInside).toBe(true);
+        expect(card.ctaInside).toBe(true);
+        expect(card.ctaOverlapsDescription).toBe(false);
+        expect(card.ctaBottomInside).toBe(true);
+        expect(card.meaningfulTextVisible).toBe(true);
+        expect(card.ctaDisabled).toBe(true);
+        expect(card.title).toBe(card.expectedTitle);
+        expect(card.ctaAriaLabel).toBe(
+          `Explore ${card.expectedTitle} (deferred: destination not approved for this scope)`,
+        );
+      }
     }
   });
 });

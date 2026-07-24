@@ -16,7 +16,7 @@ function CigarKnowledgeCard({
   return (
     <article
       aria-labelledby={titleId}
-      className="flex h-[555px] w-[392px] max-w-full shrink-0 flex-col gap-[14px] rounded-[12px] border border-border-default bg-background-card px-[16px] py-[20px]"
+      className="flex min-h-[555px] w-[392px] max-w-full shrink-0 flex-col gap-[14px] rounded-[12px] border border-border-default bg-background-card px-[16px] py-[20px]"
       data-slot="cigar-knowledge-card"
     >
       <div
@@ -38,7 +38,10 @@ function CigarKnowledgeCard({
         />
       </div>
 
-      <div className="flex min-h-0 w-full flex-1 flex-col items-center justify-between gap-[16px]">
+      <div
+        className="flex w-full flex-1 flex-col items-center justify-between gap-[16px]"
+        data-slot="cigar-knowledge-card-body"
+      >
         <div className="flex w-full flex-col items-start gap-[16px]">
           <h3
             id={titleId}
@@ -63,7 +66,7 @@ function CigarKnowledgeCard({
           aria-disabled="true"
           aria-label={`Explore ${card.title} (deferred: destination not approved for this scope)`}
           title={`Explore ${card.title} - destination not approved for this scope`}
-          className="w-full cursor-not-allowed rounded-radius-md border border-border-default bg-button-fill py-[12px] font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[length:var(--velarro-heading-product-cards-font-size)] font-normal uppercase leading-[var(--velarro-heading-product-cards-line-height)] text-text-heading"
+          className="w-full cursor-not-allowed rounded-radius-md border border-border-default bg-button-fill py-[12px] font-[family-name:var(--velarro-heading-product-cards-font-family)] text-[length:var(--velarro-heading-product-cards-font-size)] font-normal uppercase leading-none text-text-heading"
         >
           EXPLORE
         </button>

@@ -167,8 +167,11 @@ describe("CigarKnowledgeSection", () => {
     expect(cards).toHaveLength(3);
 
     for (const card of cards) {
-      expect(card.className).toContain("w-[392px]");
-      expect(card.className).toContain("h-[555px]");
+      const cardClasses = card.className.split(/\s+/).filter(Boolean);
+      expect(cardClasses).toContain("w-[392px]");
+      expect(cardClasses).toContain("min-h-[555px]");
+      expect(cardClasses).not.toContain("h-[555px]");
+      expect(cardClasses).toContain("rounded-[12px]");
       const imageFrame = card.querySelector(
         '[data-slot="cigar-knowledge-card-image"]',
       );
@@ -189,5 +192,37 @@ describe("CigarKnowledgeSection", () => {
       '[data-slot="cigar-knowledge-divider"]',
     );
     expect(divider?.parentElement?.className).toContain("max-w-[344px]");
+  });
+
+  it("keeps card body and CTA in normal flow with content-safe vertical growth", () => {
+    const { container } = render(<CigarKnowledgeSection />);
+    const cards = container.querySelectorAll(
+      '[data-slot="cigar-knowledge-card"]',
+    );
+    expect(cards).toHaveLength(3);
+
+    for (const card of cards) {
+      const cardClasses = card.className.split(/\s+/).filter(Boolean);
+      expect(cardClasses).toContain("flex");
+      expect(cardClasses).toContain("flex-col");
+      expect(cardClasses).toContain("min-h-[555px]");
+      expect(cardClasses).not.toContain("h-[555px]");
+      expect(cardClasses).not.toContain("overflow-hidden");
+
+      const body = card.querySelector('[data-slot="cigar-knowledge-card-body"]');
+      expect(body).not.toBeNull();
+      const bodyClasses = (body?.className ?? "").split(/\s+/).filter(Boolean);
+      expect(bodyClasses).toContain("flex");
+      expect(bodyClasses).toContain("flex-1");
+      expect(bodyClasses).toContain("flex-col");
+      expect(bodyClasses).toContain("justify-between");
+      expect(bodyClasses).not.toContain("min-h-0");
+      expect(bodyClasses).not.toContain("absolute");
+
+      const cta = card.querySelector("button");
+      expect(cta).not.toBeNull();
+      expect(body?.contains(cta)).toBe(true);
+      expect(cta?.className).not.toMatch(/\babsolute\b/);
+    }
   });
 });
